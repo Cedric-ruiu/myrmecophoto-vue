@@ -1,20 +1,11 @@
-# Nuxt 3 Minimal Starter
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Work in progress to the new Myrmecophoto website, continuous deployment at https://myrmecophoto.netlify.app/. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
 yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
 ```
 
 ## Development Server
@@ -25,18 +16,31 @@ Start the development server on http://localhost:3000
 npm run dev
 ```
 
-## Production
+## TODO
 
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [x] render "articles" page
+- [x] disable auto route content and build own vue article tpl
+- [ ] import/merge articles outdoor
+    - [ ] output content from DB
+- [ ] write about page
+- [ ] write contact page (hybrid ?)
+- [ ] prepare SQLITE database
+    - [ ] rename table & field
+    - [ ] delete unused table
+- [ ] install & configure Prisma
+- [ ] render pages/photos-taxo content using DB
+- [ ] render pages/photos-taxo/[specie] content using DB
+- [ ] better lint JS/TS
+- [ ] error page (404)
+- [ ] install framework CSS (UnoCSS ?)
+- [ ] install & configure stylelint
+- [ ] Inegrate entire site
+- [ ] Integrate custom Font
+- [ ] test between module nuxt webvitals <=> netlify webvitals
+- [ ] add favicons
+- [ ] add robot.txt
+- [ ] add sitemap.xml
+- [ ] add GA
+- [ ] migrate domain
+- [ ] test Cloudinary or similar image hosting
+- [ ] write a complete README
