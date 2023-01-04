@@ -1,7 +1,8 @@
 ---
-title: 50mm ou 35mm? Comment et quoi choisir ? | Articles | Myrmecophoto
+title: 50mm ou 35mm? Comment et quoi choisir ?
 description: Si vous avez choisi la méthode de l'objectif inversé, il vous reste à faire le choix de la focale de l'objectif entre un 50mm et 35mm.
-date_create: 2008-02-28
+date:
+    published: 2008-02-28
 ---
 
 ### Introduction

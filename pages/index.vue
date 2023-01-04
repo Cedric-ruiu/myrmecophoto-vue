@@ -8,9 +8,7 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout>
-    <div>
-      <h1>Macro photographies de fourmis3 !</h1>
-    </div>
-  </NuxtLayout>
+  <div>
+    <h1>Macro photographies de fourmis !</h1>
+  </div>
 </template>

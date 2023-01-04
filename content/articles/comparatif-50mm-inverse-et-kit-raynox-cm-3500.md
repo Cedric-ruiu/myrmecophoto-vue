@@ -1,7 +1,8 @@
 ---
-title: Comparatif entre un 50mm inversé et un kit Raynox CM-3500 | Articles | Myrmecophoto
+title: Comparatif entre un 50mm inversé et un kit Raynox CM-3500
 description: Vous souhaitez vous lancer dans la macrophotographie mais avec un très petit budget ? Je vous propose donc un test comparatif de 2 méthodes accessibles très financièrement.
-date_create: 2007-04-13
+date:
+    published: 2007-04-13
 ---
 
 **Attention!** Cet article est en cours de re-écriture, n'hésitez pas à repasser pour observer les changements!
