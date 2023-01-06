@@ -2,8 +2,8 @@
 useHead({
   title: 'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
   meta: [
-    { name: 'description', content: 'Macro photographie taxonomiques de fourmis aidant à l\'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.' }
-  ]
+    { name: 'description', content: 'Macro photographie taxonomiques de fourmis aidant à l\'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.' },
+  ],
 })
 </script>
 
