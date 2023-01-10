@@ -9,8 +9,8 @@ const { data: article } = await useAsyncData(`content-${path}`, () => {
 useHead({
   titleTemplate: '%s | Article | Myrmecophoto',
   meta: [
-    { name: 'description', content: article.description }
-  ]
+    { name: 'description', content: article.description },
+  ],
 })
 </script>
 

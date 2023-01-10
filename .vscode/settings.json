@@ -1,10 +1,12 @@
 {
-    "cSpell.words": [
-        "Myrmecophoto",
-        "nuxt"
-    ],
-    "editor.codeActionsOnSave": {
-        "source.fixAll": false,
-        "source.fixAll.eslint": true
-    }
+  "cSpell.words": [
+    "Myrmecophoto",
+    "nuxt",
+    "prisma"
+  ],
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

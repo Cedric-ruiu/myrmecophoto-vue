@@ -1,0 +1,114 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:database.sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model contributor {
+  id                                           Int        @id @unique(map: "sqlite_autoindex_contributor_1") @default(autoincrement())
+  name                                         String?
+  pseudo                                       String?
+  url                                          String?
+  specimen_specimen_collector_idTocontributor  specimen[] @relation("specimen_collector_idTocontributor")
+  specimen_specimen_identifier_idTocontributor specimen[] @relation("specimen_identifier_idTocontributor")
+}
+
+model country {
+  id       Int        @id @unique(map: "sqlite_autoindex_country_1") @default(autoincrement())
+  name     String
+  specimen specimen[]
+}
+
+model form {
+  id       Int        @id @unique(map: "sqlite_autoindex_form_1") @default(autoincrement())
+  name     String
+  specimen specimen[]
+}
+
+model genus {
+  id           Int       @id @unique(map: "sqlite_autoindex_genus_1") @default(autoincrement())
+  subfamily_id Int
+  name         String
+  description  String?
+  subfamily    subfamily @relation(fields: [subfamily_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  specie       specie[]
+}
+
+model material {
+  id                                                             Int                         @id @unique(map: "sqlite_autoindex_material_1") @default(autoincrement())
+  name                                                           String
+  description                                                    String?
+  taxonomy_picture_taxonomy_picture_lens_primary_idTomaterial    taxonomy_picture[]          @relation("taxonomy_picture_lens_primary_idTomaterial")
+  taxonomy_picture_taxonomy_picture_camera_idTomaterial          taxonomy_picture[]          @relation("taxonomy_picture_camera_idTomaterial")
+  taxonomy_picture_taxonomy_picture_lighting_system_idTomaterial taxonomy_picture[]          @relation("taxonomy_picture_lighting_system_idTomaterial")
+  taxonomy_picture_taxonomy_picture_other_material_idTomaterial  taxonomy_picture[]          @relation("taxonomy_picture_other_material_idTomaterial")
+  taxonomy_picture_taxonomy_picture_lens_secondary_idTomaterial  taxonomy_picture[]          @relation("taxonomy_picture_lens_secondary_idTomaterial")
+}
+
+model researcher {
+  id       Int      @id @unique(map: "sqlite_autoindex_researcher_1") @default(autoincrement())
+  name     String
+  wiki_url String?
+  specie   specie[]
+}
+
+model specie {
+  id            Int        @id @unique(map: "sqlite_autoindex_specie_1") @default(autoincrement())
+  genus_id      Int
+  researcher_id Int
+  year          Int
+  name          String
+  description   String?
+  researcher    researcher @relation(fields: [researcher_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  genus         genus      @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  specimen      specimen[]
+}
+
+model specimen {
+  id                                              Int                @id @unique(map: "sqlite_autoindex_specimen_1") @default(autoincrement())
+  specie_id                                       Int
+  form_id                                         Int
+  country_id                                      Int?
+  collector_id                                    Int?
+  identifier_id                                   Int?
+  reference                                       String?
+  size_mm                                         Float?
+  capture_site                                    String?
+  capture_date                                    String?
+  description                                     String?
+  country                                         country?           @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  form                                            form               @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  contributor_specimen_collector_idTocontributor  contributor?       @relation("specimen_collector_idTocontributor", fields: [collector_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  specie                                          specie             @relation(fields: [specie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  contributor_specimen_identifier_idTocontributor contributor?       @relation("specimen_identifier_idTocontributor", fields: [identifier_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  taxonomy_picture                                taxonomy_picture[]
+}
+
+model subfamily {
+  id          Int     @id @unique(map: "sqlite_autoindex_subfamily_1") @default(autoincrement())
+  name        String?
+  description String?
+  genus       genus[]
+}
+
+model taxonomy_picture {
+  id                                                     Int                         @id @unique(map: "sqlite_autoindex_taxonomy_picture_1") @default(autoincrement())
+  specimen_id                                            Int
+  camera_id                                              Int?
+  lens_primary_id                                        Int?
+  lens_secondary_id                                      Int?
+  lighting_system_id                                     Int?
+  other_material_id                                      Int?
+  date                                                   String?
+  file_name                                              String                      @unique(map: "sqlite_autoindex_taxonomy_picture_2")
+  description                                            String?
+  material_taxonomy_picture_lens_primary_idTomaterial    material?                   @relation("taxonomy_picture_lens_primary_idTomaterial", fields: [lens_primary_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  material_taxonomy_picture_camera_idTomaterial          material?                   @relation("taxonomy_picture_camera_idTomaterial", fields: [camera_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  material_taxonomy_picture_lighting_system_idTomaterial material?                   @relation("taxonomy_picture_lighting_system_idTomaterial", fields: [lighting_system_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  specimen                                               specimen                    @relation(fields: [specimen_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  material_taxonomy_picture_other_material_idTomaterial  material?                   @relation("taxonomy_picture_other_material_idTomaterial", fields: [other_material_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  material_taxonomy_picture_lens_secondary_idTomaterial  material?                   @relation("taxonomy_picture_lens_secondary_idTomaterial", fields: [lens_secondary_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}

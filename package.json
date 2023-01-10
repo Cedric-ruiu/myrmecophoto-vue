@@ -5,12 +5,16 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.34.0",
     "@nuxt/content": "^2.3.0",
-    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@prisma/client": "^4.8.1",
     "eslint": "^8.31.0",
-    "nuxt": "3.0.0"
+    "nuxt": "3.0.0",
+    "prisma": "^4.8.1",
+    "typescript": "^4.9.4"
   }
 }
