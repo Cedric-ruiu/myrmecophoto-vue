@@ -7,7 +7,7 @@ useHead({
 })
 
 // const countries = await $fetch('/api/testCountries')
-const countries = await useFetch('/api/testCountries')
+const countries = await useFetch('/api/testCountries', { server: true, key: 'testCountries' })
 </script>
 
 <template>
