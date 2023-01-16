@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "dbaeumer.vscode-eslint",
+        "streetsidesoftware.code-spell-checker-french",
+        "prisma.prisma",
+        "vue.volar",
+        "nuxt.mdc"
+    ]
+}

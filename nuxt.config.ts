@@ -5,7 +5,10 @@ export default defineNuxtConfig({
   ],
   nitro: {
     prerender: {
-      routes: ['/api/testCountries'],
+      routes: [
+        '/api/getTaxa',
+        '/api/getSpecies',
+      ],
     },
   },
 })

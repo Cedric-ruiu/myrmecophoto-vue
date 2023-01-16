@@ -56,25 +56,25 @@ yarn init-db
   - [x] rename table & field
   - [x] delete unused table
   - [x] install & configure Prisma
-  - [ ] test simple query on JAMStack
+  - [x] test simple query on JAMStack
   - [ ] add table `picture_taxonomy_material` & alter table `picture_taxonomy`
 - [x] better lint JS/TS
-- [ ] build "list of specimens pictures" page 
-  - [ ] engine (route, etc.) => custom Vue => use Prisma
-  - [ ] build all request api
-  - [ ] get all content
-- [ ] build all specimens pictures pages
-  - [ ] engine (route, etc.) => custom Vue => use Prisma
-  - [ ] build all request api
-  - [ ] get all content
+- [x] build "list of specimens pictures" page 
+  - [x] engine (route, etc.) => custom Vue => use Prisma
+  - [x] build all request api
+  - [x] get all content
+- [x] build all specimens pictures pages
+  - [x] engine (route, etc.) => custom Vue => use Prisma
+  - [x] build all request api
+  - [x] get all content
 - [ ] write contact page (hybrid ?)
 - [ ] write about page
-- [ ] error page (404)
 - [ ] Integrate entire site UI/UX
   - [ ] Install framework CSS (UnoCSS ?)
   - [ ] Install & configure stylelint
   - [ ] Add custom Font
   - [ ] Add favicons
+- [ ] error page (404)
 - [ ] test between module nuxt webvitals <=> netlify webvitals
 - [ ] add robot.txt
 - [ ] add sitemap.xml

@@ -8,7 +8,7 @@ useHead({
   ],
 })
 
-const { data: articles } = useAsyncData('articles', () => {
+const { data: articles } = await useAsyncData('articles', () => {
   return queryContent('articles').sort({ 'date.published': -1 }).find()
 })
 </script>
