@@ -1,6 +1,8 @@
 <template>
   <header>
-    <a href="/">logo</a>
+    <NuxtLink to="/">
+      Logo
+    </NuxtLink>
     <nav>
       <ul>
         <li><a href="/specimens">Photos spécimens</a></li>
@@ -9,8 +11,8 @@
             Articles
           </NuxtLink>
         </li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li>About</li>
+        <li>Contact</li>
       </ul>
     </nav>
   </header>
