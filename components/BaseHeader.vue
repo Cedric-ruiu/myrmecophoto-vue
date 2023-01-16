@@ -5,7 +5,11 @@
     </NuxtLink>
     <nav>
       <ul>
-        <li><a href="/specimens">Photos spécimens</a></li>
+        <li>
+          <NuxtLink to="/taxons">
+            Photos spécimens
+          </NuxtLink>
+        </li>
         <li>
           <NuxtLink to="/articles">
             Articles
