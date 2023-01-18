@@ -1,10 +1,10 @@
-Work in progress to the new Myrmecophoto website, continuous deployment at https://myrmecophoto.netlify.app/. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
+Work in progress to the new **Myrmecophoto** website, continuous deployment at https://myrmecophoto.netlify.app/. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b121a494-a2dc-474d-ba33-b37ecebee4ad/deploy-status)](https://app.netlify.com/sites/myrmecophoto/deploys)
 
 ## Setup
 
-Require Node v16 and just exec `yarn`
+Require Node v16 and exec `yarn`
 
 ## Development Server
 
@@ -13,9 +13,11 @@ Require Node v16 and just exec `yarn`
 yarn dev
 ```
 
-## Manage Database with Prisma
+## Database
 
-SQLite Database is managed by Prisma ORM.
+SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. For SSG it's useful and don't need to access database in live website.
+
+![mermaid diagramme ERD of Myrmecophoto Database](./prisma/ERD.md)
 
 **Update content** with Prisma Studio
 
@@ -26,14 +28,9 @@ yarn prisma studio
 **Update schema** only by `prisma/schema.prisma`
 
 ```bash
-# 1. update `prisma/schema.prisma`
-
-# 2.
-yarn prisma migrate dev --name my_changes --create-only
-
-# 3. check the `prisma/migrations/{time}_my_changes/migration.sql` file & update if necessary
-
-# 4.
+# update `prisma/schema.prisma`
+yarn prisma migrate dev --name my_changes_name --create-only
+# check the `prisma/migrations/{time}_my_changes/migration.sql` file & update if necessary
 yarn prisma migrate dev
 ```
 
@@ -43,7 +40,7 @@ yarn prisma migrate dev
 yarn init-db
 ```
 
-## TODO
+## TODO for the first release
 
 - [x] build "list of articles" page
   - [x] engine (route, etc.) => custom Vue
@@ -52,7 +49,7 @@ yarn init-db
   - [x] engine (route, etc.) => Nuxt Content
   - [x] add "articles" content
   - [ ] add "outdoor pictures" as articles content (from old DB)
-- [ ] prepare SQLITE database (imported from existing MySQL)
+- [ ] prepare SQLite database (imported from existing MySQL)
   - [x] rename table & field
   - [x] delete unused table
   - [x] install & configure Prisma
@@ -71,11 +68,11 @@ yarn init-db
 - [ ] write about page
 - [ ] Integrate entire site UI/UX
   - [ ] Install framework CSS (UnoCSS ?)
-  - [ ] Install & configure stylelint
+  - [ ] Install & configure Stylelint
   - [ ] Add custom Font
   - [ ] Add favicons
 - [ ] error page (404)
-- [ ] test between module nuxt webvitals <=> netlify webvitals
+- [ ] test between module `nuxt webvitals` <=> `netlify webvitals`
 - [ ] add robot.txt
 - [ ] add sitemap.xml
 - [ ] add schema.org ?
