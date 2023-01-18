@@ -8,6 +8,11 @@ generator client {
   binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "./ERD.md"
+}
+
 model contributor {
   id                                           Int        @id @unique(map: "sqlite_autoindex_contributor_1") @default(autoincrement())
   name                                         String?
