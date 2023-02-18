@@ -67,13 +67,17 @@ yarn init-db
 - [ ] write contact page (hybrid ?)
 - [ ] write about page
 - [ ] Integrate entire site UI/UX
-  - [ ] Install framework CSS (UnoCSS ?)
+  - [x] Install framework CSS (UnoCSS ?)
   - [ ] Install & configure Stylelint
+  - [ ] Add reset
+  - [ ] Add typography
+  - [ ] Add layout
   - [ ] Add custom Font
-  - [ ] Add favicons
 - [ ] error page (404)
+- [ ] polish all text
 - [ ] test between module `nuxt webvitals` <=> `netlify webvitals`
 - [ ] add robot.txt
+- [ ] Add favicons
 - [ ] add sitemap.xml
 - [ ] add schema.org ?
 - [ ] add GA
