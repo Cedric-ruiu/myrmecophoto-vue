@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <NuxtLink :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`" class="m-specieCard">
-    <h3 class="m-specieCard__title">
+    <h3 class="m-specieCard__title ma4 ms-2">
       {{ taxon }}
     </h3>
     <p class="m-specieCard__text">

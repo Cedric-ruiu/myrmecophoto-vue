@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@layer utilities {
+    .gradient-primary {
+        background: linear-gradient(90deg, #E72C27 64.09%, #FAA307 94.45%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+}

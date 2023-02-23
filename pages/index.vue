@@ -9,6 +9,8 @@ useHead({
 
 <template>
   <div>
-    <h1>Macro photographies de fourmis !</h1>
+    <h1 class="font-title uppercase italic font-400 text-6xl">
+      Macro photographies de fourmis !
+    </h1>
   </div>
 </template>

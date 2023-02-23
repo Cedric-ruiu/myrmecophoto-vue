@@ -5,16 +5,34 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
   ],
   unocss: {
-    // presets
-    uno: true, // enabled `@unocss/preset-uno`
+    uno: true,
     typography: true,
-    // icons: true, // enabled `@unocss/preset-icons`
-    // attributify: true, // enabled `@unocss/preset-attributify`,
-
-    // core options
+    preflight: true,
+    webFonts: {
+      provider: 'google', // default provider
+      fonts: {
+        // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400i|Quicksand:400,500,700" rel="stylesheet">
+        title: [
+          {
+            name: 'Open Sans',
+            weights: ['400'],
+            italic: true,
+          },
+        ],
+        text: [
+          {
+            name: 'Quicksand',
+            weights: ['400', '500', '700'],
+          },
+        ],
+      },
+    },
     shortcuts: [],
     rules: [],
   },
+  css: [
+    '@/assets/main.scss',
+  ],
   nitro: {
     prerender: {
       routes: [
