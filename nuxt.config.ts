@@ -30,6 +30,15 @@ export default defineNuxtConfig({
     shortcuts: [],
     rules: [],
   },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/core.scss" as *;',
+        },
+      },
+    },
+  },
   css: [
     '@/assets/main.scss',
   ],

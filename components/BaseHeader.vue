@@ -2,7 +2,7 @@
   <header>
     <div class="[ o-header ] h-20 container mx-auto w-full font-text">
       <NuxtLink to="/" class="text-lg font-400 uppercase">
-        Myrmeco<span class="font-700 gradient-primary">photo</span>
+        Myrmeco<span class="font-700 text-gradient-primary">photo</span>
       </NuxtLink>
       <nav aria-label="Main Navigation">
         <ul class="[ o-header__nav ] flex text-sm text-right uppercase">

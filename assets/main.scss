@@ -11,7 +11,11 @@
 
 @layer utilities {
     .gradient-primary {
-        background: linear-gradient(90deg, #E72C27 64.09%, #FAA307 94.45%);
+        @include gradient-primary();
+    }
+
+    .text-gradient-primary {
+        @include gradient-primary();
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
