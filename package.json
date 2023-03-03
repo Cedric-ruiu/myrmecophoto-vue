@@ -17,7 +17,7 @@
     "@unocss/preset-typography": "0.50.3",
     "@unocss/preset-web-fonts": "0.50.3",
     "eslint": "^8.31.0",
-    "nuxt": "3.2.2",
+    "nuxt": "3.2.3",
     "prisma": "^4.8.1",
     "prisma-erd-generator": "^1.2.5",
     "sass": "^1.57.1",
