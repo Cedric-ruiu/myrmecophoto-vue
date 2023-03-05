@@ -5,6 +5,7 @@
         "streetsidesoftware.code-spell-checker-french",
         "prisma.prisma",
         "vue.volar",
-        "nuxt.mdc"
+        "nuxt.mdc",
+        "antfu.unocss"
     ]
 }

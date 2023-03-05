@@ -18,6 +18,6 @@ const { data: subfamilies } = await useFetch('/api/getTaxa')
         <SpecieCard v-for="specie in genus.specie" :id="specie.id" :key="specie.id" :taxon="`${genus.name} ${specie.name}`" :researcher-name="specie.researcher.name" :year-discover="specie.year" />
       </template>
     </div>
-    <pre>{{ subfamilies }}</pre>
+    <pre class="whitespace-normal">{{ subfamilies }}</pre>
   </div>
 </template>

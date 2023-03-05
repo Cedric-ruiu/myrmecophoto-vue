@@ -1,4 +1,5 @@
 node_modules
+prisma/ERD.md
 *.log*
 .nuxt
 .nitro

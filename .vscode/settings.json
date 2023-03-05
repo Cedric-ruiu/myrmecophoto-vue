@@ -2,7 +2,8 @@
   "cSpell.words": [
     "Myrmecophoto",
     "nuxt",
-    "prisma"
+    "prisma",
+    "unocss"
   ],
   "prettier.enable": false,
   "editor.formatOnSave": false,

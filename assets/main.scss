@@ -1,0 +1,25 @@
+@import './core';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@layer utilities {
+    .gradient-primary {
+        @include gradient-primary();
+    }
+
+    .text-gradient-primary {
+        @include gradient-primary();
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+}
