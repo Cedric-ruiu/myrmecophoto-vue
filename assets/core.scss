@@ -1,6 +1,6 @@
-$color-primary: #E72C27;
-$color-secondary: #FAA307;
+@import './variables';
+@import 'include-media/dist/include-media';
 
 @mixin gradient-primary() {
-    background: linear-gradient(90deg, $color-primary 64.09%, $color-secondary 94.45%);
+    background: $gradient-primary;
 }

@@ -34,12 +34,16 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          // Sass core contain all mixins & variables
+          // Included as dependency for all vue components
+          // ex: reuse Sass vars & mixins
           additionalData: '@use "@/assets/core.scss" as *;',
         },
       },
     },
   },
   css: [
+    // The entry file loaded on all pages
     '@/assets/main.scss',
   ],
   nitro: {

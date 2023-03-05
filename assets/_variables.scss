@@ -1,0 +1,28 @@
+// Breakpoints
+
+// Define here all your breakpoints, choose the unit (rem|em|px) what you prefer like a dev frontend and not like end user
+// Values will be reset with $unit-default
+$breakpoints: (
+  xs: 375px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px
+) !default;
+
+// Colors
+
+$color-primary: #E72C27;
+$color-secondary: #FAA307;
+$color-layout: #000;
+
+// Gradients
+
+$gradient-primary: linear-gradient(90deg, rgba($color-primary, 1) 64.09%, rgba($color-secondary, 1) 94.45%);
+
+// Animations / UX
+
+$anime-duration: 0.2s !default;
+$anime-ease: ease !default;
+$soft-touch: 10px !default; // standard space around element, better to touch
