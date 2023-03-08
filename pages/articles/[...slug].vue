@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 // this catch-all route generate pages with unique articles based from Nuxt Content
 
 const { path } = useRoute()
