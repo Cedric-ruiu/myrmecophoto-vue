@@ -159,8 +159,8 @@ yarn init-db
 - [ ] Integrate entire site UI/UX
   - [x] Install framework CSS (UnoCSS ?)
   - [ ] Install & configure Stylelint
-  - [ ] Add reset
-  - [ ] Add typography
+  - [x] Add reset
+  - [x] Add typography
   - [ ] Add layout
   - [ ] Add custom Font
 - [ ] error page (404)
