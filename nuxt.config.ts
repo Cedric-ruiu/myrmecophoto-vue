@@ -11,6 +11,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      emailContact: '', // overridden by NUXT_PUBLIC_EMAIL_CONTACT environment variable
+    },
+  },
   unocss: {
     uno: true,
     typography: true,
