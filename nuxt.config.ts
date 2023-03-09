@@ -4,6 +4,18 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@unocss/nuxt',
   ],
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'fr',
+      },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      emailContact: '', // overridden by NUXT_PUBLIC_EMAIL_CONTACT environment variable
+    },
+  },
   unocss: {
     uno: true,
     typography: true,
