@@ -4,6 +4,13 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@unocss/nuxt',
   ],
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'fr',
+      },
+    },
+  },
   unocss: {
     uno: true,
     typography: true,
