@@ -12,9 +12,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    public: {
-      emailContact: '', // overridden by NUXT_PUBLIC_EMAIL_CONTACT environment variable
-    },
+    emailContact: '', // use NUXT_EMAIL_CONTACT environment variable
   },
   unocss: {
     uno: true,
@@ -63,6 +61,7 @@ export default defineNuxtConfig({
       routes: [
         '/api/getTaxa',
         '/api/getSpecies',
+        '/api/getEncryptedEmailContact',
       ],
     },
   },

@@ -4,18 +4,21 @@ Work in progress to the new **Myrmecophoto** website, continuous deployment at h
 
 ## Setup
 
-Require Node v16 and exec `yarn`
+Require Node v16, copy/paste `.env` from `.env.local` and exec `yarn`
 
 ## Development Server
 
 ```bash
 # Start the development server on http://localhost:3000
 yarn dev
+
+# Test SSG and serve at http://localhost:3000
+yarn serve-generate
 ```
 
 ## Database
 
-SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. For SSG it's useful and don't need to access database in live website. Mermaid diagramme ERD of Myrmecophoto Database :
+SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. `api/getSpecies` & `api/getTaxa` provide all datas needed to display "Photos Spécimens" section pages. For "SSG" it's useful and websitedon't need to access database in live website. The Database can be more granular with optimized tables, but in my case I prefer to spend time on other things, like UI integration. Below is the Mermaid diagramme ERD of Myrmecophoto Database :
 
 ```mermaid
 erDiagram
@@ -130,6 +133,18 @@ yarn prisma migrate dev
 yarn init-db
 ```
 
+## Note about email spam protection
+
+I want to share 100% source code, but don't want to be spammed from robots by displaying my email address. To do this in a full SSG & open source code on Github, I've made a strategy to not directly show my email address. The only pre=requisite is the ability of using environnement variable on server (Netlify).
+
+- store the clear address on a `.env`, add the same variable on the server & refer it on `nuxt.config.js`
+- `server/api/getEncryptedEmailContact` is prerender by Nitro & use a composable to encrypt email
+- at this moment, the encrypted method just reverse all the characters
+- in the vue application, it fetch `server/api/getEncryptedEmailContact` & display data with a tricks HTML to reverse direction reading
+- the real decrypt happens on event click on email, that redirect to the correct link mailto
+
+I think it can be possible to enhance encryption using CSS technique to display mixed characters...
+
 ## TODO for the first release
 
 - [x] build "list of articles" page
@@ -175,3 +190,4 @@ yarn init-db
 - [ ] migrate domain
 - [ ] test Cloudinary or similar image hosting
 - [ ] write a complete README
+- [ ] enhance email encryption
