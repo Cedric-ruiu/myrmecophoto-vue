@@ -20,7 +20,7 @@
     "@unocss/preset-web-fonts": "0.50.6",
     "eslint": "^8.x",
     "include-media": "^2.0.0",
-    "nuxt": "3.2.3",
+    "nuxt": "^3.3.2",
     "prisma": "4.11.0",
     "prisma-erd-generator": "^1.x",
     "sass": "^1.x",
