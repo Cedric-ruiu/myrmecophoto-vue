@@ -33,6 +33,10 @@ const open = ref(false)
 $menuBar-height: 3px !default;
 $menuBar-width: 25px !default;
 
+:root {
+  --header-height: 4.6875rem; // approximative height
+}
+
 .o-header {
   display: flex;
   align-items: center;

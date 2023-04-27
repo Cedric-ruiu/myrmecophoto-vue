@@ -1,9 +1,7 @@
 <template>
   <div class="[ o-main ]">
     <BaseHeader />
-    <div class="container mx-auto w-full p-5">
-      <slot />
-    </div>
+    <slot />
     <BaseFooter />
   </div>
 </template>
