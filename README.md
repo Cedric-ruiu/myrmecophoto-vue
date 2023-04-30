@@ -24,7 +24,7 @@ SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pr
 erDiagram
 
   contributor {
-    Int id PK🗝️ 
+    Int id PK
     String name  "nullable"
     String pseudo  "nullable"
     String url  "nullable"
@@ -32,40 +32,40 @@ erDiagram
   
 
   country {
-    Int id PK🗝️ 
+    Int id PK
     String name  
     }
   
 
   form {
-    Int id PK🗝️ 
+    Int id PK
     String name  
     }
   
 
   genus {
-    Int id PK🗝️ 
+    Int id PK
     String name  
     String description  "nullable"
     }
   
 
   material {
-    Int id PK🗝️ 
+    Int id PK
     String name  
     String description  "nullable"
     }
   
 
   researcher {
-    Int id PK🗝️ 
+    Int id PK
     String name  
     String wiki_url  "nullable"
     }
   
 
   specie {
-    Int id PK🗝️ 
+    Int id PK
     Int year  
     String name  
     String description  "nullable"
@@ -73,7 +73,7 @@ erDiagram
   
 
   specimen {
-    Int id PK🗝️ 
+    Int id PK
     String reference  "nullable"
     Float size_mm  "nullable"
     String capture_site  "nullable"
@@ -83,14 +83,14 @@ erDiagram
   
 
   subfamily {
-    Int id PK🗝️ 
+    Int id PK
     String name  "nullable"
     String description  "nullable"
     }
   
 
   taxonomy_picture {
-    Int id PK🗝️ 
+    Int id PK
     String date  "nullable"
     String file_name  
     String description  "nullable"

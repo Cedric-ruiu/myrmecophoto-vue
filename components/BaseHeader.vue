@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const open = ref(false)
+const route = useRoute()
+// <code>{{ route }}</code>
 </script>
 
 <template>
   <header>
-    <div class="[ o-header ] sm:h-20 container mx-auto w-full font-text p-5">
+    <div :class="{ 'to-anime': route.name === 'index' }" class="[ o-header ] flex justify-between flex-wrap content-center sm:h-20 container mx-auto w-full font-text p-5">
       <NuxtLink to="/" class="text-lg font-400 uppercase">
         Myrmeco<span class="font-700 text-gradient-primary">photo</span>
       </NuxtLink>
@@ -24,7 +26,7 @@ const open = ref(false)
           </HeaderNavItem>
         </ul>
       </nav>
-      <button type="button" :class="{ on: open }" class="[ o-header__menuBar ] sm:hidden" role="button" aria-controls="main-nav-header" aria-expanded="false" @click="open = !open" />
+      <button type="button" :class="{ on: open }" class="[ o-header__menuBar ] relative box-content p-0 sm:hidden" role="button" aria-controls="main-nav-header" aria-expanded="false" @click="open = !open" />
     </div>
   </header>
 </template>
@@ -38,12 +40,12 @@ $menuBar-width: 25px !default;
 }
 
 .o-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-content: center;
   transition: color $anime-duration $anime-ease;
+
+  // animate header only on the homepage
+  &.to-anime {
+    animation: header-home-appear 2s ease-in-out both 1.7s;
+  }
 
   &__nav:hover {
     :not(:hover) {
@@ -52,11 +54,8 @@ $menuBar-width: 25px !default;
   }
 
   &__menuBar {
-    position: relative;
-    box-sizing: content-box;
     width: $menuBar-width;
     height: $menuBar-height;
-    padding: 0;
     border-top: #{$soft-touch + $menuBar-height * 2} solid $color-layout;
     border-right: $soft-touch solid $color-layout;
     border-bottom: #{$soft-touch + $menuBar-height * 2} solid $color-layout;
@@ -93,6 +92,16 @@ $menuBar-width: 25px !default;
         animation-name: barBottomOn;
       }
     }
+  }
+}
+
+@keyframes header-home-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  } 100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 
