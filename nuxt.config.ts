@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@unocss/nuxt',
+    '@nuxt/image-edge',
   ],
   app: {
     head: {
