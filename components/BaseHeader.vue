@@ -6,34 +6,43 @@ const route = useRoute()
 
 <template>
   <header>
-    <div :class="{ 'to-anime': route.name === 'index' }" class="[ o-header ] flex justify-between flex-wrap content-center sm:h-20 container mx-auto w-full font-text p-5">
+    <div
+      :class="{ 'to-anime': route.name === 'index' }"
+      class="[ o-header ] flex justify-between flex-wrap content-center sm:h-20 container mx-auto w-full font-text p-5"
+    >
       <NuxtLink to="/" class="text-lg font-400 uppercase">
         Myrmeco<span class="font-700 text-gradient-primary">photo</span>
       </NuxtLink>
-      <nav :class="{ hidden: !open }" class="pl-2.5 sm:pl-0 order-3 basis-full sm:order-2 sm:basis-auto sm:flex flex-col sm:flex-row" aria-label="Main Navigation">
-        <ul class="[ o-header__nav ] py-5 sm:py-0 text-sm sm:text-right uppercase sm:items-center sm:inline-flex">
-          <HeaderNavItem link="/taxons">
-            Photos spécimens
-          </HeaderNavItem>
-          <HeaderNavItem link="/articles">
-            Articles
-          </HeaderNavItem>
-          <HeaderNavItem link="javascript:;">
-            About
-          </HeaderNavItem>
-          <HeaderNavItem link="javascript:;">
-            Contact
-          </HeaderNavItem>
+      <nav
+        :class="{ hidden: !open }"
+        class="pl-2.5 sm:pl-0 order-3 basis-full sm:order-2 sm:basis-auto sm:flex flex-col sm:flex-row"
+        aria-label="Main Navigation"
+      >
+        <ul
+          class="[ o-header__nav ] py-5 sm:py-0 text-sm sm:text-right uppercase sm:items-center sm:inline-flex"
+        >
+          <HeaderNavItem link="/taxons"> Photos spécimens </HeaderNavItem>
+          <HeaderNavItem link="/articles"> Articles </HeaderNavItem>
+          <HeaderNavItem link="javascript:;"> About </HeaderNavItem>
+          <HeaderNavItem link="javascript:;"> Contact </HeaderNavItem>
         </ul>
       </nav>
-      <button type="button" :class="{ on: open }" class="[ o-header__menuBar ] relative box-content p-0 sm:hidden" role="button" aria-controls="main-nav-header" aria-expanded="false" @click="open = !open" />
+      <button
+        type="button"
+        :class="{ on: open }"
+        class="[ o-header__menuBar ] relative box-content p-0 sm:hidden"
+        role="button"
+        aria-controls="main-nav-header"
+        aria-expanded="false"
+        @click="open = !open"
+      />
     </div>
   </header>
 </template>
 
 <style lang="scss">
-$menuBar-height: 3px !default;
-$menuBar-width: 25px !default;
+$menu-bar-height: 3px !default;
+$menu-bar-width: 25px !default;
 
 :root {
   --header-height: 4.6875rem; // approximative height
@@ -54,42 +63,47 @@ $menuBar-width: 25px !default;
   }
 
   &__menuBar {
-    width: $menuBar-width;
-    height: $menuBar-height;
-    border-top: #{$soft-touch + $menuBar-height * 2} solid $color-layout;
-    border-right: $soft-touch solid $color-layout;
-    border-bottom: #{$soft-touch + $menuBar-height * 2} solid $color-layout;
-    border-left: $soft-touch solid $color-layout;
     @include gradient-primary();
+
+    width: $menu-bar-width;
+    height: $menu-bar-height;
+
+    border-top: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;
+    border-right: $soft-touch solid $color-layout;
+    border-bottom: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;
+    border-left: $soft-touch solid $color-layout;
 
     &::before,
     &::after {
+      @include gradient-primary();
+
+      content: '';
+
       position: absolute;
       top: 0;
       left: 0;
+
       width: 100%;
-      height: $menuBar-height;
-      @include gradient-primary();
-      content: '';
+      height: $menu-bar-height;
     }
 
     &::before {
-      animation: barTop $anime-duration ease-in-out 1 normal both;
+      animation: bar-top $anime-duration ease-in-out 1 normal both;
     }
 
     &::after {
-      animation: barBottom $anime-duration ease-in-out 1 normal both;
+      animation: bar-bottom $anime-duration ease-in-out 1 normal both;
     }
 
     &.on {
       background: $color-layout;
 
       &::before {
-        animation-name: barTopOn;
+        animation-name: bar-top-on;
       }
 
       &::after {
-        animation-name: barBottomOn;
+        animation-name: bar-bottom-on;
       }
     }
   }
@@ -97,15 +111,17 @@ $menuBar-width: 25px !default;
 
 @keyframes header-home-appear {
   0% {
-    opacity: 0;
     transform: translateY(-50%);
-  } 100% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
     opacity: 1;
-    transform: translateY(0px);
   }
 }
 
-@keyframes barTop {
+@keyframes bar-top {
   0% {
     transform: translateY(0) rotateZ(45deg);
   }
@@ -115,13 +131,13 @@ $menuBar-width: 25px !default;
   }
 
   100% {
-    transform: translateY(#{-$menuBar-height * 2}) rotateZ(0);
+    transform: translateY(#{-$menu-bar-height * 2}) rotateZ(0);
   }
 }
 
-@keyframes barTopOn {
+@keyframes bar-top-on {
   0% {
-    transform: translateY(#{-$menuBar-height * 2}) rotateZ(0);
+    transform: translateY(#{-$menu-bar-height * 2}) rotateZ(0);
   }
 
   50% {
@@ -133,7 +149,7 @@ $menuBar-width: 25px !default;
   }
 }
 
-@keyframes barBottom {
+@keyframes bar-bottom {
   0% {
     transform: translateY(0) rotateZ(-45deg);
   }
@@ -143,13 +159,13 @@ $menuBar-width: 25px !default;
   }
 
   100% {
-    transform: translateY(#{$menuBar-height * 2}) rotateZ(0);
+    transform: translateY(#{$menu-bar-height * 2}) rotateZ(0);
   }
 }
 
-@keyframes barBottomOn {
+@keyframes bar-bottom-on {
   0% {
-    transform: translateY(#{$menuBar-height * 2}) rotateZ(0);
+    transform: translateY(#{$menu-bar-height * 2}) rotateZ(0);
   }
 
   50% {

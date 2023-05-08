@@ -29,48 +29,48 @@ erDiagram
     String pseudo  "nullable"
     String url  "nullable"
     }
-  
+
 
   country {
     Int id PK
-    String name  
+    String name
     }
-  
+
 
   form {
     Int id PK
-    String name  
+    String name
     }
-  
+
 
   genus {
     Int id PK
-    String name  
+    String name
     String description  "nullable"
     }
-  
+
 
   material {
     Int id PK
-    String name  
+    String name
     String description  "nullable"
     }
-  
+
 
   researcher {
     Int id PK
-    String name  
+    String name
     String wiki_url  "nullable"
     }
-  
+
 
   specie {
     Int id PK
-    Int year  
-    String name  
+    Int year
+    String name
     String description  "nullable"
     }
-  
+
 
   specimen {
     Int id PK
@@ -80,22 +80,22 @@ erDiagram
     String capture_date  "nullable"
     String description  "nullable"
     }
-  
+
 
   subfamily {
     Int id PK
     String name  "nullable"
     String description  "nullable"
     }
-  
+
 
   taxonomy_picture {
     Int id PK
     String date  "nullable"
-    String file_name  
+    String file_name
     String description  "nullable"
     }
-  
+
     contributor o{--}o specimen : "specimen_specimen_collector_idTocontributor"
     contributor o{--}o specimen : "specimen_specimen_identifier_idTocontributor"
     country o{--}o specimen : "specimen"
@@ -175,7 +175,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
   - [x] test simple query on JAMStack
   - [ ] add table `picture_taxonomy_material` & alter table `picture_taxonomy`
 - [x] better lint JS/TS
-- [x] build "list of specimens pictures" page 
+- [x] build "list of specimens pictures" page
   - [x] engine (route, etc.) => custom Vue => use Prisma
   - [x] build all request api
   - [x] get all content

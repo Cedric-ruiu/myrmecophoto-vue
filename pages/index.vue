@@ -4,16 +4,23 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
+  title:
+    'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
   meta: [
-    { name: 'description', content: 'Macro photographie taxonomiques de fourmis aidant à l\'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.' },
+    {
+      name: 'description',
+      content:
+        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+    },
   ],
 })
 </script>
 
 <template>
   <div class="[ o-hero ] grid">
-    <div class="[ o-hero__baseline ] flex flex-col text-center justify-center case-upper font-900 leading-[1em] z-1">
+    <div
+      class="[ o-hero__baseline ] flex flex-col text-center justify-center case-upper font-900 leading-[1em] z-1"
+    >
       <h1 class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
@@ -24,19 +31,35 @@ useHead({
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/exemple35mm.jpg" /> -->
-        <img src="/img/comparatif-35-50/exemple35mm.jpg" alt="photo 1" class="w-full h-full object-cover">
+        <img
+          src="/img/comparatif-35-50/exemple35mm.jpg"
+          alt="photo 1"
+          class="w-full h-full object-cover"
+        />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/comparaison50mm.jpg" /> -->
-        <img class="w-full h-full object-cover" src="/img/comparatif-35-50/comparaison50mm.jpg" alt="Photo 2">
+        <img
+          class="w-full h-full object-cover"
+          src="/img/comparatif-35-50/comparaison50mm.jpg"
+          alt="Photo 2"
+        />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/exemple50mm.jpg" /> -->
-        <img class="w-full h-full object-cover" src="/img/comparatif-35-50/exemple50mm.jpg" alt="Photo 3">
+        <img
+          class="w-full h-full object-cover"
+          src="/img/comparatif-35-50/exemple50mm.jpg"
+          alt="Photo 3"
+        />
       </div>
       <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/PICT3426c.jpg" /> -->
-        <img class="w-full h-full object-cover" src="/img/PICT3426c.jpg" alt="Photo 4">
+        <img
+          class="w-full h-full object-cover"
+          src="/img/PICT3426c.jpg"
+          alt="Photo 4"
+        />
       </div>
       <div class="[ o-hero__picture6EdgesShadow ] absolute w-full left-0" />
     </div>
@@ -51,16 +74,19 @@ useHead({
 }
 
 .o-hero {
-  grid-template-rows: var(--hero-height) calc(100vh - (var(--header-height) + var(--hero-height)));
+  grid-template-rows: var(--hero-height) calc(
+      100vh - (var(--header-height) + var(--hero-height))
+    );
   height: calc(100vh - var(--header-height));
 
   &__baseline {
-    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-    font-size: 7vw;
-
     @include media('>=sm') {
       font-size: var(--hero-font-size);
     }
+
+    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
+      Arial, sans-serif;
+    font-size: 7vw;
   }
 
   &__baselineTitle {
@@ -68,13 +94,14 @@ useHead({
   }
 
   &__baselineSubtitle {
-    animation: subtitle-appear 2s ease-in-out both 1s;
-    font-size: 4.7vw;
-    -webkit-text-stroke: 0.03em white;
-
     @include media('>=sm') {
       font-size: 3.5vw;
     }
+
+    font-size: 4.7vw;
+    animation: subtitle-appear 2s ease-in-out both 1s;
+
+    -webkit-text-stroke: 0.03em white;
   }
 
   &__pictures {
@@ -82,46 +109,80 @@ useHead({
   }
 
   &__picture4Edges {
-    @media screen and (orientation: portrait) {
-      margin-top: calc(2 * var(--hero-height));
-      height: calc(100% - 2 * var(--hero-height));
-    }
-
     &:nth-child(1) {
-      clip-path: polygon(0 0, 0 100%, 100% 100%, 100% calc(var(--hero-height) * 0.7));
+      clip-path: polygon(
+        0 0,
+        0 100%,
+        100% 100%,
+        100% calc(var(--hero-height) * 0.7)
+      );
       animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
     }
 
     &:nth-child(2) {
-      margin-top: calc(0.7 * var(--hero-height));
       height: calc(100% - 0.7 * var(--hero-height));
+      margin-top: calc(0.7 * var(--hero-height));
       animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
     }
 
     &:nth-child(3) {
-      clip-path: polygon(0 calc(var(--hero-height) * 0.7), 0 100%, 100% 100%, 100% 0);
+      clip-path: polygon(
+        0 calc(var(--hero-height) * 0.7),
+        0 100%,
+        100% 100%,
+        100% 0
+      );
       animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+    }
+
+    @media screen and (orientation: portrait) {
+      height: calc(100% - 2 * var(--hero-height));
+      margin-top: calc(2 * var(--hero-height));
     }
   }
 
   &__picture6Edges {
-    animation: picture-6-edges-appear 3s ease-in-out both 0s;
-    height: calc(2 * var(--hero-height));
     top: calc(var(--hero-height) - 2 * var(--hero-height));
-    clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% var(--hero-height), 50% calc(var(--hero-height) * 2), 0px var(--hero-height), 0px 0);
+    height: calc(2 * var(--hero-height));
+    clip-path: polygon(
+      50% calc(var(--hero-height)),
+      100% 0,
+      100% var(--hero-height),
+      50% calc(var(--hero-height) * 2),
+      0 var(--hero-height),
+      0 0
+    );
+    animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
     @media screen and (orientation: portrait) {
       height: calc(4 * var(--hero-height));
-      clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% calc(var(--hero-height) * 3), 50% calc(var(--hero-height) * 4), 0px calc(var(--hero-height) * 3), 0px 0);
+      clip-path: polygon(
+        50% calc(var(--hero-height)),
+        100% 0,
+        100% calc(var(--hero-height) * 3),
+        50% calc(var(--hero-height) * 4),
+        0 calc(var(--hero-height) * 3),
+        0 0
+      );
     }
   }
 
   &__picture6EdgesShadow {
-    animation: picture-6-edges-appear 3s ease-in-out both 0s;
-    height: calc(var(--hero-gap) + var(--hero-height));
     top: -1px; // hide line glitch
-    clip-path: polygon(50% var(--hero-height), 100% 0, 100% var(--hero-gap), 50% calc(var(--hero-height) + var(--hero-gap)), 0px var(--hero-gap), 0px 0);
+
+    height: calc(var(--hero-gap) + var(--hero-height));
+
     background-color: black;
+    clip-path: polygon(
+      50% var(--hero-height),
+      100% 0,
+      100% var(--hero-gap),
+      50% calc(var(--hero-height) + var(--hero-gap)),
+      0 var(--hero-gap),
+      0 0
+    );
+
+    animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
     @media screen and (orientation: portrait) {
       top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
@@ -138,43 +199,55 @@ useHead({
 
 @keyframes title-appear {
   0% {
+    transform: translateY(-10px) scale(1.1);
     opacity: 0;
-    transform: translateY(-10px) scale(1.10);
-  } 80% {
+  }
+
+  80% {
     opacity: 1;
-  } 100% {
-    transform: translateY(0px) scale(1);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes subtitle-appear {
   0% {
-    opacity: 0;
     transform: translateY(20px) scale(0.9);
-  } 100% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
     opacity: 1;
-    transform: translateY(0px) scale(1);
   }
 }
 
 @keyframes picture-4-edges-appear {
   0% {
-    opacity: 0;
     transform: translateY(-50%);
-  } 100% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
     opacity: 1;
-    transform: translateY(0px);
   }
 }
 
 @keyframes picture-6-edges-appear {
   0% {
-    opacity: 0;
     transform: translateY(calc(-1 * var(--header-height)));
-  } 50% {
+    opacity: 0;
+  }
+
+  50% {
     opacity: 1;
-  } 100% {
-    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 </style>

@@ -15,5 +15,7 @@ const mailtoHandler = (e: Event) => {
 </script>
 
 <template>
-  <a :href="mailtoEmailEncrypted" @click="mailtoHandler">&#x202e;{{ emailEncrypted }}&#x202c;</a>
+  <a :href="mailtoEmailEncrypted" @click="mailtoHandler"
+    >&#x202e;{{ emailEncrypted }}&#x202c;</a
+  >
 </template>

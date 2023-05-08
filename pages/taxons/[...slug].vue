@@ -7,13 +7,17 @@ if (!routeGenus || !routeSpecie)
 routeGenus = routeGenus.trim()
 routeSpecie = routeSpecie.trim()
 
-if (routeSpecie === 'sp')
+if (routeSpecie === 'sp') {
   routeSpecie += '.'
+}
 
 const { data: species } = await useFetch('/api/getSpecies')
 
 if (species == null || species.value == null)
-  throw createError({ statusCode: 404, statusMessage: 'Api getSpecies Not Found' })
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Api getSpecies Not Found',
+  })
 
 const specieId = ref(-1)
 

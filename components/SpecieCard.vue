@@ -8,13 +8,14 @@ const props = defineProps({
 </script>
 
 <template>
-  <NuxtLink :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`" class="m-specieCard">
+  <NuxtLink
+    :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`"
+    class="m-specieCard"
+  >
     <h3 class="ms-2">
       {{ taxon }}
     </h3>
-    <p class="">
-      {{ researcherName }} ({{ yearDiscover }})
-    </p>
+    <p class="">{{ researcherName }} ({{ yearDiscover }})</p>
   </NuxtLink>
 </template>
 
@@ -22,9 +23,11 @@ const props = defineProps({
 .m-specieCard {
   display: inline-flex;
   flex-direction: column;
-  border: 1px solid;
-  padding: 20px;
+
   margin: 0 10px 10px 0;
+  padding: 20px;
+
+  border: 1px solid;
   border-radius: 5px;
 }
 </style>

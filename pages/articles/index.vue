@@ -2,9 +2,14 @@
 // this route generate page with list of all articles
 
 useHead({
-  title: 'Articles myrmécologiques et photographiques, Macro photographie des fourmis en milieu naturel ou artificiel | Myrmecophoto',
+  title:
+    'Articles myrmécologiques et photographiques, Macro photographie des fourmis en milieu naturel ou artificiel | Myrmecophoto',
   meta: [
-    { name: 'description', content: 'Liste d\'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).' },
+    {
+      name: 'description',
+      content:
+        "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
+    },
   ],
 })
 
