@@ -1,13 +1,24 @@
 {
+  "css.validate": false,
+  "scss.validate": false,
+  "prettier.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "stylelint.validate": ["css", "scss", "vue", "html"],
   "cSpell.words": [
+    "Formicidae",
+    "Myrmeco",
+    "myrmécologiques",
     "Myrmecophoto",
     "nuxt",
     "prisma",
     "unocss"
   ],
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "[scss, vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

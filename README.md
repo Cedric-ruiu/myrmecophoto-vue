@@ -187,7 +187,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
 - [ ] write about page
 - [ ] Integrate entire site UI/UX
   - [x] Install framework CSS (UnoCSS ?)
-  - [ ] Install & configure Stylelint
+  - [x] Install & configure Stylelint
   - [x] Add reset
   - [x] Add typography
   - [ ] Add layout

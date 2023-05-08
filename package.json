@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.x",
+    "@cedric-ruiu/stylelint-config": "0.2.1",
     "@mermaid-js/mermaid-cli": "^9.x",
     "@nuxt/content": "2.5.2",
     "@nuxt/image-edge": "^1.0.0-27991759.1a5eea1",
@@ -20,11 +21,16 @@
     "@unocss/preset-typography": "0.50.6",
     "@unocss/preset-web-fonts": "0.50.6",
     "eslint": "^8.x",
+    "eslint-config-prettier": "^8.8.0",
     "include-media": "^2.0.0",
     "nuxt": "^3.3.2",
+    "postcss": "^8.4.23",
+    "postcss-scss": "^4.0.6",
+    "prettier": "^2.8.8",
     "prisma": "4.11.0",
     "prisma-erd-generator": "^1.x",
     "sass": "^1.x",
+    "stylelint": "^15.6.1",
     "typescript": "^4.x"
   }
 }
