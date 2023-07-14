@@ -73,128 +73,130 @@ useHead({
   --hero-gap: 20px;
 }
 
-.o-hero {
-  grid-template-rows: var(--hero-height) calc(
-      100vh - (var(--header-height) + var(--hero-height))
-    );
-  height: calc(100vh - var(--header-height));
-
-  &__baseline {
-    @include media('>=sm') {
-      font-size: var(--hero-font-size);
-    }
-
-    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
-      Arial, sans-serif;
-    font-size: 7vw;
-  }
-
-  &__baselineTitle {
-    animation: title-appear 2s ease-in-out both 0.5s;
-  }
-
-  &__baselineSubtitle {
-    @include media('>=sm') {
-      font-size: 3.5vw;
-    }
-
-    font-size: 4.7vw;
-    animation: subtitle-appear 2s ease-in-out both 1s;
-
-    -webkit-text-stroke: 0.03em white;
-  }
-
-  &__pictures {
-    gap: var(--hero-gap);
-  }
-
-  &__picture4Edges {
-    &:nth-child(1) {
-      clip-path: polygon(
-        0 0,
-        0 100%,
-        100% 100%,
-        100% calc(var(--hero-height) * 0.7)
+@layer components {
+  .o-hero {
+    grid-template-rows: var(--hero-height) calc(
+        100vh - (var(--header-height) + var(--hero-height))
       );
-      animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+    height: calc(100vh - var(--header-height));
+
+    &__baseline {
+      @include media('>=sm') {
+        font-size: var(--hero-font-size);
+      }
+
+      font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
+        Arial, sans-serif;
+      font-size: 7vw;
     }
 
-    &:nth-child(2) {
-      height: calc(100% - 0.7 * var(--hero-height));
-      margin-top: calc(0.7 * var(--hero-height));
-      animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
+    &__baselineTitle {
+      animation: title-appear 2s ease-in-out both 0.5s;
     }
 
-    &:nth-child(3) {
-      clip-path: polygon(
-        0 calc(var(--hero-height) * 0.7),
-        0 100%,
-        100% 100%,
-        100% 0
-      );
-      animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+    &__baselineSubtitle {
+      @include media('>=sm') {
+        font-size: 3.5vw;
+      }
+
+      font-size: 4.7vw;
+      animation: subtitle-appear 2s ease-in-out both 1s;
+
+      -webkit-text-stroke: 0.03em white;
     }
 
-    @media screen and (orientation: portrait) {
-      height: calc(100% - 2 * var(--hero-height));
-      margin-top: calc(2 * var(--hero-height));
+    &__pictures {
+      gap: var(--hero-gap);
     }
-  }
 
-  &__picture6Edges {
-    top: calc(var(--hero-height) - 2 * var(--hero-height));
-    height: calc(2 * var(--hero-height));
-    clip-path: polygon(
-      50% calc(var(--hero-height)),
-      100% 0,
-      100% var(--hero-height),
-      50% calc(var(--hero-height) * 2),
-      0 var(--hero-height),
-      0 0
-    );
-    animation: picture-6-edges-appear 3s ease-in-out both 0s;
+    &__picture4Edges {
+      &:nth-child(1) {
+        clip-path: polygon(
+          0 0,
+          0 100%,
+          100% 100%,
+          100% calc(var(--hero-height) * 0.7)
+        );
+        animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+      }
 
-    @media screen and (orientation: portrait) {
-      height: calc(4 * var(--hero-height));
+      &:nth-child(2) {
+        height: calc(100% - 0.7 * var(--hero-height));
+        margin-top: calc(0.7 * var(--hero-height));
+        animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
+      }
+
+      &:nth-child(3) {
+        clip-path: polygon(
+          0 calc(var(--hero-height) * 0.7),
+          0 100%,
+          100% 100%,
+          100% 0
+        );
+        animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+      }
+
+      @media screen and (orientation: portrait) {
+        height: calc(100% - 2 * var(--hero-height));
+        margin-top: calc(2 * var(--hero-height));
+      }
+    }
+
+    &__picture6Edges {
+      top: calc(var(--hero-height) - 2 * var(--hero-height));
+      height: calc(2 * var(--hero-height));
       clip-path: polygon(
         50% calc(var(--hero-height)),
         100% 0,
-        100% calc(var(--hero-height) * 3),
-        50% calc(var(--hero-height) * 4),
-        0 calc(var(--hero-height) * 3),
+        100% var(--hero-height),
+        50% calc(var(--hero-height) * 2),
+        0 var(--hero-height),
         0 0
       );
+      animation: picture-6-edges-appear 3s ease-in-out both 0s;
+
+      @media screen and (orientation: portrait) {
+        height: calc(4 * var(--hero-height));
+        clip-path: polygon(
+          50% calc(var(--hero-height)),
+          100% 0,
+          100% calc(var(--hero-height) * 3),
+          50% calc(var(--hero-height) * 4),
+          0 calc(var(--hero-height) * 3),
+          0 0
+        );
+      }
     }
-  }
 
-  &__picture6EdgesShadow {
-    top: -1px; // hide line glitch
+    &__picture6EdgesShadow {
+      top: -1px; // hide line glitch
 
-    height: calc(var(--hero-gap) + var(--hero-height));
+      height: calc(var(--hero-gap) + var(--hero-height));
 
-    background-color: black;
-    clip-path: polygon(
-      50% var(--hero-height),
-      100% 0,
-      100% var(--hero-gap),
-      50% calc(var(--hero-height) + var(--hero-gap)),
-      0 var(--hero-gap),
-      0 0
-    );
+      background-color: black;
+      clip-path: polygon(
+        50% var(--hero-height),
+        100% 0,
+        100% var(--hero-gap),
+        50% calc(var(--hero-height) + var(--hero-gap)),
+        0 var(--hero-gap),
+        0 0
+      );
 
-    animation: picture-6-edges-appear 3s ease-in-out both 0s;
+      animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
-    @media screen and (orientation: portrait) {
-      top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
+      @media screen and (orientation: portrait) {
+        top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
+      }
     }
-  }
 
-  // a nonagone try, but it's too complex and prefer save my night
-  // &__picture9EdgesShadow {
-  //   height: calc(100% + var(--hero-height));
-  //   top: calc(var(--hero-height) - 2 * var(--hero-height));
-  //   clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% var(--hero-height), 58% calc(var(--hero-height) * 1.7), 58% 100%, 42% 100%, 42% calc(var(--hero-height) * 1.7), 0 var(--hero-height), 0 0);
-  // }
+    // a nonagone try, but it's too complex and prefer save my night
+    // &__picture9EdgesShadow {
+    //   height: calc(100% + var(--hero-height));
+    //   top: calc(var(--hero-height) - 2 * var(--hero-height));
+    //   clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% var(--hero-height), 58% calc(var(--hero-height) * 1.7), 58% 100%, 42% 100%, 42% calc(var(--hero-height) * 1.7), 0 var(--hero-height), 0 0);
+    // }
+  }
 }
 
 @keyframes title-appear {
