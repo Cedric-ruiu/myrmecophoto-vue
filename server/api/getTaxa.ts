@@ -8,6 +8,9 @@ export default defineEventHandler(() => {
           specie: {
             include: {
               researcher: true,
+              _count: {
+                select: { specimen: true },
+              },
             },
             orderBy: { name: 'asc' },
           },
