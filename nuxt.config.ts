@@ -11,32 +11,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     emailContact: '', // use NUXT_EMAIL_CONTACT environment variable
   },
-  unocss: {
-    uno: true,
-    typography: true,
-    preflight: true,
-    webFonts: {
-      provider: 'google', // default provider
-      fonts: {
-        // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400i|Quicksand:400,500,700" rel="stylesheet">
-        title: [
-          {
-            name: 'Open Sans',
-            weights: ['400'],
-            italic: true,
-          },
-        ],
-        text: [
-          {
-            name: 'Quicksand',
-            weights: ['400', '500', '700'],
-          },
-        ],
-      },
-    },
-    shortcuts: [],
-    rules: [],
-  },
   vite: {
     css: {
       preprocessorOptions: {
@@ -52,6 +26,7 @@ export default defineNuxtConfig({
   css: [
     // The entry file loaded on all pages
     '@/assets/main.scss',
+    '@unocss/reset/tailwind.css',
   ],
   nitro: {
     prerender: {
