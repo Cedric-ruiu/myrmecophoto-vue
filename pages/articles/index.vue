@@ -20,8 +20,8 @@ const { data: articles } = await useAsyncData('articles', () => {
 
 <template>
   <div>
-    <h1>Les articles</h1>
-    <div v-for="article in articles" :key="article._path">
+    <h1 class="text-white text-6xl font-normal italic uppercase">Articles</h1>
+    <div v-for="article in articles" :key="article._path" class="prose">
       <NuxtLink :to="article._path">
         <h3>{{ article.title }}</h3>
       </NuxtLink>

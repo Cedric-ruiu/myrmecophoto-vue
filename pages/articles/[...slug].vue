@@ -13,6 +13,10 @@ useHead({
 </script>
 
 <template>
-  <h1>{{ article.title }}</h1>
-  <ContentDoc />
+  <h1 class="text-white text-6xl font-normal italic uppercase">
+    {{ article.title }}
+  </h1>
+  <div class="prose">
+    <ContentDoc />
+  </div>
 </template>
