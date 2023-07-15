@@ -8,18 +8,22 @@ $breakpoints: (
   md: 768px,
   lg: 1024px,
   xl: 1280px,
-  2xl: 1536px
+  2xl: 1536px,
 ) !default;
 
 // Colors
 
-$color-primary: #E72C27;
-$color-secondary: #FAA307;
+$color-primary: #e72c27;
+$color-secondary: #faa307;
 $color-layout: #000;
 
 // Gradients
 
-$gradient-primary: linear-gradient(90deg, rgba($color-primary, 1) 64.09%, rgba($color-secondary, 1) 94.45%);
+$gradient-primary: linear-gradient(
+  90deg,
+  rgba($color-primary, 1) 64.09%,
+  rgba($color-secondary, 1) 94.45%
+);
 
 // Animations / UX
 

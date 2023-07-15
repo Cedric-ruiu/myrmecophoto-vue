@@ -18,7 +18,7 @@ yarn serve-generate
 
 ## Database
 
-SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. `api/getSpecies` & `api/getTaxa` provide all datas needed to display "Photos Spécimens" section pages. For "SSG" it's useful and websitedon't need to access database in live website. The Database can be more granular with optimized tables, but in my case I prefer to spend time on other things, like UI integration. Below is the Mermaid diagramme ERD of Myrmecophoto Database :
+SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. `api/getSpecies` & `api/getTaxa` provide all datas needed to display "Photos Spécimens" section pages. For "SSG" it's useful and website doesn't need to access database on live website. The Database can be more granular with optimized tables, but in my case I prefer to spend time on other things, like UI/UX features. As far as possible, I have followed the conventions proposed by [www.sqlstyle.guide](https://www.sqlstyle.guide/). Below is the Mermaid diagramme ERD of Myrmecophoto Database :
 
 ```mermaid
 erDiagram
@@ -29,48 +29,48 @@ erDiagram
     String pseudo  "nullable"
     String url  "nullable"
     }
-  
+
 
   country {
     Int id PK
-    String name  
+    String name
     }
-  
+
 
   form {
     Int id PK
-    String name  
+    String name
     }
-  
+
 
   genus {
     Int id PK
-    String name  
+    String name
     String description  "nullable"
     }
-  
+
 
   material {
     Int id PK
-    String name  
+    String name
     String description  "nullable"
     }
-  
+
 
   researcher {
     Int id PK
-    String name  
+    String name
     String wiki_url  "nullable"
     }
-  
+
 
   specie {
     Int id PK
-    Int year  
-    String name  
+    Int year
+    String name
     String description  "nullable"
     }
-  
+
 
   specimen {
     Int id PK
@@ -80,22 +80,22 @@ erDiagram
     String capture_date  "nullable"
     String description  "nullable"
     }
-  
+
 
   subfamily {
     Int id PK
     String name  "nullable"
     String description  "nullable"
     }
-  
+
 
   taxonomy_picture {
     Int id PK
     String date  "nullable"
-    String file_name  
+    String file_name
     String description  "nullable"
     }
-  
+
     contributor o{--}o specimen : "specimen_specimen_collector_idTocontributor"
     contributor o{--}o specimen : "specimen_specimen_identifier_idTocontributor"
     country o{--}o specimen : "specimen"
@@ -175,7 +175,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
   - [x] test simple query on JAMStack
   - [ ] add table `picture_taxonomy_material` & alter table `picture_taxonomy`
 - [x] better lint JS/TS
-- [x] build "list of specimens pictures" page 
+- [x] build "list of specimens pictures" page
   - [x] engine (route, etc.) => custom Vue => use Prisma
   - [x] build all request api
   - [x] get all content
@@ -187,7 +187,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
 - [ ] write about page
 - [ ] Integrate entire site UI/UX
   - [x] Install framework CSS (UnoCSS ?)
-  - [ ] Install & configure Stylelint
+  - [x] Install & configure Stylelint
   - [x] Add reset
   - [x] Add typography
   - [ ] Add layout
