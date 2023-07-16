@@ -37,4 +37,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+  experimental: {
+    payloadExtraction: false, // Fix 404 payload on SSG https://github.com/nuxt/nuxt/issues/22068
+  },
 })

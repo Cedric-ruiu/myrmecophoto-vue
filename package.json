@@ -22,7 +22,7 @@
     "eslint": "^8.x",
     "eslint-config-prettier": "^8.x",
     "include-media": "^2.x",
-    "nuxt": "3.6.2",
+    "nuxt": "3.6.3",
     "postcss": "^8.x",
     "postcss-scss": "^4.x",
     "prettier": "^2.x",
