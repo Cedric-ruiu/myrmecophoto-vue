@@ -21,8 +21,8 @@ const route = useRoute()
         <ul
           class="[ o-header__nav ] py-5 sm:py-0 text-sm sm:text-right uppercase sm:items-center sm:inline-flex"
         >
-          <HeaderNavItem link="/taxons"> Photos spécimens </HeaderNavItem>
-          <HeaderNavItem link="/articles"> Articles </HeaderNavItem>
+          <HeaderNavItem link="/taxons/"> Photos spécimens </HeaderNavItem>
+          <HeaderNavItem link="/articles/"> Articles </HeaderNavItem>
           <HeaderNavItem link="javascript:;"> About </HeaderNavItem>
           <HeaderNavItem link="javascript:;"> Contact </HeaderNavItem>
         </ul>
