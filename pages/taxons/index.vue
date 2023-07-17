@@ -11,7 +11,7 @@ useHead({
   ],
 })
 
-const { data: subfamilies } = await useFetch('/api/getTaxa')
+const { data: subfamilies } = useNuxtData('taxa')
 </script>
 
 <template>

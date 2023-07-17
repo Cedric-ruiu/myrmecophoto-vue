@@ -11,7 +11,7 @@ if (routeSpecie === 'sp') {
   routeSpecie += '.'
 }
 
-const { data: species } = await useFetch('/api/getSpecies')
+const { data: species } = useNuxtData('species')
 
 if (species == null || species.value == null)
   throw createError({

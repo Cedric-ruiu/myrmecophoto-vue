@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: emailEncrypted } = await useFetch('/api/getEncryptedEmailContact')
+const { data: emailEncrypted } = useNuxtData('emailEncrypted')
 
 if (emailEncrypted == null || emailEncrypted.value == null)
   throw createError({
