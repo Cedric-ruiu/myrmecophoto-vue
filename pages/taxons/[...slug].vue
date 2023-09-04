@@ -30,6 +30,19 @@ for (const [index, specie] of species.value?.entries()) {
 
 if (specieId.value === -1)
   throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
+
+useHead({
+  title: `${species.value[specieId.value].genus.name} ${
+    species.value[specieId.value].name
+  }`,
+  meta: [
+    {
+      name: 'description',
+      content:
+        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+    },
+  ],
+})
 </script>
 
 <template>
