@@ -47,24 +47,83 @@ useHead({
 
 <template>
   <div v-if="species">
-    <h1 class="text-white text-6xl font-normal italic uppercase">
-      {{ species[specieId].genus.name }} {{ species[specieId].name }}
-    </h1>
-    <p>{{ species[specieId].researcher.name }} {{ species[specieId].year }}</p>
+    <div class="my-30">
+      <h1 class="text-white text-6xl font-normal italic uppercase">
+        {{ species[specieId].genus.name }} {{ species[specieId].name
+        }}<span class="text-md"
+          >{{ species[specieId].researcher.name }}
+          {{ species[specieId].year }}</span
+        >
+      </h1>
+      <p>
+        Sous-famille : <i>{{ species[specieId].genus.subfamily.name }}</i> -
+        Genre : <i>{{ species[specieId].genus.name }}</i> - Espèce :
+        <i>{{ species[specieId].name }}</i>
+      </p>
+    </div>
     <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
-      <div class="prose">
-        <h2>Specimen "{{ specimen.reference }}" ({{ specimen.form.name }})</h2>
+      <div class="w-full relative-md prose">
+        <h2>{{ specimen.form.name }} de {{ specimen.size_mm }}mm</h2>
         <p v-if="specimen.description">
           {{ specimen.description }}
         </p>
       </div>
-      <div v-for="picture in specimen.taxonomy_picture" :key="picture.id">
+      <div class="bg-white rounded-md p-12 flex gap-6">
         <img
-          class="mb-2.5"
+          v-for="picture in specimen.taxonomy_picture"
+          :key="picture.id"
+          class="max-h-40 rounded-md"
           :src="`/img/taxonomy/${picture.file_name}`"
           :alt="`${species[specieId].genus.name} ${species[specieId].name}`"
         />
       </div>
+      <div class="w-full relative p-6 border-gradient rounded-md mb-30">
+        <ul class="prose relative -top-2.5">
+          <li>Specimen n°{{ specimen.reference }}</li>
+          <li>Caste {{ specimen.form.name }}</li>
+          <li>
+            Collecteur -
+            {{ specimen.contributor_specimen_collector_idTocontributor.name }}
+          </li>
+          <li
+            v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
+          >
+            Identificateur -
+            {{ specimen.contributor_specimen_identifier_idTocontributor.name }}
+          </li>
+          <li>Size : {{ specimen.size_mm }}mm</li>
+          <li>
+            Lieu de capture : {{ specimen.capture_site }} ({{
+              specimen.country.name
+            }})
+          </li>
+          <li>Date de capture : {{ specimen.capture_date }}</li>
+        </ul>
+      </div>
     </template>
+    <div class="prose">
+      <h2>Resources</h2>
+      <ul>
+        <li>
+          Page wiki sur
+          <a
+            href="{{ species[specieId].researcher.wiki_url }}"
+            target="_blank"
+            >{{ species[specieId].researcher.name }}</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
+
+<style lang="scss">
+.border-gradient::before {
+  content: '';
+  padding: 0 0 1px 0;
+  background-image: linear-gradient(#222, #000), $gradient-primary;
+  background-clip: content-box, border-box;
+  z-index: -1;
+  @apply absolute w-full h-full rounded-md -top-2.5 left-0;
+}
+</style>
