@@ -30,31 +30,31 @@ useHead({
     </div>
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/exemple35mm.jpg" /> -->
+        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple35mm.jpg" /> -->
         <img
-          src="/img/comparatif-35-50/exemple35mm.jpg"
+          src="/img/articles/comparatif-35-50/exemple35mm.jpg"
           alt="photo 1"
           class="w-full h-full object-cover"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/comparaison50mm.jpg" /> -->
+        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/comparaison50mm.jpg" /> -->
         <img
           class="w-full h-full object-cover"
-          src="/img/comparatif-35-50/comparaison50mm.jpg"
+          src="/img/articles/comparatif-35-50/comparaison50mm.jpg"
           alt="Photo 2"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/comparatif-35-50/exemple50mm.jpg" /> -->
+        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple50mm.jpg" /> -->
         <img
           class="w-full h-full object-cover"
-          src="/img/comparatif-35-50/exemple50mm.jpg"
+          src="/img/articles/comparatif-35-50/exemple50mm.jpg"
           alt="Photo 3"
         />
       </div>
       <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/PICT3426c.jpg" /> -->
+        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/PICT3426c.jpg" /> -->
         <img
           class="w-full h-full object-cover"
           src="/img/PICT3426c.jpg"

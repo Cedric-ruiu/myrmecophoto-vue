@@ -10,10 +10,10 @@ const props = defineProps({
 <template>
   <NuxtLink
     :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`"
-    class="[ m-specieCard ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white"
+    class="[ m-specieCard horizontal-bottom-line-gradient ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white specie-card-border"
   >
     <img
-      class="[ m-specieCard__bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
+      class="[ m-specieCard__bg ] absolute top-0 left-0 w-full h-full object-cover rounded-md filtered"
       :src="`/img/taxonomy/thumbnails/${taxon
         .replace(' ', '-')
         .replace('.', '')}.jpg`"
