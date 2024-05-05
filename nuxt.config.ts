@@ -25,8 +25,8 @@ export default defineNuxtConfig({
   },
   css: [
     // The entry file loaded on all pages
-    '@/assets/main.scss',
     '@unocss/reset/tailwind.css',
+    '@/assets/main.scss',
   ],
   nitro: {
     prerender: {

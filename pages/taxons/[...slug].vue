@@ -43,21 +43,68 @@ useHead({
     },
   ],
 })
+
+import { onMounted, onUnmounted, ref } from 'vue'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
+
+const lightboxes = ref([])
+
+onMounted(async () => {
+  const galleryElements = document.querySelectorAll('.galleryTaxon')
+  galleryElements.forEach(async (galleryElement) => {
+    const links = Array.from(galleryElement.querySelectorAll('a'))
+
+    // Assurez-vous que les dimensions de chaque image sont chargées
+    await Promise.all(
+      links.map(async (link) => {
+        const img = new Image()
+        img.src = link.href
+        await new Promise((resolve) => (img.onload = resolve))
+        link.dataset.pswpWidth = img.naturalWidth
+        link.dataset.pswpHeight = img.naturalHeight
+      }),
+    )
+
+    // Créez une nouvelle instance de PhotoSwipeLightbox pour chaque galerie
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: galleryElement, // Utilisez l'élément de galerie actuel
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+    })
+    lightbox.init()
+
+    // Stockez l'instance de lightbox pour un usage futur, par exemple pour le nettoyage
+    lightboxes.value.push(lightbox)
+  })
+})
+
+onUnmounted(() => {
+  // Nettoyez chaque lightbox lors du démontage du composant
+  lightboxes.value.forEach((lightbox) => {
+    if (lightbox) {
+      lightbox.destroy()
+    }
+  })
+  lightboxes.value = []
+})
 </script>
 
 <template>
   <div v-if="species">
     <div class="my-30">
-      <h1 class="text-white text-6xl font-normal italic uppercase">
+      <h1 class="text-white font-normal italic uppercase heading-1">
         {{ species[specieId].genus.name }} {{ species[specieId].name
-        }}<span class="text-md"
+        }}<span class="ml-2 text-xl"
           >{{ species[specieId].researcher.name }}
           {{ species[specieId].year }}</span
         >
       </h1>
       <p>
-        Sous-famille : <i>{{ species[specieId].genus.subfamily.name }}</i> -
-        Genre : <i>{{ species[specieId].genus.name }}</i> - Espèce :
+        <strong>Sous-famille : </strong>
+        <i>{{ species[specieId].genus.subfamily.name }}</i> -
+        <strong>Genre :</strong> <i>{{ species[specieId].genus.name }}</i> -
+        <strong>Espèce : </strong>
         <i>{{ species[specieId].name }}</i>
       </p>
     </div>
@@ -68,36 +115,58 @@ useHead({
           {{ specimen.description }}
         </p>
       </div>
-      <div class="bg-white rounded-md p-12 flex gap-6">
-        <img
+      <div
+        id="galleryTaxon"
+        class="galleryTaxon bg-white rounded-md p-12 flex flex-wrap gap-6"
+      >
+        <a
           v-for="picture in specimen.taxonomy_picture"
           :key="picture.id"
-          class="max-h-40 rounded-md"
-          :src="`/img/taxonomy/${picture.file_name}`"
-          :alt="`${species[specieId].genus.name} ${species[specieId].name}`"
-        />
+          :href="`/img/taxonomy/${picture.file_name}`"
+          :data-pswp-width="picture.width"
+          :data-pswp-height="picture.height"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            class="max-h-40 rounded-md"
+            :src="`/img/taxonomy/${picture.file_name}`"
+            :alt="`${species[specieId].genus.name} ${species[specieId].name}`"
+          />
+        </a>
       </div>
-      <div class="w-full relative p-6 border-gradient rounded-md mb-30">
-        <ul class="prose relative -top-2.5">
-          <li>Specimen n°{{ specimen.reference }}</li>
-          <li>Caste {{ specimen.form.name }}</li>
+      <div
+        class="[ horizontal-bottom-line-gradient ] w-full relative p-6 rounded-md mb-30"
+      >
+        <ul class="prose relative">
           <li>
-            Collecteur -
-            {{ specimen.contributor_specimen_collector_idTocontributor.name }}
+            <strong>Numéro du specimen :&nbsp;</strong>
+            <samp>{{ specimen.reference }}</samp>
+          </li>
+          <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
+          <li>
+            <strong>Collecteur : </strong>
+            <i>{{
+              specimen.contributor_specimen_collector_idTocontributor.name
+            }}</i>
           </li>
           <li
             v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
           >
-            Identificateur -
-            {{ specimen.contributor_specimen_identifier_idTocontributor.name }}
+            <strong>Identificateur :</strong>
+            <i>{{
+              specimen.contributor_specimen_identifier_idTocontributor.name
+            }}</i>
           </li>
-          <li>Size : {{ specimen.size_mm }}mm</li>
+          <li><strong>Size :</strong> {{ specimen.size_mm }}mm</li>
           <li>
-            Lieu de capture : {{ specimen.capture_site }} ({{
+            <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
               specimen.country.name
             }})
           </li>
-          <li>Date de capture : {{ specimen.capture_date }}</li>
+          <li>
+            <strong>Date de capture :</strong> {{ specimen.capture_date }}
+          </li>
         </ul>
       </div>
     </template>
@@ -106,24 +175,11 @@ useHead({
       <ul>
         <li>
           Page wiki sur
-          <a
-            href="{{ species[specieId].researcher.wiki_url }}"
-            target="_blank"
-            >{{ species[specieId].researcher.name }}</a
-          >
+          <a :href="species[specieId].researcher.wiki_url" target="_blank">{{
+            species[specieId].researcher.name
+          }}</a>
         </li>
       </ul>
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.border-gradient::before {
-  content: '';
-  padding: 0 0 1px 0;
-  background-image: linear-gradient(#222, #000), $gradient-primary;
-  background-clip: content-box, border-box;
-  z-index: -1;
-  @apply absolute w-full h-full rounded-md -top-2.5 left-0;
-}
-</style>

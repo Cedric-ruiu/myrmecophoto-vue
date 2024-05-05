@@ -1,26 +1,36 @@
 @import './core';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    color: #fff;
-    background-color: #000;
-  }
+body {
+  color: #fff;
+  background-color: #000;
 }
 
-@layer utilities {
-  .gradient-primary {
-    @include gradient-primary();
-  }
+.heading-1 {
+  font-size: clamp(2rem, 4.5vw + 1rem, 3.75rem);
+}
 
-  .text-gradient-primary {
-    @include gradient-primary();
+.gradient-primary {
+  @include gradient-primary();
+}
 
-    background-clip: text;
+.text-gradient-primary {
+  @include gradient-primary();
 
-    -webkit-text-fill-color: transparent;
-  }
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.horizontal-bottom-line-gradient::before {
+  content: '';
+
+  z-index: -1;
+
+  padding: 0 0 5px;
+
+  background-image: linear-gradient(#222, #000),
+    linear-gradient(90deg, #e72c27 64.09%, #faa307 94.45%);
+  background-clip: content-box, border-box;
+
+  @apply absolute w-full h-full rounded-md -bottom-px left-0;
 }
