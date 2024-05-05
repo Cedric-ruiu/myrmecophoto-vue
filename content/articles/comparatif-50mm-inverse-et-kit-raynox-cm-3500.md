@@ -3,6 +3,7 @@ title: Comparatif entre un 50mm inversé et un kit Raynox CM-3500
 description: Vous souhaitez vous lancer dans la macrophotographie mais avec un très petit budget ? Je vous propose donc un test comparatif de 2 méthodes accessibles très financièrement.
 date:
   published: 2007-04-13
+thumbnail: comparatif-50mm-inverse-et-kit-raynox-cm-3500.jpg
 ---
 
 **Attention!** Cet article est en cours de re-écriture, n'hésitez pas à repasser pour observer les changements!
@@ -11,7 +12,7 @@ date:
 
 Après 1 an d'utilisation de la technique du 50mm inversé, j'ai décidé d'acheter un kit macro dont j'ai beaucoup entendu parler. Hormis la difficulté de commande/réception, je suis assez étonné des résultats obtenus. Les tests de ce genre de matériel étant denrée rare, je me presse donc d'en effectuer un, le plus complet possible. Donc si on reprend, nous avons 2 moyens différents de faire de la macrophotographie à très fort grossissement et à bas prix : la technique du 50mm inversé, et/ou le kit de bonnettes macro. Nous allons voir avec quelques tests quels sont les différences entre ces 2 techniques et donc, leurs avantages et inconvénients respectifs. Le 50mm utilisé est le meilleur que je possède, c'est à dire un banal Canon FD 50mm f1:1.4 (60euros d'occasion). Les bonnettes étant le kit macro de Raynox le plus puissant, le CM-3500 (100euros neuf). Concernant l'appareil photo, il s'agit un bridge, le Dimage Z6 qui est pris comme cobaye. Sa focale va "théoriquement" de 35mm à 420mm en raison de la taille du capteur (1/2,5"). Les réglages de l'appareil sont en manuel et n'ont pas été touché une seule fois pendant la phase de test. En obturation j'ai utilisé du 1/50e, diaphragme fermé au maximum à F:8, sensibilité minimale à 50ISO, balance des blancs préréglée sur la lumière du soleil et flash désactivé.
 
-![](/img/comparatif-canon50-raynox3500/canon_raynox.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/canon_raynox.jpg)
 
 ## Utilisation, ergonomie, poids, montage, etc.
 
@@ -31,25 +32,25 @@ On va maintenant passer aux choses sérieuses et savoir ce qu'ils ont dans le ve
 
 Canon FD 50mm.Distance de mise au point :~25mm
 
-![](/img/comparatif-canon50-raynox3500/canon_50mm_min.jpg)
-![](/img/comparatif-canon50-raynox3500/canon_50mm_max.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/canon_50mm_min.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/canon_50mm_max.jpg)
 
 ### Kit Raynox CM-3500 :
 
 Raynox 6X.Distance de mise au point :~168mm
 
-![](/img/comparatif-canon50-raynox3500/raynox_6x_min.jpg)
-![](/img/comparatif-canon50-raynox3500/raynox_6x_max.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_6x_min.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_6x_max.jpg)
 
 Raynox 12X.Distance de mise au point :~76mm
 
-![](/img/comparatif-canon50-raynox3500/raynox_12x_min.jpg)
-![](/img/comparatif-canon50-raynox3500/raynox_12x_max.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_12x_min.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_12x_max.jpg)
 
 Raynox 24X.Distance de mise au point :~35mm
 
-![](/img/comparatif-canon50-raynox3500/raynox_24x_min.jpg)
-![](/img/comparatif-canon50-raynox3500/raynox_24x_max.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_24x_min.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_24x_max.jpg)
 
 ### Conclusion :
 
@@ -61,11 +62,11 @@ Pour tester la profondeur de champ j'ai simplement plié en 4 la feuille de papi
 
 ### Objectif Canon FD 50mm :
 
-![](/img/comparatif-canon50-raynox3500/canon_50mm_prof.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/canon_50mm_prof.jpg)
 
 ### Kit Raynox CM-3500, bonnette 24X :
 
-![](/img/comparatif-canon50-raynox3500/raynox_24x_prof.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_24x_prof.jpg)
 
 ### Conclusion :
 
@@ -77,11 +78,11 @@ Observer la différence d'aberrations chromatiques entre l'un et l'autre n'est p
 
 ### Objectif Canon FD 50mm :
 
-![](/img/comparatif-canon50-raynox3500/canon_50mm_abe.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/canon_50mm_abe.jpg)
 
 ### Kit Raynox CM-3500, bonnette 24X :
 
-![](/img/comparatif-canon50-raynox3500/raynox_24x_abe.jpg)
+![](/img/articles/comparatif-canon50-raynox3500/raynox_24x_abe.jpg)
 
 ### Conclusion :
 

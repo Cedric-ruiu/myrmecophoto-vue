@@ -15,7 +15,7 @@ useHead({
 <template>
   <div>
     <h1 class="text-white text-6xl font-normal italic uppercase">
-      {{ article.title }}
+      {{ article?.title }}
     </h1>
     <div class="prose">
       <ContentDoc />
