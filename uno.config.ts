@@ -8,6 +8,8 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import presetIcons from '@unocss/preset-icons'
+
 export default defineConfig({
   presets: [
     presetUno(),
@@ -29,6 +31,19 @@ export default defineConfig({
             weights: ['400', '500', '700'],
           },
         ],
+      },
+    }),
+    presetIcons({
+      scale: 1.4,
+      extraProperties: {
+        display: 'inline-block',
+        'vertical-align': 'text-bottom',
+      },
+      collections: {
+        fa6: {
+          prefix: 'i-fa6',
+          icons: ['brands-linkedin', 'brands-github'],
+        },
       },
     }),
   ],
