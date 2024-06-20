@@ -7,3 +7,6 @@ prisma/ERD.md
 .output
 .env
 dist
+
+# Local Netlify folder
+.netlify
