@@ -6,6 +6,16 @@ Work in progress to the new **Myrmecophoto** website, continuous deployment at h
 
 Require Node v18, copy/paste `.env` from `.env.local` and exec `yarn`
 
+### Note about Windows environnement
+
+I use `winget` to manage package on windows. And `fnm` to manage node versions.
+
+```bash
+# Start session coding on win10
+fnm env --use-on-cd | Out-String | Invoke-Expression
+fnm use
+```
+
 ## Development Server
 
 ```bash
@@ -167,7 +177,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
 - [ ] build all articles pages
   - [x] engine (route, etc.) => Nuxt Content
   - [x] add "articles" content
-  - [ ] add "outdoor pictures" as articles content (from old DB)
+  - [x] add "outdoor pictures" as articles content (from old DB)
 - [ ] prepare SQLite database (imported from existing MySQL)
   - [x] rename table & field
   - [x] delete unused table
@@ -184,13 +194,13 @@ I think it can be possible to enhance encryption using CSS technique to display 
   - [x] build all request api
   - [x] get all content
 - [ ] write contact page (hybrid ?)
-- [ ] write about page
+- [x] write about page
 - [ ] Integrate entire site UI/UX
   - [x] Install framework CSS (UnoCSS ?)
   - [x] Install & configure Stylelint
   - [x] Add reset
   - [x] Add typography
-  - [ ] Add layout
+  - [x] Add layout
   - [ ] Add custom Font
 - [ ] error page (404)
 - [ ] polish all text

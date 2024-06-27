@@ -23,8 +23,7 @@ const route = useRoute()
         >
           <HeaderNavItem link="/taxons"> Photos spécimens </HeaderNavItem>
           <HeaderNavItem link="/articles"> Articles </HeaderNavItem>
-          <HeaderNavItem link="/about"> À propos </HeaderNavItem>
-          <HeaderNavItem link="javascript:;"> Contact </HeaderNavItem>
+          <HeaderNavItem link="/about"> À propos / Contact </HeaderNavItem>
         </ul>
       </nav>
       <button
