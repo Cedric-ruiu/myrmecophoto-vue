@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer')
+import nodemailer from 'nodemailer'
 
-exports.handler = async function (event, context) {
+export const handler = async (event, context) => {
   if (!event.body) {
     return {
       statusCode: 400,

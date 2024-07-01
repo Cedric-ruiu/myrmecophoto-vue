@@ -7,6 +7,16 @@ const form = ref({
   message: '',
 })
 
+const { data: emailEncrypted } = useNuxtData('emailEncrypted')
+
+if (emailEncrypted == null || emailEncrypted.value == null)
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Api getEncryptedEmailContact Not Found',
+  })
+
+const formResponse = ref('')
+
 function handleSubmit() {
   const data = {
     name: form.value.name,
@@ -21,12 +31,19 @@ function handleSubmit() {
   })
     .then((response) => {
       if (response.ok) {
-        console.log('Form successfully submitted')
+        formResponse.value = `Parfait, le message a bien été envoyé ;)`
       } else {
-        console.error('Form submission failed')
+        buildErrorMessage('Form submission failed')
       }
     })
-    .catch((error) => console.error('Error:', error))
+    .catch((error) => {
+      buildErrorMessage(error)
+    })
+}
+
+function buildErrorMessage(mess: string) {
+  formResponse.value = `Oups, une erreur interne est survenue, merci d'utiliser l'email de contact en attendant ;)`
+  console.error('Error:', mess)
 }
 </script>
 
@@ -106,66 +123,73 @@ function handleSubmit() {
           possible.
         </p>
 
-        <form
-          @submit.prevent="handleSubmit"
-          data-netlify="true"
-          name="contact"
-          method="POST"
-          class="p-4 w-full mx-auto bg-gray-900 rounded"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-
-          <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-white"
-              >Nom:</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              v-model="form.name"
-              required
-              class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
-            />
+        <div class="p-4 w-full mx-auto bg-gray-900 rounded">
+          <div v-if="formResponse">
+            <p></p>
+            {{ formResponse }}
+            <p><MailTo :email-encrypted="emailEncrypted?.data" /></p>
           </div>
+          <form
+            v-else
+            @submit.prevent="handleSubmit"
+            data-netlify="true"
+            name="contact"
+            method="POST"
+          >
+            <input type="hidden" name="form-name" value="contact" />
 
-          <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-white"
-              >Email:</label
-            >
-            <input
-              type="email"
-              id="email"
-              name="email"
-              v-model="form.email"
-              required
-              class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-white"
+                >Nom:</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                v-model="form.name"
+                required
+                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-          <div class="mb-4">
-            <label for="message" class="block text-sm font-medium text-white"
-              >Message:</label
-            >
-            <textarea
-              id="message"
-              name="message"
-              v-model="form.message"
-              required
-              class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
-              rows="4"
-            ></textarea>
-          </div>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-white"
+                >Email:</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                v-model="form.email"
+                required
+                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-          <div>
-            <button
-              type="submit"
-              class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white gradient-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Envoyer
-            </button>
-          </div>
-        </form>
+            <div class="mb-4">
+              <label for="message" class="block text-sm font-medium text-white"
+                >Message:</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                v-model="form.message"
+                required
+                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white gradient-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Envoyer
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
