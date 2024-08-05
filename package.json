@@ -27,7 +27,7 @@
     "eslint-config-prettier": "9.1.0",
     "include-media": "2.0.0",
     "nodemailer": "6.9.14",
-    "nuxt": "3.12.2",
+    "nuxt": "3.12.4",
     "photoswipe": "5.4.4",
     "postcss": "8.4.38",
     "postcss-scss": "4.0.9",
