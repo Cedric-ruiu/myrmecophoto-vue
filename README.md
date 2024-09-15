@@ -4,7 +4,7 @@ Work in progress to the new **Myrmecophoto** website, continuous deployment at h
 
 ## Setup
 
-Require Node v18, copy/paste `.env` from `.env.local` and exec `yarn`
+Require Node v20, copy/paste `.env` from `.env.local` and exec `yarn`
 
 ### Note about Windows environnement
 
