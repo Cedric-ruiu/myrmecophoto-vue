@@ -8,7 +8,7 @@ idGaleryAnts: 8
 fk_idSpecie: 12
 ---
 
-Le hasard m'a conduit cette fois-ci vers un spectacle que je n'avais jamais vu auparavant. J'aperçois une colonne interminable de Lasius fuliginosus déménageant vers leur nid de printemps. Beaucoup d'ouvrière transportent une larve entre leurs mandibules. J'ai guêté la journée entière une hypothétique sortie de la reine, mais ce fut malheureusement un échec.
+Le hasard m'a conduit cette fois-ci vers un spectacle que je n'avais jamais vu auparavant. J'aperçois une colonne interminable de Lasius fuliginosus déménageant vers leur nid de printemps. Beaucoup d'ouvrières transportent une larve entre leurs mandibules. J'ai guetté la journée entière une hypothétique sortie de la reine, mais ce fut malheureusement un échec.
 
 ![](/img/articles/demenagement-printanier-lasius-fuliginosus/lasius-fuliginosus-000.jpg)
 

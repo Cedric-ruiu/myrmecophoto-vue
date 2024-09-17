@@ -8,7 +8,7 @@ idGaleryAnts: 14
 fk_idSpecie: 31
 ---
 
-Malgré une réduction significative de la taille de la population, la colonie a engendré la venue d'une curieuse chose. Il ne s'agit ni plus ni moins de la première larve de sexué. Malheureusement elle disparaitra sous un gros tas de larve d'ouvrières et je ne la reverrai jamais plus.
+Malgré une réduction significative de la taille de la population, la colonie a vu l'apparition d'un phénomène curieux : la première larve de sexuée. Malheureusement, elle disparaîtra sous un gros tas de larves d'ouvrières et je ne la reverrai jamais plus.
 
 ![](/img/articles/colonie-pheidole-pallidula-mai-2007/pheidole-pallidula-000.jpg)
 

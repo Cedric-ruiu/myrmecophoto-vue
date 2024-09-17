@@ -8,7 +8,7 @@ idGaleryAnts: 1
 fk_idSpecie: 12
 ---
 
-Avant de pouvoir assister au spectacle, j'ai passé plusieurs jours à visiter et surveiller ce nid basé dans une souche d'arbre. Je savais que l'évènement était imminent et je ne voulais pas manquer ce vol nuptial. Au jour J, le temps passe et la texture du bois laisse place aux innombrables reflets argentés des ailes de sexués telle une boule à facette. Gyne et mâles prennent leur envol à tour de rôle, l'activité du nid fut très intense.
+Avant de pouvoir assister au spectacle, j'ai passé plusieurs jours à visiter et surveiller ce nid installé dans une souche d'arbre. Je savais que l'évènement était imminent et je ne voulais pas manquer ce vol nuptial. Le jour J, le temps passe et la texture du bois laisse place aux innombrables reflets argentés des ailes de sexués, tel une boule à facettes. Les gynes et les mâles prennent leur envol tour à tour, et l'activité du nid a été très intense.
 
 ![](/img/articles/essaimage-lasius-fuliginosus-2006/lasius-fuliginosus-000.jpg)
 

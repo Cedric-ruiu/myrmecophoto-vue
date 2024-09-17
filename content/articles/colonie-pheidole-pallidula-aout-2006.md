@@ -8,7 +8,7 @@ idGaleryAnts: 12
 fk_idSpecie: 31
 ---
 
-Voilà une colonie très imposante qu'un ami m'a donné, il m'a avoué plus tard que c'était en réalité un cadeau empoisonné! Quand elles ont faim elles cherchent par tous les moyens à s'évader, et elles finissent toujours par y arriver! Tant qu'elles sont dans le nid, observez leur comportement.
+Voilà une colonie très imposante qu'un ami m'a donnée. Il m'a plus tard avoué que c'était en réalité un cadeau empoisonné. Quand elles ont faim, elles cherchent par tous les moyens à s'évader et finissent toujours par y arriver. Lorsqu'elles restent dans le nid, il est intéressant d'observer leur comportement.
 
 ![](/img/articles/colonie-pheidole-pallidula-aout-2006/pheidole-pallidula-000.jpg)
 

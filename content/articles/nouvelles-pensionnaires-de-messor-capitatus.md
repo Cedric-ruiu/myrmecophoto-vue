@@ -8,7 +8,7 @@ idGaleryAnts: 19
 fk_idSpecie: 18
 ---
 
-Voilà une colonie que j'ai recueillie de la part d'une personne qui souhaitait arrêter l'élevage de fourmis par manque de temps. La forme n'est pas excellente, la population de la colonie est en déclin depuis plusieurs mois. Ce sont mes premières Messor et j'espère pouvoir faire prospérer cette colonie qui ne demande que ça. Cette santé fébrile ne m'empêche pas de réaliser quelques photos pour ouvrir le bal de cet élevage.
+Voilà une colonie que j'ai recueillie de la part d'une personne qui souhaitait arrêter l'élevage de fourmis par manque de temps. L'état de la colonie n'est pas excellent, la population est en déclin depuis plusieurs mois. Ce sont mes premières Messor et j'espère pouvoir faire prospérer cette colonie, qui n'attend que de se rétablir. Cette santé fébrile ne m'empêche pas de prendre quelques photos pour marquer le début de cet élevage.
 
 ![](/img/articles/nouvelles-pensionnaires-messor-capitatus/messor-capitatus-000.jpg)
 
