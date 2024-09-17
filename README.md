@@ -174,7 +174,7 @@ I think it can be possible to enhance encryption using CSS technique to display 
 - [x] build "list of articles" page
   - [x] engine (route, etc.) => custom Vue
   - [x] get all content
-- [ ] build all articles pages
+- [x] build all articles pages
   - [x] engine (route, etc.) => Nuxt Content
   - [x] add "articles" content
   - [x] add "outdoor pictures" as articles content (from old DB)
@@ -203,11 +203,11 @@ I think it can be possible to enhance encryption using CSS technique to display 
   - [x] Add layout
   - [ ] Add custom Font
 - [ ] error page (404)
-- [ ] polish all text
+- [x] polish all text
 - [ ] test between module `nuxt webvitals` <=> `netlify webvitals`
-- [ ] add robot.txt
+- [x] add robot.txt
 - [ ] Add favicons
-- [ ] add sitemap.xml
+- [x] add sitemap.xml
 - [ ] add schema.org ?
 - [ ] add GA
 - [ ] add 302 from old website
