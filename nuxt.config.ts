@@ -48,4 +48,12 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-09-17',
+
+  site: {
+    indexable: false,
+    url: 'https://myrmecophoto.fr',
+    name: 'Myrmecophoto - Macrophotographie et Élevage de Fourmis | Myrmécologie et Biodiversité',
+    description: `Découvrez Myrmecophoto, le site dédié à la macrophotographie des fourmis, à leur élevage et à l'exploration de la myrmécologie. Articles, guides pratiques, et comparatifs de matériel pour capturer la biodiversité.`,
+    defaultLocale: 'fr', // not needed if you have @nuxtjs/i18n installed
+  },
 })
