@@ -8,7 +8,7 @@ idGaleryAnts: 7
 fk_idSpecie: 26
 ---
 
-Quelques photos pour représenter la célèbre symbiose entre les fourmis et les pucerons.
+Quelques photos pour illustrer la célèbre symbiose entre les fourmis et les pucerons.
 
 ![](/img/articles/elevage-de-pucerons-chez-les-lasius/Lasius-sp-000.jpg)
 

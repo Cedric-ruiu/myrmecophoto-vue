@@ -8,7 +8,7 @@ idGaleryAnts: '3'
 fk_idSpecie: '28'
 ---
 
-Ma première rencontre avec des Myrmica rubra lors d'une ballade en forêt. J'ai bien sûr immortalisé la scène pour ne rien oublier.
+Ma première rencontre avec des Myrmica rubra lors d'une balade en forêt. J'ai bien sûr immortalisé la scène pour ne rien oublier.
 
 ![](/img/articles/premiere-rencontre-genre-myrmica/myrmica-sp-000.jpg)
 

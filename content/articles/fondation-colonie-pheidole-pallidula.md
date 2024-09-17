@@ -8,7 +8,7 @@ idGaleryAnts: 11
 fk_idSpecie: 31
 ---
 
-Ma première colonie de Pheidole pallidula, qui ne survivra pas très longtemps... Les seules photos rescapées illustrent un lâché de ver de ténébrion. Complètement surexcitées les Pheidole quand on leur donne des proies vivantes!
+Ma première colonie de Pheidole pallidula, qui ne survivra malheureusement pas très longtemps... Les seules photos rescapées illustrent un lâcher de vers de ténébrion. Les Pheidole deviennent complètement surexcitées lorsqu'on leur donne des proies vivantes !
 
 ![](/img/articles/fondation-colonie-pheidole-pallidula/pheidole-pallidula-000.jpg)
 

@@ -8,7 +8,7 @@ idGaleryAnts: 4
 fk_idSpecie: 26
 ---
 
-Une rencontre assez inattendue qui m'a beaucoup surpris. C'est en relevant une grosse pierre que je tombe nez à nez avec un nid du genre Lasius. On aperçoit tout le réseau de galeries souterraines, avec les chambres remplies de larve. La pierre garde longtemps la chaleur quand le soleil s'estompe, pas étonnant que les ouvrières placent les larves en priorité contre ces gros cailloux!
+Une rencontre assez inattendue qui m'a beaucoup surpris. En soulevant une grosse pierre, je me retrouve nez à nez avec un nid du genre Lasius. On aperçoit tout le réseau de galeries souterraines, avec les chambres remplies de larves. La pierre conserve longtemps la chaleur après que le soleil a disparu, il n'est donc pas surprenant que les ouvrières placent les larves en priorité près de ces gros cailloux !
 
 ![](/img/articles/galeries-lasius/lasius-sp-000.jpg)
 
