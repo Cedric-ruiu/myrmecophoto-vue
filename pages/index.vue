@@ -81,13 +81,14 @@ useHead({
     height: calc(100vh - var(--header-height));
 
     &__baseline {
+      font-family:
+        Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
+        sans-serif;
+      font-size: 7vw;
+
       @include media('>=sm') {
         font-size: var(--hero-font-size);
       }
-
-      font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
-        Arial, sans-serif;
-      font-size: 7vw;
     }
 
     &__baselineTitle {
@@ -95,14 +96,14 @@ useHead({
     }
 
     &__baselineSubtitle {
-      @include media('>=sm') {
-        font-size: 3.5vw;
-      }
-
       font-size: 4.7vw;
       animation: subtitle-appear 2s ease-in-out both 1s;
 
       -webkit-text-stroke: 0.03em white;
+
+      @include media('>=sm') {
+        font-size: 3.5vw;
+      }
     }
 
     &__pictures {

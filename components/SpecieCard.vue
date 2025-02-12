@@ -10,10 +10,10 @@ const props = defineProps({
 <template>
   <NuxtLink
     :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`"
-    class="[ m-specieCard horizontal-bottom-line-gradient ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white specie-card-border"
+    class="[ specie-card horizontal-bottom-line-gradient ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white specie-card-border"
   >
     <img
-      class="[ m-specieCard__bg ] absolute top-0 left-0 w-full h-full object-cover rounded-md filtered"
+      class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover rounded-md filtered"
       :src="`/img/taxonomy/thumbnails/${taxon
         .replace(' ', '-')
         .replace('.', '')}.jpg`"
@@ -27,14 +27,14 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
-.m-specieCard {
+.specie-card {
   &__bg {
     filter: contrast(0.7) sepia(0.3) brightness(0.5);
     transition: filter ease 0.2s;
   }
 
   &:hover {
-    .m-specieCard__bg {
+    .specie-card-bg {
       filter: contrast(1) sepia(0) brightness(0.7);
     }
   }
