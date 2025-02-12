@@ -15,7 +15,7 @@ export default defineConfig({
     presetUno(),
     presetTypography(),
     presetWebFonts({
-      provider: 'google', // default provider
+      provider: 'bunny', // default provider
       fonts: {
         // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400i|Quicksand:400,500,700" rel="stylesheet">
         title: [
