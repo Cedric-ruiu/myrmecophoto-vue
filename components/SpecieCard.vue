@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <NuxtLink
-    :to="`/taxons/${props.taxon.replace(' ', '_').replace('.', '')}`"
+    :to="`/taxons/${props.taxon.replace(' ', '-').replace('.', '')}`"
     class="[ specie-card horizontal-bottom-line-gradient ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white specie-card-border"
   >
     <img

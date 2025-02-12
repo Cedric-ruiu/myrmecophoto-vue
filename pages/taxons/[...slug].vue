@@ -1,5 +1,5 @@
 <script setup lang="ts">
-let [routeGenus, routeSpecie] = useRoute().params.slug[0].split('_', 2)
+let [routeGenus, routeSpecie] = useRoute().params.slug[0].split('-', 2)
 
 if (!routeGenus || !routeSpecie)
   throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
