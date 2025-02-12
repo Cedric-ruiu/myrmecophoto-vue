@@ -42,7 +42,7 @@ export default defineConfig({
       collections: {
         fa6: {
           prefix: 'i-fa6',
-          icons: ['brands-linkedin', 'brands-github'],
+          icons: 'brands-linkedin brands-github',
         },
       },
     }),
