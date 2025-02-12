@@ -3,12 +3,12 @@
 
 const { path } = useRoute()
 const { data: article } = await useAsyncData(`content-${path}`, () => {
-  return queryContent().where({ _path: path }).findOne()
+  return queryCollection('content').path(path).first()
 })
 
 useHead({
   titleTemplate: '%s | Article | Myrmecophoto',
-  meta: [{ name: 'description', content: article.description }],
+  meta: [{ name: 'description', content: article?.value?.description || '' }],
 })
 </script>
 
@@ -18,7 +18,7 @@ useHead({
       {{ article?.title }}
     </h1>
     <div class="prose">
-      <ContentDoc />
+      <ContentRenderer v-if="article" :value="article" />
     </div>
   </div>
 </template>

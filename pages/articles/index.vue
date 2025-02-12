@@ -14,7 +14,7 @@ useHead({
 })
 
 const { data: articles } = await useAsyncData('articles', () => {
-  return queryContent('articles').sort({ 'date.published': -1 }).find()
+  return queryCollection('content').order('date', 'DESC').all()
 })
 </script>
 
@@ -25,18 +25,18 @@ const { data: articles } = await useAsyncData('articles', () => {
     </h1>
     <article
       v-for="article in articles"
-      :key="article._path"
+      :key="article.path"
       class="flex flex-row gap-4 mb-16"
     >
       <NuxtLink
-        :to="article._path"
+        :to="article.path"
         class="block relative w-20 md:w-25 h-20 md:h-25 flex-[1_0_auto] md:flex-none horizontal-bottom-line-gradient"
         ><img
           class="rounded-md w-full h-full object-cover"
           :src="'/img/articles/thumbnails/' + article?.thumbnail"
           alt="Photo 3"
       /></NuxtLink>
-      <NuxtLink :to="article._path" class="prose">
+      <NuxtLink :to="article.path" class="prose">
         <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
         <p class="line-clamp-2 mb-2 mt-2">{{ article.description }}</p>
         <small
