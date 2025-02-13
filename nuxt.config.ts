@@ -47,6 +47,8 @@ export default defineNuxtConfig({
     payloadExtraction: false, // Fix 404 payload on SSG https://github.com/nuxt/nuxt/issues/22068
   },
 
+  devtools: { enabled: false },
+
   compatibilityDate: '2024-09-17',
 
   site: {
