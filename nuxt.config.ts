@@ -29,7 +29,6 @@ export default defineNuxtConfig({
 
   css: [
     // The entry file loaded on all pages
-    '@unocss/reset/tailwind.css',
     '@/assets/main.scss',
   ],
 

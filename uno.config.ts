@@ -47,6 +47,7 @@ export default defineConfig({
       },
     }),
   ],
+  outputToCssLayers: true,
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     breakpoints: {

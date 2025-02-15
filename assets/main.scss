@@ -1,5 +1,7 @@
 @use './core';
 
+@import '@unocss/reset/tailwind.css' layer(preflights);
+
 body {
   color: #fff;
   background-color: #000;
