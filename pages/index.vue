@@ -174,7 +174,7 @@ useHead({
 
       height: calc(var(--hero-gap) + var(--hero-height));
 
-      background-color: black;
+      background-color: $color-layout;
       clip-path: polygon(
         50% var(--hero-height),
         100% 0,

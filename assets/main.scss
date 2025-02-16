@@ -4,7 +4,7 @@
 
 body {
   color: #fff;
-  background-color: #000;
+  background-color: core.$color-layout;
 }
 
 .heading-1 {
@@ -31,7 +31,7 @@ body {
   padding: 0 0 5px;
 
   background-image:
-    linear-gradient(#222, #000),
+    linear-gradient(#222, core.$color-layout),
     linear-gradient(90deg, #e72c27 64.09%, #faa307 94.45%);
   background-clip: content-box, border-box;
 
