@@ -66,7 +66,6 @@ $menu-bar-width: 25px !default;
 
     width: $menu-bar-width;
     height: $menu-bar-height;
-
     border-top: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;
     border-right: $soft-touch solid $color-layout;
     border-bottom: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;

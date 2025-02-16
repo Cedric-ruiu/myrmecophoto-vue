@@ -48,42 +48,39 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
-const lightboxes = ref([])
+const lightboxes = ref<PhotoSwipeLightbox[]>([])
 
 onMounted(async () => {
   const galleryElements = document.querySelectorAll('.galleryTaxon')
   galleryElements.forEach(async (galleryElement) => {
     const links = Array.from(galleryElement.querySelectorAll('a'))
 
-    // Assurez-vous que les dimensions de chaque image sont chargées
     await Promise.all(
       links.map(async (link) => {
         const img = new Image()
         img.src = link.href
         await new Promise((resolve) => (img.onload = resolve))
-        link.dataset.pswpWidth = img.naturalWidth
-        link.dataset.pswpHeight = img.naturalHeight
+        link.dataset.pswpWidth = img.naturalWidth + ''
+        link.dataset.pswpHeight = img.naturalHeight + ''
       }),
     )
 
-    // Créez une nouvelle instance de PhotoSwipeLightbox pour chaque galerie
     const lightbox = new PhotoSwipeLightbox({
-      gallery: galleryElement, // Utilisez l'élément de galerie actuel
+      gallery: galleryElement as HTMLElement,
       children: 'a',
       pswpModule: () => import('photoswipe'),
     })
     lightbox.init()
 
-    // Stockez l'instance de lightbox pour un usage futur, par exemple pour le nettoyage
     lightboxes.value.push(lightbox)
   })
 })
 
 onUnmounted(() => {
-  // Nettoyez chaque lightbox lors du démontage du composant
   lightboxes.value.forEach((lightbox) => {
     if (lightbox) {
       lightbox.destroy()
+      lightbox = {} as PhotoSwipeLightbox
     }
   })
   lightboxes.value = []
