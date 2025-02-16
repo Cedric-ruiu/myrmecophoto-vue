@@ -48,11 +48,13 @@ function buildErrorMessage(mess: string) {
 </script>
 
 <template>
-  <div class="flex flex-row justify-between gap-2 w-full">
+  <div class="flex flex-col md:flex-row justify-between gap-8 w-full">
     <div>
-      <div class="my-30">
-        <h1 class="text-white text-6xl font-normal italic uppercase">
-          Qui suis-je ?
+      <div class="my-10 lg:my-30">
+        <h1
+          class="text-white text-5xl lg:text-6xl font-normal italic uppercase"
+        >
+          Qui suis-je&nbsp;?
         </h1>
       </div>
       <div class="prose">
@@ -83,8 +85,10 @@ function buildErrorMessage(mess: string) {
       </div>
     </div>
     <div>
-      <div class="my-30">
-        <h1 class="text-white text-6xl font-normal italic uppercase">
+      <div class="my-10 lg:my-30">
+        <h1
+          class="text-white text-5xl lg:text-6xl font-normal italic uppercase"
+        >
           Contactez moi
         </h1>
       </div>
@@ -123,7 +127,7 @@ function buildErrorMessage(mess: string) {
           possible.
         </p>
 
-        <div class="p-4 w-full mx-auto bg-gray-900 rounded">
+        <div class="p-4 w-full mx-auto bg-stone-900 rounded">
           <div v-if="formResponse">
             <p></p>
             {{ formResponse }}
@@ -148,7 +152,7 @@ function buildErrorMessage(mess: string) {
                 name="name"
                 v-model="form.name"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -162,7 +166,7 @@ function buildErrorMessage(mess: string) {
                 name="email"
                 v-model="form.email"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -175,7 +179,7 @@ function buildErrorMessage(mess: string) {
                 name="message"
                 v-model="form.message"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
                 rows="4"
               ></textarea>
             </div>
