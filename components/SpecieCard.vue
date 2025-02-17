@@ -10,32 +10,62 @@ const props = defineProps({
 <template>
   <NuxtLink
     :to="`/taxons/${props.taxon.replace(' ', '-').replace('.', '')}`"
-    class="[ specie-card horizontal-bottom-line-gradient ] relative inline-flex flex-col justify-end p-3.5 aspect-video text-white specie-card-border"
+    class="[ specie-card ] relative inline-flex flex-col rounded-md justify-end p-3.5 aspect-video text-white"
   >
     <img
-      class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover rounded-md filtered"
+      class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
       :src="`/img/taxonomy/thumbnails/${taxon
         .replace(' ', '-')
         .replace('.', '')}.jpg`"
       :alt="taxon"
     />
-    <h3 class="relative text-shadow-lg text-lg font-medium">{{ taxon }}</h3>
-    <p class="relative text-shadow-lg text-xs font-normal">
+    <h3 class="relative text-shadow-lg text-lg font-medium z-1">{{ taxon }}</h3>
+    <p class="relative text-shadow-lg text-xs font-normal z-1">
       {{ researcherName }} ({{ yearDiscover }})
     </p>
   </NuxtLink>
 </template>
 
 <style lang="scss">
+.specie-card-bg {
+  transition: transform ease 0.4s;
+}
+
 .specie-card {
-  &__bg {
-    filter: contrast(0.7) sepia(0.3) brightness(0.5);
-    transition: filter ease 0.2s;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0%) 30%,
+      rgb(0 0 0 / 100%) 100%
+    );
+
+    transition: opacity ease 0.4s;
+  }
+
+  &:hover::before {
+    bottom: -3px;
+  }
+
+  &:hover::after {
+    opacity: 0.5;
   }
 
   &:hover {
     .specie-card-bg {
-      filter: contrast(1) sepia(0) brightness(0.7);
+      transform: scale(1.05);
     }
   }
 }
