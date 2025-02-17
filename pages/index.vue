@@ -25,14 +25,14 @@ useHead({
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
       <h2 class="[ o-hero__baselineSubtitle ] text-black">
-        Macro-photographies de fourmis
+        Macro-photographies<br />des fourmis
       </h2>
     </div>
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple35mm.jpg" /> -->
         <img
-          src="/img/articles/comparatif-35-50/exemple35mm.jpg"
+          src="/img/Camponotus-sylvaticus-Gyne-F0075-000.avif"
           alt="photo 1"
           class="w-full h-full object-cover"
         />
@@ -41,7 +41,7 @@ useHead({
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/comparaison50mm.jpg" /> -->
         <img
           class="w-full h-full object-cover"
-          src="/img/articles/comparatif-35-50/comparaison50mm.jpg"
+          src="/img/Myrmecia-forceps-Ouvriere-F0089-000.avif"
           alt="Photo 2"
         />
       </div>
@@ -49,7 +49,7 @@ useHead({
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple50mm.jpg" /> -->
         <img
           class="w-full h-full object-cover"
-          src="/img/articles/comparatif-35-50/exemple50mm.jpg"
+          src="/img/Formica-polyctena-Ouvriere-F0067-00.avif"
           alt="Photo 3"
         />
       </div>
@@ -57,7 +57,7 @@ useHead({
         <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/PICT3426c.jpg" /> -->
         <img
           class="w-full h-full object-cover"
-          src="/img/PICT3426c.jpg"
+          src="/img/home-wall-1.avif"
           alt="Photo 4"
         />
       </div>
@@ -69,7 +69,8 @@ useHead({
 <style lang="scss">
 :root {
   --hero-font-size: calc(5000vw / 1080);
-  --hero-height: calc(var(--hero-font-size) * 3);
+  --subtitle-font-size: calc(4000vw / 1080);
+  --hero-height: calc((5000vw / 1080) * 3);
   --hero-gap: 20px;
 }
 
@@ -84,25 +85,40 @@ useHead({
       font-family:
         Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
         sans-serif;
-      font-size: 7vw;
-
-      @include media('>=sm') {
-        font-size: var(--hero-font-size);
-      }
     }
 
     &__baselineTitle {
+      margin-top: 50px;
+      font-size: 7vw;
       animation: title-appear 2s ease-in-out both 0.5s;
+
+      @include media('>=sm') {
+        margin-top: 150px;
+        font-size: calc(8000vw / 1080);
+      }
+
+      @include media('>=md') {
+        font-size: calc(8000vw / 1080);
+      }
+
+      @include media('>=lg') {
+        font-size: calc(6000vw / 1080);
+      }
     }
 
     &__baselineSubtitle {
-      font-size: 4.7vw;
+      margin-top: 20px;
+
+      font-size: calc(6000vw / 1080);
+      line-height: 1.1em;
+
       animation: subtitle-appear 2s ease-in-out both 1s;
 
       -webkit-text-stroke: 0.03em white;
 
-      @include media('>=sm') {
-        font-size: 3.5vw;
+      @include media('>=lg') {
+        margin-top: 0.3em;
+        font-size: calc(3000vw / 1080);
       }
     }
 
