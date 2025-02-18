@@ -169,49 +169,33 @@ I want to share 100% source code, but don't want to be spammed from robots by di
 
 I think it can be possible to enhance encryption using CSS technique to display mixed characters...
 
-## TODO for the first release
+## TODO before migration
 
-- [x] build "list of articles" page
-  - [x] engine (route, etc.) => custom Vue
-  - [x] get all content
-- [x] build all articles pages
-  - [x] engine (route, etc.) => Nuxt Content
-  - [x] add "articles" content
-  - [x] add "outdoor pictures" as articles content (from old DB)
-- [ ] prepare SQLite database (imported from existing MySQL)
-  - [x] rename table & field
-  - [x] delete unused table
-  - [x] install & configure Prisma
-  - [x] test simple query on JAMStack
-  - [ ] add table `picture_taxonomy_material` & alter table `picture_taxonomy`
-- [x] better lint JS/TS
-- [x] build "list of specimens pictures" page
-  - [x] engine (route, etc.) => custom Vue => use Prisma
-  - [x] build all request api
-  - [x] get all content
-- [x] build all specimens pictures pages
-  - [x] engine (route, etc.) => custom Vue => use Prisma
-  - [x] build all request api
-  - [x] get all content
-- [ ] write contact page (hybrid ?)
-- [x] write about page
-- [ ] Integrate entire site UI/UX
-  - [x] Install framework CSS (UnoCSS ?)
-  - [x] Install & configure Stylelint
-  - [x] Add reset
-  - [x] Add typography
-  - [x] Add layout
-  - [ ] Add custom Font
-- [ ] error page (404)
-- [x] polish all text
-- [ ] test between module `nuxt webvitals` <=> `netlify webvitals`
-- [x] add robot.txt
-- [ ] Add favicons
-- [x] add sitemap.xml
-- [ ] add schema.org ?
-- [ ] add GA
-- [ ] add 302 from old website
-- [ ] migrate domain
-- [ ] test Cloudinary or similar image hosting
-- [ ] write a complete README
-- [ ] enhance email encryption
+- SEO
+  - Configure schema.org
+  - lowercase url taxons
+  - Image: configure sitemap images
+  - Image: configure OG Image
+- Migrate domain
+
+## TODO secondary
+
+- Docs readme
+  - How to add article
+  - How to add specimen with pictures
+- Contact
+  - Enhance email encryption
+  - Fix Netlify function with contact form
+- SQL: add table `picture_taxonomy_material` & alter table `picture_taxonomy`
+- Add error page (404)
+- test between module `nuxt webvitals` <=> `netlify webvitals`
+- add GA
+- Images
+  - Host images on provider (Cloudinary, ipx, etc.)
+  - Move to Nuxt Image
+- UI
+  - update header
+  - update footer
+  - update taxon
+  - animation header "points"
+  - animation heading gradient on home
