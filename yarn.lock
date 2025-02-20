@@ -2666,7 +2666,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/seo@npm:^2.1.1":
+"@nuxtjs/seo@npm:2.1.1":
   version: 2.1.1
   resolution: "@nuxtjs/seo@npm:2.1.1"
   dependencies:
@@ -14698,7 +14698,7 @@ __metadata:
     "@netlify/functions": "npm:3.0.0"
     "@nuxt/content": "npm:3.1.1"
     "@nuxt/image": "npm:1.9.0"
-    "@nuxtjs/seo": "npm:^2.1.1"
+    "@nuxtjs/seo": "npm:2.1.1"
     "@prisma/client": "npm:6.3.1"
     "@unocss/nuxt": "npm:65.4.3"
     "@unocss/preset-icons": "npm:65.4.3"
