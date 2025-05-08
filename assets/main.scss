@@ -2,9 +2,19 @@
 
 @import '@unocss/reset/tailwind.css' layer(preflights);
 
+:root {
+  --color-primary: #{core.$color-primary};
+  --color-secondary: #{core.$color-secondary};
+  --color-layout: #{core.$color-layout};
+}
+
+html {
+  background-color: var(--color-layout);
+}
+
 body {
+  container-type: inline-size;
   color: #fff;
-  background-color: core.$color-layout;
 }
 
 .heading-1 {
@@ -34,6 +44,8 @@ body {
     linear-gradient(#222, core.$color-layout),
     linear-gradient(90deg, #e72c27 64.09%, #faa307 94.45%);
   background-clip: content-box, border-box;
+
+  transition: bottom ease 0.2s;
 
   @apply absolute w-full h-full rounded-md -bottom-px left-0;
 }

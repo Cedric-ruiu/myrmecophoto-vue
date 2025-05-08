@@ -8,13 +8,14 @@ $breakpoints: (
   md: 768px,
   lg: 1024px,
   xl: 1280px,
+  xxl: 1600px,
 ) !default;
 
 // Colors
 
-$color-primary: #e72c27;
-$color-secondary: #faa307;
-$color-layout: #0c0a0a;
+$color-primary: #e72c27; // hsl(1.56, 80%, 52.94%)
+$color-secondary: #faa307; // hsl(38.52, 96.05%, 50.39%)
+$color-layout: #0c0a0a; // hsl(0, 9.09%, 4.31%)
 
 // Gradients
 
