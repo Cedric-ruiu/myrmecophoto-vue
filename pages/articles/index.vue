@@ -21,7 +21,7 @@ const { data: articles } = await useAsyncData('articles', () => {
 <template>
   <div>
     <h1 class="mb-16 text-white text-6xl font-normal italic uppercase">
-      Articles
+      Tous les articles
     </h1>
     <article
       v-for="article in articles"
@@ -30,10 +30,10 @@ const { data: articles } = await useAsyncData('articles', () => {
     >
       <NuxtLink
         :to="article.path"
-        class="block relative w-20 md:w-25 h-20 md:h-25 flex-[1_0_auto] md:flex-none horizontal-bottom-line-gradient"
+        class="block relative w-20 md:w-80 h-20 md:h-60 flex-[1_0_auto] md:flex-none horizontal-bottom-line-gradient"
         ><img
           class="rounded-md w-full h-full object-cover"
-          :src="'/img/articles/thumbnails/' + article?.thumbnail"
+          :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
           alt="Photo 3"
       /></NuxtLink>
       <NuxtLink :to="article.path" class="prose">
