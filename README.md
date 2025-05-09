@@ -157,6 +157,24 @@ yarn prisma migrate dev
 yarn init-db
 ```
 
+## About Image Compression
+
+Managing images can be challenging, as it involves balancing quality, file size, and the time required to handle the process. While cloud-based media solutions like Cloudinary offer powerful features, this project keeps everything **framework, content, database, and media** in one place. To optimize images, I generate AVIF files for the best web performance and JPEGs for compatibility, SEO (Open Graph, schema.org), and fallback purposes (including 301 redirects).
+
+For resizing and compressing both AVIF and JPEG formats, I use [XnView MP](https://www.xnview.com/en/xnviewmp/), which allows batch processing and saves considerable time. All XnView MP presets are stored in the `./preset-xnview` folder. Note that during batch exports, metadata, color profiles, and original date/time attributes are not preserved. Don't forget to adapt `<Output folder="...">` to your own folder.
+
+```mermaid
+flowchart TD
+    A[Picture Source - not shared]
+    A --> C{XnView MP compressions}
+    C -->|AVIF| D[300px as thumbnail]
+    C -->|AVIF| E[600px]
+    C -->|AVIF| F[900px]
+    C -->|AVIF| G[1200px]
+    C -->|AVIF| H[1600px]
+    C -->|JPG| I[1200px]
+```
+
 ## Note about email spam protection
 
 I want to share 100% source code, but don't want to be spammed from robots by displaying my email address. To do this in a full SSG & open source code on Github, I've made a strategy to not directly show my email address. The only pre-requisite is the ability of using environnement variable on server (Netlify).

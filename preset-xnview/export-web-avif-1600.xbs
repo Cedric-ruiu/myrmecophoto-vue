@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="export-web-avif-1600">
+    <Resize mode="1" width="1600" height="0" unit="0" ratio="true" orientation="false" enlarge="1" resample="7" gamma_correct="false"/>
+    <Output folder="C:/Users/cedri/Pictures" filename="{Filename}-1600" case="1" startIndex="1" format="AVIF">
+        <Options overwrite="1" orgDate="false" keepMeta="false" keepICC="false" keepFolder="true" checkFilesize="true" keepParentFolder="true" keepExtension="false" delOrg="false" multipage="false" allPages="false" openExplorer="false" beep="true" openBrowser="false" clearItems="false"/>
+        <AVIF quality="55" format="2" speed="1"/>
+    </Output>
+</XnView_script>
