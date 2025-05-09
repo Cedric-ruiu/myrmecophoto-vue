@@ -38,7 +38,7 @@ const { data: articles } = await useAsyncData('articles', () => {
       /></NuxtLink>
       <NuxtLink :to="article.path" class="prose">
         <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
-        <p class="line-clamp-2 mb-2 mt-2">{{ article.description }}</p>
+        <p class="line-clamp-5 mb-2 mt-2">{{ article.description }}</p>
         <small
           >Publié le:
           {{ new Date(article.date.published).toLocaleDateString() }}</small
