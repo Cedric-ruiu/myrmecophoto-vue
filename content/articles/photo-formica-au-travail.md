@@ -4,7 +4,6 @@ date:
   published: 2007-05-05
 thumbnail: 'Photo-d-une-formica-au-travail.jpg'
 location: Les informations sont manquantes, mais elles doivent se trouver dans mes papiers...
-idGaleryAnts: 5
 fk_idSpecie: 29
 ---
 

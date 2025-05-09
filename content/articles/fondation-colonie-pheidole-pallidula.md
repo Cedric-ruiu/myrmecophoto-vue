@@ -4,7 +4,6 @@ date:
   published: 2006-02-08
 thumbnail: 'Fondation-d-une-colonie-de-Pheidole-pallidula.jpg'
 location: Nid artificiel (tube à essai)
-idGaleryAnts: 11
 fk_idSpecie: 31
 ---
 

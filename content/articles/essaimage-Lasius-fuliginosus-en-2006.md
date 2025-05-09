@@ -4,7 +4,6 @@ date:
   published: 2006-05-26
 thumbnail: 'Essaimage-Lasius-fuliginosus-en-2006.jpg'
 location: Nid placé dans une vieille souche d'arbre, dans la forêt du Neuhof (ALSACE)
-idGaleryAnts: 1
 fk_idSpecie: 12
 ---
 

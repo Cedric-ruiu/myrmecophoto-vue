@@ -19,7 +19,6 @@ export default defineContentConfig({
             thumbnail: z.string(),
           }),
           location: z.string().optional(),
-          idGaleryAnts: z.number().optional(),
           fk_idSpecie: z.number().optional(),
         }),
       }),

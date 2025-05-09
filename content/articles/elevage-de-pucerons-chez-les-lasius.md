@@ -4,7 +4,6 @@ date:
   published: 2006-05-28
 thumbnail: 'elevage-de-pucerons-chez-les-lasius.jpg'
 location: Gravière d'Illkirch (ALSACE)
-idGaleryAnts: 7
 fk_idSpecie: 26
 ---
 

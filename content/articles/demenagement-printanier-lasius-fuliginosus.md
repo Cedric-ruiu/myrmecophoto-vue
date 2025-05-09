@@ -4,7 +4,6 @@ date:
   published: 2006-04-01
 thumbnail: 'Demenagement-printanier-des-Lasius-fuliginosus.jpg'
 location: 'Forêt du Neuhof (ALSACE)'
-idGaleryAnts: 8
 fk_idSpecie: 12
 ---
 

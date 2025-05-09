@@ -4,7 +4,6 @@ date:
   published: 2007-05-10
 thumbnail: Colonie-N2-Pheidole-pallidula-en-mai-2007.jpg
 location: 'Nid artificiel'
-idGaleryAnts: 14
 fk_idSpecie: 31
 ---
 

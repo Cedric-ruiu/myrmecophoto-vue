@@ -4,7 +4,6 @@ date:
   published: 2006-06-04
 thumbnail: 'Les-galeries-des-Lasius.jpg'
 location: 'Sous une grosse pierre, en forêt près de Saverne (ALSACE)'
-idGaleryAnts: 4
 fk_idSpecie: 26
 ---
 

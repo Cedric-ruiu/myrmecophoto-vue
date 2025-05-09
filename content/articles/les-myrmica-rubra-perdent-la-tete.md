@@ -4,7 +4,6 @@ date:
   published: 2006-06-15
 thumbnail: 'Les-Myrmica-rubra-perdent-la-tete.jpg'
 location: 'Nid artificiel'
-idGaleryAnts: 9
 fk_idSpecie: 28
 ---
 

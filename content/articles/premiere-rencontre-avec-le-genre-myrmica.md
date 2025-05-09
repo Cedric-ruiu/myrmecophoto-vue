@@ -4,7 +4,6 @@ date:
   published: 2006-04-02
 thumbnail: 'Premiere-rencontre-avec-le-genre-Myrmica.jpg'
 location: 'Nid sous une écorce à la forêt du Neuhof, ALSACE'
-idGaleryAnts: '3'
 fk_idSpecie: '28'
 ---
 

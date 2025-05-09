@@ -4,7 +4,6 @@ date:
   published: 2006-05-19
 thumbnail: 'Observation-des-Lasius-fuliginosus.jpg'
 location: 'Forêt du Neuhof (ALSACE)'
-idGaleryAnts: 6
 fk_idSpecie: 12
 ---
 

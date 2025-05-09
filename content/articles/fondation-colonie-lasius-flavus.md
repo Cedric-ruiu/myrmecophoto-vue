@@ -4,7 +4,6 @@ date:
   published: 2006-01-11
 thumbnail: 'Fondation-d-une-colonie-de-Lasius-flavus.jpg'
 location: Nid artificiel (tube à essai)
-idGaleryAnts: 10
 fk_idSpecie: 30
 ---
 

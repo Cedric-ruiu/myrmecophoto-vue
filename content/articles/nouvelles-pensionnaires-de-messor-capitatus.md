@@ -4,7 +4,6 @@ date:
   published: 2011-07-10
 thumbnail: 'Nouvelles-pensionnaires-de-Messor-Capitatus.jpg'
 location: 'Élevage artificiel'
-idGaleryAnts: 19
 fk_idSpecie: 18
 ---
 
