@@ -3,9 +3,9 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "node scripts/generate-image-manifest.mjs && nuxt dev",
     "serveSSG": "npx serve ./dist",
-    "generate": "nuxt generate",
+    "generate": "node scripts/generate-image-manifest.mjs && nuxt generate",
     "serve-generate": "yarn generate & yarn serveSSG",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare & prisma generate",

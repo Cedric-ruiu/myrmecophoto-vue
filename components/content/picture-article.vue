@@ -47,7 +47,7 @@ const { avifSrcset, fallbackJpgPath, imgWidth, imgHeight } = useImageData(
     </picture>
     <figcaption
       v-if="$slots.default || caption"
-      class="px-4 mx-auto mt-2 text-sm text-center text-gray-600 dark:text-gray-400 max-w-prose"
+      class="px-4 mx-auto mt-2 text-sm text-center text-gray-400 max-w-prose"
     >
       <slot>{{ caption }}</slot>
     </figcaption>
