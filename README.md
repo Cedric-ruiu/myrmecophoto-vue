@@ -157,6 +157,37 @@ yarn prisma migrate dev
 yarn init-db
 ```
 
+## Managing Taxon Images
+
+### Adding Images to Existing Taxons
+
+1. **Name images correctly**: `{genus-specie}-{form}-{view}-{specimen-ref}.jpg`
+
+   - Example: `camponotus-cruentatus-major-face-f0002.jpg`
+
+2. **Place in taxon directory**: `public/img/taxons/{genus-specie}/`
+
+3. **Process with XnView MP** using presets in `./preset-xnview/` folder
+
+4. **Add to database** via Prisma Studio:
+
+   ```bash
+   yarn prisma studio
+   ```
+
+   Add entries in `taxonomy_picture` table linking to specimen
+
+5. **Regenerate image manifest**:
+   ```bash
+   node scripts/generate-image-manifest.mjs
+   ```
+
+### Adding New Species
+
+1. Add taxonomic data in Prisma Studio: `subfamily` → `genus` → `specie` → `specimen`
+2. Follow image process above
+3. Use lowercase names without accents for directories and URLs
+
 ## About Image Compression
 
 Managing images can be challenging, as it involves balancing quality, file size, and the time required to handle the process. While cloud-based media solutions like Cloudinary offer powerful features, this project keeps everything **framework, content, database, and media** in one place. To optimize images, I generate AVIF files for the best web performance and JPEGs for compatibility, SEO (Open Graph, schema.org), and fallback purposes (including 301 redirects).
