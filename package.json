@@ -18,7 +18,6 @@
     "@mermaid-js/mermaid-cli": "^11.4.2",
     "@netlify/functions": "3.0.4",
     "@nuxt/content": "3.4.0",
-    "@nuxt/image": "1.10.0",
     "@nuxtjs/seo": "3.0.1",
     "@prisma/client": "6.5.0",
     "@types/image-size": "^0.8.0",
