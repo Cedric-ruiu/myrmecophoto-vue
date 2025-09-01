@@ -15,42 +15,78 @@ async function walk(dir) {
   return files
 }
 
+function ensureEntry(manifest, key) {
+  if (!manifest[key])
+    manifest[key] = { fallback: null, 'thumbnail-fallback': null, avif: [] }
+}
+
 ;(async () => {
+  const start = Date.now()
   const files = await walk(IMG_DIR)
   const manifest = {}
+
+  // Pre-read all files to avoid multiple reads
+  const fileBuffers = {}
+  await Promise.all(
+    files.map(async (file) => {
+      fileBuffers[file] = await fs.readFile(file)
+    }),
+  )
+
   for (const file of files) {
     const rel = path.relative(IMG_DIR, file).replace(/\\/g, '/')
     if (file.endsWith('.jpg')) {
-      // Fallback image
-      const buffer = await fs.readFile(file)
-      const dims = imageSize(buffer)
+      const dims = imageSize(fileBuffers[file])
       const base = rel.replace(/\.jpg$/, '')
-      if (!manifest[base])
-        manifest[base] = {
-          fallback: '',
-          avif: [],
+      if (base.endsWith('-thumbnail')) {
+        // Thumbnail fallback
+        const mainBase = base.replace(/-thumbnail$/, '')
+        ensureEntry(manifest, mainBase)
+        manifest[mainBase]['thumbnail-fallback'] = {
+          url: '/img/' + rel,
           width: dims.width,
           height: dims.height,
         }
-      manifest[base].fallback = '/img/' + rel
-      manifest[base].width = dims.width
-      manifest[base].height = dims.height
+      } else {
+        // Main fallback
+        ensureEntry(manifest, base)
+        manifest[base].fallback = {
+          url: '/img/' + rel,
+          width: dims.width,
+          height: dims.height,
+        }
+      }
     } else if (file.endsWith('.avif')) {
       // AVIF variant
       const match = rel.match(/^(.*)-(\d+)\.avif$/)
       if (match) {
         const base = match[1]
-        const width = parseInt(match[2], 10)
-        if (!manifest[base])
-          manifest[base] = { fallback: '', avif: [], width: null, height: null }
-        manifest[base].avif.push({ url: '/img/' + rel, width })
+        const dims = imageSize(fileBuffers[file])
+        ensureEntry(manifest, base)
+        manifest[base].avif.push({
+          url: '/img/' + rel,
+          width: dims.width,
+          height: dims.height,
+        })
       }
     }
   }
-  // Sort AVIF variants by width
+
+  // Sort AVIF by width
   for (const key in manifest) {
     manifest[key].avif.sort((a, b) => a.width - b.width)
   }
-  await fs.writeFile(OUTPUT, JSON.stringify(manifest, null, 2), 'utf-8')
+
+  // Sort manifest keys for readability
+  const orderedManifest = Object.keys(manifest)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = manifest[key]
+      return obj
+    }, {})
+
+  await fs.writeFile(OUTPUT, JSON.stringify(orderedManifest, null, 2), 'utf-8')
+  const duration = ((Date.now() - start) / 1000).toFixed(2)
   console.log('Image manifest generated:', OUTPUT)
+  console.log('Execution time:', duration + 's')
 })()
