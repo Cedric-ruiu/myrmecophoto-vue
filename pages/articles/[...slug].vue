@@ -13,23 +13,23 @@ useHead({
   meta: [{ name: 'description', content: description || '' }],
 })
 
-useSeoMeta(article?.value?.seo || {}) // <-- Nuxt Robots
+// useSeoMeta(article?.value?.seo || {}) // <-- Nuxt Robots
 
-useSchemaOrg([
-  defineArticle({
-    image: useAbsoluteUrl(`/img/articles/${article.value?.image.main}.jpg`),
-    thumbnailUrl: useAbsoluteUrl(
-      `/img/articles/${article.value?.image.main}-thumbnail.jpg`,
-    ),
-    datePublished: `${article.value?.date.published}`,
-    dateModified: `${article.value?.date.updated || article.value?.date.published}`,
-  }),
-])
+// useSchemaOrg([
+//   defineArticle({
+//     image: useAbsoluteUrl(`/img/articles/${article.value?.image.main}.jpg`),
+//     thumbnailUrl: useAbsoluteUrl(
+//       `/img/articles/${article.value?.image.main}-thumbnail.jpg`,
+//     ),
+//     datePublished: `${article.value?.date.published}`,
+//     dateModified: `${article.value?.date.updated || article.value?.date.published}`,
+//   }),
+// ])
 
-defineOgImageComponent('NuxtSeo', {
-  theme: '#e72c27',
-  colorMode: 'dark',
-})
+// defineOgImageComponent('NuxtSeo', {
+//   theme: '#e72c27',
+//   colorMode: 'dark',
+// })
 </script>
 
 <template>
@@ -75,12 +75,12 @@ defineOgImageComponent('NuxtSeo', {
             <span class="mx-2">/</span>
           </li>
           <li class="flex min-w-0">
-            <a
-              href="/articles/breadcrumb"
+            <p
               aria-current="page"
               class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"
-              ><span class="truncate">{{ article?.title }}</span></a
             >
+              <span class="truncate">{{ article?.title }}</span>
+            </p>
           </li>
         </ol>
       </nav>

@@ -68,6 +68,9 @@ onMounted(async () => {
     const lightbox = new PhotoSwipeLightbox({
       gallery: galleryElement as HTMLElement,
       children: 'a',
+      initialZoomLevel: 'fit',
+      secondaryZoomLevel: 'fit',
+      maxZoomLevel: 'fit',
       pswpModule: () => import('photoswipe'),
     })
     lightbox.init()
@@ -91,23 +94,25 @@ onUnmounted(() => {
   <div v-if="species">
     <div class="my-30">
       <h1 class="text-white font-normal italic uppercase heading-1">
-        {{ species[specieId].genus.name }} {{ species[specieId].name
-        }}<span class="ml-2 text-xl"
-          >{{ species[specieId].researcher.name }}
-          {{ species[specieId].year }}</span
-        >
+        {{ species[specieId].genus.name }}
+        {{ species[specieId].name }}
+        <span class="ml-2 text-xl">
+          {{ species[specieId].researcher.name }}
+          {{ species[specieId].year }}
+        </span>
       </h1>
       <p>
         <strong>Sous-famille : </strong>
         <i>{{ species[specieId].genus.subfamily.name }}</i> -
-        <strong>Genre :</strong> <i>{{ species[specieId].genus.name }}</i> -
+        <strong>Genre :</strong>
+        <i>{{ species[specieId].genus.name }}</i> -
         <strong>Espèce : </strong>
         <i>{{ species[specieId].name }}</i>
       </p>
     </div>
     <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
       <div class="w-full relative-md prose">
-        <h2>{{ specimen.form.name }} de {{ specimen.size_mm }}mm</h2>
+        <h2>{{ specimen.form.name }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}</h2>
         <p v-if="specimen.description">
           {{ specimen.description }}
         </p>
@@ -116,21 +121,14 @@ onUnmounted(() => {
         id="galleryTaxon"
         class="galleryTaxon bg-white rounded-md p-12 flex flex-wrap gap-6"
       >
-        <a
+        <TaxonPicture
           v-for="picture in specimen.taxonomy_picture"
           :key="picture.id"
-          :href="`/img/taxonomy/${picture.file_name}`"
-          :data-pswp-width="picture.width"
-          :data-pswp-height="picture.height"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            class="max-h-40 rounded-md"
-            :src="`/img/taxonomy/${picture.file_name}`"
-            :alt="`${species[specieId].genus.name} ${species[specieId].name}`"
-          />
-        </a>
+          :picture="picture"
+          :specimen="specimen"
+          :species="species"
+          :specieId="specieId"
+        />
       </div>
       <div
         class="[ horizontal-bottom-line-gradient ] w-full relative p-6 rounded-md mb-30"
@@ -155,7 +153,7 @@ onUnmounted(() => {
               specimen.contributor_specimen_identifier_idTocontributor.name
             }}</i>
           </li>
-          <li><strong>Size :</strong> {{ specimen.size_mm }}mm</li>
+          <li v-if="specimen.size_mm"><strong>Size :</strong> {{ specimen.size_mm }}mm</li>
           <li>
             <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
               specimen.country.name
@@ -172,9 +170,9 @@ onUnmounted(() => {
       <ul>
         <li>
           Page wiki sur
-          <a :href="species[specieId].researcher.wiki_url" target="_blank">{{
-            species[specieId].researcher.name
-          }}</a>
+          <a :href="species[specieId].researcher.wiki_url" target="_blank">
+            {{ species[specieId].researcher.name }}
+          </a>
         </li>
       </ul>
     </div>

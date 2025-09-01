@@ -14,10 +14,12 @@ const props = defineProps({
   caption: { type: String, default: '' },
 })
 
-const { avifSrcset, fallbackJpgPath, imgWidth, imgHeight } = useImageData(
-  'articles/' + props.src,
-  props.sourceWidth,
-)
+// Use new system with articles path
+const imagePath = 'articles/' + props.src
+const imageData = useImageData(null, imagePath)
+
+// Extract values for template compatibility
+const { avifSrcset, fallbackJpgPath, imgWidth, imgHeight } = imageData
 </script>
 
 <template>
