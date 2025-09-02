@@ -89,7 +89,7 @@ useHead({
     <ContentRenderer
       v-if="article"
       :value="article"
-      class="pt-8 mx-auto prose o-article sm:pt-16 lg:pt-24 dark:prose-invert sm:prose-base lg:prose-lg max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl"
+      class="pt-8 mx-auto prose prose-gray dark:prose-invert o-article sm:pt-16 lg:pt-24 sm:prose-base lg:prose-lg max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl"
     />
   </article>
 </template>

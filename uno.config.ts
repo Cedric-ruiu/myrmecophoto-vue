@@ -2,17 +2,21 @@
 import {
   defineConfig,
   presetTypography,
-  presetUno,
   presetWebFonts,
   transformerDirectives,
-  transformerVariantGroup,
 } from 'unocss'
 
 import presetIcons from '@unocss/preset-icons'
+import presetWind4 from '@unocss/preset-wind4'
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetWind4({
+      preflights: {
+        reset: true,
+      },
+      dark: 'media', // Active le mode dark basé sur prefers-color-scheme
+    }),
     presetTypography(),
     presetWebFonts({
       provider: 'bunny', // default provider
@@ -48,9 +52,9 @@ export default defineConfig({
     }),
   ],
   outputToCssLayers: true,
-  transformers: [transformerDirectives(), transformerVariantGroup()],
+  transformers: [transformerDirectives()],
   theme: {
-    breakpoints: {
+    breakpoint: {
       xs: '375px',
       sm: '640px',
       md: '768px',

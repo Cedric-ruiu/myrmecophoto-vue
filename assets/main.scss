@@ -1,7 +1,5 @@
 @use './core';
 
-@import '@unocss/reset/tailwind.css' layer(preflights);
-
 :root {
   --color-primary: #{core.$color-primary};
   --color-secondary: #{core.$color-secondary};

@@ -57,7 +57,7 @@ function buildErrorMessage(mess: string) {
           Qui suis-je&nbsp;?
         </h1>
       </div>
-      <div class="prose">
+      <div class="prose prose-gray dark:prose-invert">
         <img
           src="/public/img/cedric-ruiu-avatar.webp"
           alt="Image avatar de Cédric Ruiu"
@@ -92,7 +92,7 @@ function buildErrorMessage(mess: string) {
           Contactez moi
         </h1>
       </div>
-      <div class="prose">
+      <div class="prose prose-gray dark:prose-invert">
         <p>
           Si vous souhaitez discuter de collaborations, partager des idées ou
           simplement en savoir plus sur mon travail, voici comment vous pouvez

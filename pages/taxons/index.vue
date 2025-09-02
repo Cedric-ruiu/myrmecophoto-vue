@@ -21,7 +21,7 @@ const { data: species } = useNuxtData('species')
       Macro Photographie Taxonomique
     </h1>
     <div v-for="subfamily in subfamilies" :key="subfamily.id">
-      <div class="prose">
+      <div class="prose prose-gray dark:prose-invert">
         <h2>{{ subfamily.name }}</h2>
         <p>{{ subfamily.description }}</p>
       </div>

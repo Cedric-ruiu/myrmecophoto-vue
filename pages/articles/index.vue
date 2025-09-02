@@ -36,7 +36,7 @@ const { data: articles } = await useAsyncData('articles', () => {
           :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
           alt="Photo 3"
       /></NuxtLink>
-      <NuxtLink :to="article.path" class="prose">
+      <NuxtLink :to="article.path" class="prose prose-gray dark:prose-invert">
         <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
         <p class="line-clamp-5 mb-2 mt-2">{{ article.description }}</p>
         <small

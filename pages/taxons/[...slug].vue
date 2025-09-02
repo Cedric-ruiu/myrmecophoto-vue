@@ -111,8 +111,11 @@ onUnmounted(() => {
       </p>
     </div>
     <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
-      <div class="w-full relative-md prose">
-        <h2>{{ specimen.form.name }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}</h2>
+      <div class="w-full relative-md prose prose-gray dark:prose-invert">
+        <h2>
+          {{ specimen.form.name
+          }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
+        </h2>
         <p v-if="specimen.description">
           {{ specimen.description }}
         </p>
@@ -133,7 +136,7 @@ onUnmounted(() => {
       <div
         class="[ horizontal-bottom-line-gradient ] w-full relative p-6 rounded-md mb-30"
       >
-        <ul class="prose relative">
+        <ul class="prose prose-gray dark:prose-invert relative">
           <li>
             <strong>Numéro du specimen :&nbsp;</strong>
             <samp>{{ specimen.reference }}</samp>
@@ -153,7 +156,9 @@ onUnmounted(() => {
               specimen.contributor_specimen_identifier_idTocontributor.name
             }}</i>
           </li>
-          <li v-if="specimen.size_mm"><strong>Size :</strong> {{ specimen.size_mm }}mm</li>
+          <li v-if="specimen.size_mm">
+            <strong>Size :</strong> {{ specimen.size_mm }}mm
+          </li>
           <li>
             <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
               specimen.country.name
@@ -165,7 +170,7 @@ onUnmounted(() => {
         </ul>
       </div>
     </template>
-    <div class="prose">
+    <div class="prose prose-gray dark:prose-invert">
       <h2>Resources</h2>
       <ul>
         <li>
