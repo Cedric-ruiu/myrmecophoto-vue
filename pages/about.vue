@@ -17,27 +17,26 @@ if (emailEncrypted == null || emailEncrypted.value == null)
 
 const formResponse = ref('')
 
-function handleSubmit() {
-  const data = {
-    name: form.value.name,
-    email: form.value.email,
-    message: form.value.message,
-  }
+function handleSubmit(event: Event) {
+  event.preventDefault()
+  
+  const formData = new FormData(event.target as HTMLFormElement)
 
-  fetch('/.netlify/functions/sendEmail', {
+  fetch('/', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData as any).toString(),
   })
     .then((response) => {
       if (response.ok) {
         formResponse.value = `Parfait, le message a bien été envoyé ;)`
+        form.value = { name: '', email: '', message: '' }
       } else {
         buildErrorMessage('Form submission failed')
       }
     })
     .catch((error) => {
-      buildErrorMessage(error)
+      buildErrorMessage(error.message)
     })
 }
 
@@ -48,6 +47,14 @@ function buildErrorMessage(mess: string) {
 </script>
 
 <template>
+  <!-- Hidden form for Netlify detection during build -->
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <textarea name="message"></textarea>
+    <input name="bot-field" />
+  </form>
+
   <div class="flex flex-col md:flex-row justify-between gap-8 w-full">
     <div>
       <div class="my-10 lg:my-30">
@@ -135,12 +142,17 @@ function buildErrorMessage(mess: string) {
           </div>
           <form
             v-else
-            @submit.prevent="handleSubmit"
+            @submit="handleSubmit"
             data-netlify="true"
+            netlify-honeypot="bot-field"
             name="contact"
             method="POST"
+            action="/"
           >
             <input type="hidden" name="form-name" value="contact" />
+            <div style="display: none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </div>
 
             <div class="mb-4">
               <label for="name" class="block text-sm font-medium text-white"

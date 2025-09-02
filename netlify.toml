@@ -1,9 +1,2 @@
-[[plugins]]
-  package = "@netlify/plugin-emails"
-
-[functions]
-  directory = "functions"
-
 [build]
-    functions = "functions"
     publish = "dist/"
