@@ -33,7 +33,7 @@ Fourmi _Lasius sp._ et pucerons : exemple du cadrage obtenu avec un objectif de 
 
 Avec un objectif de 50mm inversé, le grossissement devient conséquent. Le champ couvert se réduit à quelques millimètres, permettant de saisir des détails anatomiques précis, comme ici la tête d'une fourmi de taille moyenne. Ce type de grossissement peut s'avérer excessif pour des sujets plus imposants, tels que les papillons.
 
-::PictureArticle{src="lasius-fuliginosus/lasius-fuliginosus-gyne-face-f0055" alt="Détail de la tête d'une fourmi Lasius fuliginosus, capturé avec un objectif de 50mm inversé, illustrant le fort grossissement et la faible profondeur de champ."}
+::PictureTaxon{src="lasius-fuliginosus/lasius-fuliginosus-gyne-face-f0055" alt="Détail de la tête d'une fourmi Lasius fuliginosus, capturé avec un objectif de 50mm inversé, illustrant le fort grossissement et la faible profondeur de champ."}
 Tête d'une fourmi _Lasius fuliginosus_ : exemple du fort grossissement offert par un objectif de 50mm inversé, idéal pour l'étude morphologique détaillée.
 ::
 
