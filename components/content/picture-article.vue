@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useImageData } from '~/composables/useImageData'
+import { useArticleImageData } from '~/composables/useImageData'
 
 const props = defineProps({
   src: { type: String, required: true },
@@ -14,34 +14,29 @@ const props = defineProps({
   caption: { type: String, default: '' },
 })
 
-// Use new system with articles path
-const imagePath = 'articles/' + props.src
-const imageData = useImageData(null, imagePath)
-
-// Extract values for template compatibility
-const { avifSrcset, fallbackJpgPath, imgWidth, imgHeight } = imageData
+// Use simplified system for articles
+const imageData = useArticleImageData('', props.src)
 </script>
 
 <template>
   <figure
     class="not-prose relative my-8 sm:my-16 lg:my-24 w-[100vw] max-w-[1600px] ml-[50%] translate-x-[-50%]"
     :style="{
-      aspectRatio:
-        imgWidth && imgHeight ? `${imgWidth} / ${imgHeight}` : undefined,
+      aspectRatio: imageData.aspectRatio
     }"
   >
     <picture>
       <source
-        v-if="avifSrcset"
+        v-if="imageData.avifSrcset"
         type="image/avif"
-        :srcset="avifSrcset"
+        :srcset="imageData.avifSrcset"
         :sizes="sizes"
       />
       <img
-        :src="fallbackJpgPath"
+        :src="imageData.finalSrc"
         :alt="alt"
-        :width="imgWidth"
-        :height="imgHeight"
+        :width="imageData.finalWidth"
+        :height="imageData.finalHeight"
         :loading="loading"
         :decoding="decoding"
         class="block w-full h-auto mx-auto"

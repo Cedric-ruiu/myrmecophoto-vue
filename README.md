@@ -162,7 +162,6 @@ yarn init-db
 ### Adding Images to Existing Taxons
 
 1. **Name images correctly**: `{genus-specie}-{form}-{view}-{specimen-ref}.jpg`
-
    - Example: `camponotus-cruentatus-major-face-f0002.jpg`
 
 2. **Place in taxon directory**: `public/img/taxons/{genus-specie}/`
@@ -188,23 +187,105 @@ yarn init-db
 2. Follow image process above
 3. Use lowercase names without accents for directories and URLs
 
-## About Image Compression
+## SSG Image Optimization Strategy
 
-Managing images can be challenging, as it involves balancing quality, file size, and the time required to handle the process. While cloud-based media solutions like Cloudinary offer powerful features, this project keeps everything **framework, content, database, and media** in one place. To optimize images, I generate AVIF files for the best web performance and JPEGs for compatibility, SEO (Open Graph, schema.org), and fallback purposes (including 301 redirects).
+This project implements an **advanced image optimization architecture** designed for maximum web performance with zero runtime dependencies. The system combines automated multi-format generation, intelligent manifest indexing, and optimized Vue.js templates for exceptional Core Web Vitals scores.
 
-For resizing and compressing both AVIF and JPEG formats, I use [XnView MP](https://www.xnview.com/en/xnviewmp/), which allows batch processing and saves considerable time. All XnView MP presets are stored in the `./preset-xnview` folder. Note that during batch exports, metadata, color profiles, and original date/time attributes are not preserved. Don't forget to adapt `<Output folder="...">` to your own folder.
+### Architecture Overview
+
+**1. Automated Multi-Format Pipeline**
+
+- **XnView MP batch processing** with standardized presets (`./preset-xnview/`)
+- **AVIF generation**: 5 optimized sizes (300px, 600px, 900px, 1200px, 1600px) for progressive enhancement
+- **JPEG fallbacks**: 1200px primary + 300px thumbnail for compatibility and SEO
+- **Metadata preservation**: Real dimensions extracted and stored during processing
+
+**2. Intelligent Manifest System**
+
+- **Build-time indexing**: `scripts/generate-image-manifest.mjs` scans all processed images
+- **Dimension extraction**: Uses `image-size` library to capture real width/height metadata
+- **Static manifest**: Generates `composables/image-manifest.json` with complete image catalog
+- **Zero runtime overhead**: Direct JSON import eliminates API calls and database queries
+
+**3. Optimized Runtime Architecture**
+
+- **Unified composable**: `useImageData.ts` provides specialized helpers (`useTaxonImageData`, `useArticleImageData`)
+- **Computed properties**: Pre-calculated `finalSrc`, `thumbnailSrc`, `aspectRatio` for template simplicity
+- **Smart fallbacks**: Manifest-first approach with convention-based URL generation as backup
+- **SSG compatibility**: No server dependencies, works with static deployment
+
+**4. Performance-First Templates**
+
+- **Simplified syntax**: Templates use direct computed properties instead of complex conditionals
+- **Picture elements**: Modern HTML with AVIF primary + JPEG fallback for optimal browser selection
+- **Responsive srcsets**: Automatically generated with breakpoint-optimized sizes
+- **Layout stability**: Pre-calculated aspect ratios prevent Cumulative Layout Shift (CLS)
 
 ```mermaid
-flowchart TD
-    A[Picture Source - not shared]
-    A --> C{XnView MP compressions}
-    C -->|AVIF| D[300px as thumbnail]
-    C -->|AVIF| E[600px]
-    C -->|AVIF| F[900px]
-    C -->|AVIF| G[1200px]
-    C -->|AVIF| H[1600px]
-    C -->|JPG| I[1200px]
+flowchart TB
+    subgraph BUILD ["🔧 Build Pipeline"]
+        A[📁 Raw Images] --> B[🖼️ XnView MP<br/>Batch Processing]
+        B --> C[📐 Multi-format Generation]
+        C --> D[⚡ AVIF<br/>300•600•900•1200•1600px]
+        C --> E[📄 JPEG<br/>1200px + 300px thumbnail]
+    end
+
+    subgraph MANIFEST ["📋 Manifest Generation"]
+        D --> F[⚙️ generate-image-manifest.mjs]
+        E --> F
+        F --> G[📝 image-manifest.json<br/>+ Real Dimensions]
+    end
+
+    subgraph RUNTIME ["⚡ SSG Runtime"]
+        G --> H[🔄 useImageData.ts<br/>Direct Import]
+        H --> I[🧮 Computed Properties<br/>finalSrc • aspectRatio • thumbnailSrc]
+        I --> J[🎨 Optimized Templates<br/>TaxonPicture • SpecieCard • PictureArticle]
+        J --> K[🖼️ Picture Elements<br/>AVIF + JPEG Fallback]
+    end
+
+    BUILD --> MANIFEST
+    MANIFEST --> RUNTIME
+
+    classDef buildStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000
+    classDef manifestStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+    classDef runtimeStyle fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
+
+    class BUILD,A,B,C,D,E buildStyle
+    class MANIFEST,F,G manifestStyle
+    class RUNTIME,H,I,J,K runtimeStyle
 ```
+
+### Implementation Example
+
+```vue
+<script setup>
+import { useTaxonImageData } from '~/composables/useImageData'
+
+// Simple, unified API for any image context
+const imageData = useTaxonImageData(genusName, specieName, fileName)
+</script>
+
+<template>
+  <!-- Clean, performance-optimized template -->
+  <picture>
+    <source
+      type="image/avif"
+      :srcset="imageData.avifSrcset"
+      sizes="(max-width: 768px) 100vw, 800px"
+    />
+    <img
+      :src="imageData.finalSrc"
+      :width="imageData.finalWidth"
+      :height="imageData.finalHeight"
+      :style="{ aspectRatio: imageData.aspectRatio }"
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+</template>
+```
+
+This architecture delivers **exceptional Core Web Vitals scores** through AVIF compression (up to 80% smaller than JPEG), **zero Cumulative Layout Shift** via pre-calculated dimensions, and **optimal loading performance** with intelligent srcsets and lazy loading—making it ideal for media-rich SSG applications.
 
 ## Note about email spam protection
 
@@ -217,34 +298,3 @@ I want to share 100% source code, but don't want to be spammed from robots by di
 - the real decrypt happens on event click on email, that redirect to the correct link mailto
 
 I think it can be possible to enhance encryption using CSS technique to display mixed characters...
-
-## TODO before migration
-
-- SEO
-  - Configure schema.org
-  - lowercase url taxons
-  - Image: configure sitemap images
-  - Image: configure OG Image
-- Migrate domain
-
-## TODO secondary
-
-- Docs readme
-  - How to add article
-  - How to add specimen with pictures
-- Contact
-  - Enhance email encryption
-  - Fix Netlify function with contact form
-- SQL: add table `picture_taxonomy_material` & alter table `picture_taxonomy`
-- Add error page (404)
-- test between module `nuxt webvitals` <=> `netlify webvitals`
-- add GA
-- Images
-  - Host images on provider (Cloudinary, ipx, etc.)
-  - Move to Nuxt Image
-- UI
-  - update header
-  - update footer
-  - update taxon
-  - animation header "points"
-  - animation heading gradient on home

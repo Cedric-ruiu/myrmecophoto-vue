@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useImageData } from '~/composables/useImageData'
+import { useTaxonImageData } from '~/composables/useImageData'
 
 const props = defineProps({
   id: { type: Number, required: true },
@@ -13,22 +13,15 @@ const props = defineProps({
 
 const specieData = computed(() => props.species.find((s) => s.id === props.id))
 
-// Generate fallback src path based on taxon naming convention
-const fallbackSrc = computed(() => {
+// Use simplified taxon image data
+const imageData = computed(() => {
   const fileName = specieData.value?.specimen?.[0]?.taxonomy_picture?.[0]?.file_name
   if (!fileName || !props.genus.name || !specieData.value?.name) {
-    return ''
+    return { hasValidData: false, avifSrcset: '', fallback: null, 'thumbnail-fallback': null, avif: [] }
   }
   
-  const genusName = props.genus.name.toLowerCase()
-  const specieName = specieData.value.name.toLowerCase()
-  const fileBase = fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
-  
-  return `taxons/${genusName}-${specieName}/${fileBase}`
+  return useTaxonImageData(props.genus.name, specieData.value.name, fileName)
 })
-
-// Use the new system with client-side fallback
-const imageData = useImageData(null, fallbackSrc.value)
 </script>
 
 <template>
@@ -38,19 +31,19 @@ const imageData = useImageData(null, fallbackSrc.value)
   >
     <picture v-if="imageData.hasValidData">
       <source
-        v-if="imageData.avifSrcset.value"
+        v-if="imageData.avifSrcset"
         type="image/avif"
         :srcset="imageData.avif[0]?.url"
-        :width="imageData['thumbnail-fallback']?.width || 300"
-        :height="imageData['thumbnail-fallback']?.height || 200"
+        :width="imageData.thumbnailWidth"
+        :height="imageData.thumbnailHeight"
         sizes="(max-width: 400px) 100vw, 300px"
       />
       <img
         class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
-        :src="imageData['thumbnail-fallback']?.url || imageData.fallback?.url"
+        :src="imageData.thumbnailSrc"
         :alt="`${props.taxon} - Vue taxonomique`"
-        :width="imageData['thumbnail-fallback']?.width || 300"
-        :height="imageData['thumbnail-fallback']?.height || 200"
+        :width="imageData.thumbnailWidth"
+        :height="imageData.thumbnailHeight"
         loading="lazy"
         decoding="async"
       />

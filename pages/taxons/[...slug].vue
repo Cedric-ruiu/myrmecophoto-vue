@@ -129,7 +129,6 @@ onUnmounted(() => {
           :key="picture.id"
           :picture="picture"
           :specimen="specimen"
-          :species="species"
           :specieId="specieId"
         />
       </div>

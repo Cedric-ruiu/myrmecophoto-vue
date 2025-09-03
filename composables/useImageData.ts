@@ -1,82 +1,128 @@
 import { computed } from 'vue'
+// Direct import of the manifest - works in SSG because it's static
+import imageManifest from './image-manifest.json'
+
+interface ImageData {
+  avifSrcset: string
+  fallback: { url: string; width: number; height: number } | null
+  'thumbnail-fallback': { url: string; width: number; height: number } | null
+  avif: Array<{ url: string; width: number; height: number }>
+  hasValidData: boolean
+  // Enhanced computed properties for template simplification
+  finalSrc: string
+  finalWidth: number
+  finalHeight: number
+  thumbnailSrc: string
+  thumbnailWidth: number  
+  thumbnailHeight: number
+  aspectRatio: string | undefined
+  largestAvif: { url: string; width: number; height: number } | null
+}
 
 /**
- * Generate image URLs based on file naming conventions
- * This replaces the heavy manifest system for client-side usage
+ * Simple, unified composable for responsive images
+ * Works with direct manifest import for optimal SSG performance
  */
-function generateImageUrls(imagePath: string) {
-  const basePath = imagePath.replace(/\.(jpg|jpeg|png|avif)$/i, '')
+export const useImageData = (imagePath: string): ImageData => {
+  // Remove extension and normalize path for manifest lookup
+  const manifestKey = imagePath.replace(/\.(jpg|jpeg|png|avif)$/i, '')
+  const manifestEntry = imageManifest[manifestKey as keyof typeof imageManifest]
   
-  // Standard AVIF sizes used by the project
+  if (manifestEntry && manifestEntry.avif?.length) {
+    // Generate srcset from manifest data
+    const avifSrcset = manifestEntry.avif
+      .map(img => `${img.url} ${img.width}w`)
+      .join(', ')
+    
+    // Get largest AVIF for primary display
+    const largestAvif = manifestEntry.avif[manifestEntry.avif.length - 1]
+    
+    // Determine final sources with fallback priority
+    const finalSrc = manifestEntry.fallback?.url || largestAvif?.url || ''
+    const thumbnailSrc = manifestEntry['thumbnail-fallback']?.url || manifestEntry.fallback?.url || manifestEntry.avif[0]?.url || ''
+    
+    // Determine final dimensions with fallback priority  
+    const finalWidth = manifestEntry.fallback?.width || largestAvif?.width || 0
+    const finalHeight = manifestEntry.fallback?.height || largestAvif?.height || 0
+    const thumbnailWidth = manifestEntry['thumbnail-fallback']?.width || manifestEntry.fallback?.width || manifestEntry.avif[0]?.width || 300
+    const thumbnailHeight = manifestEntry['thumbnail-fallback']?.height || manifestEntry.fallback?.height || manifestEntry.avif[0]?.height || 200
+    
+    // Calculate aspect ratio
+    const aspectRatio = finalWidth && finalHeight ? `${finalWidth} / ${finalHeight}` : undefined
+    
+    return {
+      avifSrcset,
+      fallback: manifestEntry.fallback || null,
+      'thumbnail-fallback': manifestEntry['thumbnail-fallback'] || null,
+      avif: manifestEntry.avif,
+      hasValidData: true,
+      // Enhanced properties
+      finalSrc,
+      finalWidth,
+      finalHeight,
+      thumbnailSrc,
+      thumbnailWidth,
+      thumbnailHeight,
+      aspectRatio,
+      largestAvif
+    }
+  }
+  
+  // Fallback: convention-based URLs (for missing manifest entries)
+  const basePath = manifestKey
   const avifSizes = [300, 600, 900, 1200, 1600]
   const avifImages = avifSizes.map(width => ({
     url: `/img/${basePath}-${width}.avif`,
-    width
+    width,
+    height: 0 // Will be calculated by browser - not ideal but fallback only
   }))
   
-  const fallbackJpg = `/img/${basePath}-1200.jpg`
-  const thumbnail = `/img/${basePath}-300.jpg`
-  
   const avifSrcset = avifImages.map(img => `${img.url} ${img.width}w`).join(', ')
+  const largestAvif = avifImages[avifImages.length - 1]
   
   return {
-    fallback: { url: fallbackJpg, width: 1200, height: 0 },
-    'thumbnail-fallback': { url: thumbnail, width: 300, height: 0 },
-    avif: avifImages,
     avifSrcset,
-    hasValidData: true
+    fallback: { url: `/img/${basePath}-1200.jpg`, width: 1200, height: 0 },
+    'thumbnail-fallback': { url: `/img/${basePath}-300.jpg`, width: 300, height: 0 },
+    avif: avifImages,
+    hasValidData: true,
+    // Enhanced properties for convention fallback
+    finalSrc: `/img/${basePath}-1200.jpg`,
+    finalWidth: 1200,
+    finalHeight: 0,
+    thumbnailSrc: `/img/${basePath}-300.jpg`,
+    thumbnailWidth: 300,
+    thumbnailHeight: 0,
+    aspectRatio: undefined, // Unknown for convention fallback
+    largestAvif
   }
 }
 
 /**
- * Composable for handling responsive images
- * Maintains compatibility with existing templates while supporting new architecture
+ * Specialized helper for taxon images
  */
-export const useImageData = (
-  preCalculatedData: any = null,
-  fallbackSrc: string = ''
+export const useTaxonImageData = (
+  genusName: string, 
+  specieName: string, 
+  fileName: string
 ) => {
-  // If we have pre-calculated data from server-side, use it
-  if (preCalculatedData && preCalculatedData.hasValidData) {
-    return {
-      avifSrcset: computed(() => preCalculatedData.avifSrcset || ''),
-      fallback: preCalculatedData.fallback,
-      'thumbnail-fallback': preCalculatedData['thumbnail-fallback'],
-      avif: preCalculatedData.avif,
-      hasValidData: computed(() => true),
-      // Legacy compatibility
-      fallbackJpgPath: computed(() => preCalculatedData.fallback?.url || ''),
-      imgWidth: computed(() => preCalculatedData.fallback?.width || undefined),
-      imgHeight: computed(() => preCalculatedData.fallback?.height || undefined)
-    }
-  }
+  const genus = genusName.toLowerCase()
+  const species = specieName.toLowerCase()
+  const fileBase = fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
+  const imagePath = `taxons/${genus}-${species}/${fileBase}`
   
-  // Fallback: generate URLs client-side using naming conventions
-  if (fallbackSrc) {
-    const imageData = generateImageUrls(fallbackSrc)
-    return {
-      avifSrcset: computed(() => imageData.avifSrcset),
-      fallback: imageData.fallback,
-      'thumbnail-fallback': imageData['thumbnail-fallback'],
-      avif: imageData.avif,
-      hasValidData: computed(() => true),
-      // Legacy compatibility
-      fallbackJpgPath: computed(() => imageData.fallback.url),
-      imgWidth: computed(() => imageData.fallback.width),
-      imgHeight: computed(() => imageData.fallback.height)
-    }
-  }
+  return useImageData(imagePath)
+}
+
+/**
+ * Specialized helper for article images  
+ */
+export const useArticleImageData = (
+  articlePath: string,
+  fileName: string
+) => {
+  const fileBase = fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
+  const imagePath = `articles/${articlePath}/${fileBase}`
   
-  // No data available
-  return {
-    avifSrcset: computed(() => ''),
-    fallback: null,
-    'thumbnail-fallback': null,
-    avif: [],
-    hasValidData: computed(() => false),
-    // Legacy compatibility
-    fallbackJpgPath: computed(() => ''),
-    imgWidth: computed(() => undefined),
-    imgHeight: computed(() => undefined)
-  }
+  return useImageData(imagePath)
 }
