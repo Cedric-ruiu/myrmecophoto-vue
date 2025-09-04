@@ -23,11 +23,15 @@ export default defineSitemapEventHandler(async () => {
     subfamily.genus.forEach((genus) => {
       genus.specie.forEach((specie) => {
         const taxon = `${genus.name}-${specie.name}`
-          .replace(' ', '-')
-          .replace('.', '')
+          .replace(/\s+/g, '-')  // Replace spaces with dashes
+          .replace(/\./g, '')    // Remove dots
+          .toLowerCase()         // Normalize to lowercase
+        
         urls.push({
           loc: `/taxons/${taxon}`,
           lastmod: new Date(2025, 1, 16).toISOString(),
+          changefreq: 'monthly',
+          priority: 0.7,
           _sitemap: 'pages',
         })
       })

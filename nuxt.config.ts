@@ -6,7 +6,7 @@
 // 2. Nitro 2.x has module resolution conflicts with Prisma Client
 // 3. SSG prerendering needs special handling for database client
 export default defineNuxtConfig({
-  modules: ['@unocss/nuxt', '@nuxt/content'],
+  modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content'],
 
   content: {
     experimental: { 
@@ -84,6 +84,8 @@ export default defineNuxtConfig({
         '/api/getTaxa',
         '/api/getSpecies',
         '/api/getEncryptedEmailContact',
+        '/api/__sitemap__/urls',
+        '/api/__sitemap__/images',
       ],
     },
     experimental: {
@@ -102,9 +104,9 @@ export default defineNuxtConfig({
     },
   },
 
-  // sitemap: {
-  //   sources: ['/api/__sitemap__/urls'],
-  // },
+  sitemap: {
+    sources: ['/api/__sitemap__/urls', '/api/__sitemap__/images'],
+  },
 
   // linkChecker: {
   //   failOnError: true,
@@ -118,12 +120,12 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-12-01',
 
-  // site: {
-  //   url: 'https://myrmecophoto.fr',
-  //   name: 'Myrmecophoto - Macrophotographie et Élevage de Fourmis | Myrmécologie et Biodiversité',
-  //   description: `Découvrez Myrmecophoto, le site dédié à la macrophotographie des fourmis, à leur élevage et à l'exploration de la myrmécologie. Articles, guides pratiques, et comparatifs de matériel pour capturer la biodiversité.`,
-  //   defaultLocale: 'fr',
-  // },
+  site: {
+    url: 'https://myrmecophoto.fr',
+    name: 'Myrmecophoto - Macrophotographie et Élevage de Fourmis | Myrmécologie et Biodiversité',
+    description: `Découvrez Myrmecophoto, le site dédié à la macrophotographie des fourmis, à leur élevage et à l'exploration de la myrmécologie. Articles, guides pratiques, et comparatifs de matériel pour capturer la biodiversité.`,
+    defaultLocale: 'fr',
+  },
 
   // schemaOrg: {
   //   identity: definePerson({
