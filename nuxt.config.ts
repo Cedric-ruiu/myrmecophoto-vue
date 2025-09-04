@@ -9,9 +9,9 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content'],
 
   content: {
-    experimental: { 
-      sqliteConnector: 'native' 
-    }
+    experimental: {
+      sqliteConnector: 'native',
+    },
   },
 
   app: {
@@ -62,7 +62,8 @@ export default defineNuxtConfig({
         // Fix Prisma Client browser resolution issues with Nuxt 4 + Nitro bundler
         // Without this alias, build fails with ".prisma/client/index-browser" module not found
         // This maps the browser-specific Prisma client to the correct file location
-        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+        '.prisma/client/index-browser':
+          './node_modules/.prisma/client/index-browser.js',
       },
     },
   },
@@ -108,17 +109,13 @@ export default defineNuxtConfig({
     sources: ['/api/__sitemap__/urls', '/api/__sitemap__/images'],
   },
 
-  // linkChecker: {
-  //   failOnError: true,
-  // },
-
   robots: {
     groups: [
       {
         userAgent: '*',
         allow: ['/'],
         disallow: ['/api/', '/_nuxt/', '/__sitemap__/'],
-      }
+      },
     ],
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
   },
@@ -136,6 +133,17 @@ export default defineNuxtConfig({
     name: 'Myrmecophoto - Macrophotographie et Élevage de Fourmis | Myrmécologie et Biodiversité',
     description: `Découvrez Myrmecophoto, le site dédié à la macrophotographie des fourmis, à leur élevage et à l'exploration de la myrmécologie. Articles, guides pratiques, et comparatifs de matériel pour capturer la biodiversité.`,
     defaultLocale: 'fr',
+  },
+
+  ogImage: {
+    enabled: true,
+    defaults: {
+      component: 'Home',
+      props: {
+        siteName: 'Myrmecophoto',
+        theme: '#e72c27',
+      },
+    },
   },
 
   // schemaOrg: {

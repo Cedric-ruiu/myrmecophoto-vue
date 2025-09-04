@@ -1,6 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+useHead({
+  title: 'À propos - Qui suis-je ?',
+  meta: [
+    {
+      name: 'description',
+      content: 'Découvrez Cédric Ruiu, développeur web et photographe passionné de myrmécologie. Créateur de Myrmecophoto, alliance entre macro-photographie et science des fourmis.',
+    },
+  ],
+})
+
+// Configuration Open Graph pour la page à propos
+defineOgImage({
+  component: 'Home',
+  props: {
+    title: 'À propos',
+    subtitle: 'Cédric Ruiu - Développeur & Photographe',
+    description: 'Créateur de Myrmecophoto, passionné de myrmécologie et macro-photographie scientifique',
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
+
+useSeoMeta({
+  ogTitle: 'À propos - Cédric Ruiu | Myrmecophoto',
+  ogDescription: 'Découvrez Cédric Ruiu, créateur de Myrmecophoto. Développeur web et photographe passionné de myrmécologie et macro-photographie scientifique.',
+  ogImage: 'https://myrmecophoto.fr/img/cedric-ruiu-avatar-1200.jpg',
+  ogImageAlt: 'Cédric Ruiu - Créateur de Myrmecophoto',
+  twitterCard: 'summary_large_image',
+})
+
 const form = ref({
   name: '',
   email: '',

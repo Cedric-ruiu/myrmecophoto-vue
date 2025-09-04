@@ -13,23 +13,41 @@ useHead({
   meta: [{ name: 'description', content: description || '' }],
 })
 
-// useSeoMeta(article?.value?.seo || {}) // <-- Nuxt Robots
+// Configuration Open Graph avec image d'article
+defineOgImage({
+  component: 'Article',
+  props: {
+    title: article.value?.title,
+    description: article.value?.description,
+    image: `/img/articles/${article.value?.image.main}-1200.jpg`,
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
 
-// useSchemaOrg([
-//   defineArticle({
-//     image: useAbsoluteUrl(`/img/articles/${article.value?.image.main}.jpg`),
-//     thumbnailUrl: useAbsoluteUrl(
-//       `/img/articles/${article.value?.image.main}-thumbnail.jpg`,
-//     ),
-//     datePublished: `${article.value?.date.published}`,
-//     dateModified: `${article.value?.date.updated || article.value?.date.published}`,
-//   }),
-// ])
+useSeoMeta({
+  ogTitle: article.value?.title,
+  ogDescription: article.value?.description,
+  ogImage: `/img/articles/${article.value?.image.main}-1200.jpg`,
+  ogImageAlt: article.value?.title,
+  twitterCard: 'summary_large_image',
+})
 
-// defineOgImageComponent('NuxtSeo', {
-//   theme: '#e72c27',
-//   colorMode: 'dark',
-// })
+useSchemaOrg([
+  defineArticle({
+    headline: article.value?.title,
+    description: article.value?.description,
+    image: `https://myrmecophoto.fr/img/articles/${article.value?.image.main}-1200.jpg`,
+    thumbnailUrl: `https://myrmecophoto.fr/img/articles/${article.value?.image.main}-thumbnail.jpg`,
+    datePublished: article.value?.date.published,
+    dateModified: article.value?.date.updated || article.value?.date.published,
+    author: {
+      '@type': 'Person',
+      name: 'Cédric Ruiu',
+      url: 'https://myrmecophoto.fr/about'
+    }
+  }),
+])
 </script>
 
 <template>

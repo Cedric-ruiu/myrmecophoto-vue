@@ -11,6 +11,26 @@ useHead({
   ],
 })
 
+// Configuration Open Graph pour la page d'index des taxons
+defineOgImage({
+  component: 'Home',
+  props: {
+    title: 'Taxonomie',
+    subtitle: 'Macrophotographies Taxonomiques',
+    description: 'Découvrez notre collection de macrophotographies taxonomiques de fourmis pour l\'identification scientifique',
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
+
+useSeoMeta({
+  ogTitle: 'Taxonomie - Macrophotographies scientifiques | Myrmecophoto',
+  ogDescription: "Collection de macrophotographies taxonomiques de fourmis aidant à l'identification des spécimens. Référence scientifique en myrmécologie.",
+  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
+  ogImageAlt: 'Myrmecophoto - Collection taxonomique de fourmis',
+  twitterCard: 'summary_large_image',
+})
+
 const { data: subfamilies } = useNuxtData('taxa')
 const { data: species } = useNuxtData('species')
 </script>

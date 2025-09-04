@@ -13,6 +13,26 @@ useHead({
   ],
 })
 
+// Configuration Open Graph pour la page d'index des articles
+defineOgImage({
+  component: 'Home',
+  props: {
+    title: 'Articles',
+    subtitle: 'Myrmécologie & Macro-photographie',
+    description: 'Découvrez nos articles sur les techniques de macro-photographie et la myrmécologie',
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
+
+useSeoMeta({
+  ogTitle: 'Articles - Myrmécologie et Macro-photographie | Myrmecophoto',
+  ogDescription: "Découvrez nos articles sur les techniques de macro-photographie et la myrmécologie. Galerie de macrophotographies de fourmis (Formicidae).",
+  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
+  ogImageAlt: 'Myrmecophoto - Articles sur la myrmécologie',
+  twitterCard: 'summary_large_image',
+})
+
 const { data: articles } = await useAsyncData('articles', () => {
   return queryCollection('content').order('date', 'DESC').all()
 })

@@ -31,10 +31,10 @@ for (const [index, specie] of species.value?.entries()) {
 if (specieId.value === -1)
   throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
 
+const scientificName = `${species.value[specieId.value].genus.name} ${species.value[specieId.value].name}`
+
 useHead({
-  title: `${species.value[specieId.value].genus.name} ${
-    species.value[specieId.value].name
-  }`,
+  title: scientificName,
   meta: [
     {
       name: 'description',
@@ -42,6 +42,26 @@ useHead({
         "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
     },
   ],
+})
+
+// Configuration Open Graph pour taxon
+defineOgImage({
+  component: 'Taxon',
+  props: {
+    scientificName,
+    genus: routeGenus,
+    species: routeSpecie,
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
+
+useSeoMeta({
+  ogTitle: `${scientificName} - Photos taxonomiques`,
+  ogDescription: `Macrophotographies taxonomiques de ${scientificName} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`,
+  ogImage: `https://myrmecophoto.fr/img/taxons/${routeGenus}-${routeSpecie}/${routeGenus}-${routeSpecie}-thumbnail.jpg`,
+  ogImageAlt: `${scientificName} - Vue taxonomique`,
+  twitterCard: 'summary_large_image',
 })
 
 import { onMounted, onUnmounted, ref } from 'vue'

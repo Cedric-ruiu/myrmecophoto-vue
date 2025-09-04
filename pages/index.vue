@@ -14,6 +14,26 @@ useHead({
     },
   ],
 })
+
+// Configuration Open Graph pour la page d'accueil
+defineOgImage({
+  component: 'Home',
+  props: {
+    title: 'Myrmecophoto',
+    subtitle: 'Macrophotographie & Myrmécologie',
+    description: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique',
+    siteName: 'Myrmecophoto',
+    theme: '#e72c27'
+  }
+})
+
+useSeoMeta({
+  ogTitle: 'Myrmecophoto - Macrophotographie et Myrmécologie',
+  ogDescription: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
+  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
+  ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>
