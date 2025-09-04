@@ -112,6 +112,17 @@ export default defineNuxtConfig({
   //   failOnError: true,
   // },
 
+  robots: {
+    groups: [
+      {
+        userAgent: '*',
+        allow: ['/'],
+        disallow: ['/api/', '/_nuxt/', '/__sitemap__/'],
+      }
+    ],
+    sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
+  },
+
   experimental: {
     payloadExtraction: false, // Fix 404 payload on SSG https://github.com/nuxt/nuxt/issues/22068
   },
