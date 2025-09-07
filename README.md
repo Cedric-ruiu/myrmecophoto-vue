@@ -224,10 +224,10 @@ This project implements an **advanced image optimization architecture** designed
 ```mermaid
 flowchart TB
     subgraph BUILD ["🔧 Build Pipeline"]
-        A[📁 Raw Images] --> B[🖼️ XnView MP<br/>Batch Processing]
-        B --> C[📐 Multi-format Generation]
-        C --> D[⚡ AVIF<br/>300•600•900•1200•1600px]
-        C --> E[📄 JPEG<br/>1200px + 300px thumbnail]
+        A[📁 Raw Images] --> B[XnView MP<br/>Batch Processing]
+        B --> C[Multi-format Generation]
+        C --> D[⚡ AVIF<br/>Optimized format<br/>300•600•900•1200•1600px]
+        C --> E[📄 JPEG<br/>Fallback<br/>1200px + 300px thumbnail]
     end
 
     subgraph MANIFEST ["📋 Manifest Generation"]
@@ -237,9 +237,9 @@ flowchart TB
     end
 
     subgraph RUNTIME ["⚡ SSG Runtime"]
-        G --> H[🔄 useImageData.ts<br/>Direct Import]
-        H --> I[🧮 Computed Properties<br/>finalSrc • aspectRatio • thumbnailSrc]
-        I --> J[🎨 Optimized Templates<br/>TaxonPicture • SpecieCard • PictureArticle]
+        G --> H[useImageData.ts<br/>Direct Import]
+        H --> I[Computed Properties<br/>finalSrc • aspectRatio • thumbnailSrc]
+        I --> J[Optimized Templates<br/>TaxonPicture • SpecieCard • PictureArticle]
         J --> K[🖼️ Picture Elements<br/>AVIF + JPEG Fallback]
     end
 
@@ -285,7 +285,7 @@ const imageData = useTaxonImageData(genusName, specieName, fileName)
 </template>
 ```
 
-This architecture delivers **exceptional Core Web Vitals scores** through AVIF compression (up to 80% smaller than JPEG), **zero Cumulative Layout Shift** via pre-calculated dimensions, and **optimal loading performance** with intelligent srcsets and lazy loading—making it ideal for media-rich SSG applications.
+This architecture delivers **exceptional Core Web Vitals scores** through AVIF compression (up to 80% smaller than JPEG), **zero Cumulative Layout Shift** via pre-calculated dimensions, and **optimal loading performance** with intelligent srcsets and lazy loading.
 
 ## Note about email spam protection
 
