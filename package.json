@@ -12,7 +12,7 @@
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "5.2.1",
+    "@antfu/eslint-config": "5.2.2",
     "@cedric-ruiu/stylelint-config": "0.6.0",
     "@iconify-json/fa6-brands": "1.2.6",
     "@mermaid-js/mermaid-cli": "11.9.0",
@@ -27,11 +27,11 @@
     "@unocss/preset-typography": "66.5.0",
     "@unocss/preset-web-fonts": "66.5.0",
     "@unocss/preset-wind4": "66.5.0",
-    "eslint": "9.34.0",
+    "eslint": "9.35.0",
     "eslint-config-prettier": "10.1.8",
     "include-media": "2.0.0",
     "nodemailer": "7.0.6",
-    "nuxt": "4.1.0",
+    "nuxt": "4.1.1",
     "nuxt-seo-utils": "7.0.14",
     "photoswipe": "5.4.4",
     "postcss": "8.5.6",
@@ -39,8 +39,8 @@
     "prettier": "3.6.2",
     "prisma": "6.15.0",
     "prisma-erd-generator": "2.0.4",
-    "sass": "1.92.0",
-    "stylelint": "16.23.1",
+    "sass": "1.92.1",
+    "stylelint": "16.24.0",
     "typescript": "5.9.2"
   },
   "packageManager": "yarn@4.9.4",
