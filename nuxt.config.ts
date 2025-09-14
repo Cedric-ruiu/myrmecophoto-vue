@@ -70,15 +70,6 @@ export default defineNuxtConfig({
         },
       },
     },
-    resolve: {
-      alias: {
-        // Fix Prisma Client browser resolution issues with Nuxt 4 + Nitro bundler
-        // Without this alias, build fails with ".prisma/client/index-browser" module not found
-        // This maps the browser-specific Prisma client to the correct file location
-        '.prisma/client/index-browser':
-          './node_modules/.prisma/client/index-browser.js',
-      },
-    },
   },
 
   css: [
@@ -86,11 +77,8 @@ export default defineNuxtConfig({
     '@/assets/main.scss',
   ],
 
-  build: {
-    // Ensure Prisma Client is properly transpiled during build process
-    // Required for SSG (Static Site Generation) compatibility
-    transpile: ['@prisma/client'],
-  },
+  // Additional SSG optimizations
+  ssr: true,
 
   nitro: {
     prerender: {
@@ -101,9 +89,6 @@ export default defineNuxtConfig({
         '/api/__sitemap__/urls',
         '/api/__sitemap__/images',
       ],
-    },
-    experimental: {
-      wasm: true,
     },
     esbuild: {
       options: {

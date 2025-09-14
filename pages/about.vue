@@ -33,7 +33,7 @@ const formResponse = ref('')
 
 function handleSubmit(event: Event) {
   event.preventDefault()
-  
+
   const formData = new FormData(event.target as HTMLFormElement)
 
   fetch('/', {
@@ -80,7 +80,7 @@ function buildErrorMessage(mess: string) {
       </div>
       <div class="prose prose-gray dark:prose-invert">
         <img
-          src="/public/img/cedric-ruiu-avatar.webp"
+          src="/img/cedric-ruiu-avatar.webp"
           alt="Image avatar de Cédric Ruiu"
         />
         <p>
@@ -164,8 +164,10 @@ function buildErrorMessage(mess: string) {
             action="/"
           >
             <input type="hidden" name="form-name" value="contact" />
-            <div style="display: none;">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            <div style="display: none">
+              <label
+                >Don't fill this out if you're human: <input name="bot-field"
+              /></label>
             </div>
 
             <div class="mb-4">
