@@ -4,9 +4,12 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "node scripts/generate-image-manifest.mjs && nuxt dev",
+    "manifest": "node scripts/generate-image-manifest.mjs",
     "serveSSG": "npx serve ./dist",
     "generate": "node scripts/generate-image-manifest.mjs && nuxt generate",
+    "generate:local": "NUXT_SITE_ENV=production NUXT_SITE_URL=http://localhost:3000 node scripts/generate-image-manifest.mjs && NUXT_SITE_ENV=production NUXT_SITE_URL=http://localhost:3000 nuxt generate",
     "serve-generate": "yarn generate & yarn serveSSG",
+    "serve-generate:local": "yarn generate:local && yarn serveSSG",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare & prisma generate",
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
