@@ -28,24 +28,25 @@ useSeoConfig({
   },
   customMeta: {
     ogImageAlt: articleTitle.value,
-  }
+  },
+  pageType: 'article',
+  schemaData: {
+    article: {
+      headline: articleTitle.value,
+      description: articleDescription.value,
+      datePublished: article.value?.date.published || '',
+      dateModified:
+        article.value?.date.updated || article.value?.date.published || '',
+      image: {
+        main: article.value?.image.main || '',
+        width: 1200,
+        height: 800,
+      },
+      tags: article.value?.tags,
+      location: article.value?.location,
+    },
+  },
 })
-
-useSchemaOrg([
-  defineArticle({
-    headline: article.value?.title,
-    description: article.value?.description,
-    image: `https://myrmecophoto.fr/img/articles/${article.value?.image.main}-1200.jpg`,
-    thumbnailUrl: `https://myrmecophoto.fr/img/articles/${article.value?.image.main}-thumbnail.jpg`,
-    datePublished: article.value?.date.published,
-    dateModified: article.value?.date.updated || article.value?.date.published,
-    author: {
-      '@type': 'Person',
-      name: 'Cédric Ruiu',
-      url: 'https://myrmecophoto.fr/about'
-    }
-  }),
-])
 </script>
 
 <template>

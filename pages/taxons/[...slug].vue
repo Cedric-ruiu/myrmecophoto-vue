@@ -53,7 +53,20 @@ useSeoConfig({
   },
   customMeta: {
     ogImageAlt: `${scientificName.value} - Vue taxonomique`,
-  }
+  },
+  pageType: 'taxon',
+  schemaData: {
+    taxon: {
+      scientificName: scientificName.value,
+      genus: currentSpecies.value?.genus.name || '',
+      subfamily: currentSpecies.value?.genus.subfamily.name || '',
+      researcher: currentSpecies.value?.researcher.name || '',
+      year: currentSpecies.value?.year,
+      specimens: currentSpecies.value?.specimen,
+      routeGenus,
+      routeSpecie,
+    },
+  },
 })
 
 import { onMounted, onUnmounted, ref } from 'vue'

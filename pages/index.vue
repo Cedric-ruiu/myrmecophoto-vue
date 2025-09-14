@@ -16,8 +16,9 @@ useSeoConfig({
   ogImageUrl: '/img/home-wall-1.avif',
   twitterImage: '/img/home-wall-1.avif',
   customMeta: {
-    ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis'
-  }
+    ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
+  },
+  pageType: 'homepage',
 })
 </script>
 

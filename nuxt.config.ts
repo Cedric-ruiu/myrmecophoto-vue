@@ -158,16 +158,34 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
 
-  // schemaOrg: {
-  //   identity: definePerson({
-  //     name: 'Cédric Ruiu',
-  //     image: '/public/img/cedric-ruiu-avatar.webp',
-  //     jobTitle: 'Senior Software Engineer',
-  //     url: 'https://myrmecophoto.fr',
-  //     sameAs: [
-  //       'https://www.linkedin.com/in/cedric-ruiu/',
-  //       'https://github.com/Cedric-ruiu',
-  //     ],
-  //   }),
-  // },
+  schemaOrg: {
+    identity: {
+      type: 'Person',
+      name: 'Cédric Ruiu',
+      url: 'https://myrmecophoto.fr',
+      image: '/img/cedric-ruiu-avatar.webp',
+      jobTitle: [
+        'Développeur Web',
+        'Photographe Macro',
+        'Myrmécologiste Amateur',
+      ],
+      description:
+        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+      knowsAbout: [
+        'Myrmécologie',
+        'Macro-photographie',
+        'Développement Web',
+        'Entomologie',
+        'Taxonomie',
+      ],
+      sameAs: [
+        'https://www.linkedin.com/in/cedric-ruiu/',
+        'https://github.com/Cedric-ruiu',
+      ],
+      address: {
+        type: 'PostalAddress',
+        addressCountry: 'FR',
+      },
+    },
+  },
 })

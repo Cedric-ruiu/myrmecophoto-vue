@@ -1,3 +1,6 @@
+import { usePageSchemas, type PageType, type PageSchemaOptions } from './schemas/usePageSchemas'
+import type { SchemaFactoryOptions } from './useSchemaFactory'
+
 /**
  * Configuration options for SEO metadata
  *
@@ -62,6 +65,48 @@ interface SeoConfigOptions {
    * If not provided, uses ogImageUrl or automatic generation
    */
   twitterImage?: string
+
+  /**
+   * Page type for automatic Schema.org generation (OPTIONAL - Auto-detected from route)
+   * When provided, explicitly sets the schema type. If not provided, auto-detects from route path.
+   *
+   * Auto-detection rules:
+   * - '/' → 'homepage'
+   * - '/about' → 'about'
+   * - '/articles' → 'article-list'
+   * - '/taxons' → 'taxon-list'
+   * - '/articles/*' → 'article'
+   * - '/taxons/*' → 'taxon'
+   * - Other routes → fallback WebPage schema
+   *
+   * Manual override examples:
+   * - 'homepage': WebSite + WebPage + Collection schemas
+   * - 'article': Article + breadcrumbs + mainEntityOfPage
+   * - 'article-list': CollectionPage + ItemList for articles
+   * - 'taxon': Enhanced Taxon + ScholarlyArticle + ImageGallery + Dataset
+   * - 'taxon-list': Collection + Organization for taxonomic database
+   * - 'about': AboutPage + Person + ContactPage
+   *
+   * @example 'homepage', 'article', 'taxon', 'taxon-list', 'about' (or leave undefined for auto-detection)
+   */
+  pageType?: PageType
+
+  /**
+   * Schema.org data for structured data generation (OPTIONAL)
+   * Provides content-specific data for automatic schema generation
+   * Required when using pageType for dynamic content pages
+   *
+   * @example
+   * // For articles:
+   * { article: { headline: 'My Article', datePublished: '2024-01-01', tags: ['myrmecology'] } }
+   *
+   * // For taxons:
+   * { taxon: { scientificName: 'Lasius niger', genus: 'Lasius', subfamily: 'Formicinae' } }
+   *
+   * // For collections:
+   * { collection: { itemCount: 42, collectionType: 'articles', items: [...] } }
+   */
+  schemaData?: SchemaFactoryOptions
 }
 
 /**
@@ -80,32 +125,19 @@ interface SeoConfigOptions {
  *
  * @example
  * ```typescript
- * // Simple page
+ * // Auto-detected from route
  * useSeoConfig({
  *   title: 'About - Who am I?',
- *   description: 'Discover Cédric Ruiu, creator of Myrmecophoto'
+ *   description: 'Discover Cédric Ruiu'
  * })
  *
- * // Page with custom OG image
+ * // Dynamic content with data
  * useSeoConfig({
- *   title: 'Articles on myrmecology',
- *   description: 'Collection of scientific articles',
- *   ogImageProps: {
- *     subtitle: 'Articles & Guides',
- *     description: `${articleCount.value} articles available`
- *   }
- * })
- *
- * // Page with static image
- * useSeoConfig({
- *   title: 'Home - Myrmecophoto',
- *   description: 'Ant macro-photography website',
- *   ogImageUrl: '/img/home-wall-1.avif', // Will be automatically prefixed with site.url
- *   twitterImage: '/img/home-wall-1.avif'
+ *   title: scientificName.value,
+ *   pageType: 'taxon',
+ *   schemaData: { taxon: { scientificName: '...', genus: '...' } }
  * })
  * ```
- *
- * @since 2024
  */
 export function useSeoConfig(options: SeoConfigOptions) {
   const {
@@ -118,6 +150,8 @@ export function useSeoConfig(options: SeoConfigOptions) {
     titleTemplate,
     ogImageUrl,
     twitterImage,
+    pageType,
+    schemaData = {},
   } = options
 
   // Automatic canonical URL
@@ -218,6 +252,15 @@ export function useSeoConfig(options: SeoConfigOptions) {
   defineOgImageComponent('NuxtSeo', ogImageConfig)
   useSeoMeta(seoMetaConfig)
 
+  // Always apply Schema.org (either explicit pageType or auto-detected)
+  const pageSchemas = usePageSchemas()
+  pageSchemas.applyPageSchemas({
+    pageType,
+    title,
+    description,
+    ...schemaData
+  })
+
   return {
     headConfig,
     ogImageConfig,
@@ -227,134 +270,58 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
 /*
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 📚 COMPLETE USAGE GUIDE - useSeoConfig
+ * 📚 USAGE EXAMPLES
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
- * 🎯 PROPERTIES BY PRIORITY
- *
- * ✅ REQUIRED (always fill)
- * • title       - Critical SEO title for ranking
- * • description - Essential meta description
- *
- * 🔶 RECOMMENDED (depending on page type)
- * • ogImageProps - Customize generated Open Graph image
- * • articleSection - Content category (default: "Myrmécologie")
- *
- * ⚙️ OPTIONAL (special cases)
- * • ogImageUrl    - Static OG image (otherwise auto generation)
- * • titleTemplate - Custom title template
- * • robotsRule    - Control indexing (default: 'index,follow')
- * • twitterImage  - Specific Twitter image
- * • customMeta    - Additional metadata
- *
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 📋 USAGE EXAMPLES BY PAGE TYPE
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *
- * 🏠 HOME PAGE (with static image)
- * useSeoConfig({
- *   title: 'Myrmecophoto: macro photography, taxonomy & articles about ants',
- *   description: 'Taxonomic macro photography of ants helping with specimen identification',
- *   ogImageUrl: '/img/home-wall-1.avif', // Will be automatically prefixed with site.url
- *   twitterImage: '/img/home-wall-1.avif',
- *   ogImageProps: {
- *     subtitle: 'Macro Photography & Myrmecology',
- *     description: 'Discover the fascinating world of ants'
- *   }
- * })
- *
- * 👤 SIMPLE PAGE (About, Contact)
+ * // Standard pages (auto-detected from route)
  * useSeoConfig({
  *   title: 'About - Who am I?',
- *   description: 'Discover Cédric Ruiu, web developer and photographer passionate about myrmecology',
- *   ogImageProps: {
- *     subtitle: 'Developer & Photographer',
- *     description: 'Creator of Myrmecophoto'
- *   }
+ *   description: 'Discover Cédric Ruiu...'
  * })
  *
- * 📚 LIST PAGE (Articles, Taxons with dynamic data)
- * const articleCount = computed(() => articles?.value?.length || 0) // IMPORTANT: SSG-safe fallback
- *
- * useSeoConfig({
- *   title: 'Myrmecological and photographic articles',
- *   description: 'List of articles on macro photography techniques and myrmecology',
- *   ogImageProps: {
- *     subtitle: 'Articles & Guides',
- *     description: `${articleCount.value} articles on macro-photography`
- *   },
- *   articleSection: 'Macro-photography'
- * })
- *
- * 📄 DYNAMIC PAGE (Individual article, Specific taxon)
- * // IMPORTANT: SSG-safe fallbacks for async data
- * const articleTitle = computed(() => article.value?.title || 'Article Myrmecophoto')
- * const articleDescription = computed(() => article.value?.description || 'Myrmecology article')
- *
- * useSeoConfig({
- *   title: articleTitle.value,
- *   description: articleDescription.value,
- *   titleTemplate: '%s | Article | Myrmecophoto',
- *   ogImageProps: {
- *     subtitle: 'Myrmecology Article',
- *     description: articleDescription.value,
- *     date: article.value?.date.published,
- *     location: article.value?.location
- *   }
- * })
- *
- * 🔬 TAXONOMIC PAGE (Ant species)
- * const scientificName = computed(() => {
- *   if (!species.value) return 'Taxon Myrmecophoto'
- *   return `${species.value.genus.name} ${species.value.name}`
- * })
- *
+ * // Dynamic content with Schema.org
  * useSeoConfig({
  *   title: scientificName.value,
- *   description: `Taxonomic macro-photographs of ${scientificName.value}`,
- *   ogImageProps: {
- *     subtitle: species.value?.subfamily || 'Formicidae',
- *     description: `${species.value?.researcher} ${species.value?.year || ''}`
- *   },
- *   articleSection: 'Taxonomy'
+ *   pageType: 'taxon',
+ *   schemaData: {
+ *     taxon: {
+ *       scientificName: 'Lasius niger',
+ *       genus: 'Lasius',
+ *       specimens: [...]
+ *     }
+ *   }
  * })
  *
- * 🚫 PRIVATE PAGE (Admin, Maintenance)
+ * // Custom OG image
  * useSeoConfig({
- *   title: 'Maintenance page',
- *   description: 'Site under maintenance',
- *   robotsRule: 'noindex,nofollow'
+ *   title: 'Articles',
+ *   description: '...',
+ *   ogImageProps: {
+ *     subtitle: 'Macro Photography',
+ *     description: `${count.value} articles`
+ *   }
  * })
  *
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * ⚡ AUTOMATIC FEATURES
+ * 🔧 ADDING NEW PAGE TYPE
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
- * 🔗 Canonical URL generated automatically: {siteUrl}{route.path}
- * 👤 Author metadata added: from environment variables
- * 🏷️ Myrmecology keywords: "myrmécologie, fourmis, Formicidae, macro-photographie, taxonomie, entomologie, identification"
- * 🎨 Uniform OG style: Theme #e72c27, dark mode, Myrmecophoto logo
- * 🐦 Twitter Cards: @myrmecophoto, @cedric_ruiu
- * 📱 Mobile configuration: viewport, themeColor, colorScheme
- * 🖼️ OG Images: Automatic fallback to NuxtSeo generation if no URL provided
+ * 1. Add type to @schemas/usePageSchemas.ts:
+ *    export type PageType = '...' | 'my-new-type'
+ *
+ * 2. Add schema factory in @useSchemaFactory.ts:
+ *    const createMyNewTypeSchema = (options) => ({ '@type': 'MySchema', ... })
+ *
+ * 3. Add detection rule in @schemas/usePageSchemas.ts:
+ *    if (path.startsWith('/my-path/')) return 'my-new-type'
+ *
+ * 4. Add case in applyPageSchemas switch:
+ *    case 'my-new-type': applyMyNewTypeSchemas(options); break
+ *
+ * 5. Use: useSeoConfig({ pageType: 'my-new-type', schemaData: {...} })
  *
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * ⚠️ IMPORTANT TECHNICAL NOTES
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *
- * 🏗️ SSG-SAFE: Always use computed() with fallbacks for async data
- *    ❌ WRONG: title: article.value?.title
- *    ✅ CORRECT: title: computed(() => article.value?.title || 'Default')
- *
- * 🖼️ OG IMAGES:
- *    • Without ogImageUrl -> automatic NuxtSeo generation
- *    • With ogImageUrl -> static image (absolute URLs required)
- *    • Netlify compatible via runtimeBrowser: true in nuxt.config.ts
- *
- * 🌐 ABSOLUTE URLS: Environment variables used for SSG-safe URL generation
- *
- * 📊 DYNAMIC DATA: Computed with fallbacks to avoid SSG errors
- *    const count = computed(() => data?.value?.length || 0)
- *
- * 🔄 COMPATIBILITY: Compatible with useAsyncData, useNuxtData, queryCollection
+ * ⚡ AUTO-DETECTION: '/' → homepage, '/about' → about, '/articles/*' → article, '/taxons/*' → taxon
+ * 🎯 FEATURES: Automatic canonical URLs, OG images, Schema.org, breadcrumbs
+ * 🏗️ SSG-SAFE: Use computed() with fallbacks for dynamic data
  */

@@ -30,7 +30,15 @@ useSeoConfig({
   },
   customMeta: {
     ogImageAlt: 'Myrmecophoto - Collection taxonomique de fourmis',
-  }
+  },
+  pageType: 'taxon-list',
+  schemaData: {
+    collection: {
+      itemCount: speciesCount.value,
+      collectionType: 'taxons',
+      subfamilies: subfamilies.value,
+    },
+  },
 })
 </script>
 

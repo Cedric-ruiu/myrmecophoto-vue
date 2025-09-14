@@ -13,6 +13,7 @@ useSeoConfig({
   customMeta: {
     ogImageAlt: 'Cédric Ruiu - Créateur de Myrmecophoto',
   },
+  pageType: 'about',
 })
 
 const form = ref({

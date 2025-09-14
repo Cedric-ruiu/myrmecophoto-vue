@@ -18,7 +18,15 @@ useSeoConfig({
   },
   customMeta: {
     ogImageAlt: 'Myrmecophoto - Articles sur la myrmécologie',
-  }
+  },
+  pageType: 'article-list',
+  schemaData: {
+    collection: {
+      itemCount: articleCount.value,
+      collectionType: 'articles',
+      items: articles.value,
+    },
+  },
 })
 </script>
 
