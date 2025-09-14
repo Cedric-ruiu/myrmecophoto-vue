@@ -42,11 +42,12 @@ useSeoConfig({
     >
       <NuxtLink
         :to="article.path"
+        :aria-label="`Lire l'article : ${article.title}`"
         class="block relative w-20 md:w-80 h-20 md:h-60 flex-[1_0_auto] md:flex-none horizontal-bottom-line-gradient"
         ><img
           class="rounded-md w-full h-full object-cover"
           :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
-          alt="Photo 3"
+          :alt="`Image de l'article : ${article.title}`"
       /></NuxtLink>
       <NuxtLink :to="article.path" class="prose prose-gray dark:prose-invert">
         <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
