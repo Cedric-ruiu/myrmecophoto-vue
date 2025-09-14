@@ -6,31 +6,29 @@ const { data: article } = await useAsyncData(`content-${path}`, () => {
   return queryCollection('content').path(path).first()
 })
 
-const description = computed(() => article.value?.description)
+// Fallbacks SSG-safe pour données d'article
+const articleTitle = computed(
+  () => article.value?.title || 'Article Myrmecophoto',
+)
+const articleDescription = computed(
+  () =>
+    article.value?.description ||
+    'Article sur la myrmécologie et macro-photographie',
+)
 
-useHead({
+useSeoConfig({
+  title: articleTitle.value,
+  description: articleDescription.value,
   titleTemplate: '%s | Article | Myrmecophoto',
-  meta: [{ name: 'description', content: description || '' }],
-})
-
-// Configuration Open Graph avec image d'article
-defineOgImage({
-  component: 'Article',
-  props: {
-    title: article.value?.title,
-    description: article.value?.description,
-    image: `/img/articles/${article.value?.image.main}-1200.jpg`,
-    siteName: 'Myrmecophoto',
-    theme: '#e72c27'
+  ogImageProps: {
+    subtitle: 'Article Myrmécologie',
+    description: articleDescription.value,
+    date: article.value?.date.published,
+    location: article.value?.location,
+  },
+  customMeta: {
+    ogImageAlt: articleTitle.value,
   }
-})
-
-useSeoMeta({
-  ogTitle: article.value?.title,
-  ogDescription: article.value?.description,
-  ogImage: `/img/articles/${article.value?.image.main}-1200.jpg`,
-  ogImageAlt: article.value?.title,
-  twitterCard: 'summary_large_image',
 })
 
 useSchemaOrg([

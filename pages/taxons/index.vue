@@ -1,38 +1,37 @@
 <script setup lang="ts">
-useHead({
-  title:
-    'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
-    },
-  ],
-})
-
-// Configuration Open Graph pour la page d'index des taxons
-defineOgImage({
-  component: 'Home',
-  props: {
-    title: 'Taxonomie',
-    subtitle: 'Macrophotographies Taxonomiques',
-    description: 'Découvrez notre collection de macrophotographies taxonomiques de fourmis pour l\'identification scientifique',
-    siteName: 'Myrmecophoto',
-    theme: '#e72c27'
-  }
-})
-
-useSeoMeta({
-  ogTitle: 'Taxonomie - Macrophotographies scientifiques | Myrmecophoto',
-  ogDescription: "Collection de macrophotographies taxonomiques de fourmis aidant à l'identification des spécimens. Référence scientifique en myrmécologie.",
-  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
-  ogImageAlt: 'Myrmecophoto - Collection taxonomique de fourmis',
-  twitterCard: 'summary_large_image',
-})
-
 const { data: subfamilies } = useNuxtData('taxa')
 const { data: species } = useNuxtData('species')
+
+// Fallbacks SSG-safe pour computed dynamiques
+const speciesCount = computed(() => {
+  if (!subfamilies?.value) return 0
+  return subfamilies.value.reduce(
+    (total, subfamily) =>
+      total +
+      subfamily.genus.reduce(
+        (genusTotal, genus) =>
+          genusTotal +
+          genus.specie.filter((specie) => specie._count.specimen > 0).length,
+        0,
+      ),
+    0,
+  )
+})
+
+const subfamilyCount = computed(() => subfamilies?.value?.length || 0)
+
+useSeoConfig({
+  title: 'Collection taxonomique - Fourmis de France | Myrmecophoto',
+  description:
+    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+  ogImageProps: {
+    subtitle: 'Collection Taxonomique',
+    description: `${speciesCount.value} espèces de fourmis documentées dans ${subfamilyCount.value} sous-familles`,
+  },
+  customMeta: {
+    ogImageAlt: 'Myrmecophoto - Collection taxonomique de fourmis',
+  }
+})
 </script>
 
 <template>

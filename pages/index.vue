@@ -3,36 +3,21 @@ definePageMeta({
   layout: 'full',
 })
 
-useHead({
+useSeoConfig({
   title:
     'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
-    },
-  ],
-})
-
-// Configuration Open Graph pour la page d'accueil
-defineOgImage({
-  component: 'Home',
-  props: {
-    title: 'Myrmecophoto',
-    subtitle: 'Macrophotographie & Myrmécologie',
-    description: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique',
-    siteName: 'Myrmecophoto',
-    theme: '#e72c27'
+  description:
+    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+  ogImageProps: {
+    subtitle: 'Macrophotographie et Myrmécologie',
+    description:
+      'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
+  },
+  ogImageUrl: '/img/home-wall-1.avif',
+  twitterImage: '/img/home-wall-1.avif',
+  customMeta: {
+    ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis'
   }
-})
-
-useSeoMeta({
-  ogTitle: 'Myrmecophoto - Macrophotographie et Myrmécologie',
-  ogDescription: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
-  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
-  ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
-  twitterCard: 'summary_large_image',
 })
 </script>
 

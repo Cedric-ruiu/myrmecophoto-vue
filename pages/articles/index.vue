@@ -1,40 +1,24 @@
 <script setup lang="ts">
 // this route generate page with list of all articles
 
-useHead({
-  title:
-    'Articles myrmécologiques et photographiques, Macro photographie des fourmis en milieu naturel ou artificiel | Myrmecophoto',
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
-    },
-  ],
-})
-
-// Configuration Open Graph pour la page d'index des articles
-defineOgImage({
-  component: 'Home',
-  props: {
-    title: 'Articles',
-    subtitle: 'Myrmécologie & Macro-photographie',
-    description: 'Découvrez nos articles sur les techniques de macro-photographie et la myrmécologie',
-    siteName: 'Myrmecophoto',
-    theme: '#e72c27'
-  }
-})
-
-useSeoMeta({
-  ogTitle: 'Articles - Myrmécologie et Macro-photographie | Myrmecophoto',
-  ogDescription: "Découvrez nos articles sur les techniques de macro-photographie et la myrmécologie. Galerie de macrophotographies de fourmis (Formicidae).",
-  ogImage: 'https://myrmecophoto.fr/img/home-wall-1.avif',
-  ogImageAlt: 'Myrmecophoto - Articles sur la myrmécologie',
-  twitterCard: 'summary_large_image',
-})
-
 const { data: articles } = await useAsyncData('articles', () => {
   return queryCollection('content').order('date', 'DESC').all()
+})
+
+// Fallback SSG-safe pour computed
+const articleCount = computed(() => articles?.value?.length || 0)
+
+useSeoConfig({
+  title: 'Articles myrmécologie & macro-photographie | Myrmecophoto',
+  description:
+    "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
+  ogImageProps: {
+    subtitle: 'Articles & Guides',
+    description: `${articleCount.value} articles sur la macro-photographie et la myrmécologie`,
+  },
+  customMeta: {
+    ogImageAlt: 'Myrmecophoto - Articles sur la myrmécologie',
+  }
 })
 </script>
 

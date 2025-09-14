@@ -8,6 +8,15 @@
 export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content'],
 
+  linkChecker: {
+    // Ignore link validation rules that conflict with French content
+    skipInspections: [
+      'no-non-ascii-chars',
+      'no-baseless',
+      'no-uppercase-chars',
+    ],
+  },
+
   content: {
     experimental: {
       sqliteConnector: 'native',
@@ -42,11 +51,15 @@ export default defineNuxtConfig({
   runtimeConfig: {
     emailContact: '', // use NUXT_EMAIL_CONTACT environment variable
     public: {
-      baseURL: 'https://myrmecophoto.fr',
+      baseURL: process.env.NUXT_SITE_URL || 'https://myrmecophoto.fr',
     },
   },
 
   vite: {
+    optimizeDeps: {
+      include: ['photoswipe', 'image-size', '@prisma/client', '@nuxt/content'],
+      exclude: ['@nuxtjs/seo'],
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -129,21 +142,35 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-12-01',
 
   site: {
-    url: 'https://myrmecophoto.fr',
-    name: 'Myrmecophoto - Macrophotographie et Élevage de Fourmis | Myrmécologie et Biodiversité',
-    description: `Découvrez Myrmecophoto, le site dédié à la macrophotographie des fourmis, à leur élevage et à l'exploration de la myrmécologie. Articles, guides pratiques, et comparatifs de matériel pour capturer la biodiversité.`,
+    url: process.env.NUXT_SITE_URL || 'https://myrmecophoto.fr',
+    name: process.env.NUXT_SITE_NAME || 'Myrmecophoto',
+    description:
+      "Myrmecophoto : site de macrophotographie scientifique de fourmis françaises. Identification taxonomique des espèces, techniques photo macro, articles myrmécologie et guides d'équipement pour photographier les Formicidae.",
     defaultLocale: 'fr',
+    author: process.env.NUXT_SITE_AUTHOR || 'Cédric Ruiu',
   },
 
   ogImage: {
     enabled: true,
     defaults: {
-      component: 'Home',
-      props: {
-        siteName: 'Myrmecophoto',
-        theme: '#e72c27',
+      component: 'NuxtSeo',
+      width: 1200,
+      height: 630,
+    },
+    compatibility: {
+      // disable chromium dependency for prerendering (skips the chromium install in CIs)
+      prerender: {
+        chromium: false,
+        resvg: false,
+        sharp: false,
+        'css-inline': false,
       },
     },
+  },
+
+  seo: {
+    automaticDefaults: true,
+    redirectToCanonicalSiteUrl: true,
   },
 
   // schemaOrg: {

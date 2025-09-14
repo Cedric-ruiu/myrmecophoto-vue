@@ -31,37 +31,29 @@ for (const [index, specie] of species.value?.entries()) {
 if (specieId.value === -1)
   throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
 
-const scientificName = `${species.value[specieId.value].genus.name} ${species.value[specieId.value].name}`
-
-useHead({
-  title: scientificName,
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
-    },
-  ],
+// Fallbacks SSG-safe pour données taxonomiques
+const currentSpecies = computed(() => species.value?.[specieId.value])
+const scientificName = computed(() => {
+  if (!currentSpecies.value) return 'Taxon Myrmecophoto'
+  return `${currentSpecies.value.genus.name} ${currentSpecies.value.name}`
+})
+const taxonomicDescription = computed(() => {
+  if (!currentSpecies.value) return 'Macrophotographie taxonomique de fourmi'
+  return `Macrophotographies taxonomiques de ${scientificName.value} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`
 })
 
-// Configuration Open Graph pour taxon
-defineOgImage({
-  component: 'Taxon',
-  props: {
-    scientificName,
-    genus: routeGenus,
-    species: routeSpecie,
-    siteName: 'Myrmecophoto',
-    theme: '#e72c27'
+useSeoConfig({
+  title: scientificName.value,
+  description: taxonomicDescription.value,
+  ogImageProps: {
+    subtitle: currentSpecies.value?.genus.subfamily.name || 'Formicidae',
+    description: currentSpecies.value
+      ? `${currentSpecies.value.researcher.name} ${currentSpecies.value.year || ''}`
+      : 'Taxon scientifique',
+  },
+  customMeta: {
+    ogImageAlt: `${scientificName.value} - Vue taxonomique`,
   }
-})
-
-useSeoMeta({
-  ogTitle: `${scientificName} - Photos taxonomiques`,
-  ogDescription: `Macrophotographies taxonomiques de ${scientificName} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`,
-  ogImage: `https://myrmecophoto.fr/img/taxons/${routeGenus}-${routeSpecie}/${routeGenus}-${routeSpecie}-thumbnail.jpg`,
-  ogImageAlt: `${scientificName} - Vue taxonomique`,
-  twitterCard: 'summary_large_image',
 })
 
 import { onMounted, onUnmounted, ref } from 'vue'
