@@ -5,6 +5,14 @@ const { data: emailEncrypted } = await useFetch(
   '/api/getEncryptedEmailContact',
   { key: 'emailEncrypted' },
 )
+
+// Analytics privacy-friendly
+const { initAnalytics } = useAnalytics()
+
+// Initialize analytics on client-side
+onMounted(() => {
+  initAnalytics()
+})
 </script>
 
 <template>
