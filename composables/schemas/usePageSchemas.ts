@@ -44,8 +44,8 @@ export const usePageSchemas = () => {
         description: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Collection taxonomique, articles spécialisés et guides techniques.',
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: 'https://myrmecophoto.fr/img/home-wall-1.avif',
-          caption: 'Collection de macrophotographies de fourmis'
+          url: 'https://myrmecophoto.fr/img/home-wall.avif',
+          caption: 'Collection de macrophotographies de fourmis',
         },
         mainEntity: {
           '@type': 'Collection',

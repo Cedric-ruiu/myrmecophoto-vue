@@ -13,8 +13,8 @@ useSeoConfig({
     description:
       'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
   },
-  ogImageUrl: '/img/home-wall-1.avif',
-  twitterImage: '/img/home-wall-1.avif',
+  ogImageUrl: '/img/home-wall.avif',
+  twitterImage: '/img/home-wall.avif',
   customMeta: {
     ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
   },
@@ -36,35 +36,39 @@ useSeoConfig({
     </div>
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple35mm.jpg" /> -->
-        <img
-          src="/img/Camponotus-sylvaticus-Gyne-F0075-000.avif"
-          alt="photo 1"
+        <Picture
+          src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
+          alt="Camponotus sylvaticus - Gyne (reine) en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/comparaison50mm.jpg" /> -->
-        <img
+        <Picture
+          src="taxons/myrmecia-forceps/myrmecia-forceps-ouvriere-face-f0089.avif"
+          alt="Myrmecia forceps - Ouvrière en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
-          src="/img/Myrmecia-forceps-Ouvriere-F0089-000.avif"
-          alt="Photo 2"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple50mm.jpg" /> -->
-        <img
+        <Picture
+          src="taxons/formica-polyctena/formica-polyctena-ouvriere-face-f0067.avif"
+          alt="Formica polyctena - Ouvrière en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
-          src="/img/Formica-polyctena-Ouvriere-F0067-00.avif"
-          alt="Photo 3"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/PICT3426c.jpg" /> -->
-        <img
+        <Picture
+          src="home-wall.avif"
+          alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
           class="w-full h-full object-cover"
-          src="/img/home-wall-1.avif"
-          alt="Photo 4"
+          loading="eager"
+          sizes="100vw"
         />
       </div>
       <div class="[ o-hero__picture6EdgesShadow ] absolute w-full left-0" />

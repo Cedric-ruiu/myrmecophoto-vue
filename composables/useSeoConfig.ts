@@ -56,7 +56,7 @@ interface SeoConfigOptions {
   /**
    * Static Open Graph image URL (OPTIONAL)
    * If not provided, uses automatic NuxtSeo generation
-   * @example 'https://myrmecophoto.fr/img/home-wall-1.avif'
+   * @example 'https://myrmecophoto.fr/img/home-wall.avif'
    */
   ogImageUrl?: string
 
