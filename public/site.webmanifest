@@ -1,7 +1,22 @@
 {
-  "name": "Myrmecophoto",
+  "name": "Myrmecophoto - Macrophotographie de fourmis",
   "short_name": "Myrmeco",
+  "description": "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#e72c27",
+  "background_color": "#0c0a0a",
+  "categories": ["education", "photography", "science"],
+  "lang": "fr",
   "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -14,8 +29,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#e72c27",
-  "background_color": "#0c0a0a",
-  "display": "standalone"
+  ]
 }

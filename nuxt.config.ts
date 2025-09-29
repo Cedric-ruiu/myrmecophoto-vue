@@ -44,7 +44,15 @@ export default defineNuxtConfig({
         },
         { rel: 'manifest', href: '/site.webmanifest' },
       ],
-      meta: [{ name: 'apple-mobile-web-app-title', content: 'Myrmecophoto' }],
+      meta: [
+        { name: 'apple-mobile-web-app-title', content: 'Myrmecophoto' },
+        { name: 'theme-color', content: '#e72c27' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
+        {
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: 'black-translucent',
+        },
+      ],
     },
   },
 
