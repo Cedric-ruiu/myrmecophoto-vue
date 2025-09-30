@@ -1,13 +1,12 @@
 {
   "css.validate": false,
   "scss.validate": false,
-  "prettier.enable": true,
+  "prettier.enable": false,
   "eslint.useFlatConfig": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "stylelint.validate": ["css", "scss", "vue", "html"],
   "cSpell.ignorePaths": [
@@ -71,9 +70,6 @@
     "truncatus",
     "unocss"
   ],
-  "[scss, vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "mdc.enableFormatting": true,
   "[md]": {
     "editor.tabSize": 2,
