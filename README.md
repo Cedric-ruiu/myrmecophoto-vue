@@ -1,30 +1,30 @@
-Work in progress to the new **Myrmecophoto** website, continuous deployment at https://myrmecophoto.netlify.app/. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
+Work in progress to the new **Myrmecophoto** website for myrmecology and macro photography, continuous deployment at https://myrmecophoto.netlify.app/. Static site generation with optimized image handling. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b121a494-a2dc-474d-ba33-b37ecebee4ad/deploy-status)](https://app.netlify.com/sites/myrmecophoto/deploys)
 
-## Setup
+🔗 **Live**: https://myrmecophoto.netlify.app/
 
-Require Node v20, copy/paste `.env` from `.env.local` and exec `yarn`
-
-### Note about Windows environnement
-
-I use `winget` to manage package on windows. And `fnm` to manage node versions.
+## Quick Start
 
 ```bash
-# Start session coding on win10
-fnm env --use-on-cd | Out-String | Invoke-Expression
-fnm use
-```
+# Requirements: Node v22.19
+cp .env.example .env
+yarn
 
-## Development Server
-
-```bash
 # Start the development server on http://localhost:3000
 yarn dev
 
 # Test SSG and serve at http://localhost:3000
 yarn serve-generate
 ```
+
+## Tech Stack
+
+- **Nuxt 4** + TypeScript
+- **Prisma** + SQLite
+- **UnoCSS** + SCSS
+- **PhotoSwipe** for galleries
+- **Static generation** (Netlify hosting)
 
 ## Database
 
@@ -40,18 +40,15 @@ erDiagram
     String url  "nullable"
     }
 
-
   country {
     Int id PK
     String name
     }
 
-
   form {
     Int id PK
     String name
     }
-
 
   genus {
     Int id PK
@@ -59,13 +56,11 @@ erDiagram
     String description  "nullable"
     }
 
-
   material {
     Int id PK
     String name
     String description  "nullable"
     }
-
 
   researcher {
     Int id PK
@@ -73,14 +68,12 @@ erDiagram
     String wiki_url  "nullable"
     }
 
-
   specie {
     Int id PK
     Int year
     String name
     String description  "nullable"
     }
-
 
   specimen {
     Int id PK
@@ -91,13 +84,11 @@ erDiagram
     String description  "nullable"
     }
 
-
   subfamily {
     Int id PK
     String name  "nullable"
     String description  "nullable"
     }
-
 
   taxonomy_picture {
     Int id PK
@@ -176,10 +167,7 @@ yarn init-db
 
    Add entries in `taxonomy_picture` table linking to specimen
 
-5. **Regenerate image manifest**:
-   ```bash
-   node scripts/generate-image-manifest.mjs
-   ```
+5. **Start development**: `yarn dev` (manifest regenerates automatically)
 
 ### Adding New Species
 
