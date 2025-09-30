@@ -48,7 +48,7 @@ useSeoConfig({
           class="rounded-md w-full h-full object-cover"
           :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
           :alt="`Image de l'article : ${article.title}`"
-      /></NuxtLink>
+      ></NuxtLink>
       <NuxtLink :to="article.path" class="prose prose-gray dark:prose-invert">
         <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
         <p class="line-clamp-5 mb-2 mt-2">{{ article.description }}</p>
@@ -59,8 +59,8 @@ useSeoConfig({
       </NuxtLink>
     </article>
     <!-- The cursor elements -->
-    <div class="cursor cursor--small"></div>
-    <canvas class="cursor cursor--canvas" resize></canvas>
+    <div class="cursor cursor--small"/>
+    <canvas class="cursor cursor--canvas" resize/>
   </div>
 </template>
 

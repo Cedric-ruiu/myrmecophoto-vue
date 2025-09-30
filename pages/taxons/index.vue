@@ -57,9 +57,9 @@ useSeoConfig({
           <template v-for="specie in genus.specie">
             <SpecieCard
               v-if="specie._count.specimen"
+              :id="specie.id"
               :key="specie.id"
               class="not-prose"
-              :id="specie.id"
               :taxon="`${genus.name} ${specie.name}`"
               :researcher-name="specie.researcher.name"
               :year-discover="specie.year"

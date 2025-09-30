@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
+
 let [routeGenus, routeSpecie] = useRoute().params.slug[0].split('-', 2)
 
 if (!routeGenus || !routeSpecie)
@@ -68,10 +72,6 @@ useSeoConfig({
     },
   },
 })
-
-import { onMounted, onUnmounted, ref } from 'vue'
-import PhotoSwipeLightbox from 'photoswipe/lightbox'
-import 'photoswipe/style.css'
 
 const lightboxes = ref<PhotoSwipeLightbox[]>([])
 
@@ -154,7 +154,7 @@ onUnmounted(() => {
           :key="picture.id"
           :picture="picture"
           :specimen="specimen"
-          :specieId="specieId"
+          :specie-id="specieId"
         />
       </div>
       <div

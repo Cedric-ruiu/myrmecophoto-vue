@@ -1,4 +1,8 @@
-import { usePageSchemas, type PageType, type PageSchemaOptions } from './schemas/usePageSchemas'
+import {
+  usePageSchemas,
+  type PageType,
+  type PageSchemaOptions,
+} from './schemas/usePageSchemas'
 import type { SchemaFactoryOptions } from './useSchemaFactory'
 
 /**
@@ -256,7 +260,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
     pageType,
     title,
     description,
-    ...schemaData
+    ...schemaData,
   })
 
   return {

@@ -57,7 +57,7 @@ const imageData = computed(() => {
         type="image/avif"
         :srcset="imageData.avifSrcset"
         :sizes="sizes"
-      />
+      >
       <img
         :src="imageData.finalSrc"
         :alt="alt"
@@ -66,7 +66,7 @@ const imageData = computed(() => {
         :loading="loading"
         :decoding="decoding"
         class="block w-full h-auto mx-auto"
-      />
+      >
     </picture>
     
     <!-- Fallback if image data not found -->

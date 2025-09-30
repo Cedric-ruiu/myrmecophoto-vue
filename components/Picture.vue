@@ -20,7 +20,7 @@ const imageData = useImageData(props.src)
       type="image/avif"
       :srcset="imageData.avifSrcset"
       :sizes="sizes"
-    />
+    >
     <img
       :src="imageData.fallback?.url || imageData.avif[imageData.avif.length - 1]?.url"
       :alt="alt"
@@ -29,7 +29,7 @@ const imageData = useImageData(props.src)
       :loading="loading"
       decoding="async"
       :class="class"
-    />
+    >
   </picture>
   
   <!-- Fallback: use original src if no optimized data available -->
@@ -40,5 +40,5 @@ const imageData = useImageData(props.src)
     :loading="loading"
     decoding="async"
     :class="class"
-  />
+  >
 </template>

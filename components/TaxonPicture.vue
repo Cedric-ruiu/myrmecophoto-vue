@@ -42,7 +42,7 @@ const imageData = useTaxonImageData(
         :width="imageData.thumbnailWidth"
         :height="imageData.thumbnailHeight"
         sizes="(max-width: 400px) 100vw, 300px"
-      />
+      >
       <img
         class="w-auto max-h-40 rounded-md"
         :src="imageData.thumbnailSrc"
@@ -51,7 +51,7 @@ const imageData = useTaxonImageData(
         :height="imageData.thumbnailHeight"
         loading="lazy"
         decoding="async"
-      />
+      >
     </picture>
   </a>
 </template>

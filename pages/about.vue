@@ -64,10 +64,10 @@ function buildErrorMessage(mess: string) {
 <template>
   <!-- Hidden form for Netlify detection during build -->
   <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-    <textarea name="message"></textarea>
-    <input name="bot-field" />
+    <input type="text" name="name" >
+    <input type="email" name="email" >
+    <textarea name="message"/>
+    <input name="bot-field" >
   </form>
 
   <div class="flex flex-col md:flex-row justify-between gap-8 w-full">
@@ -83,7 +83,7 @@ function buildErrorMessage(mess: string) {
         <img
           src="/img/cedric-ruiu-avatar.webp"
           alt="Image avatar de Cédric Ruiu"
-        />
+        >
         <p>
           <i>MyrmecoPhoto :</i> une fenêtre ouverte sur le monde des fourmis et
           de leur diversité à travers l'objectif de la macro-photographie. Je
@@ -126,7 +126,7 @@ function buildErrorMessage(mess: string) {
             href="https://www.linkedin.com/in/cedric-ruiu/"
             alt="Page LinkedIn de Cédric Ruiu"
             class="text-gradient-primary"
-            ><i class="i-fa6-brands-linkedin"></i>
+            ><i class="i-fa6-brands-linkedin"/>
             <strong> LinkedIn -</strong></a
           >
           Visitez mon profil.
@@ -137,7 +137,7 @@ function buildErrorMessage(mess: string) {
             href="https://github.com/Cedric-ruiu/"
             alt="Page LinkedIn de Cédric Ruiu"
             class="text-gradient-primary"
-            ><i class="i-fa6-brands-github"></i> <strong>GitHub -</strong></a
+            ><i class="i-fa6-brands-github"/> <strong>GitHub -</strong></a
           >
           Découvrez mes projets sur GitHub, avec tout le code source de
           Myrmecophoto.
@@ -151,24 +151,24 @@ function buildErrorMessage(mess: string) {
 
         <div class="p-4 w-full mx-auto bg-stone-900 rounded">
           <div v-if="formResponse">
-            <p></p>
+            <p/>
             {{ formResponse }}
             <p><MailTo :email-encrypted="emailEncrypted?.data" /></p>
           </div>
           <form
             v-else
-            @submit="handleSubmit"
             data-netlify="true"
             netlify-honeypot="bot-field"
             name="contact"
             method="POST"
             action="/"
+            @submit="handleSubmit"
           >
-            <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="form-name" value="contact" >
             <div style="display: none">
               <label
                 >Don't fill this out if you're human: <input name="bot-field"
-              /></label>
+              ></label>
             </div>
 
             <div class="mb-4">
@@ -176,13 +176,13 @@ function buildErrorMessage(mess: string) {
                 >Nom:</label
               >
               <input
-                type="text"
                 id="name"
-                name="name"
                 v-model="form.name"
+                type="text"
+                name="name"
                 required
                 class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
-              />
+              >
             </div>
 
             <div class="mb-4">
@@ -190,13 +190,13 @@ function buildErrorMessage(mess: string) {
                 >Email:</label
               >
               <input
-                type="email"
                 id="email"
-                name="email"
                 v-model="form.email"
+                type="email"
+                name="email"
                 required
                 class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
-              />
+              >
             </div>
 
             <div class="mb-4">
@@ -205,12 +205,12 @@ function buildErrorMessage(mess: string) {
               >
               <textarea
                 id="message"
-                name="message"
                 v-model="form.message"
+                name="message"
                 required
                 class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
                 rows="4"
-              ></textarea>
+              />
             </div>
 
             <div>

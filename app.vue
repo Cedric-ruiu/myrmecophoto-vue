@@ -14,7 +14,7 @@ const { data: species, refresh: refreshSpecies } = await useFetch('/api/getSpeci
   lazy: true,
   default: () => [],
   // Ne pas exécuter le fetch si pas nécessaire côté serveur
-  skip: () => !needsTaxonomicData.value && process.server
+  skip: () => !needsTaxonomicData.value && import.meta.server
 })
 
 const { data: subfamilies, refresh: refreshSubfamilies } = await useFetch('/api/getTaxa', {
@@ -23,12 +23,12 @@ const { data: subfamilies, refresh: refreshSubfamilies } = await useFetch('/api/
   lazy: true,
   default: () => [],
   // Ne pas exécuter le fetch si pas nécessaire côté serveur
-  skip: () => !needsTaxonomicData.value && process.server
+  skip: () => !needsTaxonomicData.value && import.meta.server
 })
 
 // Watch pour déclencher le fetch lors des changements de route
 watch(needsTaxonomicData, (newValue) => {
-  if (newValue && process.client) {
+  if (newValue && import.meta.client) {
     // Déclencher le fetch des données seulement si nécessaire
     if (!species.value?.length) {
       refreshSpecies()

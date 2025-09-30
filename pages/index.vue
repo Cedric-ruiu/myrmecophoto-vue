@@ -29,7 +29,7 @@ useSeoConfig({
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
       <h2 class="[ o-hero__baselineSubtitle ] text-black">
-        Macro-photographies<br />des fourmis
+        Macro-photographies<br >des fourmis
       </h2>
     </div>
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">

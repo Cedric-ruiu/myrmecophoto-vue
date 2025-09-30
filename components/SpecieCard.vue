@@ -37,7 +37,7 @@ const imageData = computed(() => {
         :width="imageData.thumbnailWidth"
         :height="imageData.thumbnailHeight"
         sizes="(max-width: 400px) 100vw, 300px"
-      />
+      >
       <img
         class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
         :src="imageData.thumbnailSrc"
@@ -46,7 +46,7 @@ const imageData = computed(() => {
         :height="imageData.thumbnailHeight"
         loading="lazy"
         decoding="async"
-      />
+      >
     </picture>
     <!-- <img
       class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"

@@ -31,7 +31,7 @@ const imageData = useArticleImageData('', props.src)
         type="image/avif"
         :srcset="imageData.avifSrcset"
         :sizes="sizes"
-      />
+      >
       <img
         :src="imageData.finalSrc"
         :alt="alt"
@@ -40,7 +40,7 @@ const imageData = useArticleImageData('', props.src)
         :loading="loading"
         :decoding="decoding"
         class="block w-full h-auto mx-auto"
-      />
+      >
     </picture>
     <figcaption
       v-if="$slots.default || caption"
