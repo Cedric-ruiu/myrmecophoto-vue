@@ -14,9 +14,10 @@ const route = useRoute()
         Myrmeco<span class="font-700 text-gradient-primary">photo</span>
       </NuxtLink>
       <nav
+        id="main-nav-header"
         :class="{ hidden: !open }"
         class="pl-2.5 sm:pl-0 order-3 basis-full sm:order-2 sm:basis-auto sm:flex flex-col sm:flex-row"
-        aria-label="Main Navigation"
+        aria-label="Navigation principale"
       >
         <ul
           class="[ o-header__nav ] py-5 sm:py-0 text-sm sm:text-right uppercase sm:items-center sm:inline-flex"
@@ -30,10 +31,11 @@ const route = useRoute()
         type="button"
         :class="{ on: open }"
         class="[ o-header__menuBar ] relative box-content p-0 sm:hidden"
-        role="button"
         aria-controls="main-nav-header"
-        aria-expanded="false"
+        :aria-expanded="open"
+        aria-label="Ouvrir le menu de navigation"
         @click="open = !open"
+        @keydown.escape="open = false"
       />
     </div>
   </header>
@@ -66,7 +68,6 @@ $menu-bar-width: 25px !default;
 
     width: $menu-bar-width;
     height: $menu-bar-height;
-
     border-top: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;
     border-right: $soft-touch solid $color-layout;
     border-bottom: #{$soft-touch + $menu-bar-height * 2} solid $color-layout;

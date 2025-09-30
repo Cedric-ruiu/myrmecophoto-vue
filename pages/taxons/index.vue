@@ -1,17 +1,45 @@
 <script setup lang="ts">
-useHead({
-  title:
-    'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
-    },
-  ],
+const { data: subfamilies } = useNuxtData('taxa')
+const { data: species } = useNuxtData('species')
+
+// Fallbacks SSG-safe pour computed dynamiques
+const speciesCount = computed(() => {
+  if (!subfamilies?.value) return 0
+  return subfamilies.value.reduce(
+    (total, subfamily) =>
+      total +
+      subfamily.genus.reduce(
+        (genusTotal, genus) =>
+          genusTotal +
+          genus.specie.filter((specie) => specie._count.specimen > 0).length,
+        0,
+      ),
+    0,
+  )
 })
 
-const { data: subfamilies } = useNuxtData('taxa')
+const subfamilyCount = computed(() => subfamilies?.value?.length || 0)
+
+useSeoConfig({
+  title: 'Collection taxonomique - Fourmis de France | Myrmecophoto',
+  description:
+    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+  ogImageProps: {
+    subtitle: 'Collection Taxonomique',
+    description: `${speciesCount.value} espèces de fourmis documentées dans ${subfamilyCount.value} sous-familles`,
+  },
+  customMeta: {
+    ogImageAlt: 'Myrmecophoto - Collection taxonomique de fourmis',
+  },
+  pageType: 'taxon-list',
+  schemaData: {
+    collection: {
+      itemCount: speciesCount.value,
+      collectionType: 'taxons',
+      subfamilies: subfamilies.value,
+    },
+  },
+})
 </script>
 
 <template>
@@ -20,7 +48,7 @@ const { data: subfamilies } = useNuxtData('taxa')
       Macro Photographie Taxonomique
     </h1>
     <div v-for="subfamily in subfamilies" :key="subfamily.id">
-      <div class="prose">
+      <div class="prose prose-gray dark:prose-invert">
         <h2>{{ subfamily.name }}</h2>
         <p>{{ subfamily.description }}</p>
       </div>
@@ -35,6 +63,8 @@ const { data: subfamilies } = useNuxtData('taxa')
               :taxon="`${genus.name} ${specie.name}`"
               :researcher-name="specie.researcher.name"
               :year-discover="specie.year"
+              :species="species"
+              :genus="genus"
             />
           </template>
         </template>

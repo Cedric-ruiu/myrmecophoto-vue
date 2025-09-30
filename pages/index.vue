@@ -3,16 +3,20 @@ definePageMeta({
   layout: 'full',
 })
 
-useHead({
+useSeoConfig({
   title:
     'Myrmecophoto : macro photographie, taxonomie & articles sur les fourmis',
-  meta: [
-    {
-      name: 'description',
-      content:
-        "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
-    },
-  ],
+  description:
+    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+  ogImageProps: {
+    subtitle: 'Macrophotographie et Myrmécologie',
+    description:
+      'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
+  },
+  customMeta: {
+    ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
+  },
+  pageType: 'homepage',
 })
 </script>
 
@@ -25,40 +29,44 @@ useHead({
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
       <h2 class="[ o-hero__baselineSubtitle ] text-black">
-        Macro-photographies de fourmis
+        Macro-photographies<br >des fourmis
       </h2>
     </div>
     <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple35mm.jpg" /> -->
-        <img
-          src="/img/articles/comparatif-35-50/exemple35mm.jpg"
-          alt="photo 1"
+        <Picture
+          src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
+          alt="Camponotus sylvaticus - Gyne (reine) en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/comparaison50mm.jpg" /> -->
-        <img
+        <Picture
+          src="taxons/myrmecia-forceps/myrmecia-forceps-ouvriere-face-f0089.avif"
+          alt="Myrmecia forceps - Ouvrière en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
-          src="/img/articles/comparatif-35-50/comparaison50mm.jpg"
-          alt="Photo 2"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture4Edges ] basis-full">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/comparatif-35-50/exemple50mm.jpg" /> -->
-        <img
+        <Picture
+          src="taxons/formica-polyctena/formica-polyctena-ouvriere-face-f0067.avif"
+          alt="Formica polyctena - Ouvrière en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
-          src="/img/articles/comparatif-35-50/exemple50mm.jpg"
-          alt="Photo 3"
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
-        <!-- <nuxt-img class="w-full h-full object-cover" src="/img/articles/PICT3426c.jpg" /> -->
-        <img
+        <Picture
+          src="home-wall.avif"
+          alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
           class="w-full h-full object-cover"
-          src="/img/PICT3426c.jpg"
-          alt="Photo 4"
+          loading="eager"
+          sizes="100vw"
         />
       </div>
       <div class="[ o-hero__picture6EdgesShadow ] absolute w-full left-0" />
@@ -69,7 +77,8 @@ useHead({
 <style lang="scss">
 :root {
   --hero-font-size: calc(5000vw / 1080);
-  --hero-height: calc(var(--hero-font-size) * 3);
+  --subtitle-font-size: calc(4000vw / 1080);
+  --hero-height: calc((5000vw / 1080) * 3);
   --hero-gap: 20px;
 }
 
@@ -81,28 +90,44 @@ useHead({
     height: calc(100vh - var(--header-height));
 
     &__baseline {
-      @include media('>=sm') {
-        font-size: var(--hero-font-size);
-      }
-
-      font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
-        Arial, sans-serif;
-      font-size: 7vw;
+      font-family:
+        Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
+        sans-serif;
     }
 
     &__baselineTitle {
+      margin-top: 50px;
+      font-size: 7vw;
       animation: title-appear 2s ease-in-out both 0.5s;
+
+      @include media('>=sm') {
+        margin-top: 150px;
+        font-size: calc(8000vw / 1080);
+      }
+
+      @include media('>=md') {
+        font-size: calc(8000vw / 1080);
+      }
+
+      @include media('>=lg') {
+        font-size: calc(6000vw / 1080);
+      }
     }
 
     &__baselineSubtitle {
-      @include media('>=sm') {
-        font-size: 3.5vw;
-      }
+      margin-top: 20px;
 
-      font-size: 4.7vw;
+      font-size: calc(6000vw / 1080);
+      line-height: 1.1em;
+
       animation: subtitle-appear 2s ease-in-out both 1s;
 
       -webkit-text-stroke: 0.03em white;
+
+      @include media('>=lg') {
+        margin-top: 0.3em;
+        font-size: calc(3000vw / 1080);
+      }
     }
 
     &__pictures {
@@ -173,7 +198,7 @@ useHead({
 
       height: calc(var(--hero-gap) + var(--hero-height));
 
-      background-color: black;
+      background-color: $color-layout;
       clip-path: polygon(
         50% var(--hero-height),
         100% 0,

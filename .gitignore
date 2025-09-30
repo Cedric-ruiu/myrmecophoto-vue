@@ -1,5 +1,6 @@
 node_modules
 prisma/ERD.md
+composables/image-manifest.json
 *.log*
 .nuxt
 .nitro
@@ -7,6 +8,15 @@ prisma/ERD.md
 .output
 .env
 dist
+.data
 
 # Local Netlify folder
 .netlify
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

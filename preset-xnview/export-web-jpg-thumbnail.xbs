@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="export-web-jpg-thumbnail">
+    <Resize mode="1" width="300" height="0" unit="0" ratio="true" orientation="false" enlarge="1" resample="7" gamma_correct="false"/>
+    <Output folder="C:/Users/cedri/Pictures" filename="{Filename}-thumbnail" case="1" startIndex="1" format="JPEG">
+        <Options overwrite="1" orgDate="false" keepMeta="false" keepICC="false" keepFolder="true" checkFilesize="true" keepParentFolder="true" keepExtension="false" delOrg="false" multipage="false" allPages="false" openExplorer="false" beep="true" openBrowser="false" clearItems="false"/>
+        <JPEG useJPEGli="false" quality="70" progressive="false" optimizeHuffman="true" rebuildThumb="true" orgQuality="false" DCTMethod="2" subSampling="2" smoothFactor="0"/>
+    </Output>
+</XnView_script>

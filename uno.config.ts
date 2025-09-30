@@ -2,20 +2,24 @@
 import {
   defineConfig,
   presetTypography,
-  presetUno,
   presetWebFonts,
   transformerDirectives,
-  transformerVariantGroup,
 } from 'unocss'
 
 import presetIcons from '@unocss/preset-icons'
+import presetWind4 from '@unocss/preset-wind4'
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetWind4({
+      preflights: {
+        reset: true,
+      },
+      dark: 'media', // Active le mode dark basé sur prefers-color-scheme
+    }),
     presetTypography(),
     presetWebFonts({
-      provider: 'google', // default provider
+      provider: 'bunny', // default provider
       fonts: {
         // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400i|Quicksand:400,500,700" rel="stylesheet">
         title: [
@@ -42,19 +46,21 @@ export default defineConfig({
       collections: {
         fa6: {
           prefix: 'i-fa6',
-          icons: ['brands-linkedin', 'brands-github'],
+          icons: 'brands-linkedin brands-github',
         },
       },
     }),
   ],
-  transformers: [transformerDirectives(), transformerVariantGroup()],
+  outputToCssLayers: true,
+  transformers: [transformerDirectives()],
   theme: {
-    breakpoints: {
+    breakpoint: {
       xs: '375px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
       xl: '1280px',
+      xxl: '1600px',
     },
   },
 })

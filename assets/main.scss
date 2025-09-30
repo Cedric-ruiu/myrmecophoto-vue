@@ -1,8 +1,18 @@
-@import './core';
+@use './core';
+
+:root {
+  --color-primary: #{core.$color-primary};
+  --color-secondary: #{core.$color-secondary};
+  --color-layout: #{core.$color-layout};
+}
+
+html {
+  background-color: var(--color-layout);
+}
 
 body {
+  container-type: inline-size;
   color: #fff;
-  background-color: #000;
 }
 
 .heading-1 {
@@ -10,11 +20,11 @@ body {
 }
 
 .gradient-primary {
-  @include gradient-primary();
+  @include core.gradient-primary();
 }
 
 .text-gradient-primary {
-  @include gradient-primary();
+  @include core.gradient-primary();
 
   background-clip: text;
 
@@ -28,9 +38,12 @@ body {
 
   padding: 0 0 5px;
 
-  background-image: linear-gradient(#222, #000),
+  background-image:
+    linear-gradient(#222, core.$color-layout),
     linear-gradient(90deg, #e72c27 64.09%, #faa307 94.45%);
   background-clip: content-box, border-box;
+
+  transition: bottom ease 0.2s;
 
   @apply absolute w-full h-full rounded-md -bottom-px left-0;
 }

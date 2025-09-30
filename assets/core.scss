@@ -1,5 +1,39 @@
-@import './variables';
-@import 'include-media/dist/include-media';
+// Breakpoints
+
+// Define here all your breakpoints, choose the unit (rem|em|px) what you prefer like a dev frontend and not like end user
+// Values will be reset with $unit-default
+$breakpoints: (
+  xs: 375px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1600px,
+) !default;
+
+// Colors
+
+$color-primary: #e72c27; // hsl(1.56, 80%, 52.94%)
+$color-secondary: #faa307; // hsl(38.52, 96.05%, 50.39%)
+$color-layout: #0c0a0a; // hsl(0, 9.09%, 4.31%)
+
+// Gradients
+
+$gradient-primary: linear-gradient(
+  90deg,
+  rgba($color-primary, 1) 64.09%,
+  rgba($color-secondary, 1) 94.45%
+);
+
+// Animations / UX
+
+$anime-duration: 0.2s !default;
+$anime-ease: ease !default;
+$soft-touch: 10px !default; // standard space around element, better to touch
+
+@forward 'include-media/dist/include-media' with (
+  $breakpoints: $breakpoints !default
+);
 
 @mixin gradient-primary() {
   background: $gradient-primary;
