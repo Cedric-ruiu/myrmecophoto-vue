@@ -13,8 +13,6 @@ useSeoConfig({
     description:
       'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Taxonomie, identification et articles spécialisés.',
   },
-  ogImageUrl: '/img/home-wall.avif',
-  twitterImage: '/img/home-wall.avif',
   customMeta: {
     ogImageAlt: 'Myrmecophoto - Macrophotographies de fourmis',
   },

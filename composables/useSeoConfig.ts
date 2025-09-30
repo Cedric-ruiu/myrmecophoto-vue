@@ -217,10 +217,9 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ogLocale: 'fr_FR',
     ogSiteName: siteName,
     ogUrl: canonicalUrl,
-    ogImage:
-      ogImageUrl?.startsWith('http') ? ogImageUrl : 
-      ogImageUrl ? `${siteUrl}${ogImageUrl}` :
-      `${siteUrl}/__og-image__/image${route.path}.png`,
+    ogImage: ogImageUrl
+      ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
+      : `${siteUrl}/__og-image__/image${route.path}.png`,
 
     // Twitter Cards
     twitterCard: 'summary_large_image',
@@ -228,12 +227,11 @@ export function useSeoConfig(options: SeoConfigOptions) {
     twitterCreator: '@cedric_ruiu',
     twitterTitle: title,
     twitterDescription: description,
-    twitterImage:
-      twitterImage?.startsWith('http') ? twitterImage :
-      twitterImage ? `${siteUrl}${twitterImage}` :
-      ogImageUrl?.startsWith('http') ? ogImageUrl :
-      ogImageUrl ? `${siteUrl}${ogImageUrl}` :
-      `${siteUrl}/__og-image__/image${route.path}.png`,
+    twitterImage: twitterImage
+      ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage}`)
+      : ogImageUrl
+        ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
+        : `${siteUrl}/__og-image__/image${route.path}.png`,
 
     // Theme and appearance
     themeColor: '#e72c27',

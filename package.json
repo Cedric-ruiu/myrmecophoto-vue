@@ -24,6 +24,7 @@
     "@nuxt/eslint": "1.9.0",
     "@nuxtjs/seo": "3.2.2",
     "@prisma/client": "6.16.2",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/image-size": "0.8.0",
     "@unhead/vue": "2.0.17",
     "@unocss/nuxt": "66.5.2",

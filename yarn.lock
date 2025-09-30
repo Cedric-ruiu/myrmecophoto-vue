@@ -15758,6 +15758,7 @@ __metadata:
     "@nuxt/eslint": "npm:1.9.0"
     "@nuxtjs/seo": "npm:3.2.2"
     "@prisma/client": "npm:6.16.2"
+    "@resvg/resvg-js": "npm:^2.6.2"
     "@types/image-size": "npm:0.8.0"
     "@unhead/vue": "npm:2.0.17"
     "@unocss/nuxt": "npm:66.5.2"
