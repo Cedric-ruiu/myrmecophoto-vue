@@ -24,14 +24,14 @@ export default defineConfig({
         // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400i|Quicksand:400,500,700" rel="stylesheet">
         title: [
           {
-            name: 'Open Sans',
+            name: 'Open Sans:latin',
             weights: ['400'],
             italic: true,
           },
         ],
         text: [
           {
-            name: 'Quicksand',
+            name: 'Quicksand:latin',
             weights: ['400', '500', '700'],
           },
         ],
