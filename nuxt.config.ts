@@ -6,7 +6,7 @@
 // 2. Nitro 2.x has module resolution conflicts with Prisma Client
 // 3. SSG prerendering needs special handling for database client
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content'],
+  modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content', '@nuxt/eslint'],
 
   linkChecker: {
     // Ignore link validation rules that conflict with French content
