@@ -1,2 +1,45 @@
 [build]
-    publish = "dist/"
+publish = "dist/"
+
+# Security Headers
+[[headers]]
+for = "/*"
+
+[headers.values]
+# Security headers
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# HSTS (HTTP Strict Transport Security) - 1 year
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Cross-Origin isolation for enhanced security
+Cross-Origin-Embedder-Policy = "require-corp"
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Resource-Policy = "same-origin"
+
+# Content Security Policy for image-heavy scientific site
+Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+# Cache control for static assets
+[[headers]]
+for = "/img/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/_nuxt/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for HTML files
+[[headers]]
+for = "*.html"
+
+[headers.values]
+Cache-Control = "public, max-age=3600"
