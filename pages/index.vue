@@ -135,77 +135,94 @@ useSeoConfig({
     }
 
     &__picture4Edges {
+      // Three background images creating a wave pattern with angled top edges
+
       &:nth-child(1) {
+        // Left image: trapezoid with angled top-right edge
         clip-path: polygon(
-          0 0,
-          0 100%,
-          100% 100%,
-          100% calc(var(--hero-height) * 0.7)
+          0 0,                                // top left
+          0 100%,                             // bottom left
+          100% 100%,                          // bottom right
+          100% calc(var(--hero-height) * 0.7) // top right (angled)
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
       }
 
       &:nth-child(2) {
+        // Center image: rectangle shifted down by 70% hero-height
         height: calc(100% - 0.7 * var(--hero-height));
         margin-top: calc(0.7 * var(--hero-height));
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
       }
 
       &:nth-child(3) {
+        // Right image: trapezoid with angled top-left edge
         clip-path: polygon(
-          0 calc(var(--hero-height) * 0.7),
-          0 100%,
-          100% 100%,
-          100% 0
+          0 calc(var(--hero-height) * 0.7), // top left (angled)
+          0 100%,                           // bottom left
+          100% 100%,                        // bottom right
+          100% 0                            // top right
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
       }
 
       @media screen and (orientation: portrait) {
+        // Portrait: all shifted down by 2x hero-height to make room for hexagon
         height: calc(100% - 2 * var(--hero-height));
         margin-top: calc(2 * var(--hero-height));
       }
     }
 
     &__picture6Edges {
-      top: calc(var(--hero-height) - 2 * var(--hero-height));
+      // Position: vertically centered on hero (overflows top)
+      top: calc(var(--hero-height) - 2 * var(--hero-height)); // = -1 * hero-height
       height: calc(2 * var(--hero-height));
+
+      // Hexagonal shape: 6 points define the corners
+      // Top center point: (50%, hero-height)
+      // Top corners: (0,0) and (100%,0)
+      // Bottom corners: (0,hero-height) and (100%,hero-height)
+      // Bottom center point: (50%, 2*hero-height)
       clip-path: polygon(
-        50% calc(var(--hero-height)),
-        100% 0,
-        100% var(--hero-height),
-        50% calc(var(--hero-height) * 2),
-        0 var(--hero-height),
-        0 0
+        50% calc(var(--hero-height)),     // top center
+        100% 0,                           // top right
+        100% var(--hero-height),          // bottom right
+        50% calc(var(--hero-height) * 2), // bottom center
+        0 var(--hero-height),             // bottom left
+        0 0                               // top left
       );
       animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
       @media screen and (orientation: portrait) {
+        // Portrait: hexagon 2x taller
         height: calc(4 * var(--hero-height));
         clip-path: polygon(
-          50% calc(var(--hero-height)),
-          100% 0,
-          100% calc(var(--hero-height) * 3),
-          50% calc(var(--hero-height) * 4),
-          0 calc(var(--hero-height) * 3),
-          0 0
+          50% calc(var(--hero-height)),      // top center
+          100% 0,                            // top right
+          100% calc(var(--hero-height) * 3), // bottom right
+          50% calc(var(--hero-height) * 4),  // bottom center
+          0 calc(var(--hero-height) * 3),    // bottom left
+          0 0                                // top left
         );
       }
     }
 
     &__picture6EdgesShadow {
+      // Creates gap between hexagon and background images using inverted hexagon shape
       top: -1px; // hide line glitch
 
       height: calc(var(--hero-gap) + var(--hero-height));
 
       background-color: $color-layout;
+
+      // Inverted hexagon matching picture6Edges but with gap offset
       clip-path: polygon(
-        50% var(--hero-height),
-        100% 0,
-        100% var(--hero-gap),
-        50% calc(var(--hero-height) + var(--hero-gap)),
-        0 var(--hero-gap),
-        0 0
+        50% var(--hero-height),                         // top center
+        100% 0,                                         // top right
+        100% var(--hero-gap),                           // gap right
+        50% calc(var(--hero-height) + var(--hero-gap)), // bottom center
+        0 var(--hero-gap),                              // gap left
+        0 0                                             // top left
       );
 
       animation: picture-6-edges-appear 3s ease-in-out both 0s;
@@ -214,13 +231,6 @@ useSeoConfig({
         top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
       }
     }
-
-    // a nonagone try, but it's too complex and prefer save my night
-    // &__picture9EdgesShadow {
-    //   height: calc(100% + var(--hero-height));
-    //   top: calc(var(--hero-height) - 2 * var(--hero-height));
-    //   clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% var(--hero-height), 58% calc(var(--hero-height) * 1.7), 58% 100%, 42% 100%, 42% calc(var(--hero-height) * 1.7), 0 var(--hero-height), 0 0);
-    // }
   }
 }
 
