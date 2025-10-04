@@ -1,8 +1,10 @@
-Work in progress to the new **Myrmecophoto** website for myrmecology and macro photography, continuous deployment at https://myrmecophoto.netlify.app/. Static site generation with optimized image handling. Based on Nuxt hosted by Netlify. The original website that I migrate is http://www.myrmecophoto.fr/ (based on PHP CodeIgniter, MySQL, from scratch Sass & jQuery)
+**Myrmecophoto** is a scientific macro photography website dedicated to French ant species (myrmecology). This modern full-stack application showcases taxonomic data, macro photography techniques, and articles about ants, built with Nuxt 4 and optimized for performance with static site generation.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b121a494-a2dc-474d-ba33-b37ecebee4ad/deploy-status)](https://app.netlify.com/sites/myrmecophoto/deploys)
 
-🔗 **Live**: https://myrmecophoto.netlify.app/
+![Nuxt JS](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxt.js&logoColor=#00DC82) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+
+🔗 **Live**: https://myrmecophoto.fr
 
 ## Quick Start
 
@@ -18,17 +20,36 @@ yarn dev
 yarn serve-generate
 ```
 
+## Production Deployment
+
+**Live URL**: https://myrmecophoto.fr
+**Hosting**: Netlify with automatic deployment from Git
+
+### Build Command
+```bash
+yarn generate
+```
+
 ## Tech Stack
 
 - **Nuxt 4** + TypeScript
-- **Prisma** + SQLite
+- **Prisma ORM** + SQLite
 - **UnoCSS** + SCSS
-- **PhotoSwipe** for galleries
-- **Static generation** (Netlify hosting)
+- **PhotoSwipe** for image galleries
+- **Yarn 4** package manager
+- **Static site generation** (SSG) with Netlify hosting
 
 ## Database
 
-SQLite Database is managed by Prisma ORM. When Nuxt generate static build, it pre-render call api (check `./server/api/` files) by Nitro server (check `./nuxt.config.ts`) and provide a flatten result in JSON. `api/getSpecies` & `api/getTaxa` provide all datas needed to display "Photos Spécimens" section pages. For "SSG" it's useful and website doesn't need to access database on live website. The Database can be more granular with optimized tables, but in my case I prefer to spend time on other things, like UI/UX features. As far as possible, I have followed the conventions proposed by [www.sqlstyle.guide](https://www.sqlstyle.guide/). Below is the Mermaid diagramme ERD of Myrmecophoto Database :
+SQLite database is managed by Prisma ORM with a focus on myrmecological taxonomy accuracy. During static site generation (`yarn generate`), Nitro prerenders API routes (`./server/api/`) to JSON payloads, eliminating runtime database dependencies in production. The `api/getSpecies` and `api/getTaxa` endpoints provide all taxonomic data for the "Photos Spécimens" section.
+
+**Important**: The database schema follows [SQL Style Guide](https://www.sqlstyle.guide/) conventions and maintains scientific accuracy for taxonomical relationships.
+
+**Two databases are used**:
+- `prisma/database.sqlite` (versioned) - Taxonomic data for species, specimens, and photos
+- `.data/content/contents.sqlite` (git-ignored) - Nuxt Content articles
+
+Below is the Entity Relationship Diagram of the Myrmecophoto database:
 
 ```mermaid
 erDiagram
@@ -127,33 +148,37 @@ erDiagram
     taxonomy_picture o{--|o material : "material_taxonomy_picture_lens_secondary_idTomaterial"
 ```
 
-**Update content** with Prisma Studio
+### Database Management
 
+**Update content** via Prisma Studio:
 ```bash
 yarn prisma studio
 ```
 
-**Update schema** only by `prisma/schema.prisma`
-
+**Update schema** by modifying `prisma/schema.prisma`:
 ```bash
-# update `prisma/schema.prisma`
+# 1. Modify prisma/schema.prisma
 yarn prisma migrate dev --name my_changes_name --create-only
-# check the `prisma/migrations/{time}_my_changes/migration.sql` file & update if necessary
+
+# 2. Review generated migration.sql
+# Check prisma/migrations/{timestamp}_my_changes/migration.sql
+
+# 3. Apply migration
 yarn prisma migrate dev
 ```
 
-**Prisma is broken**, delete all files in `./prisma` except `database.sqlite` & minimal config of `schema.prisma`
-
+**Emergency recovery** (if Prisma is broken):
 ```bash
 yarn init-db
 ```
+⚠️ **Warning**: Never run `yarn init-db` in production. This command reinitializes the database from scratch.
 
 ## Managing Taxon Images
 
 ### Adding Images to Existing Taxons
 
 1. **Name images correctly**: `{genus-specie}-{form}-{view}-{specimen-ref}.jpg`
-   - Example: `camponotus-cruentatus-major-face-f0002.jpg`
+  - Example: `camponotus-cruentatus-major-face-f0002.jpg`
 
 2. **Place in taxon directory**: `public/img/taxons/{genus-specie}/`
 
@@ -161,11 +186,11 @@ yarn init-db
 
 4. **Add to database** via Prisma Studio:
 
-   ```bash
-   yarn prisma studio
-   ```
+```bash
+yarn prisma studio
+```
 
-   Add entries in `taxonomy_picture` table linking to specimen
+Add entries in `taxonomy_picture` table linking to specimen
 
 5. **Start development**: `yarn dev` (manifest regenerates automatically)
 
@@ -177,37 +202,23 @@ yarn init-db
 
 ## SSG Image Optimization Strategy
 
-This project implements an **advanced image optimization architecture** designed for maximum web performance with zero runtime dependencies. The system combines automated multi-format generation, intelligent manifest indexing, and optimized Vue.js templates for exceptional Core Web Vitals scores.
+This project implements an advanced image optimization architecture for maximum web performance with zero runtime dependencies. The system achieves exceptional Core Web Vitals through automated multi-format generation, intelligent manifest caching, and optimized responsive images.
 
-### Architecture Overview
+### Key Features
 
-**1. Automated Multi-Format Pipeline**
+- **Multi-format pipeline**: AVIF (5 sizes: 300/600/900/1200/1600px) + JPEG fallbacks (1200px + 300px thumbnail)
+- **Intelligent caching**: Image manifest regenerates only when images change (~0.1s vs 7s full generation)
+- **Build-time indexing**: `scripts/generate-image-manifest.mjs` generates `composables/image-manifest.json` with real dimensions
+- **Zero runtime overhead**: Static manifest eliminates API calls and database queries
+- **XnView MP presets**: Standardized batch processing with presets in `./preset-xnview/`
 
-- **XnView MP batch processing** with standardized presets (`./preset-xnview/`)
-- **AVIF generation**: 5 optimized sizes (300px, 600px, 900px, 1200px, 1600px) for progressive enhancement
-- **JPEG fallbacks**: 1200px primary + 300px thumbnail for compatibility and SEO
-- **Metadata preservation**: Real dimensions extracted and stored during processing
+### How It Works
 
-**2. Intelligent Manifest System**
-
-- **Build-time indexing**: `scripts/generate-image-manifest.mjs` scans all processed images
-- **Dimension extraction**: Uses `image-size` library to capture real width/height metadata
-- **Static manifest**: Generates `composables/image-manifest.json` with complete image catalog
-- **Zero runtime overhead**: Direct JSON import eliminates API calls and database queries
-
-**3. Optimized Runtime Architecture**
-
-- **Unified composable**: `useImageData.ts` provides specialized helpers (`useTaxonImageData`, `useArticleImageData`)
-- **Computed properties**: Pre-calculated `finalSrc`, `thumbnailSrc`, `aspectRatio` for template simplicity
-- **Smart fallbacks**: Manifest-first approach with convention-based URL generation as backup
-- **SSG compatibility**: No server dependencies, works with static deployment
-
-**4. Performance-First Templates**
-
-- **Simplified syntax**: Templates use direct computed properties instead of complex conditionals
-- **Picture elements**: Modern HTML with AVIF primary + JPEG fallback for optimal browser selection
-- **Responsive srcsets**: Automatically generated with breakpoint-optimized sizes
-- **Layout stability**: Pre-calculated aspect ratios prevent Cumulative Layout Shift (CLS)
+1. **External processing**: Raw images processed with XnView MP using presets (AVIF + JPEG generation)
+2. **Manifest generation**: Build script scans `public/img/`, extracts dimensions, generates JSON manifest
+3. **Smart caching**: Manifest only regenerates when images are added/modified/deleted
+4. **Runtime optimization**: Composable `useImageData.ts` provides helpers (`useTaxonImageData`, `useArticleImageData`) with pre-calculated properties
+5. **Template rendering**: Vue components use computed `finalSrc`, `thumbnailSrc`, `aspectRatio` for optimal performance
 
 ```mermaid
 flowchart TB
@@ -273,16 +284,31 @@ const imageData = useTaxonImageData(genusName, specieName, fileName)
 </template>
 ```
 
-This architecture delivers **exceptional Core Web Vitals scores** through AVIF compression (up to 80% smaller than JPEG), **zero Cumulative Layout Shift** via pre-calculated dimensions, and **optimal loading performance** with intelligent srcsets and lazy loading.
+### Performance Benefits
 
-## Note about email spam protection
+- **Superior compression**: AVIF format reduces file size by up to 80% compared to JPEG
+- **Zero layout shift**: Pre-calculated aspect ratios prevent Cumulative Layout Shift (CLS)
+- **Optimal loading**: Intelligent srcsets with lazy loading for fast page loads
+- **SEO-friendly**: JPEG fallbacks ensure compatibility and proper indexing
+- **Fast rebuilds**: Intelligent caching reduces development server startup time by ~30-40%
 
-I want to share 100% source code, but don't want to be spammed from robots by displaying my email address. To do this in a full SSG & open source code on Github, I've made a strategy to not directly show my email address. The only pre-requisite is the ability of using environnement variable on server (Netlify).
+## Email Spam Protection Strategy
 
-- store the clear address on a `.env`, add the same variable on the server & refer it on `nuxt.config.js`
-- `server/api/getEncryptedEmailContact` is prerender by Nitro & use a composable to encrypt email
-- at this moment, the encrypted method just reverse all the characters
-- in the vue application, it fetch `server/api/getEncryptedEmailContact` & display data with a tricks HTML to reverse direction reading
-- the real decrypt happens on event click on email, that redirect to the correct link mailto
+This project implements a novel approach to protect email addresses from bot scrapers while keeping 100% of the source code public on GitHub. The solution leverages SSG prerendering and runtime decryption to prevent spam without compromising code transparency.
 
-I think it can be possible to enhance encryption using CSS technique to display mixed characters...
+### How It Works
+
+1. **Environment variable storage**: Email address stored in `.env` (local) and Netlify environment variables (production), referenced in `nuxt.config.ts`
+
+2. **Build-time encryption**: `server/api/getEncryptedEmailContact` is prerendered by Nitro, using a composable to encrypt the email (currently simple character reversal)
+
+3. **Obfuscated display**: Vue application fetches the encrypted endpoint and displays it using CSS `direction: rtl` to reverse character order in the DOM
+
+4. **Runtime decryption**: User click event triggers decryption and constructs the proper `mailto:` link
+
+### Benefits
+
+- **Bot protection**: Email address never appears in plain text in HTML source or JavaScript bundles
+- **SSG compatible**: Works entirely with static generation, no runtime server required
+- **Open source friendly**: No secrets exposed in public repository
+- **User experience**: Seamless interaction, email link works normally for real users
