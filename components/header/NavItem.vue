@@ -5,8 +5,8 @@ defineProps({
 </script>
 
 <template>
-  <li class="[ u-headerNavItem ] relative sm:ml-8">
-    <NuxtLink :to="link" class="[ u-headerNavItem__link ] block py-2 sm:py-0">
+  <li class="relative sm:ml-8 [ u-headerNavItem ]">
+    <NuxtLink :to="link" class="block py-2 sm:py-0 [ u-headerNavItem__link ]">
       <slot />
     </NuxtLink>
   </li>

@@ -118,7 +118,7 @@ onUnmounted(() => {
 <template>
   <div v-if="species">
     <div class="my-30">
-      <h1 class="text-white font-normal italic uppercase heading-1">
+      <h1 class="font-normal text-white italic uppercase heading-1">
         {{ species[specieId].genus.name }}
         {{ species[specieId].name }}
         <span class="ml-2 text-xl">
@@ -136,7 +136,7 @@ onUnmounted(() => {
       </p>
     </div>
     <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
-      <div class="w-full relative-md prose prose-gray dark:prose-invert">
+      <div class="relative-md dark:prose-invert w-full prose prose-gray">
         <h2>
           {{ specimen.form.name
           }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
@@ -147,7 +147,7 @@ onUnmounted(() => {
       </div>
       <div
         id="galleryTaxon"
-        class="galleryTaxon bg-white rounded-md p-12 flex flex-wrap gap-6"
+        class="flex flex-wrap gap-6 bg-white p-12 rounded-md galleryTaxon"
       >
         <TaxonPicture
           v-for="picture in specimen.taxonomy_picture"
@@ -158,9 +158,9 @@ onUnmounted(() => {
         />
       </div>
       <div
-        class="[ horizontal-bottom-line-gradient ] w-full relative p-6 rounded-md mb-30"
+        class="horizontal-bottom-line-gradient relative mb-30 p-6 rounded-md w-full [ ]"
       >
-        <ul class="prose prose-gray dark:prose-invert relative">
+        <ul class="relative dark:prose-invert prose prose-gray">
           <li>
             <strong>Numéro du specimen :&nbsp;</strong>
             <samp>{{ specimen.reference }}</samp>
@@ -194,7 +194,7 @@ onUnmounted(() => {
         </ul>
       </div>
     </template>
-    <div class="prose prose-gray dark:prose-invert">
+    <div class="dark:prose-invert prose prose-gray">
       <h2>Resources</h2>
       <ul>
         <li>

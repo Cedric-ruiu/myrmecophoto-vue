@@ -21,18 +21,18 @@ useSeoConfig({
 </script>
 
 <template>
-  <div class="[ o-hero ] grid">
+  <div class="grid [ o-hero ]">
     <div
-      class="[ o-hero__baseline ] flex flex-col text-center justify-center case-upper font-900 leading-[1em] z-1"
+      class="z-1 flex flex-col justify-center font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
     >
       <h1 class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
-      <h2 class="[ o-hero__baselineSubtitle ] text-black">
+      <h2 class="text-black [ o-hero__baselineSubtitle ]">
         Macro-photographies<br >des fourmis
       </h2>
     </div>
-    <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
+    <div class="relative flex w-full max-w-full [ o-hero__pictures ]">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <Picture
           src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
@@ -60,7 +60,7 @@ useSeoConfig({
           sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
-      <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
+      <div class="left-0 absolute w-full [ o-hero__picture6Edges ]">
         <Picture
           src="home-wall.avif"
           alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
@@ -69,7 +69,7 @@ useSeoConfig({
           sizes="100vw"
         />
       </div>
-      <div class="[ o-hero__picture6EdgesShadow ] absolute w-full left-0" />
+      <div class="left-0 absolute w-full [ o-hero__picture6EdgesShadow ]" />
     </div>
   </div>
 </template>

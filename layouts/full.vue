@@ -1,5 +1,5 @@
 <template>
-  <div class="[ o-main ] grid">
+  <div class="grid [ o-main ]">
     <BaseHeader />
     <slot />
     <BaseFooter />

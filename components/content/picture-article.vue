@@ -20,7 +20,7 @@ const imageData = useArticleImageData('', props.src)
 
 <template>
   <figure
-    class="not-prose relative my-8 sm:my-16 lg:my-24 w-[100vw] max-w-[1600px] ml-[50%] translate-x-[-50%]"
+    class="relative my-8 sm:my-16 lg:my-24 ml-[50%] w-[100vw] max-w-[1600px] translate-x-[-50%] not-prose"
     :style="{
       aspectRatio: imageData.aspectRatio
     }"
@@ -39,12 +39,12 @@ const imageData = useArticleImageData('', props.src)
         :height="imageData.finalHeight"
         :loading="loading"
         :decoding="decoding"
-        class="block w-full h-auto mx-auto"
+        class="block mx-auto w-full h-auto"
       >
     </picture>
     <figcaption
       v-if="$slots.default || caption"
-      class="px-4 mx-auto mt-2 text-sm text-center text-gray-400 max-w-prose"
+      class="mx-auto mt-2 px-4 max-w-prose text-gray-400 text-sm text-center"
     >
       <slot>{{ caption }}</slot>
     </figcaption>

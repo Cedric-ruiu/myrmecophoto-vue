@@ -27,7 +27,7 @@ const imageData = computed(() => {
 <template>
   <NuxtLink
     :to="`/taxons/${props.taxon.replace(' ', '-').replace('.', '').toLowerCase()}`"
-    class="[ specie-card ] relative inline-flex flex-col rounded-md justify-end p-3.5 aspect-video text-white"
+    class="inline-flex relative flex-col justify-end p-3.5 rounded-md aspect-video text-white [ specie-card ]"
   >
     <picture v-if="imageData.hasValidData">
       <source
@@ -39,7 +39,7 @@ const imageData = computed(() => {
         sizes="(max-width: 400px) 100vw, 300px"
       >
       <img
-        class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
+        class="top-0 left-0 absolute w-full h-full object-cover [ specie-card-bg ] filtered"
         :src="imageData.thumbnailSrc"
         :alt="`${props.taxon} - Vue taxonomique`"
         :width="imageData.thumbnailWidth"
@@ -49,16 +49,16 @@ const imageData = computed(() => {
       >
     </picture>
     <!-- <img
-      class="[ specie-card-bg ] absolute top-0 left-0 w-full h-full object-cover filtered"
+      class="top-0 left-0 absolute w-full h-full object-cover [ specie-card-bg ] filtered"
       :src="`/img/taxonomy/thumbnails/${taxon
         .replace(' ', '-')
         .replace('.', '')}.jpg`"
       :alt="taxon"
     /> -->
-    <h3 class="relative text-shadow-lg text-lg font-medium z-1">
+    <h3 class="z-1 relative text-shadow-lg font-medium text-lg">
       {{ props.taxon }}
     </h3>
-    <p class="relative text-shadow-lg text-xs font-normal z-1">
+    <p class="z-1 relative text-shadow-lg font-normal text-xs">
       {{ props.researcherName }} ({{ props.yearDiscover }})
     </p>
   </NuxtLink>

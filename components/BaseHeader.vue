@@ -8,19 +8,19 @@ const route = useRoute()
   <header>
     <div
       :class="{ 'to-anime': route.name === 'index' }"
-      class="[ o-header ] flex justify-between flex-wrap content-center sm:h-20 container mx-auto w-full font-text p-5"
+      class="flex flex-wrap justify-between content-center mx-auto p-5 w-full sm:h-20 font-text [ o-header ] container"
     >
-      <NuxtLink to="/" class="text-lg font-400 uppercase">
+      <NuxtLink to="/" class="font-400 text-lg uppercase">
         Myrmeco<span class="font-700 text-gradient-primary">photo</span>
       </NuxtLink>
       <nav
         id="main-nav-header"
         :class="{ hidden: !open }"
-        class="pl-2.5 sm:pl-0 order-3 basis-full sm:order-2 sm:basis-auto sm:flex flex-col sm:flex-row"
+        class="sm:flex sm:flex-row flex-col order-3 sm:order-2 pl-2.5 sm:pl-0 basis-full sm:basis-auto"
         aria-label="Navigation principale"
       >
         <ul
-          class="[ o-header__nav ] py-5 sm:py-0 text-sm sm:text-right uppercase sm:items-center sm:inline-flex"
+          class="sm:inline-flex sm:items-center py-5 sm:py-0 text-sm sm:text-right uppercase [ o-header__nav ]"
         >
           <HeaderNavItem link="/taxons"> Photos spécimens </HeaderNavItem>
           <HeaderNavItem link="/articles"> Articles </HeaderNavItem>
@@ -30,7 +30,7 @@ const route = useRoute()
       <button
         type="button"
         :class="{ on: open }"
-        class="[ o-header__menuBar ] relative box-content p-0 sm:hidden"
+        class="sm:hidden box-content relative p-0 [ o-header__menuBar ]"
         aria-controls="main-nav-header"
         :aria-expanded="open"
         aria-label="Ouvrir le menu de navigation"

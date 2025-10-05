@@ -44,15 +44,15 @@ useSeoConfig({
 
 <template>
   <div>
-    <h1 class="text-white text-6xl font-normal italic uppercase">
+    <h1 class="font-normal text-white text-6xl italic uppercase">
       Macro Photographie Taxonomique
     </h1>
     <div v-for="subfamily in subfamilies" :key="subfamily.id">
-      <div class="prose prose-gray dark:prose-invert">
+      <div class="dark:prose-invert prose prose-gray">
         <h2>{{ subfamily.name }}</h2>
         <p>{{ subfamily.description }}</p>
       </div>
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3.5">
+      <div class="gap-3.5 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
         <template v-for="genus in subfamily.genus">
           <template v-for="specie in genus.specie">
             <SpecieCard

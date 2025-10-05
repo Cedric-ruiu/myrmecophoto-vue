@@ -44,7 +44,7 @@ const imageData = useTaxonImageData(
         sizes="(max-width: 400px) 100vw, 300px"
       >
       <img
-        class="w-auto max-h-40 rounded-md"
+        class="rounded-md w-auto max-h-40"
         :src="imageData.thumbnailSrc"
         :alt="`${species[specieId].genus.name} ${species[specieId].name} - ${picture.description || 'Vue taxonomique'}`"
         :width="imageData.thumbnailWidth"

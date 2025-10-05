@@ -1,7 +1,7 @@
 <template>
-  <div class="[ o-main ] grid">
+  <div class="grid [ o-main ]">
     <BaseHeader />
-    <div class="container mx-auto w-full p-5">
+    <div class="mx-auto p-5 w-full container">
       <slot />
     </div>
     <BaseFooter />

@@ -70,16 +70,16 @@ function buildErrorMessage(mess: string) {
     <input name="bot-field" >
   </form>
 
-  <div class="flex flex-col md:flex-row justify-between gap-8 w-full">
+  <div class="flex md:flex-row flex-col justify-between gap-8 w-full">
     <div>
       <div class="my-10 lg:my-30">
         <h1
-          class="text-white text-5xl lg:text-6xl font-normal italic uppercase"
+          class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
         >
           Qui suis-je&nbsp;?
         </h1>
       </div>
-      <div class="prose prose-gray dark:prose-invert">
+      <div class="dark:prose-invert prose prose-gray">
         <img
           src="/img/cedric-ruiu-avatar.webp"
           alt="Image avatar de Cédric Ruiu"
@@ -109,12 +109,12 @@ function buildErrorMessage(mess: string) {
     <div>
       <div class="my-10 lg:my-30">
         <h1
-          class="text-white text-5xl lg:text-6xl font-normal italic uppercase"
+          class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
         >
           Contactez moi
         </h1>
       </div>
-      <div class="prose prose-gray dark:prose-invert">
+      <div class="dark:prose-invert prose prose-gray">
         <p>
           Si vous souhaitez discuter de collaborations, partager des idées ou
           simplement en savoir plus sur mon travail, voici comment vous pouvez
@@ -149,7 +149,7 @@ function buildErrorMessage(mess: string) {
           possible.
         </p>
 
-        <div class="p-4 w-full mx-auto bg-stone-900 rounded">
+        <div class="bg-stone-900 mx-auto p-4 rounded w-full">
           <div v-if="formResponse">
             <p/>
             {{ formResponse }}
@@ -172,7 +172,7 @@ function buildErrorMessage(mess: string) {
             </div>
 
             <div class="mb-4">
-              <label for="name" class="block text-sm font-medium text-white"
+              <label for="name" class="block font-medium text-white text-sm"
                 >Nom:</label
               >
               <input
@@ -181,12 +181,12 @@ function buildErrorMessage(mess: string) {
                 type="text"
                 name="name"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
               >
             </div>
 
             <div class="mb-4">
-              <label for="email" class="block text-sm font-medium text-white"
+              <label for="email" class="block font-medium text-white text-sm"
                 >Email:</label
               >
               <input
@@ -195,12 +195,12 @@ function buildErrorMessage(mess: string) {
                 type="email"
                 name="email"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
               >
             </div>
 
             <div class="mb-4">
-              <label for="message" class="block text-sm font-medium text-white"
+              <label for="message" class="block font-medium text-white text-sm"
                 >Message:</label
               >
               <textarea
@@ -208,7 +208,7 @@ function buildErrorMessage(mess: string) {
                 v-model="form.message"
                 name="message"
                 required
-                class="mt-1 block w-full px-3 py-2 border border-stone-700 rounded-md shadow-sm bg-stone-800 text-white focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
                 rows="4"
               />
             </div>
@@ -216,7 +216,7 @@ function buildErrorMessage(mess: string) {
             <div>
               <button
                 type="submit"
-                class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white gradient-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                class="inline-flex justify-center hover:bg-blue-700 shadow-sm px-4 py-2 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full font-medium text-white text-sm gradient-primary"
               >
                 Envoyer
               </button>

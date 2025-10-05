@@ -10,7 +10,7 @@ if (emailEncrypted == null || emailEncrypted.value == null)
 
 <template>
   <footer
-    class="flex items-center justify-center h-20 container mx-auto w-full p-5 font-text"
+    class="flex justify-center items-center mx-auto p-5 w-full h-20 font-text container"
   >
     <p>
       Cédric Ruiu • Vannes, Brittany, France •
