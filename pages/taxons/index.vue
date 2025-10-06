@@ -1,15 +1,17 @@
 <script setup lang="ts">
-const { data: subfamilies } = useNuxtData('taxa')
+import type { TaxaWithRelations } from '~/server/api/getTaxa'
+
+const { data: subfamilies } = useNuxtData<TaxaWithRelations[]>('taxa')
 const { data: species } = useNuxtData('species')
 
 // Fallbacks SSG-safe pour computed dynamiques
 const speciesCount = computed(() => {
   if (!subfamilies?.value) return 0
   return subfamilies.value.reduce(
-    (total, subfamily) =>
+    (total: number, subfamily: TaxaWithRelations) =>
       total +
       subfamily.genus.reduce(
-        (genusTotal, genus) =>
+        (genusTotal: number, genus: TaxaWithRelations['genus'][number]) =>
           genusTotal +
           genus.specie.filter((specie) => specie._count.specimen > 0).length,
         0,

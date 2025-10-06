@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useTaxonImageData } from '~/composables/useImageData'
+import type { SpeciesWithRelations } from '~/server/api/getSpecies'
+import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
 const props = defineProps({
   id: { type: Number, required: true },
   taxon: { type: String, required: true },
   researcherName: { type: String, required: true },
   yearDiscover: { type: Number, required: true },
-  species: { type: Array as () => any[], required: true },
-  genus: { type: Object, required: true },
+  species: { type: Array as () => SpeciesWithRelations[], required: true },
+  genus: { type: Object as () => TaxaWithRelations['genus'][number], required: true },
 })
 
 const specieData = computed(() => props.species.find((s) => s.id === props.id))

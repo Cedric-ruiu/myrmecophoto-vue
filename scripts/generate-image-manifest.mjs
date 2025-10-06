@@ -9,7 +9,7 @@ const CACHE_FILE = path.join(process.cwd(), '.cache', 'image-manifest-cache.json
 async function ensureDir(dirPath) {
   try {
     await fs.mkdir(dirPath, { recursive: true })
-  } catch (err) {
+  } catch {
     // Directory might already exist, ignore
   }
 }
@@ -31,7 +31,7 @@ async function getFileStats(files) {
       try {
         const stat = await fs.stat(file)
         stats[file] = stat.mtime.getTime()
-      } catch (err) {
+      } catch {
         // File might have been deleted, ignore
       }
     }),
@@ -43,7 +43,7 @@ async function loadCache() {
   try {
     const cacheData = await fs.readFile(CACHE_FILE, 'utf-8')
     return JSON.parse(cacheData)
-  } catch (err) {
+  } catch {
     return { fileStats: {}, manifest: {} }
   }
 }

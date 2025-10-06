@@ -36,11 +36,16 @@ function handleSubmit(event: Event) {
   event.preventDefault()
 
   const formData = new FormData(event.target as HTMLFormElement)
+  const params = new URLSearchParams()
+
+  formData.forEach((value, key) => {
+    params.append(key, value.toString())
+  })
 
   fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(formData as any).toString(),
+    body: params.toString(),
   })
     .then((response) => {
       if (response.ok) {
@@ -62,166 +67,168 @@ function buildErrorMessage(mess: string) {
 </script>
 
 <template>
-  <!-- Hidden form for Netlify detection during build -->
-  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="text" name="name" >
-    <input type="email" name="email" >
-    <textarea name="message"/>
-    <input name="bot-field" >
-  </form>
-
-  <div class="flex md:flex-row flex-col justify-between gap-8 w-full">
-    <div>
-      <div class="my-10 lg:my-30">
-        <h1
-          class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
-        >
-          Qui suis-je&nbsp;?
-        </h1>
-      </div>
-      <div class="dark:prose-invert prose prose-gray">
-        <img
-          src="/img/cedric-ruiu-avatar.webp"
-          alt="Image avatar de Cédric Ruiu"
-        >
-        <p>
-          <i>MyrmecoPhoto :</i> une fenêtre ouverte sur le monde des fourmis et
-          de leur diversité à travers l'objectif de la macro-photographie. Je
-          suis un développeur web et un photographe passionné, captivé par la
-          nature et tout particulièrement par l'entomologie. Dès mon enfance,
-          les insectes, et surtout les fourmis, ont capté mon attention.
-        </p>
-
-        <p>
-          Ce site est le point de rencontre de mes passions pour la
-          macro-photographie, la myrmécologie et le développement web. Vous y
-          trouverez des reportages photo détaillés, des comparatifs de matériel
-          de photographie, et des images taxonomiques qui mettent en lumière la
-          complexité et la beauté des fourmis.
-        </p>
-
-        <p>
-          Je vous invite à explorer <i>MyrmecoPhoto :</i> pour découvrir les
-          richesses de ces créatures fascinantes. Bonne visite!
-        </p>
-      </div>
-    </div>
-    <div>
-      <div class="my-10 lg:my-30">
-        <h1
-          class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
-        >
-          Contactez moi
-        </h1>
-      </div>
-      <div class="dark:prose-invert prose prose-gray">
-        <p>
-          Si vous souhaitez discuter de collaborations, partager des idées ou
-          simplement en savoir plus sur mon travail, voici comment vous pouvez
-          me contacter :
-        </p>
-
-        <p>
-          <a
-            href="https://www.linkedin.com/in/cedric-ruiu/"
-            alt="Page LinkedIn de Cédric Ruiu"
-            class="text-gradient-primary"
-            ><i class="i-fa6-brands-linkedin"/>
-            <strong> LinkedIn -</strong></a
+  <div>
+    <!-- Hidden form for Netlify detection during build -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" >
+      <input type="email" name="email" >
+      <textarea name="message"/>
+      <input name="bot-field" >
+    </form>
+  
+    <div class="flex md:flex-row flex-col justify-between gap-8 w-full">
+      <div>
+        <div class="my-10 lg:my-30">
+          <h1
+            class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
           >
-          Visitez mon profil.
-        </p>
-
-        <p>
-          <a
-            href="https://github.com/Cedric-ruiu/"
-            alt="Page LinkedIn de Cédric Ruiu"
-            class="text-gradient-primary"
-            ><i class="i-fa6-brands-github"/> <strong>GitHub -</strong></a
+            Qui suis-je&nbsp;?
+          </h1>
+        </div>
+        <div class="dark:prose-invert prose prose-gray">
+          <img
+            src="/img/cedric-ruiu-avatar.webp"
+            alt="Image avatar de Cédric Ruiu"
           >
-          Découvrez mes projets sur GitHub, avec tout le code source de
-          Myrmecophoto.
-        </p>
-
-        <p>
-          <strong>Formulaire de Contact:</strong> Pour me contacter rapidement,
-          utilisez le formulaire suivant, je vous répondrais aussitôt que
-          possible.
-        </p>
-
-        <div class="bg-stone-900 mx-auto p-4 rounded w-full">
-          <div v-if="formResponse">
-            <p/>
-            {{ formResponse }}
-            <p><MailTo :email-encrypted="emailEncrypted?.data" /></p>
+          <p>
+            <i>MyrmecoPhoto :</i> une fenêtre ouverte sur le monde des fourmis et
+            de leur diversité à travers l'objectif de la macro-photographie. Je
+            suis un développeur web et un photographe passionné, captivé par la
+            nature et tout particulièrement par l'entomologie. Dès mon enfance,
+            les insectes, et surtout les fourmis, ont capté mon attention.
+          </p>
+  
+          <p>
+            Ce site est le point de rencontre de mes passions pour la
+            macro-photographie, la myrmécologie et le développement web. Vous y
+            trouverez des reportages photo détaillés, des comparatifs de matériel
+            de photographie, et des images taxonomiques qui mettent en lumière la
+            complexité et la beauté des fourmis.
+          </p>
+  
+          <p>
+            Je vous invite à explorer <i>MyrmecoPhoto :</i> pour découvrir les
+            richesses de ces créatures fascinantes. Bonne visite!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="my-10 lg:my-30">
+          <h1
+            class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
+          >
+            Contactez moi
+          </h1>
+        </div>
+        <div class="dark:prose-invert prose prose-gray">
+          <p>
+            Si vous souhaitez discuter de collaborations, partager des idées ou
+            simplement en savoir plus sur mon travail, voici comment vous pouvez
+            me contacter :
+          </p>
+  
+          <p>
+            <a
+              href="https://www.linkedin.com/in/cedric-ruiu/"
+              alt="Page LinkedIn de Cédric Ruiu"
+              class="text-gradient-primary"
+              ><i class="i-fa6-brands-linkedin"/>
+              <strong> LinkedIn -</strong></a
+            >
+            Visitez mon profil.
+          </p>
+  
+          <p>
+            <a
+              href="https://github.com/Cedric-ruiu/"
+              alt="Page LinkedIn de Cédric Ruiu"
+              class="text-gradient-primary"
+              ><i class="i-fa6-brands-github"/> <strong>GitHub -</strong></a
+            >
+            Découvrez mes projets sur GitHub, avec tout le code source de
+            Myrmecophoto.
+          </p>
+  
+          <p>
+            <strong>Formulaire de Contact:</strong> Pour me contacter rapidement,
+            utilisez le formulaire suivant, je vous répondrais aussitôt que
+            possible.
+          </p>
+  
+          <div class="bg-stone-900 mx-auto p-4 rounded w-full">
+            <div v-if="formResponse">
+              <p/>
+              {{ formResponse }}
+              <p><MailTo :email-encrypted="emailEncrypted?.data" /></p>
+            </div>
+            <form
+              v-else
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              name="contact"
+              method="POST"
+              action="/"
+              @submit="handleSubmit"
+            >
+              <input type="hidden" name="form-name" value="contact" >
+              <div style="display: none">
+                <label
+                  >Don't fill this out if you're human: <input name="bot-field"
+                ></label>
+              </div>
+  
+              <div class="mb-4">
+                <label for="name" class="block font-medium text-white text-sm"
+                  >Nom:</label
+                >
+                <input
+                  id="name"
+                  v-model="form.name"
+                  type="text"
+                  name="name"
+                  required
+                  class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
+                >
+              </div>
+  
+              <div class="mb-4">
+                <label for="email" class="block font-medium text-white text-sm"
+                  >Email:</label
+                >
+                <input
+                  id="email"
+                  v-model="form.email"
+                  type="email"
+                  name="email"
+                  required
+                  class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
+                >
+              </div>
+  
+              <div class="mb-4">
+                <label for="message" class="block font-medium text-white text-sm"
+                  >Message:</label
+                >
+                <textarea
+                  id="message"
+                  v-model="form.message"
+                  name="message"
+                  required
+                  class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
+                  rows="4"
+                />
+              </div>
+  
+              <div>
+                <button
+                  type="submit"
+                  class="inline-flex justify-center hover:bg-blue-700 shadow-sm px-4 py-2 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full font-medium text-white text-sm gradient-primary"
+                >
+                  Envoyer
+                </button>
+              </div>
+            </form>
           </div>
-          <form
-            v-else
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            name="contact"
-            method="POST"
-            action="/"
-            @submit="handleSubmit"
-          >
-            <input type="hidden" name="form-name" value="contact" >
-            <div style="display: none">
-              <label
-                >Don't fill this out if you're human: <input name="bot-field"
-              ></label>
-            </div>
-
-            <div class="mb-4">
-              <label for="name" class="block font-medium text-white text-sm"
-                >Nom:</label
-              >
-              <input
-                id="name"
-                v-model="form.name"
-                type="text"
-                name="name"
-                required
-                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
-              >
-            </div>
-
-            <div class="mb-4">
-              <label for="email" class="block font-medium text-white text-sm"
-                >Email:</label
-              >
-              <input
-                id="email"
-                v-model="form.email"
-                type="email"
-                name="email"
-                required
-                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
-              >
-            </div>
-
-            <div class="mb-4">
-              <label for="message" class="block font-medium text-white text-sm"
-                >Message:</label
-              >
-              <textarea
-                id="message"
-                v-model="form.message"
-                name="message"
-                required
-                class="block bg-stone-800 shadow-sm mt-1 px-3 py-2 border border-stone-700 focus:border-blue-500 rounded-md focus:outline-none focus:ring focus:ring-blue-500 w-full text-white"
-                rows="4"
-              />
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                class="inline-flex justify-center hover:bg-blue-700 shadow-sm px-4 py-2 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full font-medium text-white text-sm gradient-primary"
-              >
-                Envoyer
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>

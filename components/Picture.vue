@@ -14,7 +14,7 @@ const imageData = useImageData(props.src)
 </script>
 
 <template>
-  <picture v-if="imageData.hasValidData" :class="class">
+  <picture v-if="imageData.hasValidData" :class="props.class">
     <source
       v-if="imageData.avifSrcset"
       type="image/avif"
@@ -28,10 +28,10 @@ const imageData = useImageData(props.src)
       :height="imageData.fallback?.height || imageData.avif[imageData.avif.length - 1]?.height"
       :loading="loading"
       decoding="async"
-      :class="class"
+      :class="props.class"
     >
   </picture>
-  
+
   <!-- Fallback: use original src if no optimized data available -->
   <img
     v-else
@@ -39,6 +39,6 @@ const imageData = useImageData(props.src)
     :alt="alt"
     :loading="loading"
     decoding="async"
-    :class="class"
+    :class="props.class"
   >
 </template>

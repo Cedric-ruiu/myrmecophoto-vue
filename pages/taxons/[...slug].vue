@@ -3,7 +3,12 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
-let [routeGenus, routeSpecie] = useRoute().params.slug[0].split('-', 2)
+const slugParam = useRoute().params.slug?.[0]
+
+if (!slugParam)
+  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+
+let [routeGenus, routeSpecie] = slugParam.split('-', 2)
 
 if (!routeGenus || !routeSpecie)
   throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
@@ -25,7 +30,7 @@ if (species == null || species.value == null)
 
 const specieId = ref(-1)
 
-for (const [index, specie] of species.value?.entries()) {
+for (const [index, specie] of species.value.entries()) {
   if (specie.name === routeSpecie) {
     specieId.value = index
     break

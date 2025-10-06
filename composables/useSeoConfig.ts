@@ -1,7 +1,6 @@
 import {
   usePageSchemas,
-  type PageType,
-  type PageSchemaOptions,
+  type PageType
 } from './schemas/usePageSchemas'
 import type { SchemaFactoryOptions } from './useSchemaFactory'
 
@@ -29,7 +28,7 @@ interface SeoConfigOptions {
    * Custom props for NuxtSeo OG image component (RECOMMENDED)
    * @example { subtitle: "Developer & Photographer", description: "Creator of Myrmecophoto" }
    */
-  ogImageProps?: Record<string, any>
+  ogImageProps?: Record<string, string | number | boolean>
 
   /**
    * Rules for search engine indexing (OPTIONAL)
@@ -49,7 +48,7 @@ interface SeoConfigOptions {
    * Additional custom metadata (OPTIONAL)
    * @example { ogImageAlt: 'Alternative image description' }
    */
-  customMeta?: Record<string, any>
+  customMeta?: Record<string, string | number | boolean>
 
   /**
    * Custom title template (OPTIONAL)
@@ -160,7 +159,6 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
   // Automatic canonical URL
   const route = useRoute()
-  const config = useRuntimeConfig()
   const siteUrl = process.env.NUXT_SITE_URL || 'https://myrmecophoto.fr'
   const siteName = process.env.NUXT_SITE_NAME || 'Myrmecophoto'
   const siteAuthor = process.env.NUXT_SITE_AUTHOR || 'Cédric Ruiu'
@@ -217,7 +215,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
     // Open Graph
     ogTitle: title,
     ogDescription: description,
-    ogType: 'website',
+    ogType: 'website' as const,
     ogLocale: 'fr_FR',
     ogSiteName: siteName,
     ogUrl: canonicalUrl,
@@ -226,7 +224,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
       : `${siteUrl}/__og-image__/image${route.path}.png`,
 
     // Twitter Cards
-    twitterCard: 'summary_large_image',
+    twitterCard: 'summary_large_image' as const,
     twitterSite: '@myrmecophoto',
     twitterCreator: '@cedric_ruiu',
     twitterTitle: title,
@@ -239,7 +237,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
     // Theme and appearance
     themeColor: '#e72c27',
-    colorScheme: 'light dark',
+    colorScheme: 'light dark' as const,
     viewport: 'width=device-width, initial-scale=1',
 
     // Content type
