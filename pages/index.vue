@@ -116,10 +116,9 @@ useSeoConfig({
 
       font-size: calc(6000vw / 1080);
       line-height: 1.1em;
+      text-shadow: 1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white;
 
       animation: subtitle-appear 2s ease-in-out both 1s;
-
-      -webkit-text-stroke: 0.03em white;
 
       @include media('>=lg') {
         margin-top: 0.3em;
