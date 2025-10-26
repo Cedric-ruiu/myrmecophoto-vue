@@ -53,6 +53,13 @@ export default defineConfig({
   ],
   outputToCssLayers: true,
   transformers: [transformerDirectives()],
+  rules: [
+    ['full-width', { 'grid-column': 'full' }],
+    ['content-width', { 'grid-column': 'content' }],
+  ],
+  shortcuts: {
+    'container-responsive': 'w-full sm:w-[calc(100%_-_10rem)] px-5 xs:px-7.5 mx-auto lg:max-w-256 xl:max-w-320 xxl:max-w-400',
+  },
   theme: {
     breakpoint: {
       xs: '375px',
