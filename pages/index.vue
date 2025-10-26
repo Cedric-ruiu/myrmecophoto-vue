@@ -21,18 +21,18 @@ useSeoConfig({
 </script>
 
 <template>
-  <div class="[ o-hero ] grid">
+  <div class="relative [ o-hero ]">
     <div
-      class="[ o-hero__baseline ] flex flex-col text-center justify-center case-upper font-900 leading-[1em] z-1"
+      class="z-1 absolute flex flex-col justify-center w-full font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
     >
       <h1 class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
       </h1>
-      <h2 class="[ o-hero__baselineSubtitle ] text-black">
+      <h2 class="text-black [ o-hero__baselineSubtitle ]">
         Macro-photographies<br >des fourmis
       </h2>
     </div>
-    <div class="[ o-hero__pictures ] flex relative w-full max-w-full">
+    <div class="relative flex w-full max-w-full [ o-hero__pictures ]">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <Picture
           src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
@@ -60,7 +60,7 @@ useSeoConfig({
           sizes="(max-width: 768px) 50vw, 33vw"
         />
       </div>
-      <div class="[ o-hero__picture6Edges ] absolute w-full left-0">
+      <div class="left-0 absolute w-full [ o-hero__picture6Edges ]">
         <Picture
           src="home-wall.avif"
           alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
@@ -69,16 +69,14 @@ useSeoConfig({
           sizes="100vw"
         />
       </div>
-      <div class="[ o-hero__picture6EdgesShadow ] absolute w-full left-0" />
+      <div class="left-0 absolute w-full [ o-hero__picture6EdgesShadow ]" />
     </div>
   </div>
 </template>
 
 <style lang="scss">
 :root {
-  --hero-font-size: calc(5000vw / 1080);
-  --subtitle-font-size: calc(4000vw / 1080);
-  --hero-height: calc((5000vw / 1080) * 3);
+  --hero-height: calc((5000vw / 1080) * 3); // 13.88vw
   --hero-gap: 20px;
 }
 
@@ -96,21 +94,20 @@ useSeoConfig({
     }
 
     &__baselineTitle {
-      margin-top: 50px;
-      font-size: 7vw;
+      margin-top: 25px;
+      font-size: 8vw;
       animation: title-appear 2s ease-in-out both 0.5s;
 
-      @include media('>=sm') {
-        margin-top: 150px;
-        font-size: calc(8000vw / 1080);
-      }
-
-      @include media('>=md') {
-        font-size: calc(8000vw / 1080);
-      }
-
       @include media('>=lg') {
-        font-size: calc(6000vw / 1080);
+        font-size: 5.5vw
+      }
+
+      @include media('>=xl') {
+        margin-top: 50px;
+      }
+
+      @include media('>=xxl') {
+        margin-top: 125px;
       }
     }
 
@@ -119,10 +116,9 @@ useSeoConfig({
 
       font-size: calc(6000vw / 1080);
       line-height: 1.1em;
+      text-shadow: 1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white;
 
       animation: subtitle-appear 2s ease-in-out both 1s;
-
-      -webkit-text-stroke: 0.03em white;
 
       @include media('>=lg') {
         margin-top: 0.3em;
@@ -132,95 +128,124 @@ useSeoConfig({
 
     &__pictures {
       gap: var(--hero-gap);
+      height: 100%;
     }
 
     &__picture4Edges {
+      // Three background images creating a wave pattern with angled top edges
+      height: calc(100dvh - (var(--hero-height) + var(--header-height)));
+      margin-top: var(--hero-height);
+
       &:nth-child(1) {
+        // Left image: trapezoid with angled top-right edge
         clip-path: polygon(
-          0 0,
-          0 100%,
-          100% 100%,
-          100% calc(var(--hero-height) * 0.7)
+          0 0,                                // top left
+          0 100%,                             // bottom left
+          100% 100%,                          // bottom right
+          100% calc(var(--hero-height) * 0.7) // top right (angled)
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+
+        @media screen and (orientation: portrait) {
+          img {
+            object-position: 60% 50%;
+          }
+        }
       }
 
       &:nth-child(2) {
-        height: calc(100% - 0.7 * var(--hero-height));
-        margin-top: calc(0.7 * var(--hero-height));
+        // Center image: rectangle shifted down by 70% hero-height
+        height: calc(100dvh - ((var(--hero-height) * 1.65 + var(--header-height))));
+        margin-top: calc(var(--hero-height) * 1.65);
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
+
+        @media screen and (orientation: portrait) {
+          height: calc(100% - (35dvh));
+          margin-top: calc(35dvh);
+
+          img {
+            object-position: 63% 50%;
+          }
+        }
       }
 
       &:nth-child(3) {
+        // Right image: trapezoid with angled top-left edge
         clip-path: polygon(
-          0 calc(var(--hero-height) * 0.7),
-          0 100%,
-          100% 100%,
-          100% 0
+          0 calc(var(--hero-height) * 0.7), // top left (angled)
+          0 100%,                           // bottom left
+          100% 100%,                        // bottom right
+          100% 0                            // top right
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+
+        @media screen and (orientation: portrait) {
+          img {
+            object-position: 70% 50%;
+          }
+        }
       }
 
       @media screen and (orientation: portrait) {
-        height: calc(100% - 2 * var(--hero-height));
-        margin-top: calc(2 * var(--hero-height));
+        // Portrait: all shifted down by 2x hero-height to make room for hexagon
+        height: calc(100% - (30dvh));
+        margin-top: calc(30dvh);
       }
     }
 
     &__picture6Edges {
-      top: calc(var(--hero-height) - 2 * var(--hero-height));
+      // Position: vertically centered on hero (overflows top)
       height: calc(2 * var(--hero-height));
+
+      // Hexagonal shape: 6 points define the corners
       clip-path: polygon(
-        50% calc(var(--hero-height)),
-        100% 0,
-        100% var(--hero-height),
-        50% calc(var(--hero-height) * 2),
-        0 var(--hero-height),
-        0 0
+        50% calc(var(--hero-height)),     // top center
+        100% 0,                           // top right
+        100% var(--hero-height),          // bottom right
+        50% calc(var(--hero-height) * 2), // bottom center
+        0 var(--hero-height),             // bottom left
+        0 0                               // top left
       );
       animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
       @media screen and (orientation: portrait) {
-        height: calc(4 * var(--hero-height));
+        // Portrait: hexagon 2x taller
+        height: calc(30dvh + var(--hero-height));
         clip-path: polygon(
-          50% calc(var(--hero-height)),
-          100% 0,
-          100% calc(var(--hero-height) * 3),
-          50% calc(var(--hero-height) * 4),
-          0 calc(var(--hero-height) * 3),
-          0 0
+          50% var(--hero-height),               // top center
+          100% 0,                               // top right
+          100% 30dvh,                           // bottom right
+          50% calc(30dvh + var(--hero-height)), // bottom center
+          0 30dvh,                              // bottom left
+          0 0                                   // top left
         );
       }
     }
 
     &__picture6EdgesShadow {
-      top: -1px; // hide line glitch
+      // Creates gap between hexagon and background images using inverted hexagon shape
+      top: calc(var(--hero-height) - 1px);
 
       height: calc(var(--hero-gap) + var(--hero-height));
 
       background-color: $color-layout;
+
+      // Inverted hexagon matching picture6Edges but with gap offset
       clip-path: polygon(
-        50% var(--hero-height),
-        100% 0,
-        100% var(--hero-gap),
-        50% calc(var(--hero-height) + var(--hero-gap)),
-        0 var(--hero-gap),
-        0 0
+        50% var(--hero-height),                         // top center
+        100% 0,                                         // top right
+        100% var(--hero-gap),                           // gap right
+        50% calc(var(--hero-height) + var(--hero-gap)), // bottom center
+        0 var(--hero-gap),                              // gap left
+        0 0                                             // top left
       );
 
       animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
       @media screen and (orientation: portrait) {
-        top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
+        top: 30dvh;
       }
     }
-
-    // a nonagone try, but it's too complex and prefer save my night
-    // &__picture9EdgesShadow {
-    //   height: calc(100% + var(--hero-height));
-    //   top: calc(var(--hero-height) - 2 * var(--hero-height));
-    //   clip-path: polygon(50% calc(var(--hero-height)), 100% 0, 100% var(--hero-height), 58% calc(var(--hero-height) * 1.7), 58% 100%, 42% 100%, 42% calc(var(--hero-height) * 1.7), 0 var(--hero-height), 0 0);
-    // }
   }
 }
 

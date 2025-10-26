@@ -32,26 +32,24 @@ useSeoConfig({
 
 <template>
   <div>
-    <h1 class="mb-16 text-white text-6xl font-normal italic uppercase">
-      Tous les articles
-    </h1>
+    <PageHeader title="Tous les articles" />
     <article
       v-for="article in articles"
       :key="article.path"
-      class="flex flex-row gap-4 mb-16"
+      class="flex flex-row gap-4 mb-16 pt-12 sm:pt-20 lg:pt-28"
     >
       <NuxtLink
         :to="article.path"
         :aria-label="`Lire l'article : ${article.title}`"
-        class="block relative w-20 md:w-80 h-20 md:h-60 flex-[1_0_auto] md:flex-none horizontal-bottom-line-gradient"
+        class="block horizontal-bottom-line-gradient relative flex-[1_0_auto] md:flex-none w-20 md:w-80 h-20 md:h-60"
         ><img
           class="rounded-md w-full h-full object-cover"
           :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
           :alt="`Image de l'article : ${article.title}`"
       ></NuxtLink>
-      <NuxtLink :to="article.path" class="prose prose-gray dark:prose-invert">
-        <h3 class="line-clamp-2 mt-0 mb-2">{{ article.title }}</h3>
-        <p class="line-clamp-5 mb-2 mt-2">{{ article.description }}</p>
+      <NuxtLink :to="article.path" class="dark:prose-invert prose prose-gray">
+        <h3 class="mt-0 mb-2 line-clamp-2">{{ article.title }}</h3>
+        <p class="mt-2 mb-2 line-clamp-5">{{ article.description }}</p>
         <small
           >Publié le:
           {{ new Date(article.date.published).toLocaleDateString() }}</small
@@ -59,8 +57,8 @@ useSeoConfig({
       </NuxtLink>
     </article>
     <!-- The cursor elements -->
-    <div class="cursor cursor--small"/>
-    <canvas class="cursor cursor--canvas" resize/>
+    <div class="cursor--small cursor"/>
+    <canvas class="cursor--canvas cursor" resize/>
   </div>
 </template>
 

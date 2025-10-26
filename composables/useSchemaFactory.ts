@@ -34,7 +34,15 @@ export interface SchemaFactoryOptions {
     subfamily: string
     researcher: string
     year?: number
-    specimens?: any[]
+    specimens?: Array<{
+      form: { name: string }
+      taxonomy_picture?: Array<{
+        file_name: string
+        width?: number
+        height?: number
+        date?: string
+      }>
+    }>
     routeGenus?: string
     routeSpecie?: string
   }
@@ -43,8 +51,22 @@ export interface SchemaFactoryOptions {
   collection?: {
     itemCount: number
     collectionType: 'articles' | 'taxons'
-    items?: any[]
-    subfamilies?: any[]
+    items?: Array<{
+      path: string
+      title: string
+      description: string
+      image: { main: string }
+      date: { published: string }
+    }>
+    subfamilies?: Array<{
+      name: string
+      description?: string
+      genus?: Array<{
+        specie?: Array<{
+          _count?: { specimen: number }
+        }>
+      }>
+    }>
   }
 
   // About page-specific options
@@ -326,13 +348,13 @@ export const useSchemaFactory = () => {
         taxonRank: 'species'
       },
       associatedMedia: taxon.specimens?.flatMap(specimen =>
-        specimen.taxonomy_picture?.map((picture: any) => ({
+        specimen.taxonomy_picture?.map((picture) => ({
           '@type': 'ImageObject',
           url: SCHEMA_URLS.image(`taxons/${taxon.routeGenus}-${taxon.routeSpecie}/${picture.file_name}`),
-          caption: `${taxon.scientificName} - ${specimen.form.name} - ${picture.view}`,
+          caption: `${taxon.scientificName} - ${specimen.form.name}`,
           width: picture.width || 1200,
           height: picture.height || 800,
-          dateCreated: picture.date_taken,
+          dateCreated: picture.date,
           ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS
         }))
       ) || []
@@ -353,7 +375,7 @@ export const useSchemaFactory = () => {
         name: 'Articles Myrmecophoto',
         description: `${collection.itemCount} articles sur la macro-photographie et la myrmécologie`,
         numberOfItems: collection.itemCount,
-        itemListElement: collection.items?.map((article: any, index: number) => ({
+        itemListElement: collection.items?.map((article, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           item: {
@@ -386,7 +408,7 @@ export const useSchemaFactory = () => {
           taxonRank: 'family'
         },
         keywords: SCHEMA_CONSTANTS.KEYWORDS.taxonomy,
-        hasPart: collection.subfamilies?.map((subfamily: any) => ({
+        hasPart: collection.subfamilies?.map((subfamily) => ({
           '@type': 'Collection',
           name: subfamily.name,
           description: subfamily.description,
@@ -395,8 +417,8 @@ export const useSchemaFactory = () => {
             name: subfamily.name,
             taxonRank: 'subfamily'
           },
-          collectionSize: subfamily.genus?.reduce((total: number, genus: any) =>
-            total + genus.specie?.filter((specie: any) => specie._count?.specimen > 0).length, 0) || 0
+          collectionSize: subfamily.genus?.reduce((total: number, genus) =>
+            total + (genus.specie?.filter((specie) => (specie._count?.specimen ?? 0) > 0).length ?? 0), 0) || 0
         })) || []
       }
     }

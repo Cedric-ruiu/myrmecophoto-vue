@@ -3,7 +3,12 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
-let [routeGenus, routeSpecie] = useRoute().params.slug[0].split('-', 2)
+const slugParam = useRoute().params.slug?.[0]
+
+if (!slugParam)
+  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+
+let [routeGenus, routeSpecie] = slugParam.split('-', 2)
 
 if (!routeGenus || !routeSpecie)
   throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
@@ -25,7 +30,7 @@ if (species == null || species.value == null)
 
 const specieId = ref(-1)
 
-for (const [index, specie] of species.value?.entries()) {
+for (const [index, specie] of species.value.entries()) {
   if (specie.name === routeSpecie) {
     specieId.value = index
     break
@@ -117,84 +122,88 @@ onUnmounted(() => {
 
 <template>
   <div v-if="species">
-    <div class="my-30">
-      <h1 class="text-white font-normal italic uppercase heading-1">
-        {{ species[specieId].genus.name }}
-        {{ species[specieId].name }}
+    <PageHeader
+      :title="`${species[specieId].genus.name} ${species[specieId].name}`"
+    >
+      <template #subtitle>
         <span class="ml-2 text-xl">
-          {{ species[specieId].researcher.name }}
-          {{ species[specieId].year }}
+          {{ species[specieId].researcher.name }}&nbsp;{{ species[specieId].year }}
         </span>
-      </h1>
-      <p>
-        <strong>Sous-famille : </strong>
-        <i>{{ species[specieId].genus.subfamily.name }}</i> -
-        <strong>Genre :</strong>
-        <i>{{ species[specieId].genus.name }}</i> -
-        <strong>Espèce : </strong>
-        <i>{{ species[specieId].name }}</i>
-      </p>
-    </div>
-    <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
-      <div class="w-full relative-md prose prose-gray dark:prose-invert">
-        <h2>
-          {{ specimen.form.name
-          }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
-        </h2>
-        <p v-if="specimen.description">
-          {{ specimen.description }}
+      </template>
+      <template #metadata>
+        <p class="order-4 text-gray-200 text-sm">
+          <strong>Sous-famille : </strong>
+          <i>{{ species[specieId].genus.subfamily.name }}</i> -
+          <strong>Genre : </strong>
+          <i>{{ species[specieId].genus.name }}</i> -
+          <strong>Espèce : </strong>
+          <i>{{ species[specieId].name }}</i>
         </p>
-      </div>
-      <div
-        id="galleryTaxon"
-        class="galleryTaxon bg-white rounded-md p-12 flex flex-wrap gap-6"
-      >
-        <TaxonPicture
-          v-for="picture in specimen.taxonomy_picture"
-          :key="picture.id"
-          :picture="picture"
-          :specimen="specimen"
-          :specie-id="specieId"
-        />
-      </div>
-      <div
-        class="[ horizontal-bottom-line-gradient ] w-full relative p-6 rounded-md mb-30"
-      >
-        <ul class="prose prose-gray dark:prose-invert relative">
-          <li>
-            <strong>Numéro du specimen :&nbsp;</strong>
-            <samp>{{ specimen.reference }}</samp>
-          </li>
-          <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
-          <li>
-            <strong>Collecteur : </strong>
-            <i>{{
-              specimen.contributor_specimen_collector_idTocontributor.name
-            }}</i>
-          </li>
-          <li
-            v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
-          >
-            <strong>Identificateur :</strong>
-            <i>{{
-              specimen.contributor_specimen_identifier_idTocontributor.name
-            }}</i>
-          </li>
-          <li v-if="specimen.size_mm">
-            <strong>Size :</strong> {{ specimen.size_mm }}mm
-          </li>
-          <li>
-            <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
-              specimen.country.name
-            }})
-          </li>
-          <li>
-            <strong>Date de capture :</strong> {{ specimen.capture_date }}
-          </li>
-        </ul>
-      </div>
-    </template>
-    <div class="prose prose-gray dark:prose-invert">
+      </template>
+    </PageHeader>
+    <div class="sm:pt-4 lg:pt-12">
+
+      <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
+        <div class="relative-md dark:prose-invert w-full prose prose-gray">
+          <h2>
+            {{ specimen.form.name
+            }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
+          </h2>
+          <p v-if="specimen.description">
+            {{ specimen.description }}
+          </p>
+        </div>
+        <div
+          id="galleryTaxon"
+          class="flex flex-wrap gap-6 bg-white p-12 rounded-md galleryTaxon"
+        >
+          <TaxonPicture
+            v-for="picture in specimen.taxonomy_picture"
+            :key="picture.id"
+            :picture="picture"
+            :specimen="specimen"
+            :specie-id="specieId"
+          />
+        </div>
+        <div
+          class="horizontal-bottom-line-gradient relative mb-30 p-6 rounded-md w-full [ ]"
+        >
+          <ul class="relative dark:prose-invert prose prose-gray">
+            <li>
+              <strong>Numéro du specimen :&nbsp;</strong>
+              <samp>{{ specimen.reference }}</samp>
+            </li>
+            <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
+            <li>
+              <strong>Collecteur : </strong>
+              <i>{{
+                specimen.contributor_specimen_collector_idTocontributor.name
+              }}</i>
+            </li>
+            <li
+              v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
+            >
+              <strong>Identificateur :</strong>
+              <i>{{
+                specimen.contributor_specimen_identifier_idTocontributor.name
+              }}</i>
+            </li>
+            <li v-if="specimen.size_mm">
+              <strong>Size :</strong> {{ specimen.size_mm }}mm
+            </li>
+            <li>
+              <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
+                specimen.country.name
+              }})
+            </li>
+            <li>
+              <strong>Date de capture :</strong> {{ specimen.capture_date }}
+            </li>
+          </ul>
+        </div>
+      </template>
+    </div>
+    <div class="dark:prose-invert prose prose-gray">
       <h2>Resources</h2>
       <ul>
         <li>

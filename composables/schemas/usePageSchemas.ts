@@ -66,7 +66,6 @@ export const usePageSchemas = () => {
   const applyArticleSchemas = (options: SchemaFactoryOptions) => {
     if (!options.article) return
 
-    const route = useRoute()
     const schemas = [
       factory.createArticleSchema(options),
       {
@@ -112,7 +111,6 @@ export const usePageSchemas = () => {
   const applyTaxonSchemas = (options: SchemaFactoryOptions) => {
     if (!options.taxon) return
 
-    const route = useRoute()
     const schemas = [
       factory.createTaxonSchema(options),
       factory.createImageGallerySchema(options),
@@ -221,7 +219,7 @@ export const usePageSchemas = () => {
   /**
    * Auto-detect page type from route if not provided
    */
-  const detectPageType = (route: any): PageType | null => {
+  const detectPageType = (route: ReturnType<typeof useRoute>): PageType | null => {
     const path = route.path
 
     // Route-based detection with smart defaults

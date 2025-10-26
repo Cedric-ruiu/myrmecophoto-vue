@@ -5,8 +5,8 @@ defineProps({
 </script>
 
 <template>
-  <li class="[ u-headerNavItem ] relative sm:ml-8">
-    <NuxtLink :to="link" class="[ u-headerNavItem__link ] block py-2 sm:py-0">
+  <li class="relative not-first:sm:ml-8 [ u-headerNavItem ]">
+    <NuxtLink :to="link" class="block py-2 sm:py-0 [ u-headerNavItem__link ]">
       <slot />
     </NuxtLink>
   </li>
@@ -20,22 +20,26 @@ defineProps({
     &.router-link-active::before {
       @include gradient-primary();
 
-      display: block;
+      content: '';
+
       position: absolute;
       top: 0;
       bottom: 0;
       left: -10px;
+
+      display: block;
+
       width: 4px;
       height: 4px;
       margin: auto 0;
       border-radius: 2px;
-      content: '';
 
       @include media('>=sm') {
         top: initial;
         right: 0;
-        left: 0;
         bottom: -8px;
+        left: 0;
+
         margin: 0 auto;
       }
     }

@@ -1,19 +1,15 @@
 <script setup>
-// Chargement conditionnel des données taxonomiques selon la route
 const route = useRoute()
 
-// Condition réactive pour déterminer si les données taxonomiques sont nécessaires
 const needsTaxonomicData = computed(() =>
   route.path === '/taxons' || route.path.startsWith('/taxons/')
 )
 
-// Données taxonomiques avec chargement conditionnel réactif
 const { data: species, refresh: refreshSpecies } = await useFetch('/api/getSpecies', {
   key: 'species',
   server: true,
   lazy: true,
   default: () => [],
-  // Ne pas exécuter le fetch si pas nécessaire côté serveur
   skip: () => !needsTaxonomicData.value && import.meta.server
 })
 
@@ -22,14 +18,12 @@ const { data: subfamilies, refresh: refreshSubfamilies } = await useFetch('/api/
   server: true,
   lazy: true,
   default: () => [],
-  // Ne pas exécuter le fetch si pas nécessaire côté serveur
   skip: () => !needsTaxonomicData.value && import.meta.server
 })
 
-// Watch pour déclencher le fetch lors des changements de route
+// Fetch taxonomic data on client-side navigation when needed
 watch(needsTaxonomicData, (newValue) => {
   if (newValue && import.meta.client) {
-    // Déclencher le fetch des données seulement si nécessaire
     if (!species.value?.length) {
       refreshSpecies()
     }
@@ -39,8 +33,7 @@ watch(needsTaxonomicData, (newValue) => {
   }
 }, { immediate: true })
 
-// Email contact toujours nécessaire et léger
-const { data: emailEncrypted } = await useFetch(
+const { data: _emailEncrypted } = await useFetch(
   '/api/getEncryptedEmailContact',
   { key: 'emailEncrypted' },
 )
