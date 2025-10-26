@@ -20,7 +20,7 @@ const imageData = useArticleImageData('', props.src)
 
 <template>
   <figure
-    class="relative my-8 sm:my-16 lg:my-24 ml-[50%] w-[100vw] max-w-[1600px] translate-x-[-50%] not-prose"
+    class="full-width relative my-8 sm:my-16 lg:my-24 mx-auto max-w-[1600px] not-prose"
     :style="{
       aspectRatio: imageData.aspectRatio
     }"

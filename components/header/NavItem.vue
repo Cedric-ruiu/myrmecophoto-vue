@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-  <li class="relative sm:ml-8 [ u-headerNavItem ]">
+  <li class="relative not-first:sm:ml-8 [ u-headerNavItem ]">
     <NuxtLink :to="link" class="block py-2 sm:py-0 [ u-headerNavItem__link ]">
       <slot />
     </NuxtLink>

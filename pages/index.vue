@@ -21,9 +21,9 @@ useSeoConfig({
 </script>
 
 <template>
-  <div class="grid [ o-hero ]">
+  <div class="relative [ o-hero ]">
     <div
-      class="z-1 flex flex-col justify-center font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
+      class="z-1 absolute flex flex-col justify-center w-full font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
     >
       <h1 class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
@@ -76,9 +76,7 @@ useSeoConfig({
 
 <style lang="scss">
 :root {
-  --hero-font-size: calc(5000vw / 1080);
-  --subtitle-font-size: calc(4000vw / 1080);
-  --hero-height: calc((5000vw / 1080) * 3);
+  --hero-height: calc((5000vw / 1080) * 3); // 13.88vw
   --hero-gap: 20px;
 }
 
@@ -96,21 +94,20 @@ useSeoConfig({
     }
 
     &__baselineTitle {
-      margin-top: 50px;
-      font-size: 7vw;
+      margin-top: 25px;
+      font-size: 8vw;
       animation: title-appear 2s ease-in-out both 0.5s;
 
-      @include media('>=sm') {
-        margin-top: 150px;
-        font-size: calc(8000vw / 1080);
-      }
-
-      @include media('>=md') {
-        font-size: calc(8000vw / 1080);
-      }
-
       @include media('>=lg') {
-        font-size: calc(6000vw / 1080);
+        font-size: 5.5vw
+      }
+
+      @include media('>=xl') {
+        margin-top: 50px;
+      }
+
+      @include media('>=xxl') {
+        margin-top: 125px;
       }
     }
 
@@ -119,10 +116,9 @@ useSeoConfig({
 
       font-size: calc(6000vw / 1080);
       line-height: 1.1em;
+      text-shadow: 1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white;
 
       animation: subtitle-appear 2s ease-in-out both 1s;
-
-      -webkit-text-stroke: 0.03em white;
 
       @include media('>=lg') {
         margin-top: 0.3em;
@@ -132,10 +128,13 @@ useSeoConfig({
 
     &__pictures {
       gap: var(--hero-gap);
+      height: 100%;
     }
 
     &__picture4Edges {
       // Three background images creating a wave pattern with angled top edges
+      height: calc(100dvh - (var(--hero-height) + var(--header-height)));
+      margin-top: var(--hero-height);
 
       &:nth-child(1) {
         // Left image: trapezoid with angled top-right edge
@@ -146,13 +145,28 @@ useSeoConfig({
           100% calc(var(--hero-height) * 0.7) // top right (angled)
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+
+        @media screen and (orientation: portrait) {
+          img {
+            object-position: 60% 50%;
+          }
+        }
       }
 
       &:nth-child(2) {
         // Center image: rectangle shifted down by 70% hero-height
-        height: calc(100% - 0.7 * var(--hero-height));
-        margin-top: calc(0.7 * var(--hero-height));
+        height: calc(100dvh - ((var(--hero-height) * 1.65 + var(--header-height))));
+        margin-top: calc(var(--hero-height) * 1.65);
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.5s;
+
+        @media screen and (orientation: portrait) {
+          height: calc(100% - (35dvh));
+          margin-top: calc(35dvh);
+
+          img {
+            object-position: 63% 50%;
+          }
+        }
       }
 
       &:nth-child(3) {
@@ -164,25 +178,26 @@ useSeoConfig({
           100% 0                            // top right
         );
         animation: picture-4-edges-appear 2.5s ease-in-out both 0.7s;
+
+        @media screen and (orientation: portrait) {
+          img {
+            object-position: 70% 50%;
+          }
+        }
       }
 
       @media screen and (orientation: portrait) {
         // Portrait: all shifted down by 2x hero-height to make room for hexagon
-        height: calc(100% - 2 * var(--hero-height));
-        margin-top: calc(2 * var(--hero-height));
+        height: calc(100% - (30dvh));
+        margin-top: calc(30dvh);
       }
     }
 
     &__picture6Edges {
       // Position: vertically centered on hero (overflows top)
-      top: calc(var(--hero-height) - 2 * var(--hero-height)); // = -1 * hero-height
       height: calc(2 * var(--hero-height));
 
       // Hexagonal shape: 6 points define the corners
-      // Top center point: (50%, hero-height)
-      // Top corners: (0,0) and (100%,0)
-      // Bottom corners: (0,hero-height) and (100%,hero-height)
-      // Bottom center point: (50%, 2*hero-height)
       clip-path: polygon(
         50% calc(var(--hero-height)),     // top center
         100% 0,                           // top right
@@ -195,21 +210,21 @@ useSeoConfig({
 
       @media screen and (orientation: portrait) {
         // Portrait: hexagon 2x taller
-        height: calc(4 * var(--hero-height));
+        height: calc(30dvh + var(--hero-height));
         clip-path: polygon(
-          50% calc(var(--hero-height)),      // top center
-          100% 0,                            // top right
-          100% calc(var(--hero-height) * 3), // bottom right
-          50% calc(var(--hero-height) * 4),  // bottom center
-          0 calc(var(--hero-height) * 3),    // bottom left
-          0 0                                // top left
+          50% var(--hero-height),               // top center
+          100% 0,                               // top right
+          100% 30dvh,                           // bottom right
+          50% calc(30dvh + var(--hero-height)), // bottom center
+          0 30dvh,                              // bottom left
+          0 0                                   // top left
         );
       }
     }
 
     &__picture6EdgesShadow {
       // Creates gap between hexagon and background images using inverted hexagon shape
-      top: -1px; // hide line glitch
+      top: calc(var(--hero-height) - 1px);
 
       height: calc(var(--hero-gap) + var(--hero-height));
 
@@ -228,7 +243,7 @@ useSeoConfig({
       animation: picture-6-edges-appear 3s ease-in-out both 0s;
 
       @media screen and (orientation: portrait) {
-        top: calc(var(--hero-height) * 2 - 1px); // -1px => hide line glitch
+        top: 30dvh;
       }
     }
   }

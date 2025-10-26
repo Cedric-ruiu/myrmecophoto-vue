@@ -32,13 +32,11 @@ useSeoConfig({
 
 <template>
   <div>
-    <h1 class="mb-16 font-normal text-white text-6xl italic uppercase">
-      Tous les articles
-    </h1>
+    <PageHeader title="Tous les articles" />
     <article
       v-for="article in articles"
       :key="article.path"
-      class="flex flex-row gap-4 mb-16"
+      class="flex flex-row gap-4 mb-16 pt-12 sm:pt-20 lg:pt-28"
     >
       <NuxtLink
         :to="article.path"
