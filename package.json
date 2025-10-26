@@ -11,7 +11,7 @@
     "serve-generate": "yarn generate & yarn serveSSG",
     "serve-generate:local": "yarn generate:local && yarn serveSSG",
     "preview": "nuxt preview",
-    "format": "yarn format:script && yarn format:style && yarn format:tailwind",
+    "format": "yarn format:tailwind && yarn format:script && yarn format:style",
     "format:script": "eslint . --fix",
     "format:style": "stylelint \"assets/*.scss\" \"**/*.vue\" --fix",
     "format:tailwind": "tailwind-sorter sort -i \"**/*.vue\"",

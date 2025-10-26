@@ -8,7 +8,12 @@
     "source.fixAll.stylelint": "explicit"
   },
   "editor.formatOnSave": true,
-  "stylelint.validate": ["css", "scss", "vue", "html"],
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "vue",
+    "html"
+  ],
   "cSpell.ignorePaths": [
     "package-lock.json",
     "package.json",

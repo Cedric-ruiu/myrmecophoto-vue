@@ -46,7 +46,7 @@ const imageData = computed(() => {
 
 <template>
   <figure
-    class="full-width relative my-8 sm:my-16 lg:my-24 mx-auto max-w-[1600px] not-prose"
+    class="relative mx-auto my-8 sm:my-16 lg:my-24 max-w-[1600px] full-width not-prose"
     :style="{
       aspectRatio: imageData.aspectRatio
     }"
