@@ -1,14 +1,13 @@
 <script setup lang="ts">
 const open = ref(false)
 const route = useRoute()
-// <code>{{ route }}</code>
 </script>
 
 <template>
   <header>
     <div
       :class="{ 'to-anime': route.name === 'index' }"
-      class="flex flex-wrap justify-between content-center mx-auto p-5 w-full sm:h-20 font-text [ o-header ] container"
+      class="flex flex-wrap justify-between items-center content-center mx-auto px-5 xs:px-7.5 py-5 w-full lg:max-w-256 xl:max-w-320 xxl:max-w-400 sm:h-20 font-text [ o-header ]"
     >
       <NuxtLink to="/" class="font-400 text-lg uppercase">
         Myrmeco<span class="font-700 text-gradient-primary">photo</span>
@@ -30,7 +29,7 @@ const route = useRoute()
       <button
         type="button"
         :class="{ on: open }"
-        class="sm:hidden box-content relative p-0 [ o-header__menuBar ]"
+        class="sm:hidden -right-2.5 box-content relative p-0 [ o-header__menuBar ]"
         aria-controls="main-nav-header"
         :aria-expanded="open"
         aria-label="Ouvrir le menu de navigation"
