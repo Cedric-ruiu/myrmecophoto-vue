@@ -76,5 +76,6 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "editor.formatOnPaste": true
-  }
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
