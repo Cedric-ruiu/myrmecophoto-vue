@@ -157,12 +157,18 @@ export function useSeoConfig(options: SeoConfigOptions) {
     schemaData = {},
   } = options
 
-  // Automatic canonical URL
+  // Automatic canonical URL with trailing slash (Netlify Pretty URLs compatibility)
   const route = useRoute()
   const siteUrl = process.env.NUXT_SITE_URL || 'https://myrmecophoto.fr'
   const siteName = process.env.NUXT_SITE_NAME || 'Myrmecophoto'
   const siteAuthor = process.env.NUXT_SITE_AUTHOR || 'Cédric Ruiu'
-  const canonicalUrl = `${siteUrl}${route.path}`
+
+  // Add trailing slash for all routes except root
+  const routePath = route.path === '/'
+    ? route.path
+    : route.path.endsWith('/') ? route.path : route.path + '/'
+
+  const canonicalUrl = `${siteUrl}${routePath}`
 
   // useHead configuration
   const headConfig = {

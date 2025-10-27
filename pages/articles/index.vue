@@ -39,7 +39,7 @@ useSeoConfig({
       class="flex flex-row gap-4 mb-16 pt-12 sm:pt-20 lg:pt-28"
     >
       <NuxtLink
-        :to="article.path"
+        :to="article.path.endsWith('/') ? article.path : article.path + '/'"
         :aria-label="`Lire l'article : ${article.title}`"
         class="block horizontal-bottom-line-gradient relative flex-[1_0_auto] md:flex-none w-20 md:w-80 h-20 md:h-60"
         ><img
@@ -47,7 +47,7 @@ useSeoConfig({
           :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
           :alt="`Image de l'article : ${article.title}`"
       ></NuxtLink>
-      <NuxtLink :to="article.path" class="dark:prose-invert prose prose-gray">
+      <NuxtLink :to="article.path.endsWith('/') ? article.path : article.path + '/'" class="dark:prose-invert prose prose-gray">
         <h3 class="mt-0 mb-2 line-clamp-2">{{ article.title }}</h3>
         <p class="mt-2 mb-2 line-clamp-5">{{ article.description }}</p>
         <small

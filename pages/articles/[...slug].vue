@@ -21,7 +21,7 @@ const articleDescription = computed(
 // Breadcrumb items for PageHeader component
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
   { label: 'Accueil', href: '/' },
-  { label: 'Articles', href: '/articles' },
+  { label: 'Articles', href: '/articles/' },
   { label: articleTitle.value, current: true },
 ])
 
