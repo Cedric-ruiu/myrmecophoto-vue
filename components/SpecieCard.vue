@@ -28,7 +28,7 @@ const imageData = computed(() => {
 
 <template>
   <NuxtLink
-    :to="`/taxons/${props.taxon.replace(' ', '-').replace('.', '').toLowerCase()}`"
+    :to="`/taxons/${props.taxon.replace(' ', '-').replace('.', '').toLowerCase()}/`"
     class="inline-flex relative flex-col justify-end p-3.5 rounded-md aspect-video text-white [ specie-card ]"
   >
     <picture v-if="imageData.hasValidData">

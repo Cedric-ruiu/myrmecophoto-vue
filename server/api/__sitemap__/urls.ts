@@ -28,7 +28,7 @@ export default defineSitemapEventHandler(async () => {
           .toLowerCase() // Normalize to lowercase
 
         urls.push({
-          loc: `/taxons/${taxon}`,
+          loc: `/taxons/${taxon}/`,
           lastmod: new Date(2025, 1, 16).toISOString(),
           changefreq: 'monthly',
           priority: 0.7,

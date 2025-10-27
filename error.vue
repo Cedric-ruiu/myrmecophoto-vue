@@ -70,7 +70,7 @@ useSeoConfig({
           </NuxtLink>
 
           <NuxtLink
-            to="/articles"
+            to="/articles/"
             class="hover:bg-gray-50 dark:hover:bg-gray-800 px-6 py-3 border-1 border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-600 text-gray-700 dark:text-gray-300 transition-all"
           >
             Parcourir les articles

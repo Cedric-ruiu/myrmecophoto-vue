@@ -106,7 +106,9 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
+    trailingSlash: true, // Ensure URLs in sitemap have trailing slashes
     sources: ['/api/__sitemap__/urls', '/api/__sitemap__/images'],
+    excludeAppSources: true, // Prevent auto-discovery of pages to avoid duplicates
   },
 
   robots: {

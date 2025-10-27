@@ -10,9 +10,9 @@ if (emailEncrypted == null || emailEncrypted.value == null)
 const currentYear = new Date().getFullYear()
 
 const navigationLinks = [
-  { to: '/taxons', label: 'Photos spécimens' },
-  { to: '/articles', label: 'Articles' },
-  { to: '/about', label: 'À propos / Contact' },
+  { to: '/taxons/', label: 'Photos spécimens' },
+  { to: '/articles/', label: 'Articles' },
+  { to: '/about/', label: 'À propos / Contact' },
 ]
 
 const socialLinks = [
