@@ -32,6 +32,7 @@ function findFiles(dir: string, pattern: string): string[] {
 
 export default defineEventHandler(async (): Promise<SitemapUrlInput[]> => {
   const urls: SitemapUrlInput[] = []
+  const now = new Date().toISOString()
 
   try {
     // Base URL for the site
@@ -71,7 +72,7 @@ export default defineEventHandler(async (): Promise<SitemapUrlInput[]> => {
             caption: `Photographie macro de fourmis - ${imageTitle}`,
           }
         ],
-        lastmod: new Date(2025, 1, 16).toISOString(),
+        lastmod: now,
         changefreq: 'yearly',
         priority: 0.5,
         _sitemap: 'images',
@@ -118,7 +119,7 @@ export default defineEventHandler(async (): Promise<SitemapUrlInput[]> => {
             caption: `Photographie taxonomique de ${scientificName} - ${imageType}`,
           }
         ],
-        lastmod: new Date(2025, 1, 16).toISOString(),
+        lastmod: now,
         changefreq: 'yearly',
         priority: 0.6,
         _sitemap: 'images',

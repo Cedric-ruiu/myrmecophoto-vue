@@ -1,12 +1,6 @@
 <script setup lang="ts">
 const { data: emailEncrypted } = useNuxtData('emailEncrypted')
 
-if (emailEncrypted == null || emailEncrypted.value == null)
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Api getEncryptedEmailContact Not Found',
-  })
-
 const currentYear = new Date().getFullYear()
 
 const navigationLinks = [
@@ -75,8 +69,8 @@ const socialLinks = [
             Contact & Réseaux
           </h3>
           <ul class="flex flex-col gap-3 m-0 p-0 list-none">
-            <li class="text-[0.9rem] text-white/80 hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out">
-              <MailTo :email-encrypted="emailEncrypted?.data" />
+            <li v-if="emailEncrypted?.data" class="text-[0.9rem] text-white/80 hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out">
+              <MailTo :email-encrypted="emailEncrypted.data" />
             </li>
             <li v-for="social in socialLinks" :key="social.href">
               <a

@@ -71,7 +71,7 @@ export const usePageSchemas = () => {
       {
         '@type': 'WebPage',
         breadcrumb: factory.createBreadcrumbSchema([
-          { name: 'Articles', url: 'https://myrmecophoto.fr/articles' },
+          { name: 'Articles', url: 'https://myrmecophoto.fr/articles/' },
           { name: options.article.headline }
         ])
       }
@@ -119,7 +119,7 @@ export const usePageSchemas = () => {
         name: `${options.taxon.scientificName} - Page taxonomique`,
         description: `Macrophotographies taxonomiques de ${options.taxon.scientificName} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`,
         breadcrumb: factory.createBreadcrumbSchema([
-          { name: 'Taxons', url: 'https://myrmecophoto.fr/taxons' },
+          { name: 'Taxons', url: 'https://myrmecophoto.fr/taxons/' },
           { name: options.taxon.scientificName }
         ])
       }
@@ -220,7 +220,7 @@ export const usePageSchemas = () => {
    * Auto-detect page type from route if not provided
    */
   const detectPageType = (route: ReturnType<typeof useRoute>): PageType | null => {
-    const path = route.path
+    const path = route.path.replace(/\/$/, '') || '/'
 
     // Route-based detection with smart defaults
     if (path === '/') return 'homepage'

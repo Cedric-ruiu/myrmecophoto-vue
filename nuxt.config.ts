@@ -140,6 +140,7 @@ export default defineNuxtConfig({
       "Myrmecophoto : site de macrophotographie scientifique de fourmis françaises. Identification taxonomique des espèces, techniques photo macro, articles myrmécologie et guides d'équipement pour photographier les Formicidae.",
     defaultLocale: 'fr',
     author: process.env.NUXT_SITE_AUTHOR || 'Cédric Ruiu',
+    trailingSlash: true,
   },
 
   ogImage: {

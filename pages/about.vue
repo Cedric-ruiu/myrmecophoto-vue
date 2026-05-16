@@ -24,12 +24,6 @@ const form = ref({
 
 const { data: emailEncrypted } = useNuxtData('emailEncrypted')
 
-if (emailEncrypted == null || emailEncrypted.value == null)
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Api getEncryptedEmailContact Not Found',
-  })
-
 const formResponse = ref('')
 
 function handleSubmit(event: Event) {
