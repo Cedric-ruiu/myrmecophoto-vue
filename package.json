@@ -19,7 +19,7 @@
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
   "devDependencies": {
-    "@cedric-ruiu/stylelint-config": "0.6.0",
+    "@cedric-ruiu/stylelint-config": "1.0.4",
     "@iconify-json/fa6-brands": "1.2.6",
     "@mermaid-js/mermaid-cli": "11.12.0",
     "@netlify/functions": "4.3.0",
@@ -47,7 +47,7 @@
     "prisma": "6.18.0",
     "prisma-erd-generator": "2.1.0",
     "sass": "1.93.2",
-    "stylelint": "16.25.0",
+    "stylelint": "17.11.1",
     "tailwind-sorter": "1.0.2",
     "typescript": "5.9.3"
   },
