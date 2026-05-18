@@ -1,7 +1,7 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../prisma/generated/client/client'
 import db from '../db'
 
-const speciesInclude = Prisma.validator<Prisma.specieDefaultArgs>()({
+const speciesInclude = {
   include: {
     researcher: true,
     specimen: {
@@ -28,7 +28,7 @@ const speciesInclude = Prisma.validator<Prisma.specieDefaultArgs>()({
       },
     },
   },
-})
+} satisfies Prisma.specieDefaultArgs
 
 export type SpeciesWithRelations = Prisma.specieGetPayload<typeof speciesInclude>
 
