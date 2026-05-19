@@ -92,6 +92,7 @@ export default defineNuxtConfig({
         '/api/__sitemap__/urls',
         '/api/__sitemap__/images',
       ],
+      concurrency: 2,
     },
     esbuild: {
       options: {
@@ -146,10 +147,20 @@ export default defineNuxtConfig({
 
   ogImage: {
     enabled: true,
+    zeroRuntime: true,
+    buildCache: true,
     defaults: {
       component: 'NuxtSeo',
       width: 1200,
       height: 630,
+      colorMode: 'dark',
+      theme: '#e72c27',
+      siteLogo: '/myrmecophoto-logo.png',
+      emojis: false,
+    },
+    security: {
+      renderTimeout: 30000,
+      imageFetchTimeout: 5000,
     },
   },
 
