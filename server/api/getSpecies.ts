@@ -1,4 +1,4 @@
-import { Prisma } from '../../prisma/generated/client/client'
+import type { Prisma } from '../../prisma/generated/client/client'
 import db from '../db'
 
 const speciesInclude = {
