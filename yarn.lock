@@ -6759,7 +6759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unhead/bundler@npm:3.1.0, @unhead/bundler@npm:^3.0.5":
+"@unhead/bundler@npm:^3.0.5":
   version: 3.1.0
   resolution: "@unhead/bundler@npm:3.1.0"
   dependencies:
@@ -6815,27 +6815,6 @@ __metadata:
     "@unhead/vue":
       optional: true
   checksum: 10c0/8f142538f9e09145a8807c4d0401a4009e19d3877ea0fa3f5889bb41c531a3ab0879d483eaec5460c10929c17d1b4ed475431a4bf01b832918aafc1d78935f3b
-  languageName: node
-  linkType: hard
-
-"@unhead/vue@npm:3.1.0":
-  version: 3.1.0
-  resolution: "@unhead/vue@npm:3.1.0"
-  dependencies:
-    "@unhead/bundler": "npm:3.1.0"
-    hookable: "npm:^6.1.1"
-    unhead: "npm:3.1.0"
-    unplugin: "npm:^3.0.0"
-  peerDependencies:
-    vite: ">=6.4.2"
-    vue: ">=3.5.18"
-    webpack: ">=5.0.0"
-  peerDependenciesMeta:
-    vite:
-      optional: true
-    webpack:
-      optional: true
-  checksum: 10c0/ba6674dfa9e469161f9046b1665c4a20e3e7f29368bbb2be6cd665db1c34fbfef614193cd393b33e63325a5e226579280a31c00bd31c06d79438410bd0e711b5
   languageName: node
   linkType: hard
 
@@ -18667,7 +18646,6 @@ __metadata:
     "@prisma/client": "npm:7.8.0"
     "@resvg/resvg-js": "npm:2.6.2"
     "@types/image-size": "npm:0.8.0"
-    "@unhead/vue": "npm:3.1.0"
     "@unocss/nuxt": "npm:66.7.0"
     "@unocss/preset-icons": "npm:66.7.0"
     "@unocss/preset-typography": "npm:66.7.0"
@@ -20411,21 +20389,6 @@ __metadata:
   dependencies:
     hookable: "npm:^6.0.1"
   checksum: 10c0/ab266e9cda44d0b528ae3b62ce9136cb4f81bd2aa1e2d66431cefe6b41151a811971951e05b4d81e6adea105b65901d9091dffa29d646f1be6246691606b2407
-  languageName: node
-  linkType: hard
-
-"unhead@npm:3.1.0":
-  version: 3.1.0
-  resolution: "unhead@npm:3.1.0"
-  dependencies:
-    hookable: "npm:^6.1.1"
-    unplugin: "npm:^3.0.0"
-  peerDependencies:
-    vite: ">=6.4.2"
-  peerDependenciesMeta:
-    vite:
-      optional: true
-  checksum: 10c0/967ab3ee8729398a92d69c372d8815b7a76d55d92fe9b5f628cf88e29b75df061d9eae1f787d14fefb7efab0595492c2fa30f3d89154f17c26297513c9f7f46b
   languageName: node
   linkType: hard
 
