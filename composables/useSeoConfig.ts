@@ -253,7 +253,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
   // Apply configurations
   useHead(headConfig)
-  defineOgImage('NuxtSeo', ogImageConfig)
+  defineOgImage('NuxtSeo.satori', ogImageConfig)
   useSeoMeta(seoMetaConfig)
 
   // Always apply Schema.org (either explicit pageType or auto-detected)

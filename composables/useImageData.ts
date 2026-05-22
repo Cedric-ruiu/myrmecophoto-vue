@@ -63,7 +63,7 @@ export const useImageData = (imagePath: string): ImageData => {
       thumbnailWidth,
       thumbnailHeight,
       aspectRatio,
-      largestAvif
+      largestAvif: largestAvif ?? null
     }
   }
 
@@ -93,7 +93,7 @@ export const useImageData = (imagePath: string): ImageData => {
     thumbnailWidth: 300,
     thumbnailHeight: 0,
     aspectRatio: undefined, // Unknown for convention fallback
-    largestAvif
+    largestAvif: largestAvif ?? null
   }
 }
 
