@@ -48,7 +48,7 @@
     "satori": "0.26.0",
     "stylelint": "17.11.1",
     "tailwind-sorter": "1.0.3",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "packageManager": "yarn@4.9.4",
   "dependencies": {
