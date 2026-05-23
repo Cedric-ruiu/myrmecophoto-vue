@@ -71,6 +71,32 @@ useSeoConfig({
       <div class="left-0 absolute w-full [ o-hero__picture6EdgesShadow ]" />
     </div>
   </div>
+  <section class="mx-auto px-6 py-16 lg:py-24 max-w-prose dark:prose-invert prose prose-gray">
+    <h2>Macrophotographie scientifique des fourmis françaises</h2>
+    <p>
+      Myrmecophoto est dédié à la <strong>macrophotographie taxonomique</strong> des fourmis de France
+      et d'Europe. Plus de trente espèces de la famille des <i>Formicidae</i> y sont documentées à
+      travers des vues détaillées d'ouvrières, gynes, mâles et castes spécialisées (minors, majors,
+      médias), photographiées en studio à fort grossissement pour faire ressortir les critères
+      d'identification morphologiques utilisés en myrmécologie.
+    </p>
+    <p>
+      La <NuxtLink to="/taxons/">collection taxonomique</NuxtLink> couvre les principales sous-familles
+      observables sur le territoire français — <i>Formicinae</i>, <i>Myrmicinae</i>, <i>Ponerinae</i>,
+      <i>Dolichoderinae</i> et <i>Myrmeciinae</i>. Chaque fiche réunit des photographies sous plusieurs
+      angles (face, profil, dessus) ainsi que les détails utiles à la détermination : forme du
+      pétiole, propodéum, scape, funicules, mandibules, ainsi que les informations de capture du
+      spécimen (collecteur, identificateur, site, date).
+    </p>
+    <p>
+      Les <NuxtLink to="/articles/">articles</NuxtLink> abordent le terrain et la technique :
+      observations comportementales (essaimages, fondations claustrales, mutualisme avec les pucerons,
+      transport du couvain), suivis de colonies en élevage, et retours d'expérience sur le matériel
+      photographique adapté à la macrophoto de fourmis — comparatifs d'objectifs inversés
+      (Canon 50mm, 35mm) et de bonnettes macro (Raynox CM-3500), choix de la mise au point, gestion
+      de la profondeur de champ et des aberrations chromatiques.
+    </p>
+  </section>
 </template>
 
 <style lang="scss">

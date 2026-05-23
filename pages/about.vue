@@ -108,11 +108,11 @@ function buildErrorMessage(mess: string) {
       </div>
       <div>
         <div class="my-10 lg:my-30">
-          <h1
+          <h2
             class="font-normal text-white text-5xl lg:text-6xl italic uppercase"
           >
             Contactez moi
-          </h1>
+          </h2>
         </div>
         <div class="dark:prose-invert prose prose-gray">
           <p>

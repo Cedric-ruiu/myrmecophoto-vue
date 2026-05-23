@@ -51,6 +51,31 @@ const taxonomicDescription = computed(() => {
   return `Macrophotographies taxonomiques de ${scientificName.value} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`
 })
 
+// SEO-friendly introduction paragraph generated from available data
+const taxonIntro = computed(() => {
+  const s = currentSpecies.value
+  if (!s) return ''
+  const specimenCount = s.specimen?.length || 0
+  const formNames = [...new Set((s.specimen || []).map(sp => sp.form.name))]
+  const countries = [...new Set((s.specimen || []).map(sp => sp.country?.name).filter(Boolean))]
+  const castesLabel = formNames.length
+    ? formNames.join(', ').toLowerCase()
+    : 'différentes castes'
+  const locationLabel = countries.length
+    ? `Spécimens collectés en ${countries.join(', ')}.`
+    : ''
+  return `${scientificName.value} est une espèce de fourmi de la sous-famille des `
+    + `${s.genus.subfamily.name} (genre ${s.genus.name}), décrite par `
+    + `${s.researcher.name} en ${s.year}. Cette fiche regroupe `
+    + `${specimenCount} spécimen${specimenCount > 1 ? 's' : ''} photographié`
+    + `${specimenCount > 1 ? 's' : ''} en macrophotographie taxonomique (${castesLabel}). `
+    + `${locationLabel}`
+})
+
+const subfamilyDescription = computed(
+  () => currentSpecies.value?.genus.subfamily.description || '',
+)
+
 useSeoConfig({
   title: scientificName.value,
   description: taxonomicDescription.value,
@@ -141,6 +166,13 @@ onUnmounted(() => {
         </p>
       </template>
     </PageHeader>
+    <section class="dark:prose-invert mx-auto pt-8 sm:pt-12 lg:pt-16 max-w-prose prose prose-gray">
+      <p>{{ taxonIntro }}</p>
+      <p v-if="subfamilyDescription">
+        <strong>Sous-famille {{ species[specieId].genus.subfamily.name }} :</strong>
+        {{ subfamilyDescription }}
+      </p>
+    </section>
     <div class="sm:pt-4 lg:pt-12">
 
       <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
