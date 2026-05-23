@@ -1,7 +1,7 @@
-import { Prisma } from '@prisma/client'
+import type { Prisma } from '../../prisma/generated/client/client'
 import db from '../db'
 
-const taxaInclude = Prisma.validator<Prisma.subfamilyDefaultArgs>()({
+const taxaInclude = {
   include: {
     genus: {
       include: {
@@ -18,7 +18,7 @@ const taxaInclude = Prisma.validator<Prisma.subfamilyDefaultArgs>()({
       orderBy: { name: 'asc' },
     },
   },
-})
+} satisfies Prisma.subfamilyDefaultArgs
 
 export type TaxaWithRelations = Prisma.subfamilyGetPayload<typeof taxaInclude>
 

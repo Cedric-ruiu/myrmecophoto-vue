@@ -1,6 +1,6 @@
 ---
-title: 'Nid de Lasius : Structure, fonction et observation des galeries souterraines'
-description: "Analyse myrmécologique de l'architecture d'un nid de fourmis Lasius découvert sous une pierre. Cet article détaille l'organisation des galeries, des loges à couvain, et le rôle thermorégulateur et protecteur de la pierre pour la colonie."
+title: 'Nid de Lasius : structure et galeries souterraines'
+description: "Architecture d'un nid de fourmis Lasius sous une pierre : galeries, loges à couvain, rôle thermorégulateur et protecteur pour la colonie."
 date:
   published: 2006-06-04
   updated: 2025-05-10

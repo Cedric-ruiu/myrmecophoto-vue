@@ -9,7 +9,7 @@ const { data: articles } = await useAsyncData('articles', () => {
 const articleCount = computed(() => articles?.value?.length || 0)
 
 useSeoConfig({
-  title: 'Articles myrmécologie & macro-photographie | Myrmecophoto',
+  title: 'Articles myrmécologie & macro-photographie',
   description:
     "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
   ogImageProps: {

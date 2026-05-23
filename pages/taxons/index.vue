@@ -23,7 +23,7 @@ const speciesCount = computed(() => {
 const subfamilyCount = computed(() => subfamilies?.value?.length || 0)
 
 useSeoConfig({
-  title: 'Collection taxonomique - Fourmis de France | Myrmecophoto',
+  title: 'Collection taxonomique - Fourmis de France',
   description:
     "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
   ogImageProps: {

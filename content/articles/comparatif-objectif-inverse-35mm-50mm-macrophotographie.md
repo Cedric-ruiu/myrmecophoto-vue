@@ -1,6 +1,6 @@
 ---
-title: 'Analyse Comparative : Objectif Inversé 35mm vs 50mm pour la macrophotographie'
-description: 'Un guide complet pour sélectionner votre objectif inversé en macrophotographie : comparaison détaillée des focales 35mm et 50mm, analyse du grossissement, de la profondeur de champ, et conseils pour la photo naturaliste ou taxonomique.'
+title: 'Objectif inversé : 35mm vs 50mm en macrophoto'
+description: 'Guide pour choisir un objectif inversé en macrophoto : focales 35mm vs 50mm, grossissement, profondeur de champ, conseils naturalistes.'
 date:
   published: 2008-02-28
   updated: 2025-05-10

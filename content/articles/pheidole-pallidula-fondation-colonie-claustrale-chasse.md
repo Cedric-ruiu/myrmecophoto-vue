@@ -1,6 +1,6 @@
 ---
-title: 'Pheidole pallidula : Fondation claustrale, défis et stratégies de chasse'
-description: "Analyse détaillée de la fondation claustrale chez la fourmi Pheidole pallidula. Exploration des défis critiques pour la survie d'une jeune colonie et observations du comportement de prédation sur larves de ténébrion."
+title: 'Pheidole pallidula : fondation claustrale'
+description: "Fondation claustrale chez Pheidole pallidula : défis de survie de la jeune colonie et observation de prédation sur larves de ténébrion en macro."
 date:
   published: 2006-02-08
   updated: 2025-05-10

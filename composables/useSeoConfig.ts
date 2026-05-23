@@ -201,15 +201,13 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ],
   }
 
-  // defineOgImageComponent configuration - Uniform NuxtSeo style
+  // defineOgImage configuration — constants (colorMode, theme, siteLogo,
+  // width, height) live in nuxt.config.ts `ogImage.defaults` so the encoder
+  // strips them from the URL, keeping `/_og/s/*` paths under the 200-char
+  // threshold and avoiding the hashed-payload prerender slowdown.
   const ogImageConfig = {
     title,
     description,
-    theme: '#e72c27',
-    colorMode: 'dark',
-    siteLogo: '/myrmecophoto-logo.png',
-    width: 1200,
-    height: 630,
     ...ogImageProps,
   }
 
@@ -227,7 +225,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ogUrl: canonicalUrl,
     ogImage: ogImageUrl
       ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
-      : `${siteUrl}/__og-image__/image${route.path}.png`,
+      : `${siteUrl}/_og/d${route.path}.png`,
 
     // Twitter Cards
     twitterCard: 'summary_large_image' as const,
@@ -239,7 +237,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
       ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage}`)
       : ogImageUrl
         ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
-        : `${siteUrl}/__og-image__/image${route.path}.png`,
+        : `${siteUrl}/_og/d${route.path}.png`,
 
     // Theme and appearance
     themeColor: '#e72c27',
@@ -255,7 +253,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
   // Apply configurations
   useHead(headConfig)
-  defineOgImageComponent('NuxtSeo', ogImageConfig)
+  defineOgImage('NuxtSeo.satori', ogImageConfig)
   useSeoMeta(seoMetaConfig)
 
   // Always apply Schema.org (either explicit pageType or auto-detected)

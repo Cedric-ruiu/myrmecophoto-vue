@@ -1,6 +1,6 @@
 ---
-title: 'Migration printanière de Lasius fuliginosus : Organisation et transport du couvain en milieu forestier'
-description: "Étude du déménagement saisonnier de la fourmi Lasius fuliginosus en Alsace. Analyse du comportement colonial, de la stratégie de transport du couvain (larves, nymphes) et de l'adaptation de la colonie aux conditions printanières."
+title: 'Lasius fuliginosus : déménagement printanier'
+description: 'Déménagement saisonnier de Lasius fuliginosus en Alsace. Transport du couvain (larves, nymphes) et adaptation printanière de la colonie en forêt.'
 date:
   published: 2006-04-01
 image:

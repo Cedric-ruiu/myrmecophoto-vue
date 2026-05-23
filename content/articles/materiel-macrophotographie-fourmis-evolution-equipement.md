@@ -1,6 +1,6 @@
 ---
-title: 'Macrophotographie de Fourmis : Évolution et Optimisation du Matériel Optique'
-description: "Un examen détaillé de l'évolution du matériel photographique pour la macrophotographie de fourmis, des premières expérimentations aux configurations avancées. Discussion sur les choix techniques, les défis et les perspectives pour la capture d'images scientifiques de haute qualité."
+title: 'Évolution du matériel de macrophoto de fourmis'
+description: "Évolution du matériel photo pour la macrophotographie de fourmis : choix techniques, défis et configurations pour des images scientifiques."
 date:
   published: 2007-02-02
   updated: 2012-07-14

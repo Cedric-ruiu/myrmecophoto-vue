@@ -1,6 +1,6 @@
 ---
-title: "Mutualisme Lasius-Pucerons : Stratégies d'une Symbiose"
-description: 'Photos détaillées de la relation symbiotique entre les fourmis du genre Lasius et les pucerons. Avec la description des échanges bénéfiques de ce mutualisme (protection contre miellat).'
+title: 'Mutualisme Lasius-pucerons : symbiose et miellat'
+description: 'Photos macro de la symbiose entre fourmis Lasius et pucerons. Échanges bénéfiques de ce mutualisme : protection en échange de miellat.'
 date:
   published: 2006-05-28
   updated: 2025-05-10

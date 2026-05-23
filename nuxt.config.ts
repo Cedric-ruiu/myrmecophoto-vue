@@ -1,10 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-// Prisma + Nuxt 4 compatibility configuration
-// This triple configuration (alias + transpile + externals) is required because:
+// Prisma v7 + Nuxt 4 + SSG configuration
 // 1. Official @prisma/nuxt module doesn't support Nuxt 4 yet
-// 2. Nitro 2.x has module resolution conflicts with Prisma Client
-// 3. SSG prerendering needs special handling for database client
+// 2. Prisma v7 uses driver adapter (@prisma/adapter-better-sqlite3) wrapping a native
+//    module — better-sqlite3 must stay external so Rollup/Nitro never bundle the .node binary
+// 3. Prisma Client is generated locally (prisma/generated/client) and only runs at build
+//    time during SSG prerender of API routes
 export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content', '@nuxt/eslint'],
 
@@ -59,7 +60,7 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ['photoswipe', 'image-size', '@prisma/client', '@nuxt/content'],
+      include: ['photoswipe', 'image-size', '@nuxt/content'],
       exclude: ['@nuxtjs/seo'],
     },
     css: {
@@ -89,8 +90,8 @@ export default defineNuxtConfig({
         '/api/getSpecies',
         '/api/getEncryptedEmailContact',
         '/api/__sitemap__/urls',
-        '/api/__sitemap__/images',
       ],
+      concurrency: 2,
     },
     esbuild: {
       options: {
@@ -99,15 +100,17 @@ export default defineNuxtConfig({
     },
     node: true,
     externals: {
-      // Mark Prisma Client as external dependency for Nitro bundling
-      // Prevents bundling issues during SSG prerendering of API routes
-      external: ['@prisma/client'],
+      // Keep the better-sqlite3 native module and its Prisma adapter external so
+      // Rollup/Nitro never try to bundle the .node binary during SSG prerender.
+      external: ['@prisma/adapter-better-sqlite3', 'better-sqlite3'],
     },
   },
 
   sitemap: {
-    trailingSlash: true, // Ensure URLs in sitemap have trailing slashes
-    sources: ['/api/__sitemap__/urls', '/api/__sitemap__/images'],
+    // Page URLs already include trailing slashes (emitted by urls.ts).
+    // Note: @nuxtjs/sitemap also appends "/" to <image:loc> values (driven by
+    // site.trailingSlash); that is patched out by server/plugins/sitemap-image-loc-fix.ts.
+    sources: ['/api/__sitemap__/urls'],
     excludeAppSources: true, // Prevent auto-discovery of pages to avoid duplicates
   },
 
@@ -116,7 +119,7 @@ export default defineNuxtConfig({
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/_nuxt/', '/__sitemap__/'],
+        disallow: ['/api/', '/__sitemap__/'],
       },
     ],
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
@@ -145,10 +148,20 @@ export default defineNuxtConfig({
 
   ogImage: {
     enabled: true,
+    zeroRuntime: true,
+    buildCache: true,
     defaults: {
       component: 'NuxtSeo',
       width: 1200,
       height: 630,
+      colorMode: 'dark',
+      theme: '#e72c27',
+      siteLogo: '/myrmecophoto-logo.png',
+      emojis: false,
+    },
+    security: {
+      renderTimeout: 30000,
+      imageFetchTimeout: 5000,
     },
   },
 

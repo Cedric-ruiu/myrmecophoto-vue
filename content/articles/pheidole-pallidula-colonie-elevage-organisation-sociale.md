@@ -1,6 +1,6 @@
 ---
-title: 'Pheidole pallidula en élevage : polymorphisme, organisation sociale et comportements observés'
-description: "Étude approfondie d'une colonie de Pheidole pallidula maintenue en captivité. Cet article détaille le dimorphisme ouvrier, la division des tâches, les stratégies alimentaires et l'organisation sociale complexe de cette fourmi méditerranéenne, illustrée par des macrophotographies."
+title: 'Pheidole pallidula : polymorphisme et élevage'
+description: "Colonie de Pheidole pallidula en captivité : dimorphisme ouvrier, division des tâches, stratégies alimentaires et organisation sociale en macro."
 date:
   published: 2006-07-31
 location: 'Nid artificiel'

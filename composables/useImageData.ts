@@ -63,7 +63,7 @@ export const useImageData = (imagePath: string): ImageData => {
       thumbnailWidth,
       thumbnailHeight,
       aspectRatio,
-      largestAvif
+      largestAvif: largestAvif ?? null
     }
   }
 
@@ -93,7 +93,7 @@ export const useImageData = (imagePath: string): ImageData => {
     thumbnailWidth: 300,
     thumbnailHeight: 0,
     aspectRatio: undefined, // Unknown for convention fallback
-    largestAvif
+    largestAvif: largestAvif ?? null
   }
 }
 
@@ -113,15 +113,3 @@ export const useTaxonImageData = (
   return useImageData(imagePath)
 }
 
-/**
- * Specialized helper for article images  
- */
-export const useArticleImageData = (
-  articlePath: string,
-  fileName: string
-) => {
-  const fileBase = fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
-  const imagePath = `articles/${articlePath}/${fileBase}`
-
-  return useImageData(imagePath)
-}

@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use 'sass:string';
+
 // Breakpoints
 
 // Define here all your breakpoints, choose the unit (rem|em|px) what you prefer like a dev frontend and not like end user
@@ -31,9 +34,13 @@ $anime-duration: 0.2s !default;
 $anime-ease: ease !default;
 $soft-touch: 10px !default; // standard space around element, better to touch
 
-@forward 'include-media/dist/include-media' with (
-  $breakpoints: $breakpoints !default
-);
+@mixin media($condition) {
+  $key: string.slice($condition, 3); // ">=sm" → "sm"
+
+  @media (min-width: map.get($breakpoints, $key)) {
+    @content;
+  }
+}
 
 @mixin gradient-primary() {
   background: $gradient-primary;

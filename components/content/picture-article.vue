@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useArticleImageData } from '~/composables/useImageData'
+import { useImageData } from '~/composables/useImageData'
 
 const props = defineProps({
   src: { type: String, required: true },
@@ -14,8 +14,7 @@ const props = defineProps({
   caption: { type: String, default: '' },
 })
 
-// Use simplified system for articles
-const imageData = useArticleImageData('', props.src)
+const imageData = useImageData(`articles/${props.src}`)
 </script>
 
 <template>
