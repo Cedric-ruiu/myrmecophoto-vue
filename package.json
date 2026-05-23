@@ -15,7 +15,7 @@
     "format:script": "eslint . --fix",
     "format:style": "stylelint \"assets/*.scss\" \"**/*.vue\" --fix",
     "format:tailwind": "tailwind-sorter sort -i \"**/*.vue\"",
-    "postinstall": "nuxt prepare & prisma generate",
+    "postinstall": "nuxt prepare && prisma generate",
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
   "devDependencies": {
