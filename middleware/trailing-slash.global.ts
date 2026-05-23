@@ -9,6 +9,13 @@
  * @see https://dev.to/mornir/nuxt-netlify-and-the-trailing-slash-3gge
  */
 export default defineNuxtRouteMiddleware((to) => {
+  // Skip on server (prerender + SSR): with site.trailingSlash: true, both
+  // /foo and /foo/ are written to foo/index.html. If this middleware runs
+  // during prerender of /foo, it writes a meta-refresh that overwrites
+  // the real content (race condition with concurrency: 2).
+  // Netlify Pretty URLs handles slash canonicalization at HTTP level.
+  if (import.meta.server) return
+
   // Skip middleware for:
   // - Root path
   // - API routes
