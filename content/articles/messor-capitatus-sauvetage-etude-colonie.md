@@ -1,6 +1,6 @@
 ---
-title: "Sauvetage et étude d'une colonie de Messor capitatus - observations et suivi photographique"
-description: "Prise en charge d'une colonie de fourmis Messor capitatus en déclin : Ce suivi photographique présente les premières observations comportementales et biologiques, avec des espoirs de rétablissement. L'article documente l'état initial de la colonie, ses réserves alimentaires et les interactions au sein de la colonie."
+title: "Sauvetage d'une colonie de Messor capitatus"
+description: "Sauvetage d'une colonie de Messor capitatus en déclin : observations comportementales, réserves alimentaires et interactions documentées en photo."
 date:
   published: 2011-07-10
 image:

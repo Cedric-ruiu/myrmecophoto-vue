@@ -1,6 +1,6 @@
 ---
-title: "Cas d'étude Pheidole pallidula : Déclin colonial, larve sexuée et stratégies de survie"
-description: "Examen détaillé d'une colonie de Pheidole pallidula en mai 2007, illustrant les défis de l'élevage. Analyse du déclin de population, de l'observation d'une larve royale et des hypothèses sur les stratégies adaptatives et reproductives de l'espèce."
+title: 'Pheidole pallidula : déclin et larve royale'
+description: "Colonie de Pheidole pallidula en déclin (mai 2007) : défis d'élevage, observation d'une larve royale et hypothèses sur les stratégies adaptatives."
 date:
   published: 2007-05-10
   updated: 2025-05-10

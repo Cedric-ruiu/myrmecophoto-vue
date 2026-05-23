@@ -28,7 +28,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
 useSeoConfig({
   title: articleTitle.value,
   description: articleDescription.value,
-  titleTemplate: '%s | Article | Myrmecophoto',
+  titleTemplate: '%s | Myrmecophoto',
   ogImageProps: {
     subtitle: 'Article Myrmécologie',
     description: articleDescription.value,

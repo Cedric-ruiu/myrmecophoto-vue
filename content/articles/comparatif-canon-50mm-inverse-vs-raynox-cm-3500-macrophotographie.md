@@ -1,6 +1,6 @@
 ---
-title: 'Macrophotographie à budget maîtrisé : Analyse comparative Canon FD 50mm inversé vs. Raynox CM-3500'
-description: "Comparaison technique approfondie entre un objectif Canon FD 50mm f/1.4 inversé et le kit de bonnettes Raynox CM-3500. Évaluation du grossissement, de la profondeur de champ, des aberrations chromatiques et de l'ergonomie pour la macrophotographie."
+title: 'Canon 50mm inversé vs Raynox CM-3500 : comparatif'
+description: 'Comparaison technique : Canon FD 50mm inversé vs kit Raynox CM-3500. Grossissement, profondeur de champ et aberrations en macrophotographie.'
 date:
   published: 2007-04-13
   updated: 2025-05-10

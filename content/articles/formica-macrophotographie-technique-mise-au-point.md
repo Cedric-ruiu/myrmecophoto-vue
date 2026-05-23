@@ -1,6 +1,6 @@
 ---
-title: 'Macrophotographie de Formica sp. : Technique de mise au point'
-description: "Analyse d'une macrophotographie d'ouvrière Formica sp. transportant des matériaux. Explication de l'importance cruciale de la mise au point sur l'œil pour la netteté en macrophotographie naturaliste, illustrée par l'utilisation du kit Raynox CM-3500. Aperçu du genre Formica, les fourmis rousses des bois, et de leur activité."
+title: 'Formica sp. : technique de mise au point macro'
+description: "Macrophotographie d'une ouvrière Formica sp. en transport : mise au point sur l'œil avec le kit Raynox CM-3500 et aperçu du genre Formica."
 date:
   published: 2007-05-05
   updated: 2025-05-10

@@ -1,6 +1,6 @@
 ---
-title: 'Prédation coordonnée : Pheidole pallidula vs. Tipule (Tipulidae)'
-description: 'Analyse du comportement de chasse de la fourmi Pheidole pallidula face à une tipule.'
+title: "Pheidole pallidula : prédation d'une tipule"
+description: 'Chasse coordonnée de Pheidole pallidula face à une tipule (Tipulidae) : stratégie de prédation et mobilisation des minors et majors en macro.'
 date:
   published: 2006-09-21
 location: 'Nid artificiel'

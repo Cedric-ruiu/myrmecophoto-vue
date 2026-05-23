@@ -1,6 +1,6 @@
 ---
-title: 'Lasius fuliginosus : Observation comportementale de la Fourmi Noire des Bois'
-description: 'Plongez au cœur de l''écologie de Lasius fuliginosus. Cet article détaille l''observation des individus de "la fourmi noire des bois", son mutualisme avec les pucerons pour le miellat, ses pistes odorantes et sa morphologie.'
+title: 'Lasius fuliginosus : comportement et mutualisme'
+description: 'Observation écologique de Lasius fuliginosus, la fourmi noire des bois : mutualisme avec les pucerons, pistes odorantes et morphologie.'
 date:
   published: 2006-05-19
   updated: 2024-05-10

@@ -1,6 +1,6 @@
 ---
-title: 'Essaimage de Lasius fuliginosus : Observation du Vol Nuptial'
-description: "Observation scientifique du vol nuptial de Lasius fuliginosus. Découvrez les phases de l'essaimage, le rôle des sexués (gynes et mâles) et la stratégie de reproduction chez cette espèce de fourmi."
+title: 'Lasius fuliginosus : essaimage et vol nuptial'
+description: "Vol nuptial de Lasius fuliginosus : phases d'essaimage, rôle des sexués (gynes et mâles) et stratégies de reproduction de l'espèce."
 date:
   published: 2006-05-26
   updated: 2025-05-10

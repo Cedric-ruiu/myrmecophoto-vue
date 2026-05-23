@@ -1,6 +1,6 @@
 ---
-title: "Déclin d'une colonie de Myrmica rubra : Analyse des symptômes, causes potentielles et observations comportementales atypiques"
-description: "Une colonie de fourmis Myrmica rubra en captivité montre des signes de dépérissement : refus de nourriture, apathie. Cet article analyse les symptômes, explore les hypothèses (pathologie, stress, conditions d'élevage) et relate l'observation insolite d'une larve de ténébrion se nourrissant aux dépens de la colonie affaiblie."
+title: "Déclin d'une colonie de Myrmica rubra"
+description: "Colonie de Myrmica rubra en captivité dépérissant : symptômes, hypothèses (pathologie, stress) et observation insolite d'une larve de ténébrion."
 date:
   published: 2006-06-15
   updated: 2025-05-10

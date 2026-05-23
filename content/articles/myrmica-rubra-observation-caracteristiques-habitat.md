@@ -1,6 +1,6 @@
 ---
-title: "Myrmica rubra : Observation et caractéristiques d'une fourmi rouge en milieu forestier"
-description: "Analyse détaillée de Myrmica rubra, une espèce de fourmi européenne. Cet article explore sa morphologie, son habitat typique en forêt humide, son comportement social et les critères d'identification, illustrés par des photographies macro. Basé sur une observation en forêt du Neuhof (Alsace)."
+title: 'Myrmica rubra : observation en milieu forestier'
+description: "Myrmica rubra, fourmi rouge européenne : morphologie, habitat en forêt humide, comportement social et critères d'identification en photo macro."
 date:
   published: 2006-04-02
   updated: 2025-05-10
