@@ -90,7 +90,6 @@ export default defineNuxtConfig({
         '/api/getSpecies',
         '/api/getEncryptedEmailContact',
         '/api/__sitemap__/urls',
-        '/api/__sitemap__/images',
       ],
       concurrency: 2,
     },
@@ -108,8 +107,10 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    trailingSlash: true, // Ensure URLs in sitemap have trailing slashes
-    sources: ['/api/__sitemap__/urls', '/api/__sitemap__/images'],
+    // Page URLs already include trailing slashes (emitted by urls.ts).
+    // Note: @nuxtjs/sitemap also appends "/" to <image:loc> values (driven by
+    // site.trailingSlash); that is patched out by server/plugins/sitemap-image-loc-fix.ts.
+    sources: ['/api/__sitemap__/urls'],
     excludeAppSources: true, // Prevent auto-discovery of pages to avoid duplicates
   },
 
@@ -118,7 +119,7 @@ export default defineNuxtConfig({
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/_nuxt/', '/__sitemap__/'],
+        disallow: ['/api/', '/__sitemap__/'],
       },
     ],
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],

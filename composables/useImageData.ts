@@ -113,15 +113,3 @@ export const useTaxonImageData = (
   return useImageData(imagePath)
 }
 
-/**
- * Specialized helper for article images  
- */
-export const useArticleImageData = (
-  articlePath: string,
-  fileName: string
-) => {
-  const fileBase = fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
-  const imagePath = `articles/${articlePath}/${fileBase}`
-
-  return useImageData(imagePath)
-}
