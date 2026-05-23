@@ -118,12 +118,22 @@ export default defineSitemapEventHandler(async () => {
   const taxonImagesBySlug = collectTaxonImages(publicDir, baseUrl)
 
   const subfamilies = await db.subfamily.findMany({
-    include: { genus: { include: { specie: {} } } },
+    include: {
+      genus: {
+        include: {
+          specie: { include: { _count: { select: { specimen: true } } } },
+        },
+      },
+    },
   })
 
   subfamilies.forEach((subfamily) => {
     subfamily.genus.forEach((genus) => {
       genus.specie.forEach((specie) => {
+        // Skip empty species (no specimens = page is hidden in the listing and
+        // would 404 anyway). Avoids feeding the sitemap with placeholder URLs.
+        if (!specie._count.specimen) return
+
         const taxon = `${genus.name}-${specie.name}`
           .replace(/\s+/g, '-')
           .replace(/\./g, '')

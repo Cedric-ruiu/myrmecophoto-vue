@@ -1,5 +1,18 @@
  https://myrmecophoto.netlify.app/*  https://myrmecophoto.fr/:splat  301!
 
+/home / 301
+/home.html / 301
+/index.html / 301
+
+/taxons/pheidole-pallidula /taxons/ 301
+/taxons/lasius-sp /taxons/ 301
+/taxons/myrmica-sp /taxons/ 301
+/taxons/myrmica-rubra /taxons/ 301
+/taxons/pheidole-pallidula/ /taxons/ 301
+/taxons/lasius-sp/ /taxons/ 301
+/taxons/myrmica-sp/ /taxons/ 301
+/taxons/myrmica-rubra/ /taxons/ 301
+
 /macro-photographie.html /taxons/ 301
 /macro-photographie/taxonomie.html /taxons/ 301
 /macro-photographie/fourmi.html /articles/ 301
