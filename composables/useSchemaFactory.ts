@@ -240,6 +240,24 @@ export const useSchemaFactory = () => {
   }
 
   /**
+   * Builds the list of canonical external references for a taxon.
+   * Only includes URLs that can be reconstructed reliably from genus/species
+   * without relying on opaque external IDs stored in our database.
+   */
+  const buildTaxonSameAs = (taxon: NonNullable<SchemaFactoryOptions['taxon']>): string[] => {
+    const sameAs: string[] = []
+    if (taxon.genus) {
+      const genus = encodeURIComponent(taxon.genus)
+      if (taxon.routeSpecie && taxon.routeSpecie !== 'sp.') {
+        sameAs.push(`https://www.antweb.org/description.do?genus=${genus}&species=${encodeURIComponent(taxon.routeSpecie)}`)
+      } else {
+        sameAs.push(`https://www.antweb.org/description.do?genus=${genus}&rank=genus`)
+      }
+    }
+    return sameAs
+  }
+
+  /**
    * Creates a Bioschemas-aligned Taxon schema
    */
   const createTaxonSchema = (options: SchemaFactoryOptions) => {
@@ -248,6 +266,7 @@ export const useSchemaFactory = () => {
     const { taxon } = options
     const route = useRoute()
     const pageUrl = SCHEMA_URLS.absolute(route.path)
+    const isSpOnly = taxon.routeSpecie === 'sp.'
 
     const images = taxon.specimens?.flatMap((specimen, sIdx) =>
       specimen.taxonomy_picture?.map((picture, pIdx) =>
@@ -255,54 +274,64 @@ export const useSchemaFactory = () => {
       ) || []
     ) || []
 
+    const sameAs = buildTaxonSameAs(taxon)
+
+    const speciesParent = {
+      '@type': 'Taxon',
+      name: taxon.genus,
+      taxonRank: 'genus',
+      parentTaxon: {
+        '@type': 'Taxon',
+        name: taxon.subfamily,
+        taxonRank: 'subfamily',
+        parentTaxon: {
+          '@type': 'Taxon',
+          name: 'Formicidae',
+          taxonRank: 'family',
+          parentTaxon: {
+            '@type': 'Taxon',
+            name: 'Hymenoptera',
+            taxonRank: 'order',
+            parentTaxon: {
+              '@type': 'Taxon',
+              name: 'Insecta',
+              taxonRank: 'class'
+            }
+          }
+        }
+      }
+    }
+
+    const genusParent = speciesParent.parentTaxon
+
+    const description = isSpOnly
+      ? `Profil taxonomique du genre ${taxon.genus} (sous-famille ${taxon.subfamily}), spécimens documentés mais non déterminés à l'espèce. Documentation morphologique en macro-photographie scientifique.`
+      : `Profil taxonomique de ${taxon.scientificName}, espèce de fourmi de la sous-famille des ${taxon.subfamily}. Documentation morphologique en macro-photographie scientifique.`
+
+    const additionalProperty = [
+      { '@type': 'PropertyValue', name: 'Family', value: 'Formicidae' },
+      { '@type': 'PropertyValue', name: 'Subfamily', value: taxon.subfamily },
+      { '@type': 'PropertyValue', name: 'Genus', value: taxon.genus },
+      !isSpOnly && { '@type': 'PropertyValue', name: 'Species', value: taxon.routeSpecie },
+      !isSpOnly && { '@type': 'PropertyValue', name: 'Year of description', value: taxon.year?.toString() },
+      !isSpOnly && { '@type': 'PropertyValue', name: 'Describing author', value: taxon.researcher },
+      { '@type': 'PropertyValue', name: 'Specimens documented', value: taxon.specimens?.length?.toString() }
+    ].filter((prop): prop is { '@type': string; name: string; value: string } => Boolean(prop && prop.value))
+
     return {
       '@type': 'Taxon',
       '@id': `${pageUrl}#taxon`,
       name: taxon.scientificName,
-      alternateName: taxon.researcher && taxon.year
+      alternateName: !isSpOnly && taxon.researcher && taxon.year
         ? `${taxon.scientificName} ${taxon.researcher}, ${taxon.year}`
         : undefined,
-      description: `Profil taxonomique de ${taxon.scientificName}, espèce de fourmi de la sous-famille des ${taxon.subfamily}. Documentation morphologique en macro-photographie scientifique.`,
-      taxonRank: 'species',
-
-      parentTaxon: {
-        '@type': 'Taxon',
-        name: taxon.genus,
-        taxonRank: 'genus',
-        parentTaxon: {
-          '@type': 'Taxon',
-          name: taxon.subfamily,
-          taxonRank: 'subfamily',
-          parentTaxon: {
-            '@type': 'Taxon',
-            name: 'Formicidae',
-            taxonRank: 'family',
-            parentTaxon: {
-              '@type': 'Taxon',
-              name: 'Hymenoptera',
-              taxonRank: 'order',
-              parentTaxon: {
-                '@type': 'Taxon',
-                name: 'Insecta',
-                taxonRank: 'class'
-              }
-            }
-          }
-        }
-      },
-
+      description,
+      taxonRank: isSpOnly ? 'genus' : 'species',
+      parentTaxon: isSpOnly ? genusParent : speciesParent,
+      sameAs: sameAs.length ? sameAs : undefined,
       image: images.length ? images : undefined,
       subjectOf: { '@id': pageUrl },
-
-      additionalProperty: [
-        { '@type': 'PropertyValue', name: 'Family', value: 'Formicidae' },
-        { '@type': 'PropertyValue', name: 'Subfamily', value: taxon.subfamily },
-        { '@type': 'PropertyValue', name: 'Genus', value: taxon.genus },
-        { '@type': 'PropertyValue', name: 'Species', value: taxon.routeSpecie },
-        { '@type': 'PropertyValue', name: 'Year of description', value: taxon.year?.toString() },
-        { '@type': 'PropertyValue', name: 'Describing author', value: taxon.researcher },
-        { '@type': 'PropertyValue', name: 'Specimens documented', value: taxon.specimens?.length?.toString() }
-      ].filter(prop => prop.value)
+      additionalProperty
     }
   }
 
