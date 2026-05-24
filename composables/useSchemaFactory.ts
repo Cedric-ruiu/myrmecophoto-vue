@@ -279,18 +279,6 @@ export const useSchemaFactory = () => {
       inLanguage: 'fr-FR',
       isAccessibleForFree: true,
 
-      // Specimen data as dataset
-      dataset: taxon.specimens?.length ? {
-        '@type': 'Dataset',
-        name: `${taxon.scientificName} — collection de specimens documentés`,
-        description: `Jeu de données photographique et taxonomique de ${taxon.specimens.length} specimen${taxon.specimens.length > 1 ? 's' : ''} de ${taxon.scientificName} (genre ${taxon.genus}, sous-famille ${taxon.subfamily}), documenté${taxon.specimens.length > 1 ? 's' : ''} en macro-photographie scientifique sur Myrmecophoto par Cédric Ruiu.`,
-        numberOfItems: taxon.specimens.length,
-        inLanguage: 'fr-FR',
-        isAccessibleForFree: true,
-        license: SCHEMA_CONSTANTS.IMAGE_DEFAULTS.license,
-        creator: createPersonSchema()
-      } : undefined,
-
       // Taxonomic properties
       additionalProperty: [
         {
