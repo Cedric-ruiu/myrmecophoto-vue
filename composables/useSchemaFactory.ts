@@ -36,11 +36,16 @@ export interface SchemaFactoryOptions {
     year?: number
     specimens?: Array<{
       form: { name: string }
+      size_mm?: number | null
+      capture_site?: string | null
+      country?: { name: string } | null
+      description?: string | null
       taxonomy_picture?: Array<{
         file_name: string
         width?: number
         height?: number
         date?: string
+        description?: string | null
       }>
     }>
     routeGenus?: string
@@ -203,23 +208,63 @@ export const useSchemaFactory = () => {
   }
 
   /**
-   * Creates a scientific Taxon schema with enhanced scholarly properties
+   * Creates an enriched ImageObject schema for a single taxon picture
+   */
+  const createTaxonImageObjectSchema = (
+    picture: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number]['taxonomy_picture'][number],
+    specimen: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number],
+    taxon: NonNullable<SchemaFactoryOptions['taxon']>,
+    isPrimary: boolean
+  ) => {
+    const url = SCHEMA_URLS.image(`taxons/${taxon.routeGenus}-${taxon.routeSpecie}/${picture.file_name}`)
+    const sizeSuffix = specimen.size_mm ? ` (${specimen.size_mm} mm)` : ''
+    const locationParts = [specimen.capture_site, specimen.country?.name].filter(Boolean)
+
+    return {
+      '@type': 'ImageObject',
+      '@id': `${url}#image`,
+      contentUrl: url,
+      url,
+      caption: `${taxon.scientificName} — ${specimen.form.name}${sizeSuffix}`,
+      description: picture.description || specimen.description || undefined,
+      width: picture.width || 1200,
+      height: picture.height || 800,
+      dateCreated: picture.date,
+      contentLocation: locationParts.length ? {
+        '@type': 'Place',
+        name: locationParts.join(', ')
+      } : undefined,
+      representativeOfPage: isPrimary || undefined,
+      ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS
+    }
+  }
+
+  /**
+   * Creates a Bioschemas-aligned Taxon schema
    */
   const createTaxonSchema = (options: SchemaFactoryOptions) => {
     if (!options.taxon) throw new Error('Taxon data required')
 
     const { taxon } = options
     const route = useRoute()
+    const pageUrl = SCHEMA_URLS.absolute(route.path)
+
+    const images = taxon.specimens?.flatMap((specimen, sIdx) =>
+      specimen.taxonomy_picture?.map((picture, pIdx) =>
+        createTaxonImageObjectSchema(picture, specimen, taxon, sIdx === 0 && pIdx === 0)
+      ) || []
+    ) || []
 
     return {
-      '@type': ['Taxon', 'ScholarlyArticle'],
-      '@id': SCHEMA_URLS.absolute(route.path),
+      '@type': 'Taxon',
+      '@id': `${pageUrl}#taxon`,
       name: taxon.scientificName,
-      headline: `${taxon.scientificName} - Taxonomic Profile`,
-      description: `Scientific taxonomic profile of ${taxon.scientificName}, a ant species from the ${taxon.subfamily} subfamily. Detailed morphological documentation with macro photography.`,
+      alternateName: taxon.researcher && taxon.year
+        ? `${taxon.scientificName} ${taxon.researcher}, ${taxon.year}`
+        : undefined,
+      description: `Profil taxonomique de ${taxon.scientificName}, espèce de fourmi de la sous-famille des ${taxon.subfamily}. Documentation morphologique en macro-photographie scientifique.`,
       taxonRank: 'species',
 
-      // Taxonomic hierarchy
       parentTaxon: {
         '@type': 'Taxon',
         name: taxon.genus,
@@ -231,124 +276,33 @@ export const useSchemaFactory = () => {
           parentTaxon: {
             '@type': 'Taxon',
             name: 'Formicidae',
-            taxonRank: 'family'
+            taxonRank: 'family',
+            parentTaxon: {
+              '@type': 'Taxon',
+              name: 'Hymenoptera',
+              taxonRank: 'order',
+              parentTaxon: {
+                '@type': 'Taxon',
+                name: 'Insecta',
+                taxonRank: 'class'
+              }
+            }
           }
         }
       },
 
-      // Scientific classification
-      hasDefinedTerm: {
-        '@type': 'DefinedTerm',
-        name: taxon.scientificName,
-        inDefinedTermSet: 'Formicidae',
-        termCode: `${taxon.genus}.${taxon.routeSpecie}`
-      },
+      image: images.length ? images : undefined,
+      subjectOf: { '@id': pageUrl },
 
-      // Main taxonomic image
-      image: taxon.specimens?.[0]?.taxonomy_picture?.[0] ? {
-        '@type': 'ImageObject',
-        url: SCHEMA_URLS.image(`taxons/${taxon.routeGenus}-${taxon.routeSpecie}/${taxon.specimens[0].taxonomy_picture[0].file_name}`),
-        caption: `${taxon.scientificName} - Taxonomic view`,
-        about: {
-          '@type': 'Taxon',
-          name: taxon.scientificName
-        },
-        ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS
-      } : undefined,
-
-      // Scholarly article properties
-      author: createPersonSchema(),
-      publisher: {
-        '@type': 'Organization',
-        name: SCHEMA_CONSTANTS.SITE.name,
-        url: SCHEMA_CONSTANTS.SITE.url,
-        logo: SCHEMA_CONSTANTS.SITE.logo
-      },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': SCHEMA_URLS.absolute(route.path)
-      },
-
-      // Scientific properties
-      about: {
-        '@type': 'DefinedTermSet',
-        name: 'Myrmecology',
-        description: 'Scientific study of ants'
-      },
-      keywords: ['Formicidae', 'Myrmecology', 'Taxonomy', taxon.scientificName, taxon.genus, taxon.subfamily],
-      inLanguage: 'fr-FR',
-      isAccessibleForFree: true,
-
-      // Taxonomic properties
       additionalProperty: [
-        {
-          '@type': 'PropertyValue',
-          name: 'Family',
-          value: 'Formicidae'
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Subfamily',
-          value: taxon.subfamily
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Genus',
-          value: taxon.genus
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Species',
-          value: taxon.routeSpecie
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Year of description',
-          value: taxon.year?.toString()
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Describing author',
-          value: taxon.researcher
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Specimens documented',
-          value: taxon.specimens?.length?.toString()
-        }
-      ].filter(prop => prop.value) // Remove undefined values
-    }
-  }
-
-  /**
-   * Creates an ImageGallery schema for taxonomic collections
-   */
-  const createImageGallerySchema = (options: SchemaFactoryOptions) => {
-    if (!options.taxon) throw new Error('Taxon data required for ImageGallery')
-
-    const { taxon } = options
-
-    return {
-      '@type': 'ImageGallery',
-      name: `Galerie taxonomique - ${taxon.scientificName}`,
-      description: `Collection de macrophotographies taxonomiques de ${taxon.scientificName}`,
-      creator: createPersonSchema(),
-      about: {
-        '@type': 'Taxon',
-        name: taxon.scientificName,
-        taxonRank: 'species'
-      },
-      associatedMedia: taxon.specimens?.flatMap(specimen =>
-        specimen.taxonomy_picture?.map((picture) => ({
-          '@type': 'ImageObject',
-          url: SCHEMA_URLS.image(`taxons/${taxon.routeGenus}-${taxon.routeSpecie}/${picture.file_name}`),
-          caption: `${taxon.scientificName} - ${specimen.form.name}`,
-          width: picture.width || 1200,
-          height: picture.height || 800,
-          dateCreated: picture.date,
-          ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS
-        }))
-      ) || []
+        { '@type': 'PropertyValue', name: 'Family', value: 'Formicidae' },
+        { '@type': 'PropertyValue', name: 'Subfamily', value: taxon.subfamily },
+        { '@type': 'PropertyValue', name: 'Genus', value: taxon.genus },
+        { '@type': 'PropertyValue', name: 'Species', value: taxon.routeSpecie },
+        { '@type': 'PropertyValue', name: 'Year of description', value: taxon.year?.toString() },
+        { '@type': 'PropertyValue', name: 'Describing author', value: taxon.researcher },
+        { '@type': 'PropertyValue', name: 'Specimens documented', value: taxon.specimens?.length?.toString() }
+      ].filter(prop => prop.value)
     }
   }
 
@@ -446,7 +400,6 @@ export const useSchemaFactory = () => {
     createWebSiteSchema,
     createArticleSchema,
     createTaxonSchema,
-    createImageGallerySchema,
     createCollectionSchema,
     createBreadcrumbSchema,
     createContactPointSchema

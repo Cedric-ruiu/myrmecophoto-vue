@@ -111,13 +111,17 @@ export const usePageSchemas = () => {
   const applyTaxonSchemas = (options: SchemaFactoryOptions) => {
     if (!options.taxon) return
 
+    const taxonSchema = factory.createTaxonSchema(options)
+    const primaryImage = Array.isArray(taxonSchema.image) ? taxonSchema.image[0] : undefined
+
     const schemas = [
-      factory.createTaxonSchema(options),
-      factory.createImageGallerySchema(options),
+      taxonSchema,
       {
         '@type': 'WebPage',
         name: `${options.taxon.scientificName} - Page taxonomique`,
         description: `Macrophotographies taxonomiques de ${options.taxon.scientificName} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`,
+        mainEntity: { '@id': taxonSchema['@id'] },
+        primaryImageOfPage: primaryImage ? { '@id': primaryImage['@id'] } : undefined,
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'Taxons', url: 'https://myrmecophoto.fr/taxons/' },
           { name: options.taxon.scientificName }
