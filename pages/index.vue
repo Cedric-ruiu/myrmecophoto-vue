@@ -34,7 +34,7 @@ useSeoConfig({
     <div class="relative flex w-full max-w-full [ o-hero__pictures ]">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <Picture
-          src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
+          src="taxons/camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
           alt="Camponotus sylvaticus - Gyne (reine) en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
           loading="eager"

@@ -38,6 +38,3 @@ Au cours de cette observation, je n'ai pas pu apercevoir la reine. Son observati
 
 ::PictureArticle{src="lasius-fuliginosus-demenagement-printanier-transport-couvain/lasius-fuliginosus-demenage-larve" alt="Fourmi Lasius fuliginosus déménageant une larve"}
 ::
-
-::PictureArticle{src="lasius-fuliginosus-demenagement-printanier-transport-couvain/Lasius-fuliginosus-demenage-couvain" alt="Macrophotographie d'une Lasius fuliginosus transportant le couvain"}
-::
