@@ -24,12 +24,12 @@ useSeoConfig({
     <div
       class="z-1 absolute flex flex-col justify-center w-full font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
     >
-      <h1 class="[ o-hero__baselineTitle ]">
+      <p class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
-      </h1>
-      <h2 class="text-black [ o-hero__baselineSubtitle ]">
+      </p>
+      <h1 class="text-black [ o-hero__baselineSubtitle ]">
         Macro-photographies<br >des fourmis
-      </h2>
+      </h1>
     </div>
     <div class="relative flex w-full max-w-full [ o-hero__pictures ]">
       <div class="[ o-hero__picture4Edges ] basis-full">
