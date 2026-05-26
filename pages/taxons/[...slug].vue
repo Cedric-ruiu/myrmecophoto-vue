@@ -240,7 +240,7 @@ onUnmounted(() => {
       <ul>
         <li>
           Page wiki sur
-          <a :href="species[specieId].researcher.wiki_url" target="_blank">
+          <a :href="species[specieId].researcher.wiki_url" target="_blank" rel="noopener noreferrer">
             {{ species[specieId].researcher.name }}
           </a>
         </li>
