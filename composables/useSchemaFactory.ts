@@ -125,6 +125,10 @@ export const useSchemaFactory = () => {
           name: 'Myrmecophoto',
           url: 'https://myrmecophoto.fr',
           description: 'Site de macrophotographie scientifique de fourmis'
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          ...SCHEMA_CONSTANTS.CONTACT
         }
       }
     }
@@ -168,18 +172,21 @@ export const useSchemaFactory = () => {
 
     const { article } = options
     const route = useRoute()
+    const pageUrl = SCHEMA_URLS.absolute(route.path)
 
     return {
       '@type': 'Article',
-      '@id': SCHEMA_URLS.absolute(route.path),
+      '@id': `${pageUrl}#article`,
       headline: article.headline,
       description: article.description,
       image: {
         '@type': 'ImageObject',
+        '@id': `${pageUrl}#primaryimage`,
         url: SCHEMA_URLS.image(`articles/${article.image?.main}-1200.jpg`),
         width: article.image?.width || 1200,
         height: article.image?.height || 800,
-        caption: article.headline
+        caption: article.headline,
+        ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS
       },
       thumbnailUrl: SCHEMA_URLS.image(`articles/${article.image?.main}-thumbnail.jpg`),
       datePublished: article.datePublished,
@@ -191,10 +198,7 @@ export const useSchemaFactory = () => {
         url: SCHEMA_CONSTANTS.SITE.url,
         logo: SCHEMA_CONSTANTS.SITE.logo
       },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': SCHEMA_URLS.absolute(route.path)
-      },
+      mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
       articleSection: 'Myrmécologie',
       about: SCHEMA_CONSTANTS.KEYWORDS.myrmecology,
       keywords: article.tags || SCHEMA_CONSTANTS.KEYWORDS.myrmecology,
