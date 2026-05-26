@@ -330,7 +330,7 @@ export const useSchemaFactory = () => {
       parentTaxon: isSpOnly ? genusParent : speciesParent,
       sameAs: sameAs.length ? sameAs : undefined,
       image: images.length ? images : undefined,
-      subjectOf: { '@id': pageUrl },
+      subjectOf: { '@id': `${pageUrl}#webpage` },
       additionalProperty
     }
   }
