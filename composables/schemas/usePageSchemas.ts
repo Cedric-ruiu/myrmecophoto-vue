@@ -30,18 +30,32 @@ export const usePageSchemas = () => {
   const factory = useSchemaFactory()
 
   /**
+   * Returns the canonical URL of the current page (with trailing slash).
+   */
+  const getPageUrl = () => {
+    const route = useRoute()
+    return `https://myrmecophoto.fr${route.path.endsWith('/') ? route.path : route.path + '/'}`
+  }
+
+  /**
    * Applies schemas for the homepage
    */
   const applyHomepageSchemas = () => {
-    const schemas = [
-      // Main WebSite schema (unique across the entire app)
-      factory.createWebSiteSchema(),
+    const pageUrl = getPageUrl()
+    const collectionId = 'https://myrmecophoto.fr/#collection'
 
-      // Homepage-specific WebPage
+    const schemas = [
+      // Merge into the WebSite emitted by the module (same @id)
+      {
+        ...factory.createWebSiteSchema(),
+        '@id': 'https://myrmecophoto.fr/#website'
+      },
+
+      // Homepage-specific WebPage (merged with module default via @id)
       {
         '@type': 'WebPage',
-        name: 'Myrmecophoto - Accueil',
-        description: 'Découvrez le monde fascinant des fourmis à travers la macrophotographie scientifique. Collection taxonomique, articles spécialisés et guides techniques.',
+        '@id': `${pageUrl}#webpage`,
+        about: { '@id': collectionId },
         primaryImageOfPage: {
           '@type': 'ImageObject',
           url: 'https://myrmecophoto.fr/img/home-wall.avif',
@@ -49,6 +63,7 @@ export const usePageSchemas = () => {
         },
         mainEntity: {
           '@type': 'Collection',
+          '@id': collectionId,
           name: 'Collection Taxonomique de Fourmis',
           description: 'Base de données photographique de spécimens de fourmis avec identification taxonomique scientifique',
           creator: factory.createPersonSchema()
@@ -66,10 +81,18 @@ export const usePageSchemas = () => {
   const applyArticleSchemas = (options: SchemaFactoryOptions) => {
     if (!options.article) return
 
+    const pageUrl = getPageUrl()
+    const articleSchema = factory.createArticleSchema(options)
+    const articleImage = articleSchema.image as { '@id'?: string } | undefined
+
     const schemas = [
-      factory.createArticleSchema(options),
+      articleSchema,
       {
         '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        about: { '@id': articleSchema['@id'] },
+        mainEntity: { '@id': articleSchema['@id'] },
+        primaryImageOfPage: articleImage?.['@id'] ? { '@id': articleImage['@id'] } : undefined,
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'Articles', url: 'https://myrmecophoto.fr/articles/' },
           { name: options.article.headline }
@@ -86,19 +109,19 @@ export const usePageSchemas = () => {
   const applyArticleListSchemas = (options: SchemaFactoryOptions) => {
     if (!options.collection) return
 
+    const pageUrl = getPageUrl()
+
     const schemas = [
       {
-        '@type': 'CollectionPage',
-        name: 'Articles Myrmécologie & Macro-photographie',
-        description: "Collection d'articles spécialisés sur les techniques de macro-photographie et la myrmécologie scientifique.",
+        '@type': ['WebPage', 'CollectionPage'],
+        '@id': `${pageUrl}#webpage`,
         mainEntity: factory.createCollectionSchema({
           collection: { ...options.collection, collectionType: 'articles' }
         }),
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'Articles' }
         ]),
-        about: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie', 'Techniques photographiques'],
-        inLanguage: 'fr-FR'
+        about: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie', 'Techniques photographiques']
       }
     ]
 
@@ -111,8 +134,7 @@ export const usePageSchemas = () => {
   const applyTaxonSchemas = (options: SchemaFactoryOptions) => {
     if (!options.taxon) return
 
-    const route = useRoute()
-    const pageUrl = `https://myrmecophoto.fr${route.path.endsWith('/') ? route.path : route.path + '/'}`
+    const pageUrl = getPageUrl()
     const taxonSchema = factory.createTaxonSchema(options)
     const primaryImage = Array.isArray(taxonSchema.image) ? taxonSchema.image[0] : undefined
 
@@ -140,11 +162,12 @@ export const usePageSchemas = () => {
   const applyTaxonListSchemas = (options: SchemaFactoryOptions) => {
     if (!options.collection) return
 
+    const pageUrl = getPageUrl()
+
     const schemas = [
       {
-        '@type': 'CollectionPage',
-        name: 'Collection Taxonomique - Fourmis de France',
-        description: 'Base de données photographique taxonomique des fourmis avec identification scientifique des espèces.',
+        '@type': ['WebPage', 'CollectionPage'],
+        '@id': `${pageUrl}#webpage`,
         mainEntity: factory.createCollectionSchema({
           collection: { ...options.collection, collectionType: 'taxons' }
         }),
@@ -156,7 +179,6 @@ export const usePageSchemas = () => {
           name: 'Classification Taxonomique des Formicidae',
           description: 'Système de classification scientifique des fourmis selon la taxonomie moderne'
         },
-        inLanguage: 'fr-FR',
         isAccessibleForFree: true
       },
       // Site organization
@@ -199,23 +221,16 @@ export const usePageSchemas = () => {
    * Applies schemas for the About page
    */
   const applyAboutSchemas = () => {
+    const pageUrl = getPageUrl()
+
     const schemas = [
       {
-        '@type': 'AboutPage',
-        name: 'À propos - Cédric Ruiu',
-        description: 'Découvrez Cédric Ruiu, créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+        '@type': ['WebPage', 'AboutPage'],
+        '@id': `${pageUrl}#webpage`,
         mainEntity: factory.createPersonSchema(true),
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'À propos' }
-        ]),
-        inLanguage: 'fr-FR'
-      },
-      // Contact page
-      {
-        '@type': 'ContactPage',
-        name: 'Contact - Myrmecophoto',
-        description: 'Contactez Cédric Ruiu pour des collaborations, questions techniques ou échanges sur la myrmécologie',
-        mainEntity: factory.createContactPointSchema()
+        ])
       }
     ]
 
