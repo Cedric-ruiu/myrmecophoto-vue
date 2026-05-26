@@ -62,7 +62,9 @@ export const SCHEMA_CONSTANTS = {
       name: 'Cédric Ruiu'
     },
     license: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
-    acquireLicensePage: 'https://myrmecophoto.fr/about'
+    acquireLicensePage: 'https://myrmecophoto.fr/about',
+    copyrightNotice: '© Cédric Ruiu — Myrmecophoto',
+    creditText: 'Cédric Ruiu / Myrmecophoto'
   } as const,
 
   // Base breadcrumbs
