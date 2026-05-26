@@ -4,7 +4,7 @@ import { ref } from 'vue'
 useSeoConfig({
   title: 'À propos - Qui suis-je ?',
   description:
-    'Découvrez Cédric Ruiu, développeur web et photographe passionné de myrmécologie. Créateur de Myrmecophoto, alliance entre macro-photographie et science des fourmis.',
+    'Cédric Ruiu, photographe et développeur web passionné de myrmécologie. Démarche, parcours et matériel derrière Myrmecophoto.',
   ogImageProps: {
     subtitle: 'Développeur & Photographe',
     description:

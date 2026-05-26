@@ -6,7 +6,7 @@ definePageMeta({
 useSeoConfig({
   title: 'Macrophotographie de fourmis : taxonomie & articles',
   description:
-    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+    "Macrophotographie scientifique des fourmis de France : collection taxonomique illustrée, articles d'observation et guides techniques en myrmécologie.",
   ogImageProps: {
     subtitle: 'Macrophotographie et Myrmécologie',
     description:

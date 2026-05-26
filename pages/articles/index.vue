@@ -11,7 +11,7 @@ const articleCount = computed(() => articles?.value?.length || 0)
 useSeoConfig({
   title: 'Articles myrmécologie & macro-photographie',
   description:
-    "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
+    "Articles d'observation myrmécologique et tutoriels de macrophotographie : comportements de fourmis, élevage, matériel et techniques photo.",
   ogImageProps: {
     subtitle: 'Articles & Guides',
     description: `${articleCount.value} articles sur la macro-photographie et la myrmécologie`,
