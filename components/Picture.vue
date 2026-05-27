@@ -6,6 +6,7 @@ const props = defineProps({
   alt: { type: String, required: true },
   class: { type: String, default: '' },
   loading: { type: String as () => 'lazy' | 'eager', default: 'lazy' },
+  fetchpriority: { type: String as () => 'high' | 'low' | 'auto', default: 'auto' },
   sizes: { type: String, default: '(max-width: 768px) 100vw, 800px' }
 })
 
@@ -27,6 +28,7 @@ const imageData = useImageData(props.src)
       :width="imageData.fallback?.width || imageData.avif[imageData.avif.length - 1]?.width"
       :height="imageData.fallback?.height || imageData.avif[imageData.avif.length - 1]?.height"
       :loading="loading"
+      :fetchpriority="fetchpriority"
       decoding="async"
       :class="props.class"
     >
@@ -38,6 +40,7 @@ const imageData = useImageData(props.src)
     :src="src"
     :alt="alt"
     :loading="loading"
+    :fetchpriority="fetchpriority"
     decoding="async"
     :class="props.class"
   >

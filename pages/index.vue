@@ -65,6 +65,7 @@ useSeoConfig({
           alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
           class="w-full h-full object-cover"
           loading="eager"
+          fetchpriority="high"
           sizes="100vw"
         />
       </div>
