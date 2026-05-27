@@ -178,8 +178,7 @@ onUnmounted(() => {
       <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
         <div class="relative-md dark:prose-invert w-full prose prose-gray">
           <h2>
-            {{ specimen.form.name
-            }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
+            {{ specimen.form.name }} de <i>{{ scientificName }}</i>{{ specimen.size_mm ? ` — ${specimen.size_mm} mm` : '' }}
           </h2>
           <p v-if="specimen.description">
             {{ specimen.description }}
@@ -236,13 +235,13 @@ onUnmounted(() => {
       </template>
     </div>
     <div class="dark:prose-invert prose prose-gray">
-      <h2>Resources</h2>
+      <h2>Ressources sur <i>{{ scientificName }}</i></h2>
       <ul>
         <li>
-          Page wiki sur
+          Page Wikipédia sur
           <a :href="species[specieId].researcher.wiki_url" target="_blank" rel="noopener noreferrer">
             {{ species[specieId].researcher.name }}
-          </a>
+          </a>, taxonomiste auteur de la description originale.
         </li>
       </ul>
     </div>
