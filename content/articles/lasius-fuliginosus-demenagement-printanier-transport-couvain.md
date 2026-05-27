@@ -10,7 +10,7 @@ location: 'Forêt du Neuhof (ALSACE)'
 fk_idSpecie: 12
 ---
 
-## Observation d'un déménagement printanier de _Lasius fuliginosus_
+## Déménagement printanier de _Lasius fuliginosus_
 
 Une observation en milieu forestier (Forêt du Neuhof en Alsace) m'a permis d'étudier un aspect significatif du comportement de _Lasius fuliginosus_ : le déménagement printanier de la colonie. Une colonne continue d'ouvrières, s'étendant sur plusieurs mètres, a été observée. Chaque ouvrière transportait une larve ou un cocon entre ses mandibules, se dirigeant vers un nouveau site d'installation pour le printemps.
 
