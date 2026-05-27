@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-flavus']
 title: 'Lasius flavus : fondation de colonie en macro'
 description: 'Fondation en tube à essai chez la fourmi jaune des prairies, Lasius flavus. Le début de colonie comprend la gyne accompagnée de ses premières ouvrières.'
 date:

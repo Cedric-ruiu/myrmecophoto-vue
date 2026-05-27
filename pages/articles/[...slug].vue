@@ -25,6 +25,17 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
   { label: articleTitle.value, current: true },
 ])
 
+const citedTaxons = computed(() => {
+  const slugs = (article.value as { taxons?: string[] } | null)?.taxons || []
+  return slugs.map((slug) => {
+    const [genus = '', species = ''] = slug.split('-')
+    const label = species
+      ? `${genus.charAt(0).toUpperCase()}${genus.slice(1)} ${species}`
+      : slug
+    return { slug, label }
+  })
+})
+
 useSeoConfig({
   title: articleTitle.value,
   description: articleDescription.value,
@@ -71,6 +82,18 @@ useSeoConfig({
       :value="article"
       class="dark:prose-invert mx-auto pt-8 sm:pt-16 lg:pt-24 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl prose prose-gray o-article sm:prose-base lg:prose-lg"
     />
+
+    <aside
+      v-if="citedTaxons.length"
+      class="dark:prose-invert mx-auto mt-16 pt-8 sm:pt-12 lg:pt-16 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl border-white/10 border-t prose prose-gray"
+    >
+      <h2>Taxons cités dans cet article</h2>
+      <ul>
+        <li v-for="taxon in citedTaxons" :key="taxon.slug">
+          <NuxtLink :to="`/taxons/${taxon.slug}/`"><i>{{ taxon.label }}</i></NuxtLink>
+        </li>
+      </ul>
+    </aside>
   </article>
 </template>
 

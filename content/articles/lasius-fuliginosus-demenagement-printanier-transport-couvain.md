@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Lasius fuliginosus : déménagement printanier'
 description: 'Déménagement saisonnier de Lasius fuliginosus en Alsace. Transport du couvain (larves, nymphes) et adaptation printanière de la colonie en forêt.'
 date:

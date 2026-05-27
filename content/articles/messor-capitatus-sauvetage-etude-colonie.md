@@ -1,4 +1,5 @@
 ---
+taxons: ['messor-capitatus']
 title: "Sauvetage d'une colonie de Messor capitatus"
 description: "Sauvetage d'une colonie de Messor capitatus en déclin : observations comportementales, réserves alimentaires et interactions documentées en photo."
 date:
