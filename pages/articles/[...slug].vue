@@ -108,6 +108,30 @@ useSeoConfig({
     />
 
     <aside
+      class="dark:prose-invert flex items-start gap-4 mx-auto mt-16 pt-8 sm:pt-12 lg:pt-16 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl border-white/10 border-t prose prose-gray"
+    >
+      <img
+        src="/img/cedric-ruiu-avatar.webp"
+        alt="Portrait de Cédric Ruiu"
+        width="80"
+        height="80"
+        loading="lazy"
+        decoding="async"
+        class="m-0 rounded-full w-20 h-20 object-cover shrink-0"
+      >
+      <div class="min-w-0">
+        <p class="m-0 font-semibold">
+          <NuxtLink to="/about/">Cédric Ruiu</NuxtLink>
+        </p>
+        <p class="m-0 text-gray-300 text-sm">
+          Photographe et développeur web installé à Vannes, passionné de myrmécologie depuis l'enfance. Je documente
+          les fourmis de France à travers la macrophotographie taxonomique sur Myrmecophoto.
+          <NuxtLink to="/about/">En savoir plus</NuxtLink>.
+        </p>
+      </div>
+    </aside>
+
+    <aside
       v-if="citedTaxons.length"
       class="dark:prose-invert mx-auto mt-16 pt-8 sm:pt-12 lg:pt-16 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl border-white/10 border-t prose prose-gray"
     >
