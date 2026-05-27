@@ -47,6 +47,12 @@ useSeoConfig({
 <template>
   <div>
     <PageHeader title="Macro Photographie Taxonomique" />
+    <p class="mx-auto pt-4 max-w-prose text-gray-300 text-sm">
+      Vous cherchez une espèce précise ?
+      <NuxtLink to="/taxons/index-alphabetique/" class="underline">
+        Voir l'index alphabétique
+      </NuxtLink>.
+    </p>
     <div class="sm:pt-8 lg:pt-16">
       <div v-for="subfamily in subfamilies" :key="subfamily.id">
         <div class="dark:prose-invert prose prose-gray">
