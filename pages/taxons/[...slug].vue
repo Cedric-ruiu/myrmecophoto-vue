@@ -76,6 +76,46 @@ const subfamilyDescription = computed(
   () => currentSpecies.value?.genus.subfamily.description || '',
 )
 
+const taxonSlug = computed(() => {
+  const s = currentSpecies.value
+  if (!s) return ''
+  return `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`
+})
+
+const sameGenusSpecies = computed(() => {
+  if (!currentSpecies.value || !species.value) return []
+  const currentGenus = currentSpecies.value.genus.name
+  const currentId = currentSpecies.value.id
+  return species.value
+    .filter((s: typeof currentSpecies.value) =>
+      s.genus.name === currentGenus
+      && s.id !== currentId
+      && (s.specimen?.length || 0) > 0,
+    )
+    .map((s: typeof currentSpecies.value) => ({
+      slug: `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`,
+      label: `${s.genus.name} ${s.name}`,
+    }))
+})
+
+const { data: allArticlesForRelations } = await useAsyncData(
+  'taxon-related-articles',
+  () => queryCollection('content').all(),
+)
+
+const relatedArticles = computed(() => {
+  if (!taxonSlug.value || !allArticlesForRelations.value) return []
+  const slug = taxonSlug.value
+  return allArticlesForRelations.value
+    .filter((a: { taxons?: string[], path: string, title: string }) =>
+      Array.isArray(a.taxons) && a.taxons.includes(slug),
+    )
+    .map((a: { path: string, title: string }) => ({
+      path: a.path.endsWith('/') ? a.path : `${a.path}/`,
+      title: a.title,
+    }))
+})
+
 useSeoConfig({
   title: scientificName.value,
   description: taxonomicDescription.value,
@@ -234,7 +274,31 @@ onUnmounted(() => {
         </div>
       </template>
     </div>
-    <div class="dark:prose-invert prose prose-gray">
+    <aside
+      v-if="relatedArticles.length"
+      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+    >
+      <h2>Articles évoquant <i>{{ scientificName }}</i></h2>
+      <ul>
+        <li v-for="article in relatedArticles" :key="article.path">
+          <NuxtLink :to="article.path">{{ article.title }}</NuxtLink>
+        </li>
+      </ul>
+    </aside>
+
+    <aside
+      v-if="sameGenusSpecies.length"
+      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+    >
+      <h2>Autres espèces du genre <i>{{ currentSpecies?.genus.name }}</i></h2>
+      <ul>
+        <li v-for="related in sameGenusSpecies" :key="related.slug">
+          <NuxtLink :to="`/taxons/${related.slug}/`"><i>{{ related.label }}</i></NuxtLink>
+        </li>
+      </ul>
+    </aside>
+
+    <aside class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray">
       <h2>Ressources sur <i>{{ scientificName }}</i></h2>
       <ul>
         <li>
@@ -244,6 +308,6 @@ onUnmounted(() => {
           </a>, taxonomiste auteur de la description originale.
         </li>
       </ul>
-    </div>
+    </aside>
   </div>
 </template>
