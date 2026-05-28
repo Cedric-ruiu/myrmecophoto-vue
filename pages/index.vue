@@ -6,7 +6,7 @@ definePageMeta({
 useSeoConfig({
   title: 'Macrophotographie de fourmis : taxonomie & articles',
   description:
-    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+    "Macrophotographie scientifique des fourmis de France : collection taxonomique illustrée, articles d'observation et guides techniques en myrmécologie.",
   ogImageProps: {
     subtitle: 'Macrophotographie et Myrmécologie',
     description:
@@ -24,17 +24,17 @@ useSeoConfig({
     <div
       class="z-1 absolute flex flex-col justify-center w-full font-900 text-center leading-[1em] [ o-hero__baseline ] case-upper"
     >
-      <h1 class="[ o-hero__baselineTitle ]">
+      <p class="[ o-hero__baselineTitle ]">
         Myrmeco<span class="text-gradient-primary">photo</span>
-      </h1>
-      <h2 class="text-black [ o-hero__baselineSubtitle ]">
+      </p>
+      <h1 class="text-black [ o-hero__baselineSubtitle ]">
         Macro-photographies<br >des fourmis
-      </h2>
+      </h1>
     </div>
     <div class="relative flex w-full max-w-full [ o-hero__pictures ]">
       <div class="[ o-hero__picture4Edges ] basis-full">
         <Picture
-          src="taxons/Camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
+          src="taxons/camponotus-sylvaticus/camponotus-sylvaticus-gyne-face-f0075.avif"
           alt="Camponotus sylvaticus - Gyne (reine) en vue taxonomique, macrophotographie scientifique"
           class="w-full h-full object-cover"
           loading="eager"
@@ -65,6 +65,7 @@ useSeoConfig({
           alt="Myrmecophoto - Galerie de macrophotographies scientifiques de fourmis et myrmécologie"
           class="w-full h-full object-cover"
           loading="eager"
+          fetchpriority="high"
           sizes="100vw"
         />
       </div>

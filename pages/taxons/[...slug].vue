@@ -76,6 +76,46 @@ const subfamilyDescription = computed(
   () => currentSpecies.value?.genus.subfamily.description || '',
 )
 
+const taxonSlug = computed(() => {
+  const s = currentSpecies.value
+  if (!s) return ''
+  return `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`
+})
+
+const sameGenusSpecies = computed(() => {
+  if (!currentSpecies.value || !species.value) return []
+  const currentGenus = currentSpecies.value.genus.name
+  const currentId = currentSpecies.value.id
+  return species.value
+    .filter((s: typeof currentSpecies.value) =>
+      s.genus.name === currentGenus
+      && s.id !== currentId
+      && (s.specimen?.length || 0) > 0,
+    )
+    .map((s: typeof currentSpecies.value) => ({
+      slug: `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`,
+      label: `${s.genus.name} ${s.name}`,
+    }))
+})
+
+const { data: allArticlesForRelations } = await useAsyncData(
+  'taxon-related-articles',
+  () => queryCollection('content').all(),
+)
+
+const relatedArticles = computed(() => {
+  if (!taxonSlug.value || !allArticlesForRelations.value) return []
+  const slug = taxonSlug.value
+  return allArticlesForRelations.value
+    .filter((a: { taxons?: string[], path: string, title: string }) =>
+      Array.isArray(a.taxons) && a.taxons.includes(slug),
+    )
+    .map((a: { path: string, title: string }) => ({
+      path: a.path.endsWith('/') ? a.path : `${a.path}/`,
+      title: a.title,
+    }))
+})
+
 useSeoConfig({
   title: scientificName.value,
   description: taxonomicDescription.value,
@@ -178,8 +218,7 @@ onUnmounted(() => {
       <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
         <div class="relative-md dark:prose-invert w-full prose prose-gray">
           <h2>
-            {{ specimen.form.name
-            }}{{ specimen.size_mm ? ` de ${specimen.size_mm}mm` : '' }}
+            {{ specimen.form.name }} de <i>{{ scientificName }}</i>{{ specimen.size_mm ? ` — ${specimen.size_mm} mm` : '' }}
           </h2>
           <p v-if="specimen.description">
             {{ specimen.description }}
@@ -206,15 +245,13 @@ onUnmounted(() => {
               <samp>{{ specimen.reference }}</samp>
             </li>
             <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
-            <li>
+            <li v-if="specimen.contributor_specimen_collector_idTocontributor?.name">
               <strong>Collecteur : </strong>
               <i>{{
                 specimen.contributor_specimen_collector_idTocontributor.name
               }}</i>
             </li>
-            <li
-              v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
-            >
+            <li v-if="specimen.contributor_specimen_identifier_idTocontributor?.name">
               <strong>Identificateur :</strong>
               <i>{{
                 specimen.contributor_specimen_identifier_idTocontributor.name
@@ -223,28 +260,51 @@ onUnmounted(() => {
             <li v-if="specimen.size_mm">
               <strong>Size :</strong> {{ specimen.size_mm }}mm
             </li>
-            <li>
-              <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
-                specimen.country.name
-              }})
+            <li v-if="specimen.capture_site || specimen.country?.name">
+              <strong>Lieu de capture :</strong>
+              {{ [specimen.capture_site, specimen.country?.name ? `(${specimen.country.name})` : null].filter(Boolean).join(' ') }}
             </li>
-            <li>
+            <li v-if="specimen.capture_date">
               <strong>Date de capture :</strong> {{ specimen.capture_date }}
             </li>
           </ul>
         </div>
       </template>
     </div>
-    <div class="dark:prose-invert prose prose-gray">
-      <h2>Resources</h2>
+    <aside
+      v-if="relatedArticles.length"
+      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+    >
+      <h2>Articles évoquant <i>{{ scientificName }}</i></h2>
       <ul>
-        <li>
-          Page wiki sur
-          <a :href="species[specieId].researcher.wiki_url" target="_blank">
-            {{ species[specieId].researcher.name }}
-          </a>
+        <li v-for="article in relatedArticles" :key="article.path">
+          <NuxtLink :to="article.path">{{ article.title }}</NuxtLink>
         </li>
       </ul>
-    </div>
+    </aside>
+
+    <aside
+      v-if="sameGenusSpecies.length"
+      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+    >
+      <h2>Autres espèces du genre <i>{{ currentSpecies?.genus.name }}</i></h2>
+      <ul>
+        <li v-for="related in sameGenusSpecies" :key="related.slug">
+          <NuxtLink :to="`/taxons/${related.slug}/`"><i>{{ related.label }}</i></NuxtLink>
+        </li>
+      </ul>
+    </aside>
+
+    <aside class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray">
+      <h2>Ressources sur <i>{{ scientificName }}</i></h2>
+      <ul>
+        <li>
+          Page Wikipédia sur
+          <a :href="species[specieId].researcher.wiki_url" target="_blank" rel="noopener noreferrer">
+            {{ species[specieId].researcher.name }}
+          </a>, taxonomiste auteur de la description originale.
+        </li>
+      </ul>
+    </aside>
   </div>
 </template>

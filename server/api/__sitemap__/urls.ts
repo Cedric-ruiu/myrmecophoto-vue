@@ -111,6 +111,7 @@ export default defineSitemapEventHandler(async () => {
   urls.push(
     { loc: '/', lastmod: now, changefreq: 'weekly', priority: 1.0 },
     { loc: '/taxons/', lastmod: now, changefreq: 'weekly', priority: 0.9 },
+    { loc: '/taxons/index-alphabetique/', lastmod: now, changefreq: 'weekly', priority: 0.7 },
     { loc: '/articles/', lastmod: now, changefreq: 'weekly', priority: 0.9 },
     { loc: '/about/', lastmod: now, changefreq: 'monthly', priority: 0.6 },
   )

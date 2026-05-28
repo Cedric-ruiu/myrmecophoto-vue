@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useImageData } from '~/composables/useImageData'
+
 // this route generate page with list of all articles
 
 const { data: articles } = await useAsyncData('articles', () => {
@@ -8,10 +10,25 @@ const { data: articles } = await useAsyncData('articles', () => {
 // Fallback SSG-safe pour computed
 const articleCount = computed(() => articles?.value?.length || 0)
 
+const thumbnails = computed(() => {
+  const map = new Map<string, { src: string, width: number, height: number }>()
+  for (const article of articles.value || []) {
+    const main = article?.image?.main
+    if (!main) continue
+    const data = useImageData(`articles/${main}`)
+    map.set(article.path, {
+      src: data.thumbnailSrc,
+      width: data.thumbnailWidth,
+      height: data.thumbnailHeight,
+    })
+  }
+  return map
+})
+
 useSeoConfig({
   title: 'Articles myrmécologie & macro-photographie',
   description:
-    "Liste d'articles sur les techniques de la macro photographie ou la myrmécologie en général. Galerie représentant des macros photographies de fourmis (Formicidae).",
+    "Articles d'observation myrmécologique et tutoriels de macrophotographie : comportements de fourmis, élevage, matériel et techniques photo.",
   ogImageProps: {
     subtitle: 'Articles & Guides',
     description: `${articleCount.value} articles sur la macro-photographie et la myrmécologie`,
@@ -44,8 +61,12 @@ useSeoConfig({
         class="block horizontal-bottom-line-gradient relative flex-[1_0_auto] md:flex-none w-20 md:w-80 h-20 md:h-60"
         ><img
           class="rounded-md w-full h-full object-cover"
-          :src="'/img/articles/' + article?.image?.main + '-thumbnail.jpg'"
+          :src="thumbnails.get(article.path)?.src || ('/img/articles/' + article?.image?.main + '-thumbnail.jpg')"
+          :width="thumbnails.get(article.path)?.width"
+          :height="thumbnails.get(article.path)?.height"
           :alt="`Image de l'article : ${article.title}`"
+          loading="lazy"
+          decoding="async"
       ></NuxtLink>
       <NuxtLink :to="article.path.endsWith('/') ? article.path : article.path + '/'" class="dark:prose-invert prose prose-gray">
         <h3 class="mt-0 mb-2 line-clamp-2">{{ article.title }}</h3>

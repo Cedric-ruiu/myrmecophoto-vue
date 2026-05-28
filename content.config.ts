@@ -14,10 +14,11 @@ export default defineContentConfig({
         }),
         image: z.object({
           main: z.string(),
-          thumbnail: z.string(),
+          thumbnail: z.string().optional(),
         }),
         location: z.string().optional(),
         fk_idSpecie: z.number().optional(),
+        taxons: z.array(z.string()).optional(),
       }),
     }),
   },

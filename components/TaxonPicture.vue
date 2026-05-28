@@ -32,7 +32,7 @@ const imageData = useTaxonImageData(
     :data-pswp-height="imageData.finalHeight"
     :aria-label="`Agrandir la photo de ${species[specieId].genus.name} ${species[specieId].name} - ${picture.description || 'Vue taxonomique'}`"
     target="_blank"
-    rel="noreferrer"
+    rel="noopener noreferrer"
   >
     <picture>
       <source

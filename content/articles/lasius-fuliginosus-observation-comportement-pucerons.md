@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Lasius fuliginosus : comportement et mutualisme'
 description: 'Observation écologique de Lasius fuliginosus, la fourmi noire des bois : mutualisme avec les pucerons, pistes odorantes et morphologie.'
 date:

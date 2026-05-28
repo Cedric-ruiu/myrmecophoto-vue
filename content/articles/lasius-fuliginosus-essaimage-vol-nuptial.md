@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Lasius fuliginosus : essaimage et vol nuptial'
 description: "Vol nuptial de Lasius fuliginosus : phases d'essaimage, rôle des sexués (gynes et mâles) et stratégies de reproduction de l'espèce."
 date:

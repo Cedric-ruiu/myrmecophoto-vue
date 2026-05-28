@@ -25,7 +25,7 @@ const subfamilyCount = computed(() => subfamilies?.value?.length || 0)
 useSeoConfig({
   title: 'Collection taxonomique - Fourmis de France',
   description:
-    "Macro photographie taxonomiques de fourmis aidant à l'identification des spécimens, articles sur les techniques de macro photographie et sujet sur la myrmécologie.",
+    "Collection taxonomique illustrée de fourmis : photographies haute définition par espèce, sous-famille et caste pour l'identification des Formicidae.",
   ogImageProps: {
     subtitle: 'Collection Taxonomique',
     description: `${speciesCount.value} espèces de fourmis documentées dans ${subfamilyCount.value} sous-familles`,
@@ -47,6 +47,12 @@ useSeoConfig({
 <template>
   <div>
     <PageHeader title="Macro Photographie Taxonomique" />
+    <p class="mx-auto pt-4 max-w-prose text-gray-300 text-sm">
+      Vous cherchez une espèce précise ?
+      <NuxtLink to="/taxons/index-alphabetique/" class="underline">
+        Voir l'index alphabétique
+      </NuxtLink>.
+    </p>
     <div class="sm:pt-8 lg:pt-16">
       <div v-for="subfamily in subfamilies" :key="subfamily.id">
         <div class="dark:prose-invert prose prose-gray">

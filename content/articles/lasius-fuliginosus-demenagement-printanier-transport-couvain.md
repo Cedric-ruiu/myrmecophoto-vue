@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Lasius fuliginosus : déménagement printanier'
 description: 'Déménagement saisonnier de Lasius fuliginosus en Alsace. Transport du couvain (larves, nymphes) et adaptation printanière de la colonie en forêt.'
 date:
@@ -9,7 +10,7 @@ location: 'Forêt du Neuhof (ALSACE)'
 fk_idSpecie: 12
 ---
 
-## Observation d'un déménagement printanier de _Lasius fuliginosus_
+## Déménagement printanier de _Lasius fuliginosus_
 
 Une observation en milieu forestier (Forêt du Neuhof en Alsace) m'a permis d'étudier un aspect significatif du comportement de _Lasius fuliginosus_ : le déménagement printanier de la colonie. Une colonne continue d'ouvrières, s'étendant sur plusieurs mètres, a été observée. Chaque ouvrière transportait une larve ou un cocon entre ses mandibules, se dirigeant vers un nouveau site d'installation pour le printemps.
 
@@ -37,7 +38,4 @@ Le transport des larves et des nymphes est une tâche cruciale, souvent assurée
 Au cours de cette observation, je n'ai pas pu apercevoir la reine. Son observation directe lors de tels déplacements est exceptionnelle. Chez _Lasius fuliginosus_, la reine est typiquement escortée et maintenue au centre de la colonne de migration, soigneusement protégée des menaces extérieures. Cette discrétion c'est la stratégie pour assurer la survie et la continuité de la colonie. Peut-être la verrai-je lors d'une prochaine observation...
 
 ::PictureArticle{src="lasius-fuliginosus-demenagement-printanier-transport-couvain/lasius-fuliginosus-demenage-larve" alt="Fourmi Lasius fuliginosus déménageant une larve"}
-::
-
-::PictureArticle{src="lasius-fuliginosus-demenagement-printanier-transport-couvain/Lasius-fuliginosus-demenage-couvain" alt="Macrophotographie d'une Lasius fuliginosus transportant le couvain"}
 ::

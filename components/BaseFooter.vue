@@ -31,9 +31,9 @@ const socialLinks = [
       <!-- Left Zone: Brand & Info -->
       <div class="flex flex-col gap-6">
         <div class="flex flex-col gap-2">
-          <h2 class="m-0 font-500 sm:text-[1.75rem] text-2xl uppercase leading-tight tracking-tight">
+          <p class="m-0 font-500 sm:text-[1.75rem] text-2xl uppercase leading-tight tracking-tight">
             Myrmeco<span class="text-gradient-primary">photo</span>
-          </h2>
+          </p>
           <p class="m-0 text-[0.9rem] text-white/70 sm:text-base italic leading-snug">
             Macro-photographies des fourmis
           </p>

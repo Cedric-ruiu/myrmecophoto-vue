@@ -44,10 +44,6 @@ Le tableau suivant récapitule l'évolution de mon matériel au fil des années,
 Le bridge Konica Minolta Dimage Z6
 ::
 
-::PictureArticle{src="materiel-macrophotographie-fourmis-evolution-equipement/canon-50mm-f1-4" alt="Objectif Canon 50mm F/1.4 utilisé pour la macrophotographie."}
-L'objectif Canon 50mm F/1.4
-::
-
 ## Vers la maturité : reflex, bonnettes Raynox et perspectives d’avenir
 
 Actuellement, mon équipement principal se compose d'un appareil reflex Pentax K10D, fréquemment utilisé avec un objectif zoom Sigma 70-300mm et une bonnette Raynox CM-3500. Cette configuration, bien que datant de quelques années, demeure efficace pour la macrophotographie de fourmis et d'autres insectes. Toutefois, ses limites deviennent perceptibles, particulièrement en ce qui concerne la sensibilité ISO et la résolution, deux paramètres déterminants pour l'obtention d'images macroscopiques précises et riches en détails.
