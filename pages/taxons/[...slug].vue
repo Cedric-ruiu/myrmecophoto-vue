@@ -245,15 +245,13 @@ onUnmounted(() => {
               <samp>{{ specimen.reference }}</samp>
             </li>
             <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
-            <li>
+            <li v-if="specimen.contributor_specimen_collector_idTocontributor?.name">
               <strong>Collecteur : </strong>
               <i>{{
                 specimen.contributor_specimen_collector_idTocontributor.name
               }}</i>
             </li>
-            <li
-              v-if="specimen.contributor_specimen_identifier_idTocontributor.name"
-            >
+            <li v-if="specimen.contributor_specimen_identifier_idTocontributor?.name">
               <strong>Identificateur :</strong>
               <i>{{
                 specimen.contributor_specimen_identifier_idTocontributor.name
@@ -262,12 +260,11 @@ onUnmounted(() => {
             <li v-if="specimen.size_mm">
               <strong>Size :</strong> {{ specimen.size_mm }}mm
             </li>
-            <li>
-              <strong>Lieu de capture :</strong> {{ specimen.capture_site }} ({{
-                specimen.country.name
-              }})
+            <li v-if="specimen.capture_site || specimen.country?.name">
+              <strong>Lieu de capture :</strong>
+              {{ [specimen.capture_site, specimen.country?.name ? `(${specimen.country.name})` : null].filter(Boolean).join(' ') }}
             </li>
-            <li>
+            <li v-if="specimen.capture_date">
               <strong>Date de capture :</strong> {{ specimen.capture_date }}
             </li>
           </ul>
