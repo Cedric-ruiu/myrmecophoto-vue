@@ -12,7 +12,11 @@ fk_idSpecie: 29
 
 Cet article relate un petit moment en macrophotographie naturaliste, consacré à une série d'images du genre _Formica_. Si la majorité des prises de vues de cette session furent compromises par des flous et de la surexposition, un cliché s'est néanmoins distingué. Il figure parmi mes photographies les plus réussies en milieu naturel.
 
+## La mise au point sur l'œil
+
 La macrophotographie exige patience et précision. Un principe essentiel consiste à effectuer la mise au point sur les yeux du sujet. Appliquée aux fourmis comme aux humains à cette image, cette technique focalise l'attention de l'insecte et détache nettement de son arrière-plan. Ce cliché a été obtenu grâce au kit Raynox CM-3500, un jeu de bonnettes macro qui m'a permis de progresser énormément en macrophotographie.
+
+## Le genre Formica, les fourmis rousses des bois
 
 Le genre _Formica_ englobe des espèces de fourmis répandues, communément désignées sous le nom de "fourmis rousses des bois". Ces insectes sont reconnaissables à leurs nids imposants en forme de dômes, édifiés avec des aiguilles de conifères et divers débris végétaux. D'une grande activité, les ouvrières sont souvent observées transportant des matériaux vers le nid – comme l'illustre cette photographie – ou chassant pour subvenir aux besoins de la colonie.
 
@@ -29,3 +33,9 @@ D'autres photos, moins réussies, valent quand même le détour.
 
 ::PictureArticle{src="formica-macrophotographie-technique-mise-au-point/groupe-formica-sp-transport-brindille" alt="Un groupe de fourmis Formica sp. transportant des brindilles."}
 ::
+
+## Pour aller plus loin
+
+- [Canon 50mm inversé vs Raynox CM-3500 : comparatif](/articles/comparatif-canon-50mm-inverse-vs-raynox-cm-3500-macrophotographie/) — le type de matériel utilisé pour cette prise de vue.
+- [Objectif inversé : 35mm vs 50mm en macrophoto](/articles/comparatif-objectif-inverse-35mm-50mm-macrophotographie/) — choisir sa focale pour la macro de terrain.
+- [Évolution du matériel de macrophoto de fourmis](/articles/materiel-macrophotographie-fourmis-evolution-equipement/) — l'équipement employé au fil des années.
