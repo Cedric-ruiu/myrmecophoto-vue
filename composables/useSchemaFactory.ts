@@ -4,6 +4,7 @@
  */
 
 import { SCHEMA_CONSTANTS, SCHEMA_URLS } from './useSchemaConstants'
+import { capitalizeFirst } from './utils'
 
 export interface SchemaFactoryOptions {
   // Common options
@@ -30,6 +31,7 @@ export interface SchemaFactoryOptions {
   // Taxon-specific options
   taxon?: {
     scientificName: string
+    vernacularName?: string
     genus: string
     subfamily: string
     researcher: string
@@ -322,13 +324,19 @@ export const useSchemaFactory = () => {
       { '@type': 'PropertyValue', name: 'Specimens documented', value: taxon.specimens?.length?.toString() }
     ].filter((prop): prop is { '@type': string; name: string; value: string } => Boolean(prop && prop.value))
 
+    const alternateNames: string[] = []
+    if (taxon.vernacularName) alternateNames.push(capitalizeFirst(taxon.vernacularName))
+    if (!isSpOnly && taxon.researcher && taxon.year) {
+      alternateNames.push(`${taxon.scientificName} ${taxon.researcher}, ${taxon.year}`)
+    }
+
     return {
       '@type': 'Taxon',
       '@id': `${pageUrl}#taxon`,
       name: taxon.scientificName,
-      alternateName: !isSpOnly && taxon.researcher && taxon.year
-        ? `${taxon.scientificName} ${taxon.researcher}, ${taxon.year}`
-        : undefined,
+      alternateName: alternateNames.length === 0
+        ? undefined
+        : alternateNames.length === 1 ? alternateNames[0] : alternateNames,
       description,
       taxonRank: isSpOnly ? 'genus' : 'species',
       parentTaxon: isSpOnly ? genusParent : speciesParent,

@@ -46,3 +46,11 @@ Après neutralisation et démembrement, les fragments de la proie sont acheminé
 ::PictureArticle{src="pheidole-pallidula-fondation-colonie-claustrale-chasse/pheidole-pallidula-en-vol-larve-tenebrion" alt="Ouvrière Pheidole pallidula dans les airs, tentant de se débattre face à une larve de ténébrions."}
 Cette ouvrière dans les airs ne lâche pas l'affaire !
 ::
+
+## Pour aller plus loin
+
+La suite du suivi de cette colonie de _Pheidole pallidula_ élevée en captivité :
+
+- [Pheidole pallidula : polymorphisme et élevage](/articles/pheidole-pallidula-colonie-elevage-organisation-sociale/) — l'organisation sociale une fois la colonie développée.
+- [Pheidole pallidula : prédation d'une tipule](/articles/pheidole-pallidula-capture-tipule-predation/) — une chasse collective spectaculaire.
+- [Pheidole pallidula : déclin et larve royale](/articles/pheidole-pallidula-declin-colonie-larve-sexuee/) — la dernière phase de la colonie.

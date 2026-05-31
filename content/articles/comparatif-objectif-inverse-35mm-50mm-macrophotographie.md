@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Objectif inversé : 35mm vs 50mm en macrophoto'
 description: 'Guide pour choisir un objectif inversé en macrophoto : focales 35mm vs 50mm, grossissement, profondeur de champ, conseils naturalistes.'
 date:
@@ -10,7 +11,7 @@ image:
 
 La macrophotographie à budget maîtrisé suscite de nombreuses interrogations quant au choix du matériel. Si l'objectif de 50mm est fréquemment plébiscité, d'autres options, tel que le 35mm, peuvent s'avérer judicieuses pour le photographe amateur. Sélectionner la focale adéquate à ses pratiques est essentiel. Cet article explore les critères de choix d'un objectif inversé et les éléments fondamentaux à considérer pour optimiser cette technique.
 
-### Distinction fondamentale : 50mm ou 35mm ?
+## Distinction fondamentale : 50mm ou 35mm ?
 
 La distinction primordiale entre un objectif de 35mm et un de 50mm, utilisés en configuration inversée, réside dans leur capacité de grossissement : le 50mm offre un rapport de reproduction significativement supérieur. Le 35mm se révèle particulièrement adapté à la photographie de sujets mobiles en milieu naturel, permettant de les contextualiser dans leur environnement. À l'inverse, le fort grossissement du 50mm le destine davantage à la capture de très petits sujets ou à la photographie taxonomique en conditions contrôlées, comme en studio.
 
@@ -21,7 +22,7 @@ Le choix de la focale pour un objectif inversé dépend donc étroitement de l'a
 1.  **Macrophotographie en extérieur :** Pour photographier des insectes de taille moyenne à grande dans leur environnement naturel, en conservant une partie du contexte, un objectif de 35mm est généralement préférable.
 2.  **Macrophotographie en intérieur (taxonomique) :** Pour obtenir des grossissements importants, nécessaires à l'identification et à l'étude de détails morphologiques fins, un objectif de 50mm est plus indiqué.
 
-#### Illustration : photographie avec un objectif de type 35mm inversé
+### Illustration : photographie avec un objectif de type 35mm inversé
 
 Bien que l'objectif utilisé pour cet exemple ne soit pas un strict 35mm, le résultat illustre typiquement le rendu obtenu. Ce niveau de grossissement permet d'intégrer le sujet dans son contexte environnemental.
 
@@ -29,7 +30,7 @@ Bien que l'objectif utilisé pour cet exemple ne soit pas un strict 35mm, le ré
 Fourmi _Lasius sp._ et pucerons : exemple du cadrage obtenu avec un objectif de type 35mm inversé, montrant le sujet dans son biotope.
 ::
 
-#### Illustration : photographie avec un objectif de 50mm inversé
+### Illustration : photographie avec un objectif de 50mm inversé
 
 Avec un objectif de 50mm inversé, le grossissement devient conséquent. Le champ couvert se réduit à quelques millimètres, permettant de saisir des détails anatomiques précis, comme ici la tête d'une fourmi de taille moyenne. Ce type de grossissement peut s'avérer excessif pour des sujets plus imposants, tels que les papillons.
 
@@ -37,7 +38,7 @@ Avec un objectif de 50mm inversé, le grossissement devient conséquent. Le cham
 Tête d'une fourmi _Lasius fuliginosus_ : exemple du fort grossissement offert par un objectif de 50mm inversé, idéal pour l'étude morphologique détaillée.
 ::
 
-### Critères de sélection d'un objectif pour l'inversion
+## Critères de sélection d'un objectif pour l'inversion
 
 Au-delà de la focale, l'ouverture maximale de l'objectif (souvent exprimée par la plus petite valeur f/, par exemple f/1.4) est un critère déterminant. Une grande ouverture maximale (petit nombre f/) se traduit par une meilleure transmission de la lumière. Ceci est crucial en macrophotographie inversée, car cela permet de minimiser le vignettage et facilite la visée ainsi que la mise au point, surtout dans des conditions de faible luminosité. À titre comparatif, un objectif ouvrant à f/1.7 est plus lumineux qu'un objectif ouvrant à f/3.5.
 
@@ -50,3 +51,9 @@ Comparaison du diaphragme de deux objectifs 50mm : à gauche, f/1.9 ; à droite,
 ::
 
 Enfin, un point de vigilance essentiel lors de l'acquisition d'un objectif d'occasion concerne l'état des lentilles. La présence de champignons (moisissures internes), de rayures importantes ou d'une quantité excessive de poussière entre les éléments optiques peut dégrader significativement la qualité des images produites. Une inspection minutieuse est donc recommandée avant tout achat.
+
+## Pour aller plus loin
+
+- [Canon 50mm inversé vs Raynox CM-3500 : comparatif](/articles/comparatif-canon-50mm-inverse-vs-raynox-cm-3500-macrophotographie/) — objectif inversé contre bonnettes macro, tests à l'appui.
+- [Évolution du matériel de macrophoto de fourmis](/articles/materiel-macrophotographie-fourmis-evolution-equipement/) — comment cet équipement a évolué au fil des années.
+- [Formica sp. : technique de mise au point macro](/articles/formica-macrophotographie-technique-mise-au-point/) — la technique appliquée à un sujet de terrain.

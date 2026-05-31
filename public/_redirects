@@ -4,14 +4,15 @@
 /home.html / 301
 /index.html / 301
 
-/taxons/pheidole-pallidula /taxons/ 301
-/taxons/lasius-sp /taxons/ 301
-/taxons/myrmica-sp /taxons/ 301
-/taxons/myrmica-rubra /taxons/ 301
-/taxons/pheidole-pallidula/ /taxons/ 301
-/taxons/lasius-sp/ /taxons/ 301
-/taxons/myrmica-sp/ /taxons/ 301
-/taxons/myrmica-rubra/ /taxons/ 301
+# Taxons sans planche photo : rediriger vers la ressource existante la plus pertinente
+/taxons/pheidole-pallidula /articles/pheidole-pallidula-colonie-elevage-organisation-sociale/ 301
+/taxons/pheidole-pallidula/ /articles/pheidole-pallidula-colonie-elevage-organisation-sociale/ 301
+/taxons/myrmica-rubra /articles/myrmica-rubra-observation-caracteristiques-habitat/ 301
+/taxons/myrmica-rubra/ /articles/myrmica-rubra-observation-caracteristiques-habitat/ 301
+/taxons/myrmica-sp /taxons/myrmica-ruginodis/ 301
+/taxons/myrmica-sp/ /taxons/myrmica-ruginodis/ 301
+/taxons/lasius-sp /articles/lasius-niger-fourmi-noire-jardin-identification/ 301
+/taxons/lasius-sp/ /articles/lasius-niger-fourmi-noire-jardin-identification/ 301
 
 /macro-photographie.html /taxons/ 301
 /macro-photographie/taxonomie.html /taxons/ 301

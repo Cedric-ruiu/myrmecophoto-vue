@@ -83,6 +83,10 @@ function buildErrorMessage(mess: string) {
           <img
             src="/img/cedric-ruiu-avatar.webp"
             alt="Image avatar de Cédric Ruiu"
+            width="677"
+            height="677"
+            loading="lazy"
+            decoding="async"
           >
           <p>
             <i>MyrmecoPhoto :</i> une fenêtre ouverte sur le monde des fourmis et

@@ -13,11 +13,15 @@ fk_idSpecie: 30
 
 Ces photographies illustrent mes débuts en macrophotographie. Réalisées avec mon premier appareil, un Konica Minolta Dimage Z6, elles m'ont initié à la technicité de ce mode de prise de vue. Bien que leur qualité visuelle puisse paraître un peu limitée, ces premières images permettent d'étudier les comportements (de _Lasius flavus_ entre autre) difficilement perceptibles à l'œil nu.
 
+## La fondation claustrale de la fourmi jaune
+
 Chez _Lasius flavus_, communément appelée la fourmi jaune des prairies, la fondation de la colonie est de type claustral. Suite au vol nuptial, la jeune reine fécondée recherche un site favorable, généralement un sol meuble et humide, pour y creuser une loge initiale. C'est dans cet abri qu'elle pond ses premiers œufs et élève seule la première génération d'ouvrières, utilisant ses réserves corporelles comme unique source de nourriture. Dès lors, elle demeurera confinée au nid.
 
 ::PictureArticle{src="lasius-flavus-fondation-colonie-gyne-nanitics/lasius-flavus-gyne-ouvriere" alt="Gyne Lasius flavus avec une de ses premières ouvrières dans un tube à essai."}
 Jeune reine _Lasius flavus_ et l'une de ses premières ouvrières. La reine, nettement plus grande, se distingue aisément.
 ::
+
+## Les premières ouvrières : les nanitiques
 
 Les premières ouvrières, dites nanitiques en raison de leur taille souvent réduite par rapport aux générations ultérieures, assument ensuite les tâches essentielles : le soin au couvain, l'expansion du nid et l'approvisionnement en nourriture.
 
@@ -28,7 +32,15 @@ Les premières ouvrières, dites nanitiques en raison de leur taille souvent ré
 Angle intéressant montrant le soin prodigué par la reine _Lasius flavus_ à une larve.
 ::
 
+## Le développement de la colonie
+
 Initialement lent, le développement de la colonie s'accélère progressivement. Une colonie mature de _Lasius flavus_ peut ainsi regrouper plusieurs dizaines de milliers d'individus et se manifeste souvent par la construction de dômes de terre distinctifs dans les prairies et pâturages.
 
 ::PictureArticle{src="lasius-flavus-fondation-colonie-gyne-nanitics/lasius-flavus-ouvriere-zoom" alt="Zoom sur une ouvrière Lasius flavus, mettant en évidence les détails de son exosquelette."}
 ::
+
+## Pour aller plus loin
+
+- [Lasius fuliginosus : essaimage et vol nuptial](/articles/lasius-fuliginosus-essaimage-vol-nuptial/) — l'étape qui précède la fondation, lorsque les jeunes gynes quittent le nid.
+- [Lasius niger : identifier la fourmi noire du jardin](/articles/lasius-niger-fourmi-noire-jardin-identification/) — la fondation claustrale décrite ici se déroule à l'identique chez l'espèce la plus commune du genre.
+- [Nid de Lasius : structure et galeries souterraines](/articles/lasius-nid-structure-galeries-souterraines/) — l'architecture du nid une fois la colonie développée.

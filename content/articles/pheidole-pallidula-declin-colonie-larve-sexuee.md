@@ -48,3 +48,11 @@ Observation d'une trophallaxie entre une ouvrière minor et la larve sexuée.
 ::PictureArticle{src="pheidole-pallidula-declin-colonie-larve-sexuee/pheidole-pallidula-larve-boulaire-zoom" alt="Zoom sur une larve de Pheidole pallidula de forme arrondie et de grande taille, caractéristique d'une larve 'boulaire' avant la nymphose."}
 Détail d'une larve sexuée de _Pheidole pallidula_.
 ::
+
+## Pour aller plus loin
+
+Cet épisode clôt le suivi d'une colonie de _Pheidole pallidula_ documentée depuis sa fondation :
+
+- [Pheidole pallidula : fondation claustrale](/articles/pheidole-pallidula-fondation-colonie-claustrale-chasse/) — les débuts de la colonie.
+- [Pheidole pallidula : polymorphisme et élevage](/articles/pheidole-pallidula-colonie-elevage-organisation-sociale/) — l'organisation sociale à son apogée.
+- [Pheidole pallidula : prédation d'une tipule](/articles/pheidole-pallidula-capture-tipule-predation/) — une chasse collective spectaculaire.

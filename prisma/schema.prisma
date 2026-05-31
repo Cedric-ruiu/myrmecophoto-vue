@@ -64,9 +64,10 @@ model specie {
   id            Int        @id @unique(map: "sqlite_autoindex_specie_1") @default(autoincrement())
   genus_id      Int
   researcher_id Int
-  year          Int
-  name          String
-  description   String?
+  year            Int
+  name            String
+  description     String?
+  vernacular_name String?
   researcher    researcher @relation(fields: [researcher_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   genus         genus      @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   specimen      specimen[]

@@ -4,7 +4,7 @@ definePageMeta({
 })
 
 useSeoConfig({
-  title: 'Macrophotographie de fourmis : taxonomie & articles',
+  title: 'Macrophotographie de fourmis de France',
   description:
     "Macrophotographie scientifique des fourmis de France : collection taxonomique illustrée, articles d'observation et guides techniques en myrmécologie.",
   ogImageProps: {

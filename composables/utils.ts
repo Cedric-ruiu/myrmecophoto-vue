@@ -14,3 +14,8 @@ export const useAbsoluteUrl = (relativeUrl: string) => {
   const config = useRuntimeConfig()
   return new URL(relativeUrl, config.public.baseURL).href
 }
+
+/** Capitalise la première lettre (ex. nom vernaculaire affiché en sous-titre). */
+export const capitalizeFirst = (text: string): string => {
+  return text ? text.charAt(0).toUpperCase() + text.slice(1) : text
+}
