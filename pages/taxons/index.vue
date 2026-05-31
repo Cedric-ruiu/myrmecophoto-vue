@@ -46,7 +46,7 @@ useSeoConfig({
 
 <template>
   <div>
-    <PageHeader title="Macro Photographie Taxonomique" />
+    <PageHeader title="Collection taxonomique des fourmis de France" />
     <p class="mx-auto pt-4 max-w-prose text-gray-300 text-sm">
       Vous cherchez une espèce précise ?
       <NuxtLink to="/taxons/index-alphabetique/" class="underline">
