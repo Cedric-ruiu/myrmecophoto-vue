@@ -47,6 +47,7 @@ erDiagram
     Int year 
     String name 
     String description "❓"
+    String vernacular_name "❓"
     }
   
 

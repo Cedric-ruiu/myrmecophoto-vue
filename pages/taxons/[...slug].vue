@@ -46,9 +46,21 @@ const scientificName = computed(() => {
   if (!currentSpecies.value) return 'Taxon Myrmecophoto'
   return `${currentSpecies.value.genus.name} ${currentSpecies.value.name}`
 })
+const taxonSlug = computed(() => {
+  const s = currentSpecies.value
+  if (!s) return ''
+  return `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`
+})
+
+// French vernacular name from the DB (specie.vernacular_name). Empty when none.
+const vernacularName = computed(() => currentSpecies.value?.vernacular_name || '')
+const vernacularDisplay = computed(() => capitalizeFirst(vernacularName.value))
+
 const taxonomicDescription = computed(() => {
   if (!currentSpecies.value) return 'Macrophotographie taxonomique de fourmi'
-  return `Macrophotographies taxonomiques de ${scientificName.value} - Identification, morphologie et caractéristiques de cette espèce de fourmi.`
+  const vern = vernacularName.value ? `, ${vernacularName.value}` : ''
+  return `Macrophotographies de ${scientificName.value}${vern} : identification, `
+    + `morphologie et caractéristiques de cette espèce de fourmi.`
 })
 
 // SEO-friendly introduction paragraph generated from available data
@@ -64,7 +76,10 @@ const taxonIntro = computed(() => {
   const locationLabel = countries.length
     ? `Spécimens collectés en ${countries.join(', ')}.`
     : ''
-  return `${scientificName.value} est une espèce de fourmi de la sous-famille des `
+  const vern = vernacularName.value
+    ? `, communément appelée ${vernacularName.value},`
+    : ''
+  return `${scientificName.value}${vern} est une espèce de fourmi de la sous-famille des `
     + `${s.genus.subfamily.name} (genre ${s.genus.name}), décrite par `
     + `${s.researcher.name} en ${s.year}. Cette fiche regroupe `
     + `${specimenCount} spécimen${specimenCount > 1 ? 's' : ''} photographié`
@@ -75,12 +90,6 @@ const taxonIntro = computed(() => {
 const subfamilyDescription = computed(
   () => currentSpecies.value?.genus.subfamily.description || '',
 )
-
-const taxonSlug = computed(() => {
-  const s = currentSpecies.value
-  if (!s) return ''
-  return `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`
-})
 
 const sameGenusSpecies = computed(() => {
   if (!currentSpecies.value || !species.value) return []
@@ -117,7 +126,9 @@ const relatedArticles = computed(() => {
 })
 
 useSeoConfig({
-  title: scientificName.value,
+  title: vernacularName.value
+    ? `${scientificName.value} (${vernacularName.value})`
+    : scientificName.value,
   description: taxonomicDescription.value,
   ogImageProps: {
     subtitle: currentSpecies.value?.genus.subfamily.name || 'Formicidae',
@@ -132,6 +143,7 @@ useSeoConfig({
   schemaData: {
     taxon: {
       scientificName: scientificName.value,
+      vernacularName: vernacularName.value,
       genus: currentSpecies.value?.genus.name || '',
       subfamily: currentSpecies.value?.genus.subfamily.name || '',
       researcher: currentSpecies.value?.researcher.name || '',
@@ -194,6 +206,10 @@ onUnmounted(() => {
         <span class="ml-2 text-xl">
           {{ species[specieId].researcher.name }}&nbsp;{{ species[specieId].year }}
         </span>
+        <span
+          v-if="vernacularName"
+          class="block mt-2 text-lg text-gray-300 normal-case not-italic"
+        >{{ vernacularDisplay }}</span>
       </template>
       <template #metadata>
         <p class="order-4 text-gray-200 text-sm">
@@ -208,6 +224,7 @@ onUnmounted(() => {
     </PageHeader>
     <section class="dark:prose-invert mx-auto pt-8 sm:pt-12 lg:pt-16 max-w-prose prose prose-gray">
       <p>{{ taxonIntro }}</p>
+      <p v-if="currentSpecies?.description">{{ currentSpecies.description }}</p>
       <p v-if="subfamilyDescription">
         <strong>Sous-famille {{ species[specieId].genus.subfamily.name }} :</strong>
         {{ subfamilyDescription }}
