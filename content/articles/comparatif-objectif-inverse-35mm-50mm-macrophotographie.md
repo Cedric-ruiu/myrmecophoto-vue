@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-fuliginosus']
 title: 'Objectif inversé : 35mm vs 50mm en macrophoto'
 description: 'Guide pour choisir un objectif inversé en macrophoto : focales 35mm vs 50mm, grossissement, profondeur de champ, conseils naturalistes.'
 date:

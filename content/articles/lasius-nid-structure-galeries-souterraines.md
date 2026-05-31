@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-brunneus', 'lasius-flavus', 'lasius-fuliginosus', 'lasius-platythorax']
 title: 'Nid de Lasius : structure et galeries souterraines'
 description: "Architecture d'un nid de fourmis Lasius sous une pierre : galeries, loges à couvain, rôle thermorégulateur et protecteur pour la colonie."
 date:

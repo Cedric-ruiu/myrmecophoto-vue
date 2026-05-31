@@ -1,4 +1,5 @@
 ---
+taxons: ['myrmica-ruginodis']
 title: 'Myrmica rubra : observation en milieu forestier'
 description: "Myrmica rubra, fourmi rouge européenne : morphologie, habitat en forêt humide, comportement social et critères d'identification en photo macro."
 date:

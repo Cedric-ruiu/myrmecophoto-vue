@@ -1,4 +1,5 @@
 ---
+taxons: ['myrmica-ruginodis']
 title: "Déclin d'une colonie de Myrmica rubra"
 description: "Colonie de Myrmica rubra en captivité dépérissant : symptômes, hypothèses (pathologie, stress) et observation insolite d'une larve de ténébrion."
 date:

@@ -1,4 +1,5 @@
 ---
+taxons: ['lasius-brunneus', 'lasius-flavus', 'lasius-fuliginosus', 'lasius-platythorax']
 title: 'Mutualisme Lasius-pucerons : symbiose et miellat'
 description: 'Photos macro de la symbiose entre fourmis Lasius et pucerons. Échanges bénéfiques de ce mutualisme : protection en échange de miellat.'
 date:

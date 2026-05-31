@@ -1,4 +1,5 @@
 ---
+taxons: ['formica-fusca', 'formica-polyctena', 'formica-sanguinea']
 title: 'Formica sp. : technique de mise au point macro'
 description: "Macrophotographie d'une ouvrière Formica sp. en transport : mise au point sur l'œil avec le kit Raynox CM-3500 et aperçu du genre Formica."
 date:
