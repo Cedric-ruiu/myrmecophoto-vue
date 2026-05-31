@@ -49,13 +49,16 @@ useSeoConfig({
 
 <template>
   <div>
-    <PageHeader title="Articles : myrmécologie & macrophotographie" />
-    <p class="mx-auto pt-4 max-w-prose text-gray-300 text-sm">
-      Observations de terrain et d'élevage, comportements des fourmis (essaimage, fondation de
-      colonie, mutualisme avec les pucerons) et guides techniques de macrophotographie :
-      l'ensemble des articles de Myrmecophoto consacrés à la myrmécologie et à la photographie
-      macro des <i>Formicidae</i>.
-    </p>
+    <PageHeader title="Articles : myrmécologie & macrophotographie">
+      <template #metadata>
+        <p class="order-4 max-w-prose text-gray-300 text-sm">
+          Observations de terrain et d'élevage, comportements des fourmis (essaimage, fondation de
+          colonie, mutualisme avec les pucerons) et guides techniques de macrophotographie :
+          l'ensemble des articles de Myrmecophoto consacrés à la myrmécologie et à la photographie
+          macro des <i>Formicidae</i>.
+        </p>
+      </template>
+    </PageHeader>
     <article
       v-for="article in articles"
       :key="article.path"

@@ -89,7 +89,7 @@ useSeoConfig({
     <nav
       v-if="showToc"
       aria-label="Sommaire de l'article"
-      class="dark:prose-invert mx-auto mt-8 sm:mt-12 lg:mt-16 px-6 py-4 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl border-white/10 border rounded-md prose prose-gray prose-sm"
+      class="dark:prose-invert mx-auto mt-8 sm:mt-12 lg:mt-16 px-6 py-4 max-w-prose md:max-w-3xl lg:max-w-4xl xl:max-w-5xl prose prose-gray sm:prose-base lg:prose-sm"
     >
       <p class="m-0 mb-2 font-semibold text-gray-300 text-sm uppercase tracking-wider">
         Sommaire
