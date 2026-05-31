@@ -15,7 +15,11 @@ Une observation en milieu forestier a permis d'étudier de près une colonie de 
 Ouvrières _Lasius fuliginosus_ interagissant avec une colonie de pucerons. Elles assurent leur protection contre les prédateurs et récoltent en échange le miellat, une excrétion sucrée. Cette relation illustre une symbiose bénéfique pour les deux espèces. Les ouvrières peuvent être observées tant au sol que dans les strates arborées, parfois hors de portée directe.
 ::
 
+## Le mutualisme avec les pucerons
+
 _Lasius fuliginosus_ pratique une forme d'élevage des pucerons pour exploiter leur miellat, une substance sucrée à haute valeur énergétique. En contrepartie de cette ressource alimentaire, les fourmis protègent activement les pucerons de leurs prédateurs, tels que les coccinelles. Ce mutualisme est essentiel au développement et à la pérennité des populations des deux partenaires.
+
+## Pistes odorantes et retour au nid
 
 Un autre comportement fréquemment observé est le retour au nid des ouvrières chargées de nourriture.
 
@@ -33,3 +37,9 @@ Gros plan sur une ouvrière _Lasius fuliginosus_, mettant en évidence sa couleu
 
 ::PictureArticle{src="lasius-fuliginosus-observation-comportement-pucerons/lasius-fuliginosus-transport-objet-2" alt="Macrophoto d'une Lasius fuliginosus portant un objet mystère."}
 ::
+
+## Pour aller plus loin
+
+- [Mutualisme Lasius-pucerons : symbiose et miellat](/articles/lasius-elevage-pucerons-mutualisme-miellat/) — le détail de cette relation à l'échelle du genre.
+- [Lasius fuliginosus : essaimage et vol nuptial](/articles/lasius-fuliginosus-essaimage-vol-nuptial/) — la reproduction de la même espèce.
+- [Lasius fuliginosus : déménagement printanier](/articles/lasius-fuliginosus-demenagement-printanier-transport-couvain/) — le transport coordonné du couvain.

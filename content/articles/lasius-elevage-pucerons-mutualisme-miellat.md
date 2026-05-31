@@ -38,3 +38,9 @@ Le miellat revêt une telle importance qu'il peut moduler la compétition interc
 
 ::PictureArticle{src="lasius-elevage-pucerons-mutualisme-miellat/lasius-sp-elevage-pucerons-2" alt="Gros plan d'une fourmi Lasius sp. récoltant du miellat auprès d'un puceron."}
 ::
+
+## Pour aller plus loin
+
+- [Lasius fuliginosus : comportement et mutualisme](/articles/lasius-fuliginosus-observation-comportement-pucerons/) — le même mutualisme observé chez la fourmi noire des bois.
+- [Lasius niger : identifier la fourmi noire du jardin](/articles/lasius-niger-fourmi-noire-jardin-identification/) — le mutualisme chez l'espèce la plus commune des jardins.
+- [Nid de Lasius : structure et galeries souterraines](/articles/lasius-nid-structure-galeries-souterraines/) — où ce miellat est rapporté et stocké.

@@ -12,7 +12,11 @@ location: "Forêt (souche d'arbre)"
 
 L'essaimage, également connu sous le nom de vol nuptial, représente une étape déterminante du cycle de vie d'une colonie de fourmis. Durant cet événement, les individus reproducteurs, à savoir les futures reines (gynes) et les mâles, s'envolent du nid d'origine en quête de partenaires pour l'accouplement, avec pour objectif la fondation de nouvelles colonies. J'ai pu avoir l'opportunité d'observer ce phénomène chez _Lasius fuliginosus_.
 
+## L'attente de l'essaimage
+
 L'observation de cet essaimage a été précédée par plusieurs jours de surveillance d'un nid localisé dans une vieille souche d'arbre. L'agitation grandissante des ouvrières, conjuguée à l'apparition progressive des premiers individus sexués à proximité des orifices du nid, signalait que l'essaimage était sur le point d'arriver.
+
+## Le jour du vol nuptial
 
 Et puis le jour de l'essaimage est arrivé, avec des milliers d'ailes argentées appartenant aux gynes et aux mâles s'apprêtant à l'envol, miroitaient à la lumière.
 
@@ -35,3 +39,9 @@ Les gynes, de stature imposante, et les mâles, plus graciles, initiaient leur v
 
 ::PictureArticle{src="lasius-fuliginosus-essaimage-vol-nuptial/lasius-fuliginosus-groupe-essaimage" alt="Un groupe de fourmis Lasius fuliginosus en plein essaimage."}
 ::
+
+## Pour aller plus loin
+
+- [Lasius flavus : fondation de colonie](/articles/lasius-flavus-fondation-colonie-gyne-nanitics/) — ce que devient une gyne fécondée après le vol nuptial.
+- [Lasius niger : identifier la fourmi noire du jardin](/articles/lasius-niger-fourmi-noire-jardin-identification/) — l'essaimage estival d'une espèce voisine, très commune dans les jardins.
+- [Lasius fuliginosus : comportement et mutualisme](/articles/lasius-fuliginosus-observation-comportement-pucerons/) — d'autres observations de la même espèce.
