@@ -36,7 +36,7 @@
     "@unocss/preset-wind4": "66.7.0",
     "better-sqlite3": "12.10.0",
     "eslint": "10.4.1",
-    "nuxt": "4.4.6",
+    "nuxt": "4.4.7",
     "nuxt-seo-utils": "8.1.11",
     "photoswipe": "5.4.4",
     "postcss": "8.5.15",
