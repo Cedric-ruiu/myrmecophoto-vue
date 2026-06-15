@@ -211,6 +211,16 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ...ogImageProps,
   }
 
+  // Open Graph type: articles expose 'article' (+ article:* meta), the rest 'website'
+  const isArticle = pageType === 'article'
+  const articleMeta = isArticle && schemaData.article
+    ? {
+        articlePublishedTime: schemaData.article.datePublished,
+        articleModifiedTime:
+          schemaData.article.dateModified || schemaData.article.datePublished,
+      }
+    : {}
+
   // useSeoMeta configuration - Complete metadata
   const seoMetaConfig = {
     // SEO & Robots
@@ -219,7 +229,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
     // Open Graph
     ogTitle: title,
     ogDescription: description,
-    ogType: 'website' as const,
+    ogType: isArticle ? 'article' as const : 'website' as const,
     ogLocale: 'fr_FR',
     ogSiteName: siteName,
     ogUrl: canonicalUrl,
@@ -246,6 +256,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
     // Content type
     articleSection,
+    ...articleMeta,
 
     // Custom metadata
     ...customMeta,
