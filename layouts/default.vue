@@ -1,9 +1,9 @@
 <template>
   <div class="o-main-layout">
     <BaseHeader />
-    <div class="o-content-area">
+    <main class="o-content-area">
       <slot />
-    </div>
+    </main>
     <BaseFooter />
   </div>
 </template>
