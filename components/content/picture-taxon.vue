@@ -72,7 +72,7 @@ const imageData = computed(() => {
     <!-- Fallback if image data not found -->
     <div 
       v-else
-      class="flex justify-center items-center bg-gray-100 h-48 text-gray-500"
+      class="flex justify-center items-center bg-gray-100 h-48 text-gray-700"
     >
       <span>Image taxon non trouvée : {{ src }}</span>
     </div>
