@@ -186,7 +186,7 @@ export function useSeoConfig(options: SeoConfigOptions) {
       {
         name: 'keywords',
         content:
-          'myrmécologie, fourmis, Formicidae, macro-photographie, taxonomie, entomologie, identification',
+          'myrmécologie, fourmis, Formicidae, macrophotographie, taxonomie, entomologie, identification',
       },
       {
         property: 'article:author',

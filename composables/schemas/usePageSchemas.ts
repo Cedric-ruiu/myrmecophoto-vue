@@ -121,7 +121,7 @@ export const usePageSchemas = () => {
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'Articles' }
         ]),
-        about: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie', 'Techniques photographiques']
+        about: ['Myrmécologie', 'Macrophotographie', 'Formicidae', 'Entomologie', 'Techniques photographiques']
       }
     ]
 
@@ -193,7 +193,7 @@ export const usePageSchemas = () => {
         },
         description: 'Site personnel de documentation taxonomique et photographique des fourmis françaises',
         founder: factory.createPersonSchema(),
-        knowsAbout: ['Myrmécologie', 'Macro-photographie', 'Taxonomie', 'Entomologie'],
+        knowsAbout: ['Myrmécologie', 'Macrophotographie', 'Taxonomie', 'Entomologie'],
         areaServed: 'FR',
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
@@ -207,7 +207,7 @@ export const usePageSchemas = () => {
             {
               '@type': 'Offer',
               name: 'Articles spécialisés',
-              description: 'Guides et articles sur la macro-photographie et myrmécologie'
+              description: 'Guides et articles sur la macrophotographie et myrmécologie'
             }
           ]
         }

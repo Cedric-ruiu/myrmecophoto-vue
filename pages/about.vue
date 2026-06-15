@@ -8,7 +8,7 @@ useSeoConfig({
   ogImageProps: {
     subtitle: 'Développeur & Photographe',
     description:
-      'Créateur de Myrmecophoto, développeur web et photographe passionné de myrmécologie et macro-photographie scientifique.',
+      'Créateur de Myrmecophoto, développeur web et photographe passionné de myrmécologie et macrophotographie scientifique.',
   },
   customMeta: {
     ogImageAlt: 'Cédric Ruiu - Créateur de Myrmecophoto',
@@ -90,7 +90,7 @@ function buildErrorMessage(mess: string) {
           >
           <p>
             <i>MyrmecoPhoto :</i> une fenêtre ouverte sur le monde des fourmis et
-            de leur diversité à travers l'objectif de la macro-photographie. Je
+            de leur diversité à travers l'objectif de la macrophotographie. Je
             suis un développeur web et un photographe passionné, captivé par la
             nature et tout particulièrement par l'entomologie. Dès mon enfance,
             les insectes, et surtout les fourmis, ont capté mon attention.
@@ -98,7 +98,7 @@ function buildErrorMessage(mess: string) {
   
           <p>
             Ce site est le point de rencontre de mes passions pour la
-            macro-photographie, la myrmécologie et le développement web. Vous y
+            macrophotographie, la myrmécologie et le développement web. Vous y
             trouverez des reportages photo détaillés, des comparatifs de matériel
             de photographie, et des images taxonomiques qui mettent en lumière la
             complexité et la beauté des fourmis.

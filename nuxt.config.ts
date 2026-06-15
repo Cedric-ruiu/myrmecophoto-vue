@@ -182,10 +182,10 @@ export default defineNuxtConfig({
         'Myrmécologiste Amateur',
       ],
       description:
-        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
       knowsAbout: [
         'Myrmécologie',
-        'Macro-photographie',
+        'Macrophotographie',
         'Développement Web',
         'Entomologie',
         'Taxonomie',

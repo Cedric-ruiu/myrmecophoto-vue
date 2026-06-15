@@ -115,7 +115,7 @@ export const useSchemaFactory = () => {
               '@type': 'Place',
               addressCountry: 'FR'
             },
-            skills: ['Macro-photographie', 'Photographie scientifique', 'Éclairage macro']
+            skills: ['Macrophotographie', 'Photographie scientifique', 'Éclairage macro']
           }
         ],
         worksFor: {
@@ -311,8 +311,8 @@ export const useSchemaFactory = () => {
     const genusParent = speciesParent.parentTaxon
 
     const description = isSpOnly
-      ? `Profil taxonomique du genre ${taxon.genus} (sous-famille ${taxon.subfamily}), spécimens documentés mais non déterminés à l'espèce. Documentation morphologique en macro-photographie scientifique.`
-      : `Profil taxonomique de ${taxon.scientificName}, espèce de fourmi de la sous-famille des ${taxon.subfamily}. Documentation morphologique en macro-photographie scientifique.`
+      ? `Profil taxonomique du genre ${taxon.genus} (sous-famille ${taxon.subfamily}), spécimens documentés mais non déterminés à l'espèce. Documentation morphologique en macrophotographie scientifique.`
+      : `Profil taxonomique de ${taxon.scientificName}, espèce de fourmi de la sous-famille des ${taxon.subfamily}. Documentation morphologique en macrophotographie scientifique.`
 
     const additionalProperty = [
       { '@type': 'PropertyValue', name: 'Family', value: 'Formicidae' },
@@ -359,7 +359,7 @@ export const useSchemaFactory = () => {
       return {
         '@type': 'ItemList',
         name: 'Articles Myrmecophoto',
-        description: `${collection.itemCount} articles sur la macro-photographie et la myrmécologie`,
+        description: `${collection.itemCount} articles sur la macrophotographie et la myrmécologie`,
         numberOfItems: collection.itemCount,
         itemListElement: collection.items?.map((article, index) => ({
           '@type': 'ListItem',

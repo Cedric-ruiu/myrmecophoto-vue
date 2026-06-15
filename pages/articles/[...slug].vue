@@ -15,7 +15,7 @@ const articleTitle = computed(
 const articleDescription = computed(
   () =>
     article.value?.description ||
-    'Article sur la myrmécologie et macro-photographie',
+    'Article sur la myrmécologie et macrophotographie',
 )
 
 // Breadcrumb items for PageHeader component

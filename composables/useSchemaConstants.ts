@@ -12,10 +12,10 @@ export const SCHEMA_CONSTANTS = {
     url: 'https://myrmecophoto.fr',
     image: '/img/cedric-ruiu-avatar.webp',
     jobTitle: ['Développeur Web', 'Photographe Macro', 'Myrmécologiste Amateur'],
-    description: 'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+    description: 'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
     knowsAbout: [
       'Myrmécologie',
-      'Macro-photographie',
+      'Macrophotographie',
       'Développement Web',
       'Entomologie',
       'Taxonomie',
@@ -41,14 +41,14 @@ export const SCHEMA_CONSTANTS = {
     description: 'Site de macrophotographie scientifique de fourmis françaises avec identification taxonomique, articles myrmécologie et guides techniques.',
     inLanguage: 'fr-FR',
     about: 'Myrmécologie',
-    keywords: ['myrmécologie', 'fourmis', 'Formicidae', 'macro-photographie', 'taxonomie', 'entomologie', 'identification'],
+    keywords: ['myrmécologie', 'fourmis', 'Formicidae', 'macrophotographie', 'taxonomie', 'entomologie', 'identification'],
     logo: {
       '@type': 'ImageObject',
       url: 'https://myrmecophoto.fr/myrmecophoto-logo.png'
     },
     areaServed: 'FR',
     foundingDate: '2024',
-    knowsAbout: ['Myrmécologie', 'Macro-photographie', 'Taxonomie', 'Entomologie']
+    knowsAbout: ['Myrmécologie', 'Macrophotographie', 'Taxonomie', 'Entomologie']
   } as const,
 
   // Default configuration for images
@@ -118,15 +118,15 @@ export const SCHEMA_CONSTANTS = {
     articles: {
       '@type': 'Offer',
       name: 'Articles spécialisés',
-      description: 'Guides et articles sur la macro-photographie et myrmécologie'
+      description: 'Guides et articles sur la macrophotographie et myrmécologie'
     }
   } as const,
 
   // Scientific keywords by category
   KEYWORDS: {
-    myrmecology: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie'],
+    myrmecology: ['Myrmécologie', 'Macrophotographie', 'Formicidae', 'Entomologie'],
     taxonomy: ['Formicidae', 'Taxonomie', 'Identification', 'Fourmis', 'Myrmécologie'],
-    photography: ['Macro-photographie', 'Photographie scientifique', 'Techniques photographiques'],
+    photography: ['Macrophotographie', 'Photographie scientifique', 'Techniques photographiques'],
     technical: ['Vue.js', 'Nuxt.js', 'JavaScript', 'TypeScript', 'Développement Web']
   } as const
 } as const

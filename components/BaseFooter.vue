@@ -35,7 +35,7 @@ const socialLinks = [
             Myrmeco<span class="text-gradient-primary">photo</span>
           </p>
           <p class="m-0 text-[0.9rem] text-white/70 sm:text-base italic leading-snug">
-            Macro-photographies des fourmis
+            Macrophotographies des fourmis
           </p>
         </div>
         <address class="text-white/60 text-sm not-italic leading-relaxed">

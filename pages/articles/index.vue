@@ -26,12 +26,12 @@ const thumbnails = computed(() => {
 })
 
 useSeoConfig({
-  title: 'Articles myrmécologie & macro-photographie',
+  title: 'Articles myrmécologie & macrophotographie',
   description:
     "Articles d'observation myrmécologique et tutoriels de macrophotographie : comportements de fourmis, élevage, matériel et techniques photo.",
   ogImageProps: {
     subtitle: 'Articles & Guides',
-    description: `${articleCount.value} articles sur la macro-photographie et la myrmécologie`,
+    description: `${articleCount.value} articles sur la macrophotographie et la myrmécologie`,
   },
   customMeta: {
     ogImageAlt: 'Myrmecophoto - Articles sur la myrmécologie',
