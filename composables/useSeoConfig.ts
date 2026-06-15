@@ -239,8 +239,6 @@ export function useSeoConfig(options: SeoConfigOptions) {
 
     // Twitter Cards
     twitterCard: 'summary_large_image' as const,
-    twitterSite: '@myrmecophoto',
-    twitterCreator: '@cedric_ruiu',
     twitterTitle: title,
     twitterDescription: description,
     twitterImage: twitterImage
