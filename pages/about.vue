@@ -128,7 +128,7 @@ function buildErrorMessage(mess: string) {
           <p>
             <a
               href="https://www.linkedin.com/in/cedric-ruiu/"
-              alt="Page LinkedIn de Cédric Ruiu"
+              aria-label="Profil LinkedIn de Cédric Ruiu"
               class="text-gradient-primary"
               ><i class="i-fa6-brands-linkedin"/>
               <strong> LinkedIn -</strong></a
@@ -139,7 +139,7 @@ function buildErrorMessage(mess: string) {
           <p>
             <a
               href="https://github.com/Cedric-ruiu/"
-              alt="Page LinkedIn de Cédric Ruiu"
+              aria-label="Profil GitHub de Cédric Ruiu"
               class="text-gradient-primary"
               ><i class="i-fa6-brands-github"/> <strong>GitHub -</strong></a
             >
