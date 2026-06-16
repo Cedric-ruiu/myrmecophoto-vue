@@ -59,6 +59,9 @@ useSeoConfig({
         </p>
       </template>
     </PageHeader>
+    <div class="dark:prose-invert prose prose-gray sm:pt-8 lg:pt-16">
+      <h2>Tous les articles</h2>
+    </div>
     <article
       v-for="article in articles"
       :key="article.path"
