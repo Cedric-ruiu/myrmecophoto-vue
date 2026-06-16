@@ -4,6 +4,7 @@
  */
 
 import { useSchemaFactory, type SchemaFactoryOptions } from '../useSchemaFactory'
+import { SCHEMA_CONSTANTS } from '../useSchemaConstants'
 
 /**
  * Supported page types
@@ -60,6 +61,7 @@ export const usePageSchemas = () => {
           '@type': 'ImageObject',
           url: 'https://myrmecophoto.fr/img/home-wall.avif',
           caption: 'Collection de macrophotographies de fourmis',
+          ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS,
         },
         mainEntity: {
           '@type': 'Collection',
