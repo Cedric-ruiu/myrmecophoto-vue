@@ -82,7 +82,6 @@ async function generateManifest(files, fileBuffers) {
       const dims = imageSize(fileBuffers[file])
       const base = rel.replace(/\.jpg$/, '')
       if (base.endsWith('-thumbnail')) {
-        // Thumbnail fallback
         const mainBase = base.replace(/-thumbnail$/, '')
         ensureEntry(manifest, mainBase)
         manifest[mainBase]['thumbnail-fallback'] = {
@@ -91,7 +90,6 @@ async function generateManifest(files, fileBuffers) {
           height: dims.height,
         }
       } else {
-        // Main fallback
         ensureEntry(manifest, base)
         manifest[base].fallback = {
           url: '/img/' + rel,
@@ -100,7 +98,6 @@ async function generateManifest(files, fileBuffers) {
         }
       }
     } else if (file.endsWith('.avif')) {
-      // AVIF variant
       const match = rel.match(/^(.*)-(\d+)\.avif$/)
       if (match) {
         const base = match[1]
@@ -115,7 +112,6 @@ async function generateManifest(files, fileBuffers) {
     }
   }
 
-  // Sort AVIF by width
   for (const key in manifest) {
     manifest[key].avif.sort((a, b) => a.width - b.width)
   }
@@ -133,7 +129,6 @@ async function generateManifest(files, fileBuffers) {
   const start = Date.now()
   const files = await walk(IMG_DIR)
   
-  // Check cache
   const currentStats = await getFileStats(files)
   const cache = await loadCache()
   
@@ -141,7 +136,6 @@ async function generateManifest(files, fileBuffers) {
   let useCache = false
   
   if (!hasFilesChanged(currentStats, cache.fileStats)) {
-    // Use cached manifest
     manifest = cache.manifest
     useCache = true
     console.log('Using cached image manifest (no changes detected)')
@@ -158,7 +152,6 @@ async function generateManifest(files, fileBuffers) {
     
     manifest = await generateManifest(files, fileBuffers)
     
-    // Save to cache
     await saveCache(currentStats, manifest)
   }
 

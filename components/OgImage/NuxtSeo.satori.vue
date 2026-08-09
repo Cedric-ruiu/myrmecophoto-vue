@@ -46,27 +46,27 @@ const hasMeta = computed(() => Boolean(props.date || props.location))
 
 <template>
   <div
-    class="w-full h-full flex justify-between relative p-[60px]"
+    class="relative flex justify-between p-[60px] w-full h-full"
     :class="isDark ? ['bg-gray-900', 'text-white'] : ['bg-white', 'text-gray-900']"
   >
     <div
-      class="flex absolute top-0 right-[-100%]"
+      class="top-0 right-[-100%] absolute flex"
       :style="{
         width: '200%',
         height: '200%',
         backgroundImage: `radial-gradient(circle, rgba(${themeRgb}, 0.45) 0%, ${isDark ? 'rgba(17, 24, 39, 0.3)' : 'rgba(255, 255, 255, 0.7)'} 50%, ${isDark ? 'rgba(17, 24, 39, 0)' : 'rgba(255, 255, 255, 0)'} 70%)`,
       }"
     />
-    <div class="h-full w-full flex flex-col justify-between relative">
+    <div class="relative flex flex-col justify-between w-full h-full">
       <div class="flex flex-col w-full max-w-[85%]">
         <p
           v-if="subtitle"
-          class="uppercase font-bold tracking-wide m-0 mb-[20px] text-[26px]"
+          class="m-0 mb-[20px] font-bold text-[26px] uppercase tracking-wide"
           :style="{ color: themeHex }"
         >
           {{ subtitle }}
         </p>
-        <h1 class="m-0 font-bold mb-[28px] text-[72px] leading-tight">
+        <h1 class="m-0 mb-[28px] font-bold text-[72px] leading-tight">
           {{ title }}
         </h1>
         <p
@@ -78,7 +78,7 @@ const hasMeta = computed(() => Boolean(props.date || props.location))
         </p>
       </div>
 
-      <div class="flex flex-row items-center justify-between w-full">
+      <div class="flex flex-row justify-between items-center w-full">
         <div class="flex flex-row items-center">
           <img v-if="siteLogo" :src="siteLogo" height="46" style="margin-right: 18px;">
           <p

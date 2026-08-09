@@ -26,36 +26,33 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer class="bg-black/30 mt-16 py-16 border-white/10 border-t font-text">
-    <div class="gap-12 lg:gap-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_3fr] container-responsive">
-      <!-- Left Zone: Brand & Info -->
-      <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-2">
-          <p class="m-0 font-500 sm:text-[1.75rem] text-2xl uppercase leading-tight tracking-tight">
-            Myrmeco<span class="text-gradient-primary">photo</span>
+  <footer class="bg-surface-footer mt-auto pt-16 pb-8 border-white/10 border-t font-text gutter-x">
+    <div class="gap-12 grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] measure-wide">
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="m-0 font-400 font-title text-[22px] italic leading-none">
+            Myrmeco<span class="font-700 text-gradient-primary not-italic">photo</span>
           </p>
-          <p class="m-0 text-[0.9rem] text-white/70 sm:text-base italic leading-snug">
+          <p class="mt-2 mb-0 text-[15px] text-ink-4 italic leading-snug">
             Macrophotographies des fourmis
           </p>
         </div>
-        <address class="text-white/60 text-sm not-italic leading-relaxed">
-          <p class="my-1">&copy; {{ currentYear }} Cédric Ruiu</p>
-          <p class="my-1">Vannes, Brittany, France</p>
+        <address class="text-[13px] text-ink-4 not-italic leading-relaxed">
+          <p class="my-0">&copy; {{ currentYear }} Cédric Ruiu</p>
+          <p class="my-0">Vannes, Bretagne, France</p>
         </address>
       </div>
 
-      <!-- Right Zone: Navigation & Social -->
-      <div class="gap-8 sm:gap-10 grid grid-cols-1 sm:grid-cols-2">
-        <!-- Navigation Links -->
+      <div class="gap-8 grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
         <nav aria-label="Navigation du pied de page">
-          <h3 class="m-0 mb-4 font-700 text-gradient-primary text-sm uppercase leading-tight tracking-widest">
+          <h3 class="m-0 mb-4 font-700 font-text text-gradient-primary text-xs uppercase leading-tight tracking-[0.1em]">
             Navigation
           </h3>
-          <ul class="flex flex-col gap-3 m-0 p-0 list-none">
+          <ul class="flex flex-col gap-2.5 m-0 p-0 text-sm list-none">
             <li v-for="link in navigationLinks" :key="link.to">
               <NuxtLink
                 :to="link.to"
-                class="inline-flex items-center gap-2 focus-visible:outline-none text-[0.9rem] text-white/80 no-underline leading-snug transition-all hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out"
+                class="inline-flex items-center gap-2 focus-visible:outline-none text-ink-2 hover:text-link-hover no-underline leading-snug transition-all hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out"
               >
                 {{ link.label }}
               </NuxtLink>
@@ -63,13 +60,12 @@ const socialLinks = [
           </ul>
         </nav>
 
-        <!-- Contact & Social Links -->
         <div>
-          <h3 class="m-0 mb-4 font-700 text-gradient-primary text-sm uppercase leading-tight tracking-widest">
+          <h3 class="m-0 mb-4 font-700 font-text text-gradient-primary text-xs uppercase leading-tight tracking-[0.1em]">
             Contact & Réseaux
           </h3>
-          <ul class="flex flex-col gap-3 m-0 p-0 list-none">
-            <li v-if="emailEncrypted?.data" class="text-[0.9rem] text-white/80 hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out">
+          <ul class="flex flex-col gap-2.5 m-0 p-0 text-sm list-none">
+            <li v-if="emailEncrypted?.data" class="text-ink-2 hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out">
               <MailTo :email-encrypted="emailEncrypted.data" />
             </li>
             <li v-for="social in socialLinks" :key="social.href">
@@ -78,7 +74,7 @@ const socialLinks = [
                 :aria-label="social.ariaLabel"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group inline-flex items-center gap-2 focus-visible:outline-none text-[0.9rem] text-white/80 no-underline leading-snug transition-all hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out"
+                class="group inline-flex items-center gap-2 focus-visible:outline-none text-ink-2 hover:text-link-hover no-underline leading-snug transition-all hover:translate-x-1 focus-visible:translate-x-1 duration-200 ease-in-out"
               >
                 <i :class="[social.icon, 'transition-transform duration-200 ease-in-out']" />
                 {{ social.label }}

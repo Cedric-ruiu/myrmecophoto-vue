@@ -16,11 +16,6 @@ export default defineNuxtRouteMiddleware((to) => {
   // Netlify Pretty URLs handles slash canonicalization at HTTP level.
   if (import.meta.server) return
 
-  // Skip middleware for:
-  // - Root path
-  // - API routes
-  // - Static assets
-  // - Special Nuxt routes
   if (
     to.path === '/' ||
     to.path.startsWith('/api/') ||
@@ -31,9 +26,7 @@ export default defineNuxtRouteMiddleware((to) => {
     return
   }
 
-  // Force trailing slash if not present
   if (!to.path.endsWith('/')) {
-    // Preserve query parameters and hash
     const query = to.query
     const hash = to.hash
 

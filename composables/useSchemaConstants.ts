@@ -1,10 +1,6 @@
-/**
- * Centralized constants for Schema.org
- * Prevents duplication and ensures consistency of structured data
- */
+/** Shared Schema.org constants. */
 
 export const SCHEMA_CONSTANTS = {
-  // Author information (Person)
   AUTHOR: {
     '@type': 'Person',
     name: 'Cédric Ruiu',
@@ -34,7 +30,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Site information (WebSite/Organization)
   SITE: {
     name: 'Myrmecophoto',
     url: 'https://myrmecophoto.fr',
@@ -51,7 +46,6 @@ export const SCHEMA_CONSTANTS = {
     knowsAbout: ['Myrmécologie', 'Macrophotographie', 'Taxonomie', 'Entomologie']
   } as const,
 
-  // Default configuration for images
   IMAGE_DEFAULTS: {
     creator: {
       '@type': 'Person',
@@ -67,7 +61,6 @@ export const SCHEMA_CONSTANTS = {
     creditText: 'Cédric Ruiu / Myrmecophoto'
   } as const,
 
-  // Base breadcrumbs
   BREADCRUMBS: {
     home: {
       '@type': 'ListItem',
@@ -95,7 +88,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Contact configuration
   CONTACT: {
     contactType: 'Contact professionnel',
     availableLanguage: ['French', 'English'],
@@ -108,7 +100,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Configuration for services/offers
   SERVICES: {
     database: {
       '@type': 'Offer',
@@ -122,7 +113,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Scientific keywords by category
   KEYWORDS: {
     myrmecology: ['Myrmécologie', 'Macrophotographie', 'Formicidae', 'Entomologie'],
     taxonomy: ['Formicidae', 'Taxonomie', 'Identification', 'Fourmis', 'Myrmécologie'],
@@ -131,18 +121,12 @@ export const SCHEMA_CONSTANTS = {
   } as const
 } as const
 
-/**
- * Utilities for generating absolute URLs
- */
 export const SCHEMA_URLS = {
   absolute: (path: string) => `https://myrmecophoto.fr${path}`,
   image: (path: string) => `https://myrmecophoto.fr/img/${path}`,
   api: (endpoint: string) => `https://myrmecophoto.fr/api/${endpoint}`
 } as const
 
-/**
- * TypeScript types for validation
- */
 export type SchemaAuthor = typeof SCHEMA_CONSTANTS.AUTHOR
 export type SchemaSite = typeof SCHEMA_CONSTANTS.SITE
 export type SchemaKeywords = keyof typeof SCHEMA_CONSTANTS.KEYWORDS

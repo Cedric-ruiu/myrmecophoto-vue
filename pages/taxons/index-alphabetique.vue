@@ -81,11 +81,11 @@ useSeoConfig({
       aria-label="Aller à la lettre"
       class="dark:prose-invert mx-auto pt-8 sm:pt-12 max-w-prose prose prose-gray"
     >
-      <ul class="flex flex-wrap gap-3 list-none p-0">
+      <ul class="flex flex-wrap gap-3 p-0 list-none">
         <li v-for="[letter] in groupedByLetter" :key="letter" class="m-0">
           <a
             :href="`#letter-${letter}`"
-            class="inline-block px-3 py-1 border border-white/20 rounded-md text-sm uppercase no-underline hover:bg-white/10"
+            class="inline-block hover:bg-white/10 px-3 py-1 border border-white/20 rounded-md text-sm no-underline uppercase"
           >{{ letter }}</a>
         </li>
       </ul>
@@ -94,7 +94,7 @@ useSeoConfig({
     <section
       v-for="[letter, items] in groupedByLetter"
       :key="letter"
-      class="dark:prose-invert mx-auto pt-8 sm:pt-12 max-w-prose prose prose-gray"
+      class="dark:prose-invert mx-auto pt-8 sm:pt-12 last:pb-[clamp(72px,10vw,120px)] max-w-prose prose prose-gray"
     >
       <h2 :id="`letter-${letter}`">{{ letter }}</h2>
       <ul>

@@ -5,8 +5,11 @@ defineProps({
 </script>
 
 <template>
-  <li class="relative not-first:sm:ml-8 [ u-headerNavItem ]">
-    <NuxtLink :to="link" class="block py-2 sm:py-0 [ u-headerNavItem__link ]">
+  <li class="relative [ u-headerNavItem ]">
+    <NuxtLink
+      :to="link"
+      class="block py-3 sm:py-1 text-ink-4 [ u-headerNavItem__link ]"
+    >
       <slot />
     </NuxtLink>
   </li>
@@ -17,6 +20,13 @@ defineProps({
   transition: color $anime-duration ease-in-out;
 
   &__link {
+    &:hover,
+    &.router-link-active {
+      color: $color-ink;
+    }
+
+    // Accent dot marking the current section: left of the label while stacked in
+    // the mobile panel, centred underneath once the nav is inline.
     &.router-link-active::before {
       @include gradient-primary();
 
@@ -37,7 +47,7 @@ defineProps({
       @include media('>=sm') {
         top: initial;
         right: 0;
-        bottom: -8px;
+        bottom: -6px;
         left: 0;
 
         margin: 0 auto;
