@@ -1,10 +1,6 @@
 @use 'sass:map';
 @use 'sass:string';
 
-// Breakpoints
-
-// Define here all your breakpoints, choose the unit (rem|em|px) what you prefer like a dev frontend and not like end user
-// Values will be reset with $unit-default
 $breakpoints: (
   xs: 375px,
   sm: 640px,
@@ -13,23 +9,34 @@ $breakpoints: (
   xl: 1280px,
   xxl: 1600px,
 ) !default;
-
-// Colors
-
 $color-primary: #e72c27; // hsl(1.56, 80%, 52.94%)
 $color-secondary: #faa307; // hsl(38.52, 96.05%, 50.39%)
-$color-layout: #0c0a0a; // hsl(0, 9.09%, 4.31%)
 
-// Gradients
+// Dark-only surface ramp (mirrors theme.colors in uno.config.ts)
+$color-layout: oklch(15% 0.01 50deg); // page background
+$color-layout-deep: oklch(10% 0.01 50deg); // hero backdrop
+$color-surface: oklch(19% 0.01 50deg); // cards & panels
+$color-surface-raised: oklch(26% 0.01 50deg);
+$color-footer: oklch(11% 0.01 50deg);
+$color-ink: oklch(96% 0.004 90deg);
+$color-ink-2: oklch(85% 0.004 90deg);
+$color-ink-3: oklch(72% 0.008 80deg);
+$color-ink-4: oklch(60% 0.01 60deg);
+$color-link: oklch(70% 0.17 38deg);
+$color-link-hover: oklch(76% 0.15 55deg);
 
+// Detached warm header banner (Collection, Articles, Specimen)
+$gradient-banner: linear-gradient(
+  135deg,
+  oklch(24% 0.045 40deg) 0%,
+  oklch(17% 0.02 40deg) 60%,
+  oklch(15% 0.01 50deg) 100%
+);
 $gradient-primary: linear-gradient(
   90deg,
-  rgba($color-primary, 1) 64.09%,
-  rgba($color-secondary, 1) 94.45%
+  $color-primary,
+  $color-secondary
 );
-
-// Animations / UX
-
 $anime-duration: 0.2s !default;
 $anime-ease: ease !default;
 $soft-touch: 10px !default; // standard space around element, better to touch
@@ -44,4 +51,8 @@ $soft-touch: 10px !default; // standard space around element, better to touch
 
 @mixin gradient-primary() {
   background: $gradient-primary;
+}
+
+@mixin gradient-banner() {
+  background: $gradient-banner;
 }

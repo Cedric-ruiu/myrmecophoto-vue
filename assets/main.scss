@@ -4,15 +4,82 @@
   --color-primary: #{core.$color-primary};
   --color-secondary: #{core.$color-secondary};
   --color-layout: #{core.$color-layout};
+  --color-surface: #{core.$color-surface};
+  --color-ink: #{core.$color-ink};
+  --color-ink-2: #{core.$color-ink-2};
+  --color-ink-3: #{core.$color-ink-3};
+  --color-ink-4: #{core.$color-ink-4};
+  --color-link: #{core.$color-link};
+  --color-link-hover: #{core.$color-link-hover};
+
+  // Horizontal rhythm — defined here (always loaded) rather than in a layout,
+  // so both `default` and `full` layouts resolve the same gutters.
+  --content-max-width: 1240px;
+  --content-padding: clamp(20px, 5vw, 64px);
 }
 
-html {
-  background-color: var(--color-layout);
+/* Element styles live in UnoCSS's `base` layer (preset-declared order:
+   fonts, properties, theme, base, typography, shortcuts, default).
+   This is required: outside any layer these rules would beat EVERY utility class
+   — an unlayered `a { color }` was, for instance, overriding `text-ink-4` on the nav. */
+@layer base {
+  html {
+    background-color: var(--color-layout);
+  }
+
+  body {
+    container-type: inline-size;
+    font-family: Quicksand, sans-serif;
+    color: var(--color-ink);
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* `:any-link` rather than `a`: the preset reset declares `a { color: inherit }`
+     in this very layer, so a higher specificity is needed to beat it — while still
+     losing to the utilities (`default` layer). */
+  a:any-link {
+    color: var(--color-link);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-link-hover);
+    }
+  }
+
+  /* Headings and species binomials run in Open Sans; body copy in Quicksand. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+
+    /* French headings contain very long words ("macrophotographie"): at the
+       narrowest widths they overflowed instead of breaking. */
+    overflow-wrap: break-word;
+  }
 }
 
-body {
-  container-type: inline-size;
-  color: #fff;
+/* Dark-only theme: align the typography preset with the redesign ramp. */
+.prose {
+  --un-prose-body: #{core.$color-ink-2};
+  --un-prose-headings: #{core.$color-ink};
+  --un-prose-lead: #{core.$color-ink-3};
+  --un-prose-links: #{core.$color-link};
+  --un-prose-bold: #{core.$color-ink};
+  --un-prose-counters: #{core.$color-ink-4};
+  --un-prose-bullets: #{core.$color-ink-4};
+  --un-prose-hr: rgb(255 255 255 / 10%);
+  --un-prose-quotes: #{core.$color-ink};
+  --un-prose-quote-borders: #{core.$color-primary};
+  --un-prose-captions: #{core.$color-ink-4};
+  --un-prose-code: #{core.$color-ink};
+  --un-prose-pre-bg: #{core.$color-surface};
+  --un-prose-th-borders: rgb(255 255 255 / 15%);
+  --un-prose-td-borders: rgb(255 255 255 / 10%);
+
+  line-height: 1.8;
 }
 
 .heading-1 {
@@ -31,6 +98,16 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-banner {
+  @include core.gradient-banner();
+}
+
+/* Pull-quote rule: the accent gradient rendered as a left border. */
+.quote-gradient-border {
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(180deg, core.$color-primary, core.$color-secondary) 1;
+}
+
 .horizontal-bottom-line-gradient::before {
   content: '';
 
@@ -39,8 +116,8 @@ body {
   padding: 0 0 5px;
 
   background-image:
-    linear-gradient(#222, core.$color-layout),
-    linear-gradient(90deg, #e72c27 64.09%, #faa307 94.45%);
+    linear-gradient(core.$color-surface, core.$color-layout),
+    core.$gradient-primary;
   background-clip: content-box, border-box;
 
   transition: bottom ease 0.2s;
