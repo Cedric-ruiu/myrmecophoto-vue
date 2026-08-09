@@ -33,7 +33,6 @@ const parsedTaxon = computed(() => {
   return { genus, species, fileName }
 })
 
-// Get taxon image data using parsed information
 const imageData = computed(() => {
   const { genus, species, fileName } = parsedTaxon.value
   if (!genus || !species || !fileName) {
@@ -46,7 +45,7 @@ const imageData = computed(() => {
 
 <template>
   <figure
-    class="relative mx-auto my-8 sm:my-16 lg:my-24 max-w-[1600px] full-width not-prose"
+    class="relative mx-auto my-8 sm:my-16 lg:my-24 w-full max-w-[1600px] full-width not-prose"
     :style="{
       aspectRatio: imageData.aspectRatio
     }"
@@ -69,7 +68,6 @@ const imageData = computed(() => {
       >
     </picture>
     
-    <!-- Fallback if image data not found -->
     <div 
       v-else
       class="flex justify-center items-center bg-gray-100 h-48 text-gray-700"
