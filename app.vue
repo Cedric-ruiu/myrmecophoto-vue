@@ -1,8 +1,9 @@
 <script setup>
 const route = useRoute()
 
+// The homepage also renders a collection excerpt and the hero data reader.
 const needsTaxonomicData = computed(() =>
-  route.path === '/taxons' || route.path.startsWith('/taxons/')
+  route.path === '/' || route.path === '/taxons' || route.path.startsWith('/taxons/')
 )
 
 const { data: species, refresh: refreshSpecies } = await useFetch('/api/getSpecies', {
