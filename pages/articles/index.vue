@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { useImageData } from '~/composables/useImageData'
 
-// this route generate page with list of all articles
-
 const { data: articles } = await useAsyncData('articles', () => {
   return queryCollection('content').order('date', 'DESC').all()
 })
 
-// Fallback SSG-safe pour computed
+// SSG-safe fallback for computed values
 const articleCount = computed(() => articles?.value?.length || 0)
 
 const thumbnails = computed(() => {
@@ -24,6 +22,11 @@ const thumbnails = computed(() => {
   }
   return map
 })
+
+const breadcrumbItems = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Articles', current: true },
+]
 
 useSeoConfig({
   title: 'Articles myrmécologie & macrophotographie',
@@ -49,75 +52,56 @@ useSeoConfig({
 
 <template>
   <div>
-    <PageHeader title="Articles : myrmécologie & macrophotographie">
+    <PageHeader
+      title="Articles : myrmécologie & macrophotographie"
+      :breadcrumb-items="breadcrumbItems"
+      width="narrow"
+    >
       <template #metadata>
-        <p class="order-4 max-w-prose text-gray-300 text-sm">
+        <p class="order-4 mt-5 mb-0 max-w-[60ch] text-[15px] text-ink-3 leading-[1.7]">
           Observations de terrain et d'élevage, comportements des fourmis (essaimage, fondation de
-          colonie, mutualisme avec les pucerons) et guides techniques de macrophotographie :
-          l'ensemble des articles de Myrmecophoto consacrés à la myrmécologie et à la photographie
-          macro des <i>Formicidae</i>.
+          colonie, mutualisme avec les pucerons) et guides techniques de macrophotographie des
+          <i>Formicidae</i>.
         </p>
       </template>
     </PageHeader>
-    <div class="dark:prose-invert prose prose-gray sm:pt-8 lg:pt-16">
-      <h2>Tous les articles</h2>
-    </div>
-    <article
-      v-for="article in articles"
-      :key="article.path"
-      class="flex flex-row gap-4 mb-16 pt-12 sm:pt-20 lg:pt-28"
+
+    <div
+      class="flex flex-col gap-[clamp(40px,6vw,64px)] mx-auto pt-[clamp(48px,8vw,88px)] pb-[clamp(72px,10vw,120px)] max-w-[820px]"
     >
-      <NuxtLink
-        :to="article.path.endsWith('/') ? article.path : article.path + '/'"
-        :aria-label="`Lire l'article : ${article.title}`"
-        class="block horizontal-bottom-line-gradient relative flex-[1_0_auto] md:flex-none w-20 md:w-80 h-20 md:h-60"
-        ><img
-          class="rounded-md w-full h-full object-cover"
-          :src="thumbnails.get(article.path)?.src || ('/img/articles/' + article?.image?.main + '-thumbnail.jpg')"
-          :width="thumbnails.get(article.path)?.width"
-          :height="thumbnails.get(article.path)?.height"
-          :alt="`Image de l'article : ${article.title}`"
-          loading="lazy"
-          decoding="async"
-      ></NuxtLink>
-      <NuxtLink :to="article.path.endsWith('/') ? article.path : article.path + '/'" class="dark:prose-invert prose prose-gray">
-        <h3 class="mt-0 mb-2 line-clamp-2">{{ article.title }}</h3>
-        <p class="mt-2 mb-2 line-clamp-5">{{ article.description }}</p>
-        <small
-          >Publié le:
-          {{ new Date(article.date.published).toLocaleDateString() }}</small
+      <!-- `minmax(0,1fr)` on the text column: without it, its min-content floor
+           causes horizontal overflow on mobile. -->
+      <article v-for="article in articles" :key="article.path">
+        <NuxtLink
+          :to="withTrailingSlash(article.path)"
+          class="group items-start gap-4 sm:gap-6 grid grid-cols-[110px_minmax(0,1fr)] sm:grid-cols-[minmax(140px,220px)_minmax(0,1fr)]"
         >
-      </NuxtLink>
-    </article>
-    <!-- The cursor elements -->
-    <div class="cursor--small cursor"/>
-    <canvas class="cursor--canvas cursor" resize/>
+          <div class="bg-surface rounded-[6px] aspect-[4/3] overflow-hidden">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400 ease"
+              :src="thumbnails.get(article.path)?.src"
+              :width="thumbnails.get(article.path)?.width"
+              :height="thumbnails.get(article.path)?.height"
+              :alt="`Image de l'article : ${article.title}`"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div>
+            <p class="m-0 mb-1.5 text-ink-4 text-xs">
+              {{ formatArticleDate(article.date.published) }}
+            </p>
+            <h2
+              class="m-0 mb-2 font-400 font-title text-[clamp(1.2rem,2.2vw,1.5rem)] text-ink leading-[1.3]"
+            >
+              {{ article.title }}
+            </h2>
+            <p class="m-0 text-[14.5px] text-ink-3 leading-[1.65]">
+              {{ article.description }}
+            </p>
+          </div>
+        </NuxtLink>
+      </article>
+    </div>
   </div>
 </template>
-
-<style lang="scss">
-body.tutorial {
-  --color-text: #fff;
-  --color-bg: #171717;
-  --color-link: #f00;
-
-  background-color: var(--color-bg);
-}
-
-.page {
-  position: absolute;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-
-  &__inner {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-}
-</style>
