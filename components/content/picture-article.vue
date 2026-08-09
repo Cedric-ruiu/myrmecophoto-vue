@@ -19,7 +19,7 @@ const imageData = useImageData(`articles/${props.src}`)
 
 <template>
   <figure
-    class="relative mx-auto my-8 sm:my-16 lg:my-24 max-w-[1600px] full-width not-prose"
+    class="relative mx-auto my-8 sm:my-16 lg:my-24 w-full max-w-[1600px] full-width not-prose"
     :style="{
       aspectRatio: imageData.aspectRatio
     }"

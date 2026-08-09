@@ -1,13 +1,8 @@
-/**
- * Specialized composables for applying schemas according to page type
- * Uses the factory pattern to generate appropriate schemas
- */
+/** Applies the Schema.org graph matching each page type. */
 
 import { useSchemaFactory, type SchemaFactoryOptions } from '../useSchemaFactory'
+import { SCHEMA_CONSTANTS } from '../useSchemaConstants'
 
-/**
- * Supported page types
- */
 export type PageType =
   | 'homepage'
   | 'article'
@@ -23,9 +18,6 @@ export interface PageSchemaOptions extends SchemaFactoryOptions {
   description?: string
 }
 
-/**
- * Automatically applies appropriate schemas according to page type
- */
 export const usePageSchemas = () => {
   const factory = useSchemaFactory()
 
@@ -37,9 +29,6 @@ export const usePageSchemas = () => {
     return `https://myrmecophoto.fr${route.path.endsWith('/') ? route.path : route.path + '/'}`
   }
 
-  /**
-   * Applies schemas for the homepage
-   */
   const applyHomepageSchemas = () => {
     const pageUrl = getPageUrl()
     const collectionId = 'https://myrmecophoto.fr/#collection'
@@ -60,6 +49,7 @@ export const usePageSchemas = () => {
           '@type': 'ImageObject',
           url: 'https://myrmecophoto.fr/img/home-wall.avif',
           caption: 'Collection de macrophotographies de fourmis',
+          ...SCHEMA_CONSTANTS.IMAGE_DEFAULTS,
         },
         mainEntity: {
           '@type': 'Collection',
@@ -75,9 +65,6 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Applies schemas for an individual article page
-   */
   const applyArticleSchemas = (options: SchemaFactoryOptions) => {
     if (!options.article) return
 
@@ -103,9 +90,6 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Applies schemas for the article list
-   */
   const applyArticleListSchemas = (options: SchemaFactoryOptions) => {
     if (!options.collection) return
 
@@ -121,16 +105,13 @@ export const usePageSchemas = () => {
         breadcrumb: factory.createBreadcrumbSchema([
           { name: 'Articles' }
         ]),
-        about: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie', 'Techniques photographiques']
+        about: ['Myrmécologie', 'Macrophotographie', 'Formicidae', 'Entomologie', 'Techniques photographiques']
       }
     ]
 
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Applies schemas for an individual taxonomic page
-   */
   const applyTaxonSchemas = (options: SchemaFactoryOptions) => {
     if (!options.taxon) return
 
@@ -156,9 +137,6 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Applies schemas for the taxonomic list
-   */
   const applyTaxonListSchemas = (options: SchemaFactoryOptions) => {
     if (!options.collection) return
 
@@ -181,7 +159,6 @@ export const usePageSchemas = () => {
         },
         isAccessibleForFree: true
       },
-      // Site organization
       {
         '@type': 'Organization',
         '@id': 'https://myrmecophoto.fr/#organization',
@@ -193,7 +170,7 @@ export const usePageSchemas = () => {
         },
         description: 'Site personnel de documentation taxonomique et photographique des fourmis françaises',
         founder: factory.createPersonSchema(),
-        knowsAbout: ['Myrmécologie', 'Macro-photographie', 'Taxonomie', 'Entomologie'],
+        knowsAbout: ['Myrmécologie', 'Macrophotographie', 'Taxonomie', 'Entomologie'],
         areaServed: 'FR',
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
@@ -207,7 +184,7 @@ export const usePageSchemas = () => {
             {
               '@type': 'Offer',
               name: 'Articles spécialisés',
-              description: 'Guides et articles sur la macro-photographie et myrmécologie'
+              description: 'Guides et articles sur la macrophotographie et myrmécologie'
             }
           ]
         }
@@ -217,9 +194,6 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Applies schemas for the About page
-   */
   const applyAboutSchemas = () => {
     const pageUrl = getPageUrl()
 
@@ -237,13 +211,9 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Auto-detect page type from route if not provided
-   */
   const detectPageType = (route: ReturnType<typeof useRoute>): PageType | null => {
     const path = route.path.replace(/\/$/, '') || '/'
 
-    // Route-based detection with smart defaults
     if (path === '/') return 'homepage'
     if (path === '/about') return 'about'
     if (path === '/articles') return 'article-list'
@@ -254,9 +224,6 @@ export const usePageSchemas = () => {
     return null
   }
 
-  /**
-   * Apply fallback schema for unknown page types
-   */
   const applyFallbackSchema = (options: PageSchemaOptions) => {
     const route = useRoute()
     const schemas = [
@@ -278,22 +245,16 @@ export const usePageSchemas = () => {
     useSchemaOrg(schemas)
   }
 
-  /**
-   * Main function that applies schemas according to page type with intelligent defaults
-   */
   const applyPageSchemas = (options: PageSchemaOptions) => {
     const route = useRoute()
 
-    // Auto-detect page type if not provided
     const pageType = options.pageType || detectPageType(route)
 
     if (!pageType) {
-      // Apply fallback schema for unknown page types
       applyFallbackSchema(options)
       return
     }
 
-    // Apply schemas based on detected or provided page type
     switch (pageType) {
       case 'homepage':
         applyHomepageSchemas()
@@ -346,7 +307,4 @@ export const usePageSchemas = () => {
   }
 }
 
-/**
- * Type for validation
- */
 export type PageSchemas = ReturnType<typeof usePageSchemas>

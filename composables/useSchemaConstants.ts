@@ -1,10 +1,6 @@
-/**
- * Centralized constants for Schema.org
- * Prevents duplication and ensures consistency of structured data
- */
+/** Shared Schema.org constants. */
 
 export const SCHEMA_CONSTANTS = {
-  // Author information (Person)
   AUTHOR: {
     '@type': 'Person',
     name: 'Cédric Ruiu',
@@ -12,10 +8,10 @@ export const SCHEMA_CONSTANTS = {
     url: 'https://myrmecophoto.fr',
     image: '/img/cedric-ruiu-avatar.webp',
     jobTitle: ['Développeur Web', 'Photographe Macro', 'Myrmécologiste Amateur'],
-    description: 'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+    description: 'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
     knowsAbout: [
       'Myrmécologie',
-      'Macro-photographie',
+      'Macrophotographie',
       'Développement Web',
       'Entomologie',
       'Taxonomie',
@@ -34,24 +30,22 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Site information (WebSite/Organization)
   SITE: {
     name: 'Myrmecophoto',
     url: 'https://myrmecophoto.fr',
     description: 'Site de macrophotographie scientifique de fourmis françaises avec identification taxonomique, articles myrmécologie et guides techniques.',
     inLanguage: 'fr-FR',
     about: 'Myrmécologie',
-    keywords: ['myrmécologie', 'fourmis', 'Formicidae', 'macro-photographie', 'taxonomie', 'entomologie', 'identification'],
+    keywords: ['myrmécologie', 'fourmis', 'Formicidae', 'macrophotographie', 'taxonomie', 'entomologie', 'identification'],
     logo: {
       '@type': 'ImageObject',
       url: 'https://myrmecophoto.fr/myrmecophoto-logo.png'
     },
     areaServed: 'FR',
     foundingDate: '2024',
-    knowsAbout: ['Myrmécologie', 'Macro-photographie', 'Taxonomie', 'Entomologie']
+    knowsAbout: ['Myrmécologie', 'Macrophotographie', 'Taxonomie', 'Entomologie']
   } as const,
 
-  // Default configuration for images
   IMAGE_DEFAULTS: {
     creator: {
       '@type': 'Person',
@@ -67,7 +61,6 @@ export const SCHEMA_CONSTANTS = {
     creditText: 'Cédric Ruiu / Myrmecophoto'
   } as const,
 
-  // Base breadcrumbs
   BREADCRUMBS: {
     home: {
       '@type': 'ListItem',
@@ -95,7 +88,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Contact configuration
   CONTACT: {
     contactType: 'Contact professionnel',
     availableLanguage: ['French', 'English'],
@@ -108,7 +100,6 @@ export const SCHEMA_CONSTANTS = {
     }
   } as const,
 
-  // Configuration for services/offers
   SERVICES: {
     database: {
       '@type': 'Offer',
@@ -118,31 +109,24 @@ export const SCHEMA_CONSTANTS = {
     articles: {
       '@type': 'Offer',
       name: 'Articles spécialisés',
-      description: 'Guides et articles sur la macro-photographie et myrmécologie'
+      description: 'Guides et articles sur la macrophotographie et myrmécologie'
     }
   } as const,
 
-  // Scientific keywords by category
   KEYWORDS: {
-    myrmecology: ['Myrmécologie', 'Macro-photographie', 'Formicidae', 'Entomologie'],
+    myrmecology: ['Myrmécologie', 'Macrophotographie', 'Formicidae', 'Entomologie'],
     taxonomy: ['Formicidae', 'Taxonomie', 'Identification', 'Fourmis', 'Myrmécologie'],
-    photography: ['Macro-photographie', 'Photographie scientifique', 'Techniques photographiques'],
+    photography: ['Macrophotographie', 'Photographie scientifique', 'Techniques photographiques'],
     technical: ['Vue.js', 'Nuxt.js', 'JavaScript', 'TypeScript', 'Développement Web']
   } as const
 } as const
 
-/**
- * Utilities for generating absolute URLs
- */
 export const SCHEMA_URLS = {
   absolute: (path: string) => `https://myrmecophoto.fr${path}`,
   image: (path: string) => `https://myrmecophoto.fr/img/${path}`,
   api: (endpoint: string) => `https://myrmecophoto.fr/api/${endpoint}`
 } as const
 
-/**
- * TypeScript types for validation
- */
 export type SchemaAuthor = typeof SCHEMA_CONSTANTS.AUTHOR
 export type SchemaSite = typeof SCHEMA_CONSTANTS.SITE
 export type SchemaKeywords = keyof typeof SCHEMA_CONSTANTS.KEYWORDS

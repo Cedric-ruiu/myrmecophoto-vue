@@ -40,7 +40,7 @@ for (const [index, specie] of species.value.entries()) {
 if (specieId.value === -1)
   throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
 
-// Fallbacks SSG-safe pour données taxonomiques
+// SSG-safe fallbacks for taxonomic data
 const currentSpecies = computed(() => species.value?.[specieId.value])
 const scientificName = computed(() => {
   if (!currentSpecies.value) return 'Taxon Myrmecophoto'
@@ -90,6 +90,12 @@ const taxonIntro = computed(() => {
 const subfamilyDescription = computed(
   () => currentSpecies.value?.genus.subfamily.description || '',
 )
+
+const breadcrumbItems = computed(() => [
+  { label: 'Accueil', href: '/' },
+  { label: 'Collection', href: '/taxons/' },
+  { label: scientificName.value, current: true, scientific: true },
+])
 
 const sameGenusSpecies = computed(() => {
   if (!currentSpecies.value || !species.value) return []
@@ -157,27 +163,20 @@ useSeoConfig({
 
 const lightboxes = ref<PhotoSwipeLightbox[]>([])
 
-onMounted(async () => {
+onMounted(() => {
   const galleryElements = document.querySelectorAll('.galleryTaxon')
-  galleryElements.forEach(async (galleryElement) => {
-    const links = Array.from(galleryElement.querySelectorAll('a'))
-
-    await Promise.all(
-      links.map(async (link) => {
-        const img = new Image()
-        img.src = link.href
-        await new Promise((resolve) => (img.onload = resolve))
-        link.dataset.pswpWidth = img.naturalWidth + ''
-        link.dataset.pswpHeight = img.naturalHeight + ''
-      }),
-    )
-
+  galleryElements.forEach((galleryElement) => {
+    // Dimensions come from the build manifest via data-pswp-width/height on each
+    // link, so there is no need to preload every full-size image just to measure it.
     const lightbox = new PhotoSwipeLightbox({
       gallery: galleryElement as HTMLElement,
       children: 'a',
+      // Zoom matters most on mobile, where "fit" barely fills the screen.
+      // Open the whole specimen (fit), double-tap / magnifier goes to 1:1 native
+      // pixels, and pinch reaches 2.5x native to inspect morphology up close.
       initialZoomLevel: 'fit',
-      secondaryZoomLevel: 'fit',
-      maxZoomLevel: 'fit',
+      secondaryZoomLevel: 1,
+      maxZoomLevel: 2.5,
       pswpModule: () => import('photoswipe'),
     })
     lightbox.init()
@@ -201,28 +200,34 @@ onUnmounted(() => {
   <div v-if="species">
     <PageHeader
       :title="`${species[specieId].genus.name} ${species[specieId].name}`"
+      :breadcrumb-items="breadcrumbItems"
+      width="narrow"
+      :title-uppercase="false"
     >
-      <template #subtitle>
-        <span class="ml-2 text-xl">
-          {{ species[specieId].researcher.name }}&nbsp;{{ species[specieId].year }}
-        </span>
-        <span
-          v-if="vernacularName"
-          class="block mt-2 text-lg text-gray-300 normal-case not-italic"
-        >{{ vernacularDisplay }}</span>
-      </template>
       <template #metadata>
-        <p class="order-4 text-gray-200 text-sm">
-          <strong>Sous-famille : </strong>
-          <i>{{ species[specieId].genus.subfamily.name }}</i> -
-          <strong>Genre : </strong>
-          <i>{{ species[specieId].genus.name }}</i> -
-          <strong>Espèce : </strong>
-          <i>{{ species[specieId].name }}</i>
+        <p class="order-4 mt-3.5 mb-0 text-[clamp(1.1rem,2vw,1.4rem)] text-ink-3 leading-[1.3]">
+          {{ species[specieId].researcher.name }}, {{ species[specieId].year }}
+        </p>
+        <!-- Vernacular name: no italics, those are reserved for scientific names. -->
+        <p
+          v-if="vernacularName"
+          class="order-5 mt-2 mb-0 text-ink-4 text-base"
+        >
+          {{ vernacularDisplay }}
+        </p>
+        <!-- Explicit spaces: Vue strips whitespace-only text nodes containing a
+             newline between two elements. -->
+        <p class="order-6 mt-6 mb-0 text-ink-3 text-sm">
+          <strong>Sous-famille :</strong>&#32;<i>{{ species[specieId].genus.subfamily.name }}</i>
+          &nbsp;·&nbsp;
+          <strong>Genre :</strong>&#32;<i>{{ species[specieId].genus.name }}</i>
+          &nbsp;·&nbsp;
+          <strong>Espèce :</strong>&#32;<i>{{ species[specieId].name }}</i>
         </p>
       </template>
     </PageHeader>
-    <section class="dark:prose-invert mx-auto pt-8 sm:pt-12 lg:pt-16 max-w-prose prose prose-gray">
+
+    <section class="dark:prose-invert pt-[clamp(48px,8vw,80px)] prose prose-gray measure-editorial">
       <p>{{ taxonIntro }}</p>
       <p v-if="currentSpecies?.description">{{ currentSpecies.description }}</p>
       <p v-if="subfamilyDescription">
@@ -230,98 +235,114 @@ onUnmounted(() => {
         {{ subfamilyDescription }}
       </p>
     </section>
-    <div class="sm:pt-4 lg:pt-12">
 
-      <template v-for="specimen in species[specieId].specimen" :key="specimen.id">
-        <div class="relative-md dark:prose-invert w-full prose prose-gray">
-          <h2>
-            {{ specimen.form.name }} de <i>{{ scientificName }}</i>{{ specimen.size_mm ? ` — ${specimen.size_mm} mm` : '' }}
-          </h2>
-          <p v-if="specimen.description">
-            {{ specimen.description }}
-          </p>
-        </div>
-        <div
-          id="galleryTaxon"
-          class="flex flex-wrap gap-6 bg-white p-12 rounded-md galleryTaxon"
-        >
-          <TaxonPicture
-            v-for="picture in specimen.taxonomy_picture"
-            :key="picture.id"
-            :picture="picture"
-            :specimen="specimen"
-            :specie-id="specieId"
-          />
-        </div>
-        <div
-          class="horizontal-bottom-line-gradient relative mb-30 p-6 rounded-md w-full [ ]"
-        >
-          <ul class="relative dark:prose-invert prose prose-gray">
-            <li>
-              <strong>Numéro du specimen :&nbsp;</strong>
-              <samp>{{ specimen.reference }}</samp>
-            </li>
-            <li><strong>Caste :</strong> {{ specimen.form.name }}</li>
-            <li v-if="specimen.contributor_specimen_collector_idTocontributor?.name">
-              <strong>Collecteur : </strong>
-              <i>{{
-                specimen.contributor_specimen_collector_idTocontributor.name
-              }}</i>
-            </li>
-            <li v-if="specimen.contributor_specimen_identifier_idTocontributor?.name">
-              <strong>Identificateur :</strong>
-              <i>{{
-                specimen.contributor_specimen_identifier_idTocontributor.name
-              }}</i>
-            </li>
-            <li v-if="specimen.size_mm">
-              <strong>Size :</strong> {{ specimen.size_mm }}mm
-            </li>
-            <li v-if="specimen.capture_site || specimen.country?.name">
-              <strong>Lieu de capture :</strong>
-              {{ [specimen.capture_site, specimen.country?.name ? `(${specimen.country.name})` : null].filter(Boolean).join(' ') }}
-            </li>
-            <li v-if="specimen.capture_date">
-              <strong>Date de capture :</strong> {{ specimen.capture_date }}
-            </li>
-          </ul>
-        </div>
-      </template>
-    </div>
-    <aside
-      v-if="relatedArticles.length"
-      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+    <section
+      v-for="specimen in species[specieId].specimen"
+      :key="specimen.id"
+      class="mx-auto pt-[clamp(56px,9vw,100px)] w-full max-w-[1000px]"
     >
-      <h2>Articles évoquant <i>{{ scientificName }}</i></h2>
-      <ul>
-        <li v-for="article in relatedArticles" :key="article.path">
-          <NuxtLink :to="article.path">{{ article.title }}</NuxtLink>
-        </li>
-      </ul>
-    </aside>
+      <h2 class="m-0 mb-2 font-400 font-title text-[clamp(1.4rem,2.6vw,1.9rem)] leading-tight">
+        {{ specimen.form.name }} de <i>{{ scientificName }}</i>{{ specimen.size_mm ? ` — ${specimen.size_mm} mm` : '' }}
+      </h2>
+      <p
+        v-if="specimen.description"
+        class="mt-0 mb-7 max-w-[70ch] text-[15px] text-ink-3 leading-[1.7]"
+      >
+        {{ specimen.description }}
+      </p>
 
-    <aside
-      v-if="sameGenusSpecies.length"
-      class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray"
+      <!-- Multi-angle grid: adapts from 3 to 7+ views with no code change. -->
+      <div
+        class="gap-3 grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] bg-surface p-[clamp(16px,3vw,32px)] rounded-lg galleryTaxon"
+      >
+        <TaxonPicture
+          v-for="picture in specimen.taxonomy_picture"
+          :key="picture.id"
+          :picture="picture"
+          :specimen="specimen"
+          :specie-id="specieId"
+        />
+      </div>
+
+      <dl
+        class="flex flex-wrap gap-x-6 gap-y-1 mt-3 mb-0 text-[14.5px] text-ink-2 leading-[1.4]"
+      >
+        <div v-if="specimen.reference">
+          <dt class="inline text-ink-4">Numéro du spécimen </dt>
+          <dd class="inline m-0"><samp>{{ specimen.reference }}</samp></dd>
+        </div>
+        <div>
+          <dt class="inline text-ink-4">Caste </dt>
+          <dd class="inline m-0">{{ specimen.form.name }}</dd>
+        </div>
+        <div v-if="specimen.contributor_specimen_collector_idTocontributor?.name">
+          <dt class="inline text-ink-4">Collecteur </dt>
+          <dd class="inline m-0">
+            <i>{{ specimen.contributor_specimen_collector_idTocontributor.name }}</i>
+          </dd>
+        </div>
+        <div v-if="specimen.contributor_specimen_identifier_idTocontributor?.name">
+          <dt class="inline text-ink-4">Identificateur </dt>
+          <dd class="inline m-0">
+            <i>{{ specimen.contributor_specimen_identifier_idTocontributor.name }}</i>
+          </dd>
+        </div>
+        <div v-if="specimen.size_mm">
+          <dt class="inline text-ink-4">Taille </dt>
+          <dd class="inline m-0">{{ specimen.size_mm }} mm</dd>
+        </div>
+        <div v-if="specimen.capture_site || specimen.country?.name">
+          <dt class="inline text-ink-4">Lieu de capture </dt>
+          <dd class="inline m-0">
+            {{ [specimen.capture_site, specimen.country?.name ? `(${specimen.country.name})` : null].filter(Boolean).join(' ') }}
+          </dd>
+        </div>
+        <div v-if="specimen.capture_date">
+          <dt class="inline text-ink-4">Date de capture </dt>
+          <dd class="inline m-0">{{ formatCaptureDate(specimen.capture_date) }}</dd>
+        </div>
+      </dl>
+    </section>
+    <div
+      class="flex flex-col gap-10 pt-[clamp(64px,9vw,110px)] pb-[clamp(80px,10vw,120px)] measure-editorial"
     >
-      <h2>Autres espèces du genre <i>{{ currentSpecies?.genus.name }}</i></h2>
-      <ul>
-        <li v-for="related in sameGenusSpecies" :key="related.slug">
-          <NuxtLink :to="`/taxons/${related.slug}/`"><i>{{ related.label }}</i></NuxtLink>
-        </li>
-      </ul>
-    </aside>
+      <section v-if="relatedArticles.length">
+        <h2 class="m-0 mb-4 font-400 font-title text-xl">
+          Articles évoquant <i>{{ scientificName }}</i>
+        </h2>
+        <ul class="flex flex-col gap-2 m-0 p-0 text-[15px] list-none">
+          <li v-for="article in relatedArticles" :key="article.path">
+            <NuxtLink :to="article.path">{{ article.title }}</NuxtLink>
+          </li>
+        </ul>
+      </section>
 
-    <aside class="dark:prose-invert w-full mx-auto max-w-prose prose prose-gray">
-      <h2>Ressources sur <i>{{ scientificName }}</i></h2>
-      <ul>
-        <li>
+      <section v-if="sameGenusSpecies.length">
+        <h2 class="m-0 mb-4 font-400 font-title text-xl">
+          Autres espèces du genre <i>{{ currentSpecies?.genus.name }}</i>
+        </h2>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
+          <NuxtLink
+            v-for="related in sameGenusSpecies"
+            :key="related.slug"
+            :to="`/taxons/${related.slug}/`"
+          >
+            <i>{{ related.label }}</i>
+          </NuxtLink>
+        </div>
+      </section>
+
+      <section v-if="species[specieId].researcher.wiki_url">
+        <h2 class="m-0 mb-4 font-400 font-title text-xl">
+          Ressources sur <i>{{ scientificName }}</i>
+        </h2>
+        <p class="m-0 text-[15px] text-ink-3 leading-[1.6]">
           Page Wikipédia sur
           <a :href="species[specieId].researcher.wiki_url" target="_blank" rel="noopener noreferrer">
             {{ species[specieId].researcher.name }}
           </a>, taxonomiste auteur de la description originale.
-        </li>
-      </ul>
-    </aside>
+        </p>
+      </section>
+    </div>
   </div>
 </template>

@@ -3,28 +3,50 @@ export interface BreadcrumbItem {
   label: string
   href?: string
   current?: boolean
+  /** Scientific name: rendered in italics, per taxonomic convention. */
+  scientific?: boolean
 }
 
 interface Props {
   title: string
   date?: string
   breadcrumbItems?: BreadcrumbItem[]
+  /**
+   * Banner width: `wide` aligns with the content column (collection), `narrow`
+   * with the templates using a tighter reading column (articles, species sheet).
+   */
+  width?: 'wide' | 'narrow'
+  /**
+   * Editorial titles are uppercased. Disable this for a scientific binomial, whose
+   * casing is meaningful (capitalised genus, lowercase specific epithet:
+   * "Camponotus sylvaticus").
+   */
+  titleUppercase?: boolean
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  date: undefined,
+  breadcrumbItems: undefined,
+  width: 'wide',
+  titleUppercase: true,
+})
 </script>
 
 <template>
   <header
-    class="bg-[linear-gradient(0deg,hsla(1.56,80%,52.94%,0.15)_0%,hsl(0,9.09%,4.31%)_100%)] sm:pt-8 lg:pt-16 pb-8 sm:pb-16 lg:pb-24 text-white text-left full-width"
+    class="pt-[clamp(32px,6vw,80px)] pb-[clamp(48px,8vw,96px)] text-ink text-left gradient-banner gutter-x full-width"
   >
-    <div class="flex flex-col container-responsive">
+    <div
+      class="flex flex-col mx-auto w-full"
+      :class="width === 'narrow' ? 'max-w-[900px]' : 'max-w-[var(--content-max-width)]'"
+    >
       <nav
         v-if="breadcrumbItems?.length"
         aria-label="breadcrumb"
-        class="relative order-1 min-w-0 text-gray-400 text-sm"
+        class="relative order-1 mb-4 min-w-0 text-[13px] text-ink-4"
       >
-        <ol class="flex items-center gap-1.5">
+        <!-- Full breadcrumb at every breakpoint (mobile/desktop parity) -->
+        <ol class="flex flex-wrap items-center gap-y-1 m-0 p-0 list-none">
           <template
             v-for="(item, index) in breadcrumbItems"
             :key="item.label"
@@ -34,36 +56,34 @@ defineProps<Props>()
               role="presentation"
               aria-hidden="true"
               class="flex"
-              :class="{ 'hidden sm:flex': index === 1 }"
             >
               <span class="mx-2">/</span>
             </li>
-            <li
-              class="flex min-w-0"
-              :class="{ 'hidden sm:flex': index === 0 }"
-            >
-              <a
+            <li class="flex min-w-0">
+              <NuxtLink
                 v-if="item.href && !item.current"
-                :href="item.href"
-                class="group relative flex items-center gap-1.5 min-w-0 font-medium text-sm transition-colors"
+                :to="item.href"
+                class="text-ink-4 hover:text-link-hover transition-colors"
+                :class="item.scientific ? 'italic' : ''"
               >
-                <span class="truncate">{{ item.label }}</span>
-              </a>
-              <p
+                {{ item.label }}
+              </NuxtLink>
+              <span
                 v-else
                 :aria-current="item.current ? 'page' : undefined"
-                class="group relative flex items-center gap-1.5 focus-visible:outline-primary min-w-0 font-semibold text-sm"
-                :class="{ 'text-primary': item.current }"
+                class="text-ink-3"
+                :class="item.scientific ? 'italic' : ''"
               >
-                <span class="truncate">{{ item.label }}</span>
-              </p>
+                {{ item.label }}
+              </span>
             </li>
           </template>
         </ol>
       </nav>
 
       <h1
-        class="order-2 mt-1.5 mb-4 font-normal text-4xl md:text-5xl lg:text-6xl italic uppercase"
+        class="order-2 m-0 font-400 font-title text-[clamp(2rem,5vw,3.6rem)] italic leading-[1.1]"
+        :class="titleUppercase ? 'uppercase' : ''"
       >
         {{ title }}
         <slot name="subtitle" />
@@ -71,7 +91,7 @@ defineProps<Props>()
 
       <p
         v-if="date"
-        class="order-3 text-gray-400 text-sm leading-none"
+        class="order-3 mt-4 mb-0 text-ink-4 text-sm leading-none"
       >
         Publié le {{ date }}
       </p>

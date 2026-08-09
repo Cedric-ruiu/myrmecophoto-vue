@@ -22,6 +22,8 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: 'fr',
+        // Dark theme only (see `dark: 'class'` in uno.config.ts)
+        class: 'dark',
       },
       link: [
         {
@@ -66,9 +68,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          // Sass core contain all mixins & variables
-          // Included as dependency for all vue components
-          // ex: reuse Sass vars & mixins
+          // Auto-injected into every component, so Sass vars & mixins are always in scope.
           additionalData: '@use "@/assets/core.scss" as *;',
         },
       },
@@ -76,11 +76,9 @@ export default defineNuxtConfig({
   },
 
   css: [
-    // The entry file loaded on all pages
     '@/assets/main.scss',
   ],
 
-  // Additional SSG optimizations
   ssr: true,
 
   nitro: {
@@ -182,10 +180,10 @@ export default defineNuxtConfig({
         'Myrmécologiste Amateur',
       ],
       description:
-        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macro-photographie scientifique des fourmis.',
+        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
       knowsAbout: [
         'Myrmécologie',
-        'Macro-photographie',
+        'Macrophotographie',
         'Développement Web',
         'Entomologie',
         'Taxonomie',

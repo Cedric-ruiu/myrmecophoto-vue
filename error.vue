@@ -11,7 +11,6 @@ const errorMessage = computed(() => {
     return props.error.statusMessage
   }
 
-  // Default messages based on status code
   const messages: Record<number, string> = {
     404: 'Page introuvable',
     500: 'Erreur interne du serveur',
@@ -33,7 +32,6 @@ const errorDescription = computed(() => {
   return descriptions[errorCode.value] || 'Une erreur inattendue s\'est produite lors du traitement de votre demande.'
 })
 
-// SEO for error page
 useSeoConfig({
   title: `Erreur ${errorCode.value} | Myrmecophoto`,
   description: errorMessage.value,
@@ -45,22 +43,18 @@ useSeoConfig({
   <NuxtLayout>
     <div class="flex-col justify-center items-center px-4 py-16 min-h-[calc(100vh-var(--header-height))]">
       <div class="flex flex-col justify-center items-center mx-auto max-w-2xl text-center">
-        <!-- Error Code -->
         <h1 class="mb-6 font-900 text-gradient-primary text-8xl md:text-9xl">
           {{ errorCode }}
         </h1>
 
-        <!-- Error Message -->
         <h2 class="mb-4 font-700 text-3xl md:text-4xl">
           {{ errorMessage }}
         </h2>
 
-        <!-- Error Description -->
         <p class="mb-8 text-gray-600 dark:text-gray-400 text-lg md:text-xl">
           {{ errorDescription }}
         </p>
 
-        <!-- Action Buttons -->
         <div class="flex sm:flex-row flex-col sm:justify-center gap-4">
           <NuxtLink
             to="/"
@@ -77,7 +71,6 @@ useSeoConfig({
           </NuxtLink>
         </div>
 
-        <!-- Decorative ant illustration hint -->
         <div class="opacity-20 mt-12 text-6xl">
           🐜
         </div>
