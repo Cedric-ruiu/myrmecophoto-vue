@@ -1,19 +1,14 @@
-/**
- * Factory pattern for generating Schema.org schemas
- * Centralizes creation logic and prevents duplication
- */
+/** Factory for the Schema.org graphs used across page types. */
 
 import { SCHEMA_CONSTANTS, SCHEMA_URLS } from './useSchemaConstants'
 import { capitalizeFirst } from './utils'
 
 export interface SchemaFactoryOptions {
-  // Common options
   title?: string
   description?: string
   url?: string
   image?: string
 
-  // Article-specific options
   article?: {
     headline: string
     description: string
@@ -28,7 +23,6 @@ export interface SchemaFactoryOptions {
     location?: string
   }
 
-  // Taxon-specific options
   taxon?: {
     scientificName: string
     vernacularName?: string
@@ -54,7 +48,6 @@ export interface SchemaFactoryOptions {
     routeSpecie?: string
   }
 
-  // Collection-specific options
   collection?: {
     itemCount: number
     collectionType: 'articles' | 'taxons'
@@ -76,21 +69,14 @@ export interface SchemaFactoryOptions {
     }>
   }
 
-  // About page-specific options
   person?: {
     hasOccupation?: boolean
     contactPoint?: boolean
   }
 }
 
-/**
- * Main factory for creating schemas
- */
 export const useSchemaFactory = () => {
 
-  /**
-   * Creates a reusable Person schema
-   */
   const createPersonSchema = (extended = false) => {
     const baseSchema = { ...SCHEMA_CONSTANTS.AUTHOR }
 
@@ -138,9 +124,6 @@ export const useSchemaFactory = () => {
     return baseSchema
   }
 
-  /**
-   * Creates a unique WebSite schema (to avoid duplication)
-   */
   const createWebSiteSchema = () => ({
     '@type': 'WebSite',
     name: SCHEMA_CONSTANTS.SITE.name,
@@ -166,9 +149,6 @@ export const useSchemaFactory = () => {
     }
   })
 
-  /**
-   * Creates an enriched Article schema
-   */
   const createArticleSchema = (options: SchemaFactoryOptions) => {
     if (!options.article) throw new Error('Article data required')
 
@@ -213,9 +193,6 @@ export const useSchemaFactory = () => {
     }
   }
 
-  /**
-   * Creates an enriched ImageObject schema for a single taxon picture
-   */
   const createTaxonImageObjectSchema = (
     picture: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number]['taxonomy_picture'][number],
     specimen: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number],
@@ -263,9 +240,7 @@ export const useSchemaFactory = () => {
     return sameAs
   }
 
-  /**
-   * Creates a Bioschemas-aligned Taxon schema
-   */
+  /** Bioschemas-aligned Taxon schema. */
   const createTaxonSchema = (options: SchemaFactoryOptions) => {
     if (!options.taxon) throw new Error('Taxon data required')
 
@@ -347,9 +322,6 @@ export const useSchemaFactory = () => {
     }
   }
 
-  /**
-   * Creates a Collection schema for listings
-   */
   const createCollectionSchema = (options: SchemaFactoryOptions) => {
     if (!options.collection) throw new Error('Collection data required')
 
@@ -412,9 +384,6 @@ export const useSchemaFactory = () => {
     throw new Error('Invalid collection type')
   }
 
-  /**
-   * Creates structured breadcrumbs
-   */
   const createBreadcrumbSchema = (items: Array<{ name: string; url?: string }>) => ({
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -428,9 +397,6 @@ export const useSchemaFactory = () => {
     ]
   })
 
-  /**
-   * Creates a ContactPoint schema
-   */
   const createContactPointSchema = () => ({
     '@type': 'ContactPoint',
     ...SCHEMA_CONSTANTS.CONTACT
@@ -447,7 +413,4 @@ export const useSchemaFactory = () => {
   }
 }
 
-/**
- * Type for TypeScript validation
- */
 export type SchemaFactory = ReturnType<typeof useSchemaFactory>

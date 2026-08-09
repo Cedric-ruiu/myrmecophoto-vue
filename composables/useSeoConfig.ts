@@ -4,73 +4,68 @@ import {
 } from './schemas/usePageSchemas'
 import type { SchemaFactoryOptions } from './useSchemaFactory'
 
-/**
- * Configuration options for SEO metadata
- *
- * @interface SeoConfigOptions
- */
 interface SeoConfigOptions {
   /**
-   * Page title for SEO (REQUIRED)
+   * Page title for SEO
    * Used for <title>, Open Graph and Twitter Cards
    * @example "About - Who am I?"
    */
   title: string
 
   /**
-   * Page description for SEO (REQUIRED)
+   * Page description for SEO
    * Used for meta description, Open Graph and Twitter Cards
    * @example "Discover Cédric Ruiu, web developer and photographer passionate about myrmecology."
    */
   description: string
 
   /**
-   * Custom props for NuxtSeo OG image component (RECOMMENDED)
+   * Custom props for NuxtSeo OG image component
    * @example { subtitle: "Developer & Photographer", description: "Creator of Myrmecophoto" }
    */
   ogImageProps?: Record<string, string | number | boolean>
 
   /**
-   * Rules for search engine indexing (OPTIONAL)
+   * Rules for search engine indexing
    * @default 'index,follow'
    * @example 'noindex,follow' for a private page
    */
   robotsRule?: string
 
   /**
-   * Article section/category (OPTIONAL)
+   * Article section/category
    * @default 'Myrmécologie'
    * @example 'Taxonomy' or 'Macro-photography'
    */
   articleSection?: string
 
   /**
-   * Additional custom metadata (OPTIONAL)
+   * Additional custom metadata
    * @example { ogImageAlt: 'Alternative image description' }
    */
   customMeta?: Record<string, string | number | boolean>
 
   /**
-   * Custom title template (OPTIONAL)
+   * Custom title template
    * @example '%s | Article | Myrmecophoto'
    */
   titleTemplate?: string
 
   /**
-   * Static Open Graph image URL (OPTIONAL)
+   * Static Open Graph image URL
    * If not provided, uses automatic NuxtSeo generation
    * @example 'https://myrmecophoto.fr/img/home-wall.avif'
    */
   ogImageUrl?: string
 
   /**
-   * Specific Twitter image URL (OPTIONAL)
+   * Specific Twitter image URL
    * If not provided, uses ogImageUrl or automatic generation
    */
   twitterImage?: string
 
   /**
-   * Page type for automatic Schema.org generation (OPTIONAL - Auto-detected from route)
+   * Page type for automatic Schema.org generation (auto-detected from route)
    * When provided, explicitly sets the schema type. If not provided, auto-detects from route path.
    *
    * Auto-detection rules:
@@ -95,7 +90,7 @@ interface SeoConfigOptions {
   pageType?: PageType
 
   /**
-   * Schema.org data for structured data generation (OPTIONAL)
+   * Schema.org data for structured data generation
    * Provides content-specific data for automatic schema generation
    * Required when using pageType for dynamic content pages
    *
@@ -163,14 +158,12 @@ export function useSeoConfig(options: SeoConfigOptions) {
   const siteName = process.env.NUXT_SITE_NAME || 'Myrmecophoto'
   const siteAuthor = process.env.NUXT_SITE_AUTHOR || 'Cédric Ruiu'
 
-  // Add trailing slash for all routes except root
   const routePath = route.path === '/'
     ? route.path
     : route.path.endsWith('/') ? route.path : route.path + '/'
 
   const canonicalUrl = `${siteUrl}${routePath}`
 
-  // useHead configuration
   const headConfig = {
     title,
     titleTemplate,
@@ -211,7 +204,6 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ...ogImageProps,
   }
 
-  // Open Graph type: articles expose 'article' (+ article:* meta), the rest 'website'
   const isArticle = pageType === 'article'
   const articleMeta = isArticle && schemaData.article
     ? {
@@ -221,12 +213,9 @@ export function useSeoConfig(options: SeoConfigOptions) {
       }
     : {}
 
-  // useSeoMeta configuration - Complete metadata
   const seoMetaConfig = {
-    // SEO & Robots
     robots: robotsRule,
 
-    // Open Graph
     ogTitle: title,
     ogDescription: description,
     ogType: isArticle ? 'article' as const : 'website' as const,
@@ -237,7 +226,6 @@ export function useSeoConfig(options: SeoConfigOptions) {
       ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
       : `${siteUrl}/_og/d${route.path}.png`,
 
-    // Twitter Cards
     twitterCard: 'summary_large_image' as const,
     twitterTitle: title,
     twitterDescription: description,
@@ -247,25 +235,20 @@ export function useSeoConfig(options: SeoConfigOptions) {
         ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
         : `${siteUrl}/_og/d${route.path}.png`,
 
-    // Theme and appearance
     themeColor: '#e72c27',
     colorScheme: 'light dark' as const,
     viewport: 'width=device-width, initial-scale=1',
 
-    // Content type
     articleSection,
     ...articleMeta,
 
-    // Custom metadata
     ...customMeta,
   }
 
-  // Apply configurations
   useHead(headConfig)
   defineOgImage('NuxtSeo.satori', ogImageConfig)
   useSeoMeta(seoMetaConfig)
 
-  // Always apply Schema.org (either explicit pageType or auto-detected)
   const pageSchemas = usePageSchemas()
   pageSchemas.applyPageSchemas({
     pageType,
@@ -282,59 +265,9 @@ export function useSeoConfig(options: SeoConfigOptions) {
 }
 
 /*
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 📚 USAGE EXAMPLES
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *
- * // Standard pages (auto-detected from route)
- * useSeoConfig({
- *   title: 'About - Who am I?',
- *   description: 'Discover Cédric Ruiu...'
- * })
- *
- * // Dynamic content with Schema.org
- * useSeoConfig({
- *   title: scientificName.value,
- *   pageType: 'taxon',
- *   schemaData: {
- *     taxon: {
- *       scientificName: 'Lasius niger',
- *       genus: 'Lasius',
- *       specimens: [...]
- *     }
- *   }
- * })
- *
- * // Custom OG image
- * useSeoConfig({
- *   title: 'Articles',
- *   description: '...',
- *   ogImageProps: {
- *     subtitle: 'Macro Photography',
- *     description: `${count.value} articles`
- *   }
- * })
- *
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🔧 ADDING NEW PAGE TYPE
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *
- * 1. Add type to @schemas/usePageSchemas.ts:
- *    export type PageType = '...' | 'my-new-type'
- *
- * 2. Add schema factory in @useSchemaFactory.ts:
- *    const createMyNewTypeSchema = (options) => ({ '@type': 'MySchema', ... })
- *
- * 3. Add detection rule in @schemas/usePageSchemas.ts:
- *    if (path.startsWith('/my-path/')) return 'my-new-type'
- *
- * 4. Add case in applyPageSchemas switch:
- *    case 'my-new-type': applyMyNewTypeSchemas(options); break
- *
- * 5. Use: useSeoConfig({ pageType: 'my-new-type', schemaData: {...} })
- *
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * ⚡ AUTO-DETECTION: '/' → homepage, '/about' → about, '/articles/*' → article, '/taxons/*' → taxon
- * 🎯 FEATURES: Automatic canonical URLs, OG images, Schema.org, breadcrumbs
- * 🏗️ SSG-SAFE: Use computed() with fallbacks for dynamic data
+ * Adding a new page type:
+ * 1. Extend PageType in ./schemas/usePageSchemas.ts
+ * 2. Add its factory in ./useSchemaFactory.ts
+ * 3. Add its path rule to the auto-detection in ./schemas/usePageSchemas.ts
+ * 4. Add its case to the applyPageSchemas switch
  */

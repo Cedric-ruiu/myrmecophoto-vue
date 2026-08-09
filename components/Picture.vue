@@ -10,7 +10,6 @@ const props = defineProps({
   sizes: { type: String, default: '(max-width: 768px) 100vw, 800px' }
 })
 
-// Get optimized image data
 const imageData = useImageData(props.src)
 </script>
 
@@ -34,7 +33,6 @@ const imageData = useImageData(props.src)
     >
   </picture>
 
-  <!-- Fallback: use original src if no optimized data available -->
   <img
     v-else
     :src="src"

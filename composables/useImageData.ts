@@ -7,7 +7,6 @@ interface ImageData {
   'thumbnail-fallback': { url: string; width: number; height: number } | null
   avif: Array<{ url: string; width: number; height: number }>
   hasValidData: boolean
-  // Enhanced computed properties for template simplification
   finalSrc: string
   finalWidth: number
   finalHeight: number
@@ -18,35 +17,26 @@ interface ImageData {
   largestAvif: { url: string; width: number; height: number } | null
 }
 
-/**
- * Simple, unified composable for responsive images
- * Works with direct manifest import for optimal SSG performance
- */
+/** Responsive image sources, resolved from the prebuilt manifest. */
 export const useImageData = (imagePath: string): ImageData => {
-  // Remove extension and normalize path for manifest lookup
   const manifestKey = imagePath.replace(/\.(jpg|jpeg|png|avif)$/i, '')
   const manifestEntry = imageManifest[manifestKey as keyof typeof imageManifest]
 
   if (manifestEntry && manifestEntry.avif?.length) {
-    // Generate srcset from manifest data
     const avifSrcset = manifestEntry.avif
       .map(img => `${img.url} ${img.width}w`)
       .join(', ')
 
-    // Get largest AVIF for primary display
     const largestAvif = manifestEntry.avif[manifestEntry.avif.length - 1]
 
-    // Determine final sources with fallback priority
     const finalSrc = manifestEntry.fallback?.url || largestAvif?.url || ''
     const thumbnailSrc = manifestEntry['thumbnail-fallback']?.url || manifestEntry.fallback?.url || manifestEntry.avif[0]?.url || ''
 
-    // Determine final dimensions with fallback priority  
     const finalWidth = manifestEntry.fallback?.width || largestAvif?.width || 0
     const finalHeight = manifestEntry.fallback?.height || largestAvif?.height || 0
     const thumbnailWidth = manifestEntry['thumbnail-fallback']?.width || manifestEntry.fallback?.width || manifestEntry.avif[0]?.width || 300
     const thumbnailHeight = manifestEntry['thumbnail-fallback']?.height || manifestEntry.fallback?.height || manifestEntry.avif[0]?.height || 200
 
-    // Calculate aspect ratio
     const aspectRatio = finalWidth && finalHeight ? `${finalWidth} / ${finalHeight}` : undefined
 
     return {
@@ -55,7 +45,6 @@ export const useImageData = (imagePath: string): ImageData => {
       'thumbnail-fallback': manifestEntry['thumbnail-fallback'] || null,
       avif: manifestEntry.avif,
       hasValidData: true,
-      // Enhanced properties
       finalSrc,
       finalWidth,
       finalHeight,
@@ -85,7 +74,6 @@ export const useImageData = (imagePath: string): ImageData => {
     'thumbnail-fallback': { url: `/img/${basePath}-300.jpg`, width: 300, height: 0 },
     avif: avifImages,
     hasValidData: true,
-    // Enhanced properties for convention fallback
     finalSrc: `/img/${basePath}-1200.jpg`,
     finalWidth: 1200,
     finalHeight: 0,
@@ -97,9 +85,6 @@ export const useImageData = (imagePath: string): ImageData => {
   }
 }
 
-/**
- * Specialized helper for taxon images
- */
 export const useTaxonImageData = (
   genusName: string,
   specieName: string,
