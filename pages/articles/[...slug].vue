@@ -42,6 +42,16 @@ const tocLinks = computed<TocLink[]>(() => {
 
 const showToc = computed(() => tocLinks.value.length >= 3)
 
+// Tap to zoom on the article images. Same zoom levels as the taxon gallery:
+// "fit" on open, double-tap / magnifier at native pixels, pinch up to 2.5x.
+// Every figure of the article forms a single gallery, so the viewer also swipes
+// from one image to the next.
+useLightbox('.o-article', {
+  initialZoomLevel: 'fit',
+  secondaryZoomLevel: 1,
+  maxZoomLevel: 2.5,
+})
+
 useSeoConfig({
   title: articleTitle.value,
   description: articleDescription.value,
