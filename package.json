@@ -21,7 +21,6 @@
   "devDependencies": {
     "@cedric-ruiu/stylelint-config": "1.0.4",
     "@iconify-json/fa6-brands": "1.2.6",
-    "@mermaid-js/mermaid-cli": "11.17.1",
     "@nuxt/content": "3.17.0",
     "@nuxt/eslint": "1.17.0",
     "@nuxtjs/seo": "6.0.1",
@@ -42,7 +41,7 @@
     "postcss": "8.5.33",
     "postcss-scss": "4.0.9",
     "prisma": "7.10.1",
-    "prisma-erd-generator": "2.5.0",
+    "prisma-erd-generator": "3.2.1",
     "sass": "1.108.2",
     "satori": "0.47.1",
     "stylelint": "17.16.0",
