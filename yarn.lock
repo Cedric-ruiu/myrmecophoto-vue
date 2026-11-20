@@ -370,18 +370,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cedric-ruiu/stylelint-config@npm:1.0.4":
-  version: 1.0.4
-  resolution: "@cedric-ruiu/stylelint-config@npm:1.0.4"
+"@cedric-ruiu/stylelint-config@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@cedric-ruiu/stylelint-config@npm:2.0.1"
   dependencies:
-    postcss-html: "npm:^1.8.1"
-    stylelint-config-clean-order: "npm:^8.0.1"
-    stylelint-config-html: "npm:^1.1.0"
+    postcss-html: "npm:^2.0.0"
+    stylelint-config-clean-order: "npm:^10.0.0"
+    stylelint-config-html: "npm:^2.0.0"
+    stylelint-config-standard: "npm:^40.0.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
     stylelint-order: "npm:^8.1.1"
   peerDependencies:
+    postcss: ^8.5.0
     stylelint: ">=17"
-  checksum: 10c0/1e05edb3dbf9c0ed13d18bf09de6b81d269149b567a4d4e8245644ae68582d535cd3f38b95d9c4a140105c6850a390ee29d34d53e6cdd155cf1b8556d4d1e14d
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: 10c0/e575e880fcbf1e621c943658ba3b43d2987c054dd5614a42640e6d89963f7486286f434b1560c3809f8b108d4c1f4d06f75f3d432ee78980c675bc63bba20ef5
   languageName: node
   linkType: hard
 
@@ -6412,14 +6417,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^3.0.1":
-  version: 3.1.0
-  resolution: "domutils@npm:3.1.0"
+"domutils@npm:^3.1.0":
+  version: 3.2.2
+  resolution: "domutils@npm:3.2.2"
   dependencies:
     dom-serializer: "npm:^2.0.0"
     domelementtype: "npm:^2.3.0"
     domhandler: "npm:^5.0.3"
-  checksum: 10c0/342d64cf4d07b8a0573fb51e0a6312a88fb520c7fefd751870bf72fa5fc0f2e0cb9a3958a573610b1d608c6e2a69b8e9b4b40f0bfb8f87a71bce4f180cca1887
+  checksum: 10c0/47938f473b987ea71cd59e59626eb8666d3aa8feba5266e45527f3b636c7883cca7e582d901531961f742c519d7514636b7973353b648762b2e3bedbf235fada
   languageName: node
   linkType: hard
 
@@ -8296,15 +8301,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^8.0.0":
-  version: 8.0.2
-  resolution: "htmlparser2@npm:8.0.2"
+"htmlparser2@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "htmlparser2@npm:9.1.0"
   dependencies:
     domelementtype: "npm:^2.3.0"
     domhandler: "npm:^5.0.3"
-    domutils: "npm:^3.0.1"
-    entities: "npm:^4.4.0"
-  checksum: 10c0/609cca85886d0bf2c9a5db8c6926a89f3764596877492e2caa7a25a789af4065bc6ee2cdc81807fe6b1d03a87bf8a373b5a754528a4cc05146b713c20575aab4
+    domutils: "npm:^3.1.0"
+    entities: "npm:^4.5.0"
+  checksum: 10c0/394f6323efc265bbc791d8c0d96bfe95984e0407565248521ab92e2dc7668e5ceeca7bc6ed18d408b9ee3b25032c5743368a4280d280332d782821d5d467ad8f
   languageName: node
   linkType: hard
 
@@ -11630,15 +11635,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-html@npm:^1.8.1":
-  version: 1.8.1
-  resolution: "postcss-html@npm:1.8.1"
+"postcss-html@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "postcss-html@npm:2.0.1"
   dependencies:
-    htmlparser2: "npm:^8.0.0"
+    htmlparser2: "npm:^9.1.0"
     js-tokens: "npm:^9.0.0"
-    postcss: "npm:^8.5.0"
-    postcss-safe-parser: "npm:^6.0.0"
-  checksum: 10c0/2db37b710ae4d5cf8493ae982a381c7c1dfed328eb1806c4aa9220b166a0a44a636275beebf072efb41a38017dd35f47216e7cde682c10c8c69e30807d4126c6
+    postcss-safe-parser: "npm:^7.0.1"
+  peerDependencies:
+    postcss: ^8.5.0
+  checksum: 10c0/129320f6a354d1da9139275d4d95bc7a7473a4f849993cccca79e022007da54e25fea48defa7870d6cd33a3e4b1898b6a8d3e646f1743ea6c76b9fd61154aa54
   languageName: node
   linkType: hard
 
@@ -11653,15 +11659,6 @@ __metadata:
   version: 0.1.6
   resolution: "postcss-resolve-nested-selector@npm:0.1.6"
   checksum: 10c0/84213a2bccce481b1569c595a3c547b25c6ef1cca839fbd6c82c12ab407559966e968613c7454b573aa54f38cfd7e900c1fd603f0efc9f51939ab9f93f115455
-  languageName: node
-  linkType: hard
-
-"postcss-safe-parser@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "postcss-safe-parser@npm:6.0.0"
-  peerDependencies:
-    postcss: ^8.3.3
-  checksum: 10c0/5b0997b63de6ab4afb4b718a52dd7902e465c21d1f2e516762bcb59047787459b4dc5713132f6a19c9c8c483043b20b8a380a55fb61152ee66cbffcddf3b57f0
   languageName: node
   linkType: hard
 
@@ -11708,7 +11705,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.5.33, postcss@npm:^8.5.0, postcss@npm:^8.5.26, postcss@npm:^8.5.32, postcss@npm:^8.5.8":
+"postcss@npm:8.5.33, postcss@npm:^8.5.26, postcss@npm:^8.5.32, postcss@npm:^8.5.8":
   version: 8.5.33
   resolution: "postcss@npm:8.5.33"
   dependencies:
@@ -12570,7 +12567,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@cedric-ruiu/stylelint-config": "npm:1.0.4"
+    "@cedric-ruiu/stylelint-config": "npm:2.0.1"
     "@iconify-json/fa6-brands": "npm:1.2.6"
     "@nuxt/content": "npm:3.17.0"
     "@nuxt/eslint": "npm:1.17.0"
@@ -13333,23 +13330,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-clean-order@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "stylelint-config-clean-order@npm:8.0.1"
+"stylelint-config-clean-order@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "stylelint-config-clean-order@npm:10.0.0"
   peerDependencies:
     stylelint: ">=16"
     stylelint-order: ">=6"
-  checksum: 10c0/0cf445132b7d0d1780f9f3fc6f0865e33b4eaec70a9e524df5f868dfcad52286f76b9a495e3e838b50e65013bb42a2b47f14cae7b9b32c7e189f450274f6227c
+  checksum: 10c0/6a9d9579bcdf0303138fc999bbec5f7d53520d23b423bc3ee5613ef3350440f519b260a8fb7695be3c2a731abb39bd240a47cc6d53fffe7011c111bc2795da90
   languageName: node
   linkType: hard
 
-"stylelint-config-html@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "stylelint-config-html@npm:1.1.0"
+"stylelint-config-html@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "stylelint-config-html@npm:2.0.0"
   peerDependencies:
-    postcss-html: ^1.0.0
-    stylelint: ">=14.0.0"
-  checksum: 10c0/7af0875554608fd17cf04b5ede54186123f7cd2d94a41e79bb3d67796a1a643ce543f1248cec8122a5551f93d59ef0ebec44169779a06a6812b49294439ce8e0
+    postcss-html: ^2.0.0
+    stylelint: ">=16.0.0"
+  checksum: 10c0/b45f3a7e7d2f1baaac377456745e5705e30734bf354a45e9846a1bc63b1ae93ca189703a2e93c15c87e1991eb37224911560d0f3f35fa991d912cbb5363b505c
   languageName: node
   linkType: hard
 
