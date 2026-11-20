@@ -246,7 +246,9 @@ export function useSeoConfig(options: SeoConfigOptions) {
   }
 
   useHead(headConfig)
-  defineOgImage('NuxtSeo.satori', ogImageConfig)
+  // nuxt-og-image owns the og:image tag group, so its alt must go through the module options
+  const ogImageAlt = customMeta.ogImageAlt
+  defineOgImage('NuxtSeo.satori', ogImageConfig, ogImageAlt ? { alt: String(ogImageAlt) } : undefined)
   useSeoMeta(seoMetaConfig)
 
   const pageSchemas = usePageSchemas()
