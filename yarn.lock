@@ -3686,15 +3686,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/image-size@npm:0.8.0":
-  version: 0.8.0
-  resolution: "@types/image-size@npm:0.8.0"
-  dependencies:
-    image-size: "npm:*"
-  checksum: 10c0/b381b01144140539ef5985fbe3ea2de38829995aea44a1f7a3ff4313e4b5d1bda65a8bcc7e0cb097ec53eb27d418d39a292140065704cafb83cd0cd5e8246cce
-  languageName: node
-  linkType: hard
-
 "@types/json-schema@npm:^7.0.15":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -8433,7 +8424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"image-size@npm:*, image-size@npm:2.1.0":
+"image-size@npm:2.1.0":
   version: 2.1.0
   resolution: "image-size@npm:2.1.0"
   bin:
@@ -12587,7 +12578,6 @@ __metadata:
     "@prisma/adapter-better-sqlite3": "npm:7.10.1"
     "@prisma/client": "npm:7.10.1"
     "@resvg/resvg-js": "npm:2.6.2"
-    "@types/image-size": "npm:0.8.0"
     "@unocss/nuxt": "npm:66.13.0"
     "@unocss/preset-icons": "npm:66.13.0"
     "@unocss/preset-typography": "npm:66.13.0"
