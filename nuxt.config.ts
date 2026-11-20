@@ -184,6 +184,10 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
 
+  // Bundled by @nuxtjs/seo v6 and enabled by default: not wanted on this static site.
+  aiReady: false,
+  skewProtection: false,
+
   schemaOrg: {
     identity: {
       type: 'Person',

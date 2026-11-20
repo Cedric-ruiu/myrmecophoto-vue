@@ -1,4 +1,4 @@
-import type { SitemapUrlInput } from '#sitemap/types'
+import type { SitemapUrlInput } from '#sitemap/server'
 import { readdirSync, statSync } from 'fs'
 import path from 'path'
 import db from '../../db'
