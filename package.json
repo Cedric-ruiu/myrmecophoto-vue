@@ -44,7 +44,7 @@
     "prisma": "7.10.1",
     "prisma-erd-generator": "2.5.0",
     "sass": "1.108.2",
-    "satori": "0.29.1",
+    "satori": "0.47.1",
     "stylelint": "17.16.0",
     "tailwind-sorter": "1.0.3",
     "typescript": "6.0.3",

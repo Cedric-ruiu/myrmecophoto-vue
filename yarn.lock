@@ -9177,6 +9177,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fflate@npm:0.7.3":
+  version: 0.7.3
+  resolution: "fflate@npm:0.7.3"
+  checksum: 10c0/d116debcc828ca8860f78753e9472c3e0f14bc52cd2aab8bbcb01fd86577147993127317b8271d5f6eaaa821680e21adfa1e163211863300abfed6e006fc1d95
+  languageName: node
+  linkType: hard
+
 "fflate@npm:^0.7.3":
   version: 0.7.4
   resolution: "fflate@npm:0.7.4"
@@ -9738,6 +9745,13 @@ __metadata:
   version: 0.5.2
   resolution: "hachure-fill@npm:0.5.2"
   checksum: 10c0/307e3b6f9f2d3c11a82099c3f71eecbb9c440c00c1f896ac1732c23e6dbff16a92bb893d222b8b721b89cf11e58649ca60b4c24e5663f705f877cefd40153429
+  languageName: node
+  linkType: hard
+
+"harfbuzzjs@npm:0.10.0":
+  version: 0.10.0
+  resolution: "harfbuzzjs@npm:0.10.0"
+  checksum: 10c0/acc0cdcadb76de6ebe127468a30e7b9926edd9582fc1f0e966b0bbf955d9c5bb756de0d801344105da9d78357a86789ea3467d0ae2c37a075aef41c445a847a3
   languageName: node
   linkType: hard
 
@@ -15308,7 +15322,7 @@ __metadata:
     prisma: "npm:7.10.1"
     prisma-erd-generator: "npm:2.5.0"
     sass: "npm:1.108.2"
-    satori: "npm:0.29.1"
+    satori: "npm:0.47.1"
     stylelint: "npm:17.16.0"
     tailwind-sorter: "npm:1.0.3"
     typescript: "npm:6.0.3"
@@ -15421,9 +15435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"satori@npm:0.29.1":
-  version: 0.29.1
-  resolution: "satori@npm:0.29.1"
+"satori@npm:0.47.1":
+  version: 0.47.1
+  resolution: "satori@npm:0.47.1"
   dependencies:
     "@shuding/opentype.js": "npm:1.4.0-beta.0"
     css-background-parser: "npm:^0.1.0"
@@ -15432,11 +15446,12 @@ __metadata:
     css-to-react-native: "npm:^3.0.0"
     emoji-regex-xs: "npm:^2.0.1"
     escape-html: "npm:^1.0.3"
+    fflate: "npm:0.7.3"
+    harfbuzzjs: "npm:0.10.0"
     linebreak: "npm:^1.1.0"
     parse-css-color: "npm:^0.2.1"
     postcss-value-parser: "npm:^4.2.0"
-    yoga-layout: "npm:^3.2.1"
-  checksum: 10c0/8f822c2f18caba1c606de649a8666657eec6d865118994c1b9d881b743b4d496f8df7fd139341c9add1567732239adf34b7fe30108e4c8ba9c897b4f92d1cc06
+  checksum: 10c0/42c09ca2fec2ad60139cac70ae49d0399d0ab1f1b97d9b17f50a3010027f17ae9130622e081ad175b1ade8369c849c4183920623e213841823fc1a8962e0ec1c
   languageName: node
   linkType: hard
 
@@ -18290,13 +18305,6 @@ __metadata:
   version: 1.2.2
   resolution: "yocto-queue@npm:1.2.2"
   checksum: 10c0/36d4793e9cf7060f9da543baf67c55e354f4862c8d3d34de1a1b1d7c382d44171315cc54abf84d8900b8113d742b830108a1434f4898fb244f9b7e8426d4b8f5
-  languageName: node
-  linkType: hard
-
-"yoga-layout@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "yoga-layout@npm:3.2.1"
-  checksum: 10c0/9001e51be993c85e03757e5a04a2b61b8b30c9e5a7865d0156ca87a6431a3b717d51eb4990bfe588189fcfeac688dd9c3de707bbd50d1c344a84e63974cc54a8
   languageName: node
   linkType: hard
 
