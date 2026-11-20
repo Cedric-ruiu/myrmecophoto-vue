@@ -19,7 +19,7 @@
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
   "devDependencies": {
-    "@cedric-ruiu/stylelint-config": "2.0.1",
+    "@cedric-ruiu/stylelint-config": "3.0.0",
     "@iconify-json/fa6-brands": "1.2.6",
     "@nuxt/content": "3.17.0",
     "@nuxt/eslint": "1.17.0",
@@ -43,7 +43,7 @@
     "prisma-erd-generator": "3.2.1",
     "sass": "1.108.2",
     "satori": "0.47.1",
-    "stylelint": "17.16.0",
+    "stylelint": "18.1.0",
     "tailwind-sorter": "1.0.3",
     "typescript": "6.0.3",
     "unocss": "66.13.0"
