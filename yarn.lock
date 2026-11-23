@@ -12525,6 +12525,8 @@ __metadata:
     tailwind-sorter: "npm:1.0.3"
     typescript: "npm:6.0.3"
     unocss: "npm:66.13.0"
+    vue: "npm:3.5.46"
+    vue-router: "npm:5.5.1"
   languageName: unknown
   linkType: soft
 
@@ -14681,7 +14683,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-router@npm:^5.4.0":
+"vue-router@npm:5.5.1, vue-router@npm:^5.4.0":
   version: 5.5.1
   resolution: "vue-router@npm:5.5.1"
   dependencies:
@@ -14720,7 +14722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.5.44":
+"vue@npm:3.5.46, vue@npm:^3.5.44":
   version: 3.5.46
   resolution: "vue@npm:3.5.46"
   dependencies:
