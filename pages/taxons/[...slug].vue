@@ -20,28 +20,17 @@ if (routeSpecie === 'sp') {
   routeSpecie += '.'
 }
 
-const { data: species } = useNuxtData('species')
+const slug = slugParam.toLowerCase()
 
-if (species == null || species.value == null)
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Api getSpecies Not Found',
-  })
+const { data: taxon, error } = await useFetch(`/api/getTaxon/${slug}`, {
+  key: `taxon-${slug}`,
+})
 
-const specieId = ref(-1)
-
-for (const [index, specie] of species.value.entries()) {
-  if (specie.name === routeSpecie) {
-    specieId.value = index
-    break
-  }
-}
-
-if (specieId.value === -1)
+if (error.value || !taxon.value)
   throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
 
 // SSG-safe fallbacks for taxonomic data
-const currentSpecies = computed(() => species.value?.[specieId.value])
+const currentSpecies = computed(() => taxon.value)
 const scientificName = computed(() => {
   if (!currentSpecies.value) return 'Taxon Myrmecophoto'
   return `${currentSpecies.value.genus.name} ${currentSpecies.value.name}`
@@ -98,38 +87,25 @@ const breadcrumbItems = computed(() => [
 ])
 
 const sameGenusSpecies = computed(() => {
-  if (!currentSpecies.value || !species.value) return []
-  const currentGenus = currentSpecies.value.genus.name
-  const currentId = currentSpecies.value.id
-  return species.value
-    .filter((s: typeof currentSpecies.value) =>
-      s.genus.name === currentGenus
-      && s.id !== currentId
-      && (s.specimen?.length || 0) > 0,
-    )
-    .map((s: typeof currentSpecies.value) => ({
-      slug: `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`,
-      label: `${s.genus.name} ${s.name}`,
-    }))
+  const s = currentSpecies.value
+  if (!s) return []
+  return s.sameGenus.map(related => ({
+    slug: `${s.genus.name.toLowerCase()}-${related.name.toLowerCase()}`,
+    label: `${s.genus.name} ${related.name}`,
+  }))
 })
 
-const { data: allArticlesForRelations } = await useAsyncData(
-  'taxon-related-articles',
-  () => queryCollection('content').all(),
+// Only the articles citing this taxon end up in the payload.
+const { data: relatedArticles } = await useAsyncData(
+  `taxon-articles-${slug}`,
+  () => queryCollection('content').select('path', 'title', 'taxons').all(),
+  {
+    default: () => [],
+    transform: articles => articles
+      .filter(a => Array.isArray(a.taxons) && a.taxons.includes(taxonSlug.value))
+      .map(a => ({ path: withTrailingSlash(a.path), title: a.title })),
+  },
 )
-
-const relatedArticles = computed(() => {
-  if (!taxonSlug.value || !allArticlesForRelations.value) return []
-  const slug = taxonSlug.value
-  return allArticlesForRelations.value
-    .filter((a: { taxons?: string[], path: string, title: string }) =>
-      Array.isArray(a.taxons) && a.taxons.includes(slug),
-    )
-    .map((a: { path: string, title: string }) => ({
-      path: a.path.endsWith('/') ? a.path : `${a.path}/`,
-      title: a.title,
-    }))
-})
 
 useSeoConfig({
   title: vernacularName.value
@@ -197,16 +173,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="species">
+  <div v-if="taxon">
     <PageHeader
-      :title="`${species[specieId].genus.name} ${species[specieId].name}`"
+      :title="`${taxon.genus.name} ${taxon.name}`"
       :breadcrumb-items="breadcrumbItems"
       width="narrow"
       :title-uppercase="false"
     >
       <template #metadata>
         <p class="order-4 mt-3.5 mb-0 text-[clamp(1.1rem,2vw,1.4rem)] text-ink-3 leading-[1.3]">
-          {{ species[specieId].researcher.name }}, {{ species[specieId].year }}
+          {{ taxon.researcher.name }}, {{ taxon.year }}
         </p>
         <!-- Vernacular name: no italics, those are reserved for scientific names. -->
         <p
@@ -218,11 +194,11 @@ onUnmounted(() => {
         <!-- Explicit spaces: Vue strips whitespace-only text nodes containing a
              newline between two elements. -->
         <p class="order-6 mt-6 mb-0 text-ink-3 text-sm">
-          <strong>Sous-famille :</strong>&#32;<i>{{ species[specieId].genus.subfamily.name }}</i>
+          <strong>Sous-famille :</strong>&#32;<i>{{ taxon.genus.subfamily.name }}</i>
           &nbsp;·&nbsp;
-          <strong>Genre :</strong>&#32;<i>{{ species[specieId].genus.name }}</i>
+          <strong>Genre :</strong>&#32;<i>{{ taxon.genus.name }}</i>
           &nbsp;·&nbsp;
-          <strong>Espèce :</strong>&#32;<i>{{ species[specieId].name }}</i>
+          <strong>Espèce :</strong>&#32;<i>{{ taxon.name }}</i>
         </p>
       </template>
     </PageHeader>
@@ -231,13 +207,13 @@ onUnmounted(() => {
       <p>{{ taxonIntro }}</p>
       <p v-if="currentSpecies?.description">{{ currentSpecies.description }}</p>
       <p v-if="subfamilyDescription">
-        <strong>Sous-famille {{ species[specieId].genus.subfamily.name }} :</strong>
+        <strong>Sous-famille {{ taxon.genus.subfamily.name }} :</strong>
         {{ subfamilyDescription }}
       </p>
     </section>
 
     <section
-      v-for="specimen in species[specieId].specimen"
+      v-for="specimen in taxon.specimen"
       :key="specimen.id"
       class="mx-auto pt-[clamp(56px,9vw,100px)] w-full max-w-[1000px]"
     >
@@ -260,7 +236,8 @@ onUnmounted(() => {
           :key="picture.id"
           :picture="picture"
           :specimen="specimen"
-          :specie-id="specieId"
+          :genus-name="taxon.genus.name"
+          :specie-name="taxon.name"
         />
       </div>
 
@@ -332,14 +309,14 @@ onUnmounted(() => {
         </div>
       </section>
 
-      <section v-if="species[specieId].researcher.wiki_url">
+      <section v-if="taxon.researcher.wiki_url">
         <h2 class="m-0 mb-4 font-400 font-title text-xl">
           Ressources sur <i>{{ scientificName }}</i>
         </h2>
         <p class="m-0 text-[15px] text-ink-3 leading-[1.6]">
           Page Wikipédia sur
-          <a :href="species[specieId].researcher.wiki_url" target="_blank" rel="noopener noreferrer">
-            {{ species[specieId].researcher.name }}
+          <a :href="taxon.researcher.wiki_url" target="_blank" rel="noopener noreferrer">
+            {{ taxon.researcher.name }}
           </a>, taxonomiste auteur de la description originale.
         </p>
       </section>

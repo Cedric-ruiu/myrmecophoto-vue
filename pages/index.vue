@@ -275,13 +275,13 @@ useSeoConfig({
         <div class="gap-7 grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))]">
           <SpecieCard
             v-for="entry in featuredSpecies"
-            :id="entry.specie.id"
             :key="entry.specie.id"
             :taxon="`${entry.genus.name} ${entry.specie.name}`"
             :researcher-name="entry.specie.researcher.name"
             :year-discover="entry.specie.year"
-            :species="species || []"
-            :genus="entry.genus"
+            :genus-name="entry.genus.name"
+            :specie-name="entry.specie.name"
+            :thumbnail="entry.specie.specimen[0]?.taxonomy_picture[0]?.file_name"
           />
         </div>
       </div>

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
-const { data: subfamilies } = useNuxtData<TaxaWithRelations[]>('taxa')
-const { data: species } = useNuxtData('species')
+const { data: subfamilies } = await useFetch('/api/getTaxa', { key: 'taxa-list' })
 
 // SSG-safe fallbacks for dynamic computed values
 const speciesCount = computed(() => {
@@ -83,13 +82,13 @@ useSeoConfig({
             <template v-for="specie in genus.specie">
               <SpecieCard
                 v-if="specie._count.specimen"
-                :id="specie.id"
                 :key="specie.id"
                 :taxon="`${genus.name} ${specie.name}`"
                 :researcher-name="specie.researcher.name"
                 :year-discover="specie.year"
-                :species="species"
-                :genus="genus"
+                :genus-name="genus.name"
+                :specie-name="specie.name"
+                :thumbnail="specie.specimen[0]?.taxonomy_picture[0]?.file_name"
               />
             </template>
           </template>

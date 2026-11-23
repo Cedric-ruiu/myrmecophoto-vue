@@ -5,21 +5,13 @@ import { useTaxonImageData } from '~/composables/useImageData'
 const props = defineProps({
   picture: { type: Object, required: true },
   specimen: { type: Object, required: true },
-  specieId: { type: Number, required: true },
+  genusName: { type: String, required: true },
+  specieName: { type: String, required: true },
 })
 
-const { data: species } = useNuxtData('species')
+const scientificName = computed(() => `${props.genusName} ${props.specieName}`)
 
-const scientificName = computed(() => {
-  const specie = species.value?.[props.specieId]
-  return specie ? `${specie.genus.name} ${specie.name}` : ''
-})
-
-const imageData = useTaxonImageData(
-  species.value?.[props.specieId]?.genus?.name || '',
-  species.value?.[props.specieId]?.name || '',
-  props.picture.file_name,
-)
+const imageData = useTaxonImageData(props.genusName, props.specieName, props.picture.file_name)
 
 // Viewing angle: database description when available, otherwise derived from the file name.
 const viewLabel = computed(

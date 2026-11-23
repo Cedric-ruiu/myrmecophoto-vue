@@ -1,27 +1,23 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useTaxonImageData } from '~/composables/useImageData'
-import type { SpeciesWithRelations } from '~/server/api/getSpecies'
-import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
 const props = defineProps({
-  id: { type: Number, required: true },
   taxon: { type: String, required: true },
   researcherName: { type: String, required: true },
   yearDiscover: { type: Number, required: true },
-  species: { type: Array as () => SpeciesWithRelations[], required: true },
-  genus: { type: Object as () => TaxaWithRelations['genus'][number], required: true },
+  genusName: { type: String, required: true },
+  specieName: { type: String, required: true },
+  /** File name of the card picture (first view of the first specimen). */
+  thumbnail: { type: String, default: '' },
 })
 
-const specieData = computed(() => props.species.find((s) => s.id === props.id))
-
 const imageData = computed(() => {
-  const fileName = specieData.value?.specimen?.[0]?.taxonomy_picture?.[0]?.file_name
-  if (!fileName || !props.genus.name || !specieData.value?.name) {
+  if (!props.thumbnail || !props.genusName || !props.specieName) {
     return { hasValidData: false, avifSrcset: '', fallback: null, 'thumbnail-fallback': null, avif: [] }
   }
 
-  return useTaxonImageData(props.genus.name, specieData.value.name, fileName)
+  return useTaxonImageData(props.genusName, props.specieName, props.thumbnail)
 })
 
 const to = computed(

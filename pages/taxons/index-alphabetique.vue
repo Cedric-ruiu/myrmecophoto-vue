@@ -1,28 +1,29 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '~/components/PageHeader.vue'
-import type { SpeciesWithRelations } from '~/server/api/getSpecies'
+import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
-const { data: species } = useNuxtData<SpeciesWithRelations[]>('species')
-
-const photographedSpecies = computed(() => {
-  if (!species.value) return []
-  return species.value
-    .filter(s => (s.specimen?.length || 0) > 0)
-    .map((s) => {
-      const scientificName = `${s.genus.name} ${s.name}`
-      const slug = `${s.genus.name.toLowerCase()}-${s.name.toLowerCase()}`
-        .replace(/\s+/g, '-')
-        .replace(/\./g, '')
-      return {
-        scientificName,
-        slug,
-        initial: s.genus.name.charAt(0).toUpperCase(),
-        researcher: s.researcher.name,
-        year: s.year,
-        subfamily: s.genus.subfamily.name,
-      }
-    })
-    .sort((a, b) => a.scientificName.localeCompare(b.scientificName))
+// Flattened server-side so the payload only holds the rows rendered below.
+const { data: photographedSpecies } = await useFetch('/api/getTaxa', {
+  key: 'taxa-index',
+  default: () => [],
+  transform: (subfamilies: TaxaWithRelations[]) => subfamilies
+    .flatMap(subfamily => subfamily.genus.flatMap(genus => genus.specie
+      .filter(s => s._count.specimen > 0)
+      .map((s) => {
+        const scientificName = `${genus.name} ${s.name}`
+        const slug = `${genus.name.toLowerCase()}-${s.name.toLowerCase()}`
+          .replace(/\s+/g, '-')
+          .replace(/\./g, '')
+        return {
+          scientificName,
+          slug,
+          initial: genus.name.charAt(0).toUpperCase(),
+          researcher: s.researcher.name,
+          year: s.year,
+          subfamily: subfamily.name,
+        }
+      })))
+    .sort((a, b) => a.scientificName.localeCompare(b.scientificName)),
 })
 
 const groupedByLetter = computed(() => {
