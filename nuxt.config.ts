@@ -140,8 +140,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    payloadExtraction: true,
-    sharedPrerenderData: true,
+    // payloadExtraction and sharedPrerenderData already default to true.
     extractAsyncDataHandlers: true,
     typescriptPlugin: true,
   },
