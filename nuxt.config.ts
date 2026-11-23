@@ -177,6 +177,14 @@ export default defineNuxtConfig({
       renderTimeout: 30000,
       imageFetchTimeout: 5000,
     },
+    // sharp is only needed for JPEG output and is not installed. With zeroRuntime,
+    // nuxt-og-image skips its own "sharp missing" detection and keeps the sharp
+    // binding, so the dev server crashes on `import "sharp"`.
+    compatibility: {
+      dev: { sharp: false },
+      prerender: { sharp: false },
+      runtime: { sharp: false },
+    },
   },
 
   seo: {
