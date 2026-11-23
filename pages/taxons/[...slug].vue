@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
-import PhotoSwipeLightbox from 'photoswipe/lightbox'
-import 'photoswipe/style.css'
-
 const slugParam = useRoute().params.slug?.[0]
 
 if (!slugParam)
@@ -137,38 +133,15 @@ useSeoConfig({
   },
 })
 
-const lightboxes = ref<PhotoSwipeLightbox[]>([])
-
-onMounted(() => {
-  const galleryElements = document.querySelectorAll('.galleryTaxon')
-  galleryElements.forEach((galleryElement) => {
-    // Dimensions come from the build manifest via data-pswp-width/height on each
-    // link, so there is no need to preload every full-size image just to measure it.
-    const lightbox = new PhotoSwipeLightbox({
-      gallery: galleryElement as HTMLElement,
-      children: 'a',
-      // Zoom matters most on mobile, where "fit" barely fills the screen.
-      // Open the whole specimen (fit), double-tap / magnifier goes to 1:1 native
-      // pixels, and pinch reaches 2.5x native to inspect morphology up close.
-      initialZoomLevel: 'fit',
-      secondaryZoomLevel: 1,
-      maxZoomLevel: 2.5,
-      pswpModule: () => import('photoswipe'),
-    })
-    lightbox.init()
-
-    lightboxes.value.push(lightbox)
-  })
-})
-
-onUnmounted(() => {
-  lightboxes.value.forEach((lightbox) => {
-    if (lightbox) {
-      lightbox.destroy()
-      lightbox = {} as PhotoSwipeLightbox
-    }
-  })
-  lightboxes.value = []
+// Zoom matters most on mobile, where "fit" barely fills the screen.
+// Open the whole specimen (fit), double-tap / magnifier goes to 1:1 native
+// pixels, and pinch reaches 2.5x native to inspect morphology up close.
+// Each specimen grid is its own gallery; PhotoSwipe is only fetched on the
+// first interaction with a photo.
+useLightbox('.galleryTaxon', {
+  initialZoomLevel: 'fit',
+  secondaryZoomLevel: 1,
+  maxZoomLevel: 2.5,
 })
 </script>
 
