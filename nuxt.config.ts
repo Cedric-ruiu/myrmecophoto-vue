@@ -78,9 +78,9 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      // @vue/devtools-core: discovered at runtime otherwise, which reloads the
-      // dev server on the first page view.
-      include: ['photoswipe', 'image-size', '@nuxt/content', '@vue/devtools-core'],
+      // @vue/devtools-core and photoswipe/lightbox (dynamic import): discovered at
+      // runtime otherwise, which reloads the dev server on the first page view.
+      include: ['photoswipe', 'photoswipe/lightbox', 'image-size', '@nuxt/content', '@vue/devtools-core'],
       exclude: ['@nuxtjs/seo'],
     },
     css: {
