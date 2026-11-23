@@ -18,6 +18,10 @@ yarn dev
 
 # Test SSG and serve at http://localhost:3000
 yarn serve-generate
+
+# Serve the generated site like Netlify on http://localhost:4000:
+# netlify.toml headers (CSP, COEP...), _redirects, pretty URLs, 404.html, compression
+yarn generate && yarn serve:netlify
 ```
 
 ## Production Deployment

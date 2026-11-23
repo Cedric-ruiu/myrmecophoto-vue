@@ -6,6 +6,7 @@
     "dev": "node scripts/generate-image-manifest.mjs && nuxt dev --host 0.0.0.0",
     "manifest": "node scripts/generate-image-manifest.mjs",
     "serveSSG": "npx serve ./dist",
+    "serve:netlify": "node scripts/serve-netlify.mjs",
     "generate": "node scripts/generate-image-manifest.mjs && nuxt generate",
     "generate:local": "NUXT_SITE_ENV=production NUXT_SITE_URL=http://localhost:3000 node scripts/generate-image-manifest.mjs && NUXT_SITE_ENV=production NUXT_SITE_URL=http://localhost:3000 nuxt generate",
     "serve-generate": "yarn generate & yarn serveSSG",
