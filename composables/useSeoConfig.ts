@@ -186,12 +186,16 @@ export function useSeoConfig(options: SeoConfigOptions) {
         content: siteAuthor,
       },
     ],
-    link: [
-      {
-        rel: 'canonical',
-        href: canonicalUrl,
-      },
-    ],
+    // No canonical on noindex pages (error page): once prerendered as 404.html it
+    // would point to a URL that does not exist.
+    link: robotsRule.includes('noindex')
+      ? []
+      : [
+          {
+            rel: 'canonical',
+            href: canonicalUrl,
+          },
+        ],
   }
 
   // defineOgImage configuration — constants (colorMode, theme, siteLogo,

@@ -146,6 +146,9 @@ export default defineNuxtConfig({
     // extracted _payload.json files.
     payloadExtraction: 'client',
     extractAsyncDataHandlers: true,
+    // Server-rendered 404.html (served by Netlify for unknown paths) instead of an
+    // empty SPA shell.
+    prerenderErrorPages: true,
     typescriptPlugin: true,
   },
 
