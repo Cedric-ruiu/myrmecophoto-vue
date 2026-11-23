@@ -106,7 +106,8 @@ export const useSchemaFactory = () => {
         ],
         worksFor: {
           '@type': 'Organization',
-          name: 'Freelance'
+          name: 'Cédric Ruiu, développeur web freelance',
+          url: 'https://cedric-ruiu.fr'
         },
         creator: {
           '@type': 'CreativeWork',

@@ -202,15 +202,15 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
       name: 'Cédric Ruiu',
-      url: 'https://myrmecophoto.fr',
+      url: 'https://cedric-ruiu.fr',
       image: '/img/cedric-ruiu-avatar.webp',
       jobTitle: [
-        'Développeur Web',
-        'Photographe Macro',
-        'Myrmécologiste Amateur',
+        'Développeur web freelance',
+        'Photographe macro',
+        'Myrmécologiste amateur',
       ],
       description:
-        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
+        'Passionné d\'entomologie, créateur de Myrmecophoto et développeur web freelance près de Vannes.',
       knowsAbout: [
         'Myrmécologie',
         'Macrophotographie',
