@@ -2,12 +2,12 @@
 const slugParam = useRoute().params.slug?.[0]
 
 if (!slugParam)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+  throw createError({ status: 404, statusText: 'Taxon page Not Found' })
 
 let [routeGenus, routeSpecie] = slugParam.split('-', 2)
 
 if (!routeGenus || !routeSpecie)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+  throw createError({ status: 404, statusText: 'Taxon page Not Found' })
 
 routeGenus = routeGenus.trim()
 routeSpecie = routeSpecie.trim()
@@ -23,7 +23,7 @@ const { data: taxon, error } = await useFetch(`/api/getTaxon/${slug}`, {
 })
 
 if (error.value || !taxon.value)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
+  throw createError({ status: 404, statusText: 'Taxon Not Found' })
 
 // SSG-safe fallbacks for taxonomic data
 const currentSpecies = computed(() => taxon.value)

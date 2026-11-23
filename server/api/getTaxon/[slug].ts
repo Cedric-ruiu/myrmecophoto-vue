@@ -52,7 +52,7 @@ export default defineEventHandler(async (event): Promise<TaxonDetail> => {
   let routeSpecie = speciesPart?.trim()
 
   if (!routeGenus || !routeSpecie)
-    throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
+    throw createError({ status: 404, statusText: 'Taxon Not Found' })
 
   if (routeSpecie === 'sp') routeSpecie += '.'
 
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event): Promise<TaxonDetail> => {
   const taxon = candidates.find(s => s.genus.name.toLowerCase() === routeGenus)
 
   if (!taxon)
-    throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
+    throw createError({ status: 404, statusText: 'Taxon Not Found' })
 
   const sameGenus = await db.specie.findMany({
     where: {
