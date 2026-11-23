@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { useImageData, useTaxonImageData } from '~/composables/useImageData'
-import type { SpeciesWithRelations } from '~/server/api/getSpecies'
 import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
 definePageMeta({
   layout: 'full',
 })
-
-const { data: species } = useNuxtData<SpeciesWithRelations[]>('species')
-const { data: subfamilies } = useNuxtData<TaxaWithRelations[]>('taxa')
 
 /**
  * Hero slides. Two independent, freely editable lists — add or remove entries and
@@ -52,29 +48,25 @@ interface HeroSlide {
   alt: string
 }
 
-const heroSlides = computed<HeroSlide[]>(() => {
-  const taxonSlides = HERO_TAXON_PICTURES.flatMap((fileBase): HeroSlide[] => {
-    for (const specie of species.value || []) {
-      for (const specimen of specie.specimen || []) {
-        const picture = specimen.taxonomy_picture?.find(
-          (p) => p.file_name.replace(/\.(jpg|jpeg|png|avif)$/i, '') === fileBase,
-        )
-        if (!picture) continue
+const { data: heroPictures } = await useFetch('/api/getTaxonPictures', {
+  key: 'home-hero',
+  query: { files: HERO_TAXON_PICTURES.join(',') },
+  default: () => [],
+})
 
-        const view = taxonViewLabel(picture.file_name, picture.description)
-        return [{
-          key: `taxon-${fileBase}`,
-          image: useTaxonImageData(specie.genus.name, specie.name, picture.file_name),
-          title: `${specie.genus.name} ${specie.name}`,
-          italic: true,
-          caption: [specimen.form.name, view, specimen.reference ? `spéc. ${specimen.reference}` : '']
-            .filter(Boolean)
-            .join(' · '),
-          alt: `${specie.genus.name} ${specie.name} — ${specimen.form.name}, ${view || 'vue taxonomique'}, macrophotographie scientifique`,
-        }]
-      }
+const heroSlides = computed<HeroSlide[]>(() => {
+  const taxonSlides = (heroPictures.value || []).map((picture): HeroSlide => {
+    const view = taxonViewLabel(picture.file_name, picture.description)
+    return {
+      key: `taxon-${picture.fileBase}`,
+      image: useTaxonImageData(picture.genus, picture.specie, picture.file_name),
+      title: `${picture.genus} ${picture.specie}`,
+      italic: true,
+      caption: [picture.form, view, picture.reference ? `spéc. ${picture.reference}` : '']
+        .filter(Boolean)
+        .join(' · '),
+      alt: `${picture.genus} ${picture.specie} — ${picture.form}, ${view || 'vue taxonomique'}, macrophotographie scientifique`,
     }
-    return []
   })
 
   const customSlides = HERO_CUSTOM_SLIDES.flatMap((slide): HeroSlide[] => {
@@ -111,20 +103,26 @@ onMounted(() => {
 onBeforeUnmount(() => clearInterval(slideTimer))
 
 /** Collection excerpt: one photographed species per subfamily. */
-const featuredSpecies = computed(() =>
-  (subfamilies.value || [])
+const { data: featuredSpecies } = await useFetch('/api/getTaxa', {
+  key: 'home-featured',
+  default: () => [],
+  transform: (subfamilies: TaxaWithRelations[]) => subfamilies
     .map((subfamily) => {
       for (const genus of subfamily.genus) {
         const specie = genus.specie.find((s) => s._count.specimen > 0)
-        if (specie) return { specie, genus }
+        if (specie) return { specie, genus: { name: genus.name } }
       }
       return null
     })
     .filter((entry) => entry !== null),
-)
+})
 
 const { data: latestArticles } = await useAsyncData('home-latest-articles', () =>
-  queryCollection('content').order('date', 'DESC').limit(2).all(),
+  queryCollection('content')
+    .select('path', 'title', 'description', 'date', 'image')
+    .order('date', 'DESC')
+    .limit(2)
+    .all(),
 )
 
 const articleThumbnails = computed(() => {
