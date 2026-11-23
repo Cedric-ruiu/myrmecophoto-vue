@@ -4,7 +4,7 @@ import { ref } from 'vue'
 useSeoConfig({
   title: 'À propos - Qui suis-je ?',
   description:
-    'Cédric Ruiu, photographe et développeur web passionné de myrmécologie. Démarche, parcours et matériel derrière Myrmecophoto.',
+    'Cédric Ruiu, passionné de fourmis et de macrophotographie, développeur web freelance près de Vannes. Démarche, parcours et matériel derrière Myrmecophoto.',
   ogImageProps: {
     subtitle: 'Développeur & Photographe',
     description:
@@ -23,6 +23,8 @@ const form = ref({
 })
 
 const { data: emailEncrypted } = useNuxtData('emailEncrypted')
+
+const authorUrl = SCHEMA_CONSTANTS.AUTHOR.url
 
 const formResponse = ref('')
 
@@ -98,11 +100,11 @@ function buildErrorMessage(mess: string) {
         >
         <div class="dark:prose-invert max-w-none prose prose-gray">
           <p>
-            <i>Myrmecophoto :</i> une fenêtre ouverte sur le monde des fourmis et
+            <i>Myrmecophoto&nbsp;:</i> une fenêtre ouverte sur le monde des fourmis et
             de leur diversité à travers l'objectif de la macrophotographie. Je
-            suis développeur web et photographe passionné, captivé par la
-            nature et tout particulièrement par l'entomologie. Dès mon enfance,
-            les insectes, et surtout les fourmis, ont capté mon attention.
+            suis un photographe passionné, captivé par la nature et tout
+            particulièrement par l'entomologie. Dès mon enfance, les insectes,
+            et surtout les fourmis, ont capté mon attention.
           </p>
 
           <p>
@@ -114,8 +116,17 @@ function buildErrorMessage(mess: string) {
           </p>
 
           <p>
+            Myrmecophoto est un projet personnel, mené sur mon temps libre. Le
+            reste de la semaine, je suis développeur web freelance près de
+            Vannes&nbsp;: je conçois des sites internet sur mesure pour les
+            indépendants et les entreprises, présentés sur
+            <a :href="authorUrl" target="_blank" rel="author noopener" data-umami-event="author-site" data-umami-event-placement="about">cedric-ruiu.fr</a>.
+            Myrmecophoto me sert aussi de terrain d'expérimentation technique.
+          </p>
+
+          <p>
             Je vous invite à explorer <i>Myrmecophoto</i> pour découvrir les
-            richesses de ces créatures fascinantes. Bonne visite !
+            richesses de ces créatures fascinantes. Bonne visite&nbsp;!
           </p>
         </div>
       </div>
@@ -153,6 +164,21 @@ function buildErrorMessage(mess: string) {
             <i class="text-ink-3 shrink-0 i-fa6-brands-github" />
             <strong class="text-gradient-primary">GitHub</strong>
             <span class="text-ink-3">— Code source de Myrmecophoto</span>
+          </a>
+          <a
+            :href="authorUrl"
+            target="_blank"
+            rel="author noopener"
+            data-umami-event="author-site"
+            data-umami-event-placement="about-contact"
+            class="flex items-center gap-2.5 text-[15px] text-ink"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-[1.4em] h-[1.4em] text-ink-3 shrink-0" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+            </svg>
+            <strong class="text-gradient-primary">cedric-ruiu.fr</strong>
+            <span class="text-ink-3">— Création de sites internet</span>
           </a>
         </div>
 
