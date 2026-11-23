@@ -140,7 +140,11 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    // payloadExtraction and sharedPrerenderData already default to true.
+    // sharedPrerenderData already defaults to true.
+    // Initial render reads the payload inlined in the HTML (no _payload.json
+    // round trip before hydration); client-side navigation still loads the
+    // extracted _payload.json files.
+    payloadExtraction: 'client',
     extractAsyncDataHandlers: true,
     typescriptPlugin: true,
   },
