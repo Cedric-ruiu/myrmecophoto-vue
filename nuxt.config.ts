@@ -99,12 +99,16 @@ export default defineNuxtConfig({
 
   ssr: true,
 
+  prerender: {
+    routes: [
+      '/api/getEncryptedEmailContact',
+      '/api/__sitemap__/urls',
+    ],
+  },
+
   nitro: {
     prerender: {
-      routes: [
-        '/api/getEncryptedEmailContact',
-        '/api/__sitemap__/urls',
-      ],
+      // Builder-specific: not part of the top-level `prerender` option.
       concurrency: 2,
     },
     esbuild: {
