@@ -23,7 +23,7 @@ interface SeoConfigOptions {
    * Custom props for NuxtSeo OG image component
    * @example { subtitle: "Developer & Photographer", description: "Creator of Myrmecophoto" }
    */
-  ogImageProps?: Record<string, string | number | boolean>
+  ogImageProps?: Record<string, string | number | boolean | undefined>
 
   /**
    * Rules for search engine indexing
@@ -96,7 +96,7 @@ interface SeoConfigOptions {
    *
    * @example
    * // For articles:
-   * { article: { headline: 'My Article', datePublished: '2024-01-01', tags: ['myrmecology'] } }
+   * { article: { headline: 'My Article', datePublished: '2024-01-01' } }
    *
    * // For taxons:
    * { taxon: { scientificName: 'Lasius niger', genus: 'Lasius', subfamily: 'Formicinae' } }
@@ -192,16 +192,16 @@ export function useSeoConfig(options: SeoConfigOptions) {
       ? []
       : [
           {
-            rel: 'canonical',
+            rel: 'canonical' as const,
             href: canonicalUrl,
           },
         ],
   }
 
-  // defineOgImage configuration — constants (colorMode, theme, siteLogo,
-  // width, height) live in nuxt.config.ts `ogImage.defaults` so the encoder
-  // strips them from the URL, keeping `/_og/s/*` paths under the 200-char
-  // threshold and avoiding the hashed-payload prerender slowdown.
+  // defineOgImage configuration — constants stay out of the URL, keeping
+  // `/_og/s/*` paths under the 200-char threshold and avoiding the
+  // hashed-payload prerender slowdown: width/height live in nuxt.config.ts
+  // `ogImage.defaults`, colorMode/theme/siteLogo are the component's prop defaults.
   const ogImageConfig = {
     title,
     description,

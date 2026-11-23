@@ -79,7 +79,6 @@ useSeoConfig({
         width: 1200,
         height: 800,
       },
-      tags: article.value?.tags,
       location: article.value?.location,
     },
   },

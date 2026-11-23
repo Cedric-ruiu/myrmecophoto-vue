@@ -178,12 +178,10 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     buildCache: true,
     defaults: {
-      component: 'NuxtSeo',
+      // colorMode, theme and siteLogo: prop defaults of OgImage/NuxtSeo.satori.vue
+      // (nuxt-og-image v7 only accepts image options here).
       width: 1200,
       height: 630,
-      colorMode: 'dark',
-      theme: '#e72c27',
-      siteLogo: '/myrmecophoto-logo.png',
       emojis: false,
     },
     security: {
