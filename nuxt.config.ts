@@ -143,12 +143,15 @@ export default defineNuxtConfig({
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
   },
 
+  // Opt into Nuxt 5 defaults ahead of the upgrade. Among them, payloadExtraction
+  // defaults to 'client': the initial render reads the payload inlined in the HTML,
+  // client-side navigation still loads the extracted _payload.json files.
+  future: {
+    compatibilityVersion: 5,
+  },
+
   experimental: {
     // sharedPrerenderData already defaults to true.
-    // Initial render reads the payload inlined in the HTML (no _payload.json
-    // round trip before hydration); client-side navigation still loads the
-    // extracted _payload.json files.
-    payloadExtraction: 'client',
     extractAsyncDataHandlers: true,
     // Server-rendered 404.html (served by Netlify for unknown paths) instead of an
     // empty SPA shell.
