@@ -22,7 +22,7 @@ const parsedTaxon = computed(() => {
     return { genus: '', species: '', fileName: '' }
   }
   
-  const [genusSpecies, fileName] = [parts[0], parts.slice(1).join('/')]
+  const [genusSpecies = '', fileName] = [parts[0], parts.slice(1).join('/')]
   const [genus, species] = genusSpecies.split('-')
   
   if (!genus || !species) {

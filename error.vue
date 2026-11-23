@@ -5,12 +5,10 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
-const errorCode = computed(() => props.error?.statusCode || 500)
+const errorCode = computed(() => props.error?.status || 500)
+// French message first: framework errors carry an English statusText
+// (e.g. "Page Not Found" on the prerendered 404.html).
 const errorMessage = computed(() => {
-  if (props.error?.statusMessage) {
-    return props.error.statusMessage
-  }
-
   const messages: Record<number, string> = {
     404: 'Page introuvable',
     500: 'Erreur interne du serveur',
@@ -18,7 +16,7 @@ const errorMessage = computed(() => {
     401: 'Non autorisé',
   }
 
-  return messages[errorCode.value] || 'Une erreur est survenue'
+  return messages[errorCode.value] || props.error?.statusText || 'Une erreur est survenue'
 })
 
 const errorDescription = computed(() => {

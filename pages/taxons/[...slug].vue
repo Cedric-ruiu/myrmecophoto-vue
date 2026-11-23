@@ -1,13 +1,16 @@
 <script setup lang="ts">
+// fatal: client-side navigation renders the 404 page too (non-fatal by default).
+const notFound = (statusText: string) => createError({ status: 404, statusText, fatal: true })
+
 const slugParam = useRoute().params.slug?.[0]
 
 if (!slugParam)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+  throw notFound('Taxon page Not Found')
 
 let [routeGenus, routeSpecie] = slugParam.split('-', 2)
 
 if (!routeGenus || !routeSpecie)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon page Not Found' })
+  throw notFound('Taxon page Not Found')
 
 routeGenus = routeGenus.trim()
 routeSpecie = routeSpecie.trim()
@@ -23,7 +26,7 @@ const { data: taxon, error } = await useFetch(`/api/getTaxon/${slug}`, {
 })
 
 if (error.value || !taxon.value)
-  throw createError({ statusCode: 404, statusMessage: 'Taxon Not Found' })
+  throw notFound('Taxon Not Found')
 
 // SSG-safe fallbacks for taxonomic data
 const currentSpecies = computed(() => taxon.value)

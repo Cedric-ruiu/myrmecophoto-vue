@@ -99,12 +99,16 @@ export default defineNuxtConfig({
 
   ssr: true,
 
+  prerender: {
+    routes: [
+      '/api/getEncryptedEmailContact',
+      '/api/__sitemap__/urls',
+    ],
+  },
+
   nitro: {
     prerender: {
-      routes: [
-        '/api/getEncryptedEmailContact',
-        '/api/__sitemap__/urls',
-      ],
+      // Builder-specific: not part of the top-level `prerender` option.
       concurrency: 2,
     },
     esbuild: {
@@ -139,12 +143,15 @@ export default defineNuxtConfig({
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
   },
 
+  // Opt into Nuxt 5 defaults ahead of the upgrade. Among them, payloadExtraction
+  // defaults to 'client': the initial render reads the payload inlined in the HTML,
+  // client-side navigation still loads the extracted _payload.json files.
+  future: {
+    compatibilityVersion: 5,
+  },
+
   experimental: {
     // sharedPrerenderData already defaults to true.
-    // Initial render reads the payload inlined in the HTML (no _payload.json
-    // round trip before hydration); client-side navigation still loads the
-    // extracted _payload.json files.
-    payloadExtraction: 'client',
     extractAsyncDataHandlers: true,
     // Server-rendered 404.html (served by Netlify for unknown paths) instead of an
     // empty SPA shell.
@@ -171,12 +178,10 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     buildCache: true,
     defaults: {
-      component: 'NuxtSeo',
+      // colorMode, theme and siteLogo: prop defaults of OgImage/NuxtSeo.satori.vue
+      // (nuxt-og-image v7 only accepts image options here).
       width: 1200,
       height: 630,
-      colorMode: 'dark',
-      theme: '#e72c27',
-      siteLogo: '/myrmecophoto-logo.png',
       emojis: false,
     },
     security: {

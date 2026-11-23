@@ -13,9 +13,7 @@ const props = defineProps({
 })
 
 const imageData = computed(() => {
-  if (!props.thumbnail || !props.genusName || !props.specieName) {
-    return { hasValidData: false, avifSrcset: '', fallback: null, 'thumbnail-fallback': null, avif: [] }
-  }
+  if (!props.thumbnail || !props.genusName || !props.specieName) return null
 
   return useTaxonImageData(props.genusName, props.specieName, props.thumbnail)
 })
@@ -28,7 +26,7 @@ const to = computed(
 <template>
   <NuxtLink :to="to" class="group block [ specie-card ]">
     <div class="relative bg-surface rounded-[6px] aspect-[16/10] overflow-hidden">
-      <picture v-if="imageData.hasValidData">
+      <picture v-if="imageData?.hasValidData">
         <source
           v-if="imageData.avifSrcset"
           type="image/avif"

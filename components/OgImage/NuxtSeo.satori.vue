@@ -17,6 +17,10 @@ const props = withDefaults(defineProps<{
   siteName: 'Myrmecophoto',
   siteLogo: '/myrmecophoto-logo.png',
   title: '',
+  description: '',
+  subtitle: '',
+  date: '',
+  location: '',
 })
 
 const HexRegex = /^#(?:[0-9a-f]{3}){1,2}$/i
