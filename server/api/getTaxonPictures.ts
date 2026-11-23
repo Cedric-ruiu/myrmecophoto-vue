@@ -1,3 +1,4 @@
+import { defineEventHandler, getQuery } from 'nuxt/server'
 import db from '../db'
 
 const stripExtension = (fileName: string) => fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
