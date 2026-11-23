@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useImageData, useTaxonImageData } from '~/composables/useImageData'
+import { useImageData } from '~/composables/useImageData'
+import { useTaxonImageData } from '~/composables/useTaxonImageData'
 import type { TaxaWithRelations } from '~/server/api/getTaxa'
 
 definePageMeta({

@@ -208,7 +208,7 @@ This project implements an advanced image optimization architecture for maximum 
 
 - **Multi-format pipeline**: AVIF (5 sizes: 300/600/900/1200/1600px) + JPEG fallbacks (1200px + 300px thumbnail)
 - **Intelligent caching**: Image manifest regenerates only when images change (~0.1s vs 7s full generation)
-- **Build-time indexing**: `scripts/generate-image-manifest.mjs` generates `composables/image-manifest.json` with real dimensions
+- **Build-time indexing**: `scripts/generate-image-manifest.mjs` generates `composables/image-manifest.json` (articles, homepage) and `composables/image-manifest-taxons.json` (taxon photos) with real dimensions
 - **Zero runtime overhead**: Static manifest eliminates API calls and database queries
 - **XnView MP presets**: Standardized batch processing with presets in `./preset-xnview/`
 

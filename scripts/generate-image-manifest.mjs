@@ -3,7 +3,10 @@ import path from 'path'
 import { imageSize } from 'image-size'
 
 const IMG_DIR = path.join(process.cwd(), 'public', 'img')
+// Split by section so a page only ships the entries it can render: taxon
+// photos in one file, everything else (articles, homepage) in the other.
 const OUTPUT = path.join(process.cwd(), 'composables', 'image-manifest.json')
+const OUTPUT_TAXONS = path.join(process.cwd(), 'composables', 'image-manifest-taxons.json')
 const CACHE_FILE = path.join(process.cwd(), '.cache', 'image-manifest-cache.json')
 
 async function ensureDir(dirPath) {
@@ -155,11 +158,18 @@ async function generateManifest(files, fileBuffers) {
     await saveCache(currentStats, manifest)
   }
 
-  // Always write the manifest file (for first-time setup or changes)
-  await fs.writeFile(OUTPUT, JSON.stringify(manifest, null, 2), 'utf-8')
+  // Always write the manifest files (for first-time setup or changes)
+  const taxons = {}
+  const others = {}
+  for (const [key, entry] of Object.entries(manifest)) {
+    if (key.startsWith('taxons/')) taxons[key] = entry
+    else others[key] = entry
+  }
+  await fs.writeFile(OUTPUT, JSON.stringify(others, null, 2), 'utf-8')
+  await fs.writeFile(OUTPUT_TAXONS, JSON.stringify(taxons, null, 2), 'utf-8')
   
   const duration = ((Date.now() - start) / 1000).toFixed(2)
-  console.log('Image manifest ready:', OUTPUT)
+  console.log('Image manifests ready:', OUTPUT, OUTPUT_TAXONS)
   if (useCache) {
     console.log('Cache hit - execution time:', duration + 's')
   } else {

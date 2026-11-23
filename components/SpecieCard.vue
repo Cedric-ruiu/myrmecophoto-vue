@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useTaxonImageData } from '~/composables/useImageData'
+import { useTaxonImageData } from '~/composables/useTaxonImageData'
 
 const props = defineProps({
   taxon: { type: String, required: true },
