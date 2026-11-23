@@ -7,6 +7,10 @@ const { data: article } = await useAsyncData(`content-${path}`, () => {
   return queryCollection('content').path(path).first()
 })
 
+// fatal: client-side navigation renders the 404 page too (non-fatal by default).
+if (!article.value)
+  throw createError({ status: 404, statusText: 'Article Not Found', fatal: true })
+
 // SSG-safe fallbacks for article data
 const articleTitle = computed(
   () => article.value?.title || 'Article Myrmecophoto',
