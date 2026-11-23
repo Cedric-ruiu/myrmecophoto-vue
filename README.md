@@ -41,7 +41,7 @@ yarn generate
 
 ## Database
 
-SQLite database is managed by Prisma ORM with a focus on myrmecological taxonomy accuracy. During static site generation (`yarn generate`), Nitro prerenders API routes (`./server/api/`) to JSON payloads, eliminating runtime database dependencies in production. The `api/getSpecies` and `api/getTaxa` endpoints provide all taxonomic data for the "Photos Spécimens" section.
+SQLite database is managed by Prisma ORM with a focus on myrmecological taxonomy accuracy. During static site generation (`yarn generate`), Nitro prerenders API routes (`./server/api/`) to JSON payloads, eliminating runtime database dependencies in production. Each page fetches only what it renders: `api/getTaxa` (taxonomic tree for the listings), `api/getTaxon/[slug]` (one species page) and `api/getTaxonPictures` (homepage hero plates). Their data reaches the client through the per-page `_payload.json` files, not through the API routes.
 
 **Important**: The database schema follows [SQL Style Guide](https://www.sqlstyle.guide/) conventions and maintains scientific accuracy for taxonomical relationships.
 

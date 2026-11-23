@@ -102,8 +102,6 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/api/getTaxa',
-        '/api/getSpecies',
         '/api/getEncryptedEmailContact',
         '/api/__sitemap__/urls',
       ],
