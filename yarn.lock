@@ -3712,6 +3712,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:24.19.2":
+  version: 24.19.2
+  resolution: "@types/node@npm:24.19.2"
+  dependencies:
+    undici-types: "npm:>=7.24.0 <7.24.7"
+  checksum: 10c0/b51a7f8854007ad579dffdd0633d8addbfeb2c97cceb380f2eba0ed163638ec52e17565385a6cc04d54ac4ff99c70c64aee68a4ca45b6128c035e828794e29c5
+  languageName: node
+  linkType: hard
+
 "@types/parse-path@npm:^7.0.0":
   version: 7.0.3
   resolution: "@types/parse-path@npm:7.0.3"
@@ -12504,6 +12513,7 @@ __metadata:
     "@prisma/adapter-better-sqlite3": "npm:7.10.1"
     "@prisma/client": "npm:7.10.1"
     "@resvg/resvg-js": "npm:2.6.2"
+    "@types/node": "npm:24.19.2"
     "@unocss/nuxt": "npm:66.13.0"
     "@unocss/preset-icons": "npm:66.13.0"
     "@unocss/preset-typography": "npm:66.13.0"
@@ -12527,6 +12537,7 @@ __metadata:
     unocss: "npm:66.13.0"
     vue: "npm:3.5.46"
     vue-router: "npm:5.5.1"
+    vue-tsc: "npm:3.3.14"
   languageName: unknown
   linkType: soft
 
@@ -13804,6 +13815,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici-types@npm:>=7.24.0 <7.24.7":
+  version: 7.24.6
+  resolution: "undici-types@npm:7.24.6"
+  checksum: 10c0/d9cd8befb643ac904615c280a095ba4240531f6bb4a5e75a22a7483630ca8d3f1016d2ab6ace6ceda1f63b3a2db2fe037fafe121d6917a0187573aa548ff78ca
+  languageName: node
+  linkType: hard
+
 "undici@npm:^8.12.3":
   version: 8.13.0
   resolution: "undici@npm:8.13.0"
@@ -14719,6 +14737,20 @@ __metadata:
     vite:
       optional: true
   checksum: 10c0/8c68e73c3e885c3730ac693f4601840fce947a434492390b7552b667e069f24ad02b73ff6fa405265a5eefc63187b350d44669bb0d1631a02c71839c9b617259
+  languageName: node
+  linkType: hard
+
+"vue-tsc@npm:3.3.14":
+  version: 3.3.14
+  resolution: "vue-tsc@npm:3.3.14"
+  dependencies:
+    "@volar/typescript": "npm:2.4.30"
+    "@vue/language-core": "npm:3.3.14"
+  peerDependencies:
+    typescript: ">=5.0.0"
+  bin:
+    vue-tsc: ./bin/vue-tsc.js
+  checksum: 10c0/1ae61d57a3af3e0b63a3ed72e351cac9e09b718d26bcb21b926e12dda6b95bfb2dbf4c9d534cc2b3236defc5512c67689b98f76426ccdfb7cf2942d4f6fffd9c
   languageName: node
   linkType: hard
 

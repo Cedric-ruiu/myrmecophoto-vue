@@ -16,6 +16,7 @@
     "format:script": "eslint . --fix",
     "format:style": "stylelint \"assets/*.scss\" \"**/*.vue\" --fix",
     "format:tailwind": "tailwind-sorter sort -i \"**/*.vue\"",
+    "typecheck": "nuxt typecheck",
     "postinstall": "nuxt prepare && prisma generate",
     "init-db": "prisma db pull & prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql & prisma migrate resolve --applied 0_init & prisma generate"
   },
@@ -28,6 +29,7 @@
     "@prisma/adapter-better-sqlite3": "7.10.1",
     "@prisma/client": "7.10.1",
     "@resvg/resvg-js": "2.6.2",
+    "@types/node": "24.19.2",
     "@unocss/nuxt": "66.13.0",
     "@unocss/preset-icons": "66.13.0",
     "@unocss/preset-typography": "66.13.0",
@@ -49,7 +51,8 @@
     "typescript": "6.0.3",
     "unocss": "66.13.0",
     "vue": "3.5.46",
-    "vue-router": "5.5.1"
+    "vue-router": "5.5.1",
+    "vue-tsc": "3.3.14"
   },
   "packageManager": "yarn@4.9.4",
   "dependencies": {
