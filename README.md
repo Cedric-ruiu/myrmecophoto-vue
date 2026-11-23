@@ -9,7 +9,7 @@
 ## Quick Start
 
 ```bash
-# Requirements: Node v22.19
+# Requirements: Node v24 (see .nvmrc)
 cp .env.example .env
 yarn
 
@@ -22,6 +22,10 @@ yarn serve-generate
 # Serve the generated site like Netlify on http://localhost:4000:
 # netlify.toml headers (CSP, COEP...), _redirects, pretty URLs, 404.html, compression
 yarn generate && yarn serve:netlify
+
+# Checks
+yarn typecheck
+yarn eslint . && yarn stylelint "assets/*.scss" "**/*.vue"
 ```
 
 ## Production Deployment
@@ -304,7 +308,7 @@ This project implements a novel approach to protect email addresses from bot scr
 
 1. **Environment variable storage**: Email address stored in `.env` (local) and Netlify environment variables (production), referenced in `nuxt.config.ts`
 
-2. **Build-time encryption**: `server/api/getEncryptedEmailContact` is prerendered by Nitro, using a composable to encrypt the email (currently simple character reversal)
+2. **Build-time encryption**: `server/api/getEncryptedEmailContact` is prerendered by Nitro, using a shared util (`shared/utils/email.ts`) to encrypt the email (currently simple character reversal)
 
 3. **Obfuscated display**: Vue application fetches the encrypted endpoint and displays it using CSS `direction: rtl` to reverse character order in the DOM
 
