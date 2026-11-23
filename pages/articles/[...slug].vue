@@ -2,9 +2,14 @@
 import type { BreadcrumbItem } from '~/components/PageHeader.vue'
 
 const { path } = useRoute()
+const authorUrl = SCHEMA_CONSTANTS.AUTHOR.url
 const { data: article } = await useAsyncData(`content-${path}`, () => {
   return queryCollection('content').path(path).first()
 })
+
+// fatal: client-side navigation renders the 404 page too (non-fatal by default).
+if (!article.value)
+  throw createError({ status: 404, statusText: 'Article Not Found', fatal: true })
 
 // SSG-safe fallbacks for article data
 const articleTitle = computed(
@@ -78,7 +83,6 @@ useSeoConfig({
         width: 1200,
         height: 800,
       },
-      tags: article.value?.tags,
       location: article.value?.location,
     },
   },
@@ -165,8 +169,9 @@ useSeoConfig({
           <NuxtLink to="/about/" class="text-inherit">Cédric Ruiu</NuxtLink>
         </p>
         <p class="mt-1.5 mb-0 text-ink-3 text-sm leading-[1.6]">
-          Photographe et développeur web installé à Vannes, passionné de myrmécologie depuis l'enfance. Je documente
-          les fourmis de France à travers la macrophotographie taxonomique sur Myrmecophoto.
+          Passionné d'entomologie, je documente les fourmis de France à travers la
+          macrophotographie taxonomique sur Myrmecophoto. Dans la vie, je suis développeur web freelance près de
+          Vannes (<a :href="authorUrl" target="_blank" rel="author noopener" data-umami-event="author-site" data-umami-event-placement="article">cedric-ruiu.fr</a>).
           <NuxtLink to="/about/">En savoir plus</NuxtLink>.
         </p>
       </div>

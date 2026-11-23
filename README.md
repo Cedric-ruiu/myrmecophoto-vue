@@ -9,7 +9,7 @@
 ## Quick Start
 
 ```bash
-# Requirements: Node v22.19
+# Requirements: Node v24 (see .nvmrc)
 cp .env.example .env
 yarn
 
@@ -18,6 +18,14 @@ yarn dev
 
 # Test SSG and serve at http://localhost:3000
 yarn serve-generate
+
+# Serve the generated site like Netlify on http://localhost:4000:
+# netlify.toml headers (CSP, COEP...), _redirects, pretty URLs, 404.html, compression
+yarn generate && yarn serve:netlify
+
+# Checks
+yarn typecheck
+yarn eslint . && yarn stylelint "assets/*.scss" "**/*.vue"
 ```
 
 ## Production Deployment
@@ -41,7 +49,7 @@ yarn generate
 
 ## Database
 
-SQLite database is managed by Prisma ORM with a focus on myrmecological taxonomy accuracy. During static site generation (`yarn generate`), Nitro prerenders API routes (`./server/api/`) to JSON payloads, eliminating runtime database dependencies in production. The `api/getSpecies` and `api/getTaxa` endpoints provide all taxonomic data for the "Photos Spécimens" section.
+SQLite database is managed by Prisma ORM with a focus on myrmecological taxonomy accuracy. During static site generation (`yarn generate`), Nitro prerenders API routes (`./server/api/`) to JSON payloads, eliminating runtime database dependencies in production. Each page fetches only what it renders: `api/getTaxa` (taxonomic tree for the listings), `api/getTaxon/[slug]` (one species page) and `api/getTaxonPictures` (homepage hero plates). Their data reaches the client through the per-page `_payload.json` files, not through the API routes.
 
 **Important**: The database schema follows [SQL Style Guide](https://www.sqlstyle.guide/) conventions and maintains scientific accuracy for taxonomical relationships.
 
@@ -208,7 +216,7 @@ This project implements an advanced image optimization architecture for maximum 
 
 - **Multi-format pipeline**: AVIF (5 sizes: 300/600/900/1200/1600px) + JPEG fallbacks (1200px + 300px thumbnail)
 - **Intelligent caching**: Image manifest regenerates only when images change (~0.1s vs 7s full generation)
-- **Build-time indexing**: `scripts/generate-image-manifest.mjs` generates `composables/image-manifest.json` with real dimensions
+- **Build-time indexing**: `scripts/generate-image-manifest.mjs` generates `composables/image-manifest.json` (articles, homepage) and `composables/image-manifest-taxons.json` (taxon photos) with real dimensions
 - **Zero runtime overhead**: Static manifest eliminates API calls and database queries
 - **XnView MP presets**: Standardized batch processing with presets in `./preset-xnview/`
 
@@ -300,7 +308,7 @@ This project implements a novel approach to protect email addresses from bot scr
 
 1. **Environment variable storage**: Email address stored in `.env` (local) and Netlify environment variables (production), referenced in `nuxt.config.ts`
 
-2. **Build-time encryption**: `server/api/getEncryptedEmailContact` is prerendered by Nitro, using a composable to encrypt the email (currently simple character reversal)
+2. **Build-time encryption**: `server/api/getEncryptedEmailContact` is prerendered by Nitro, using a shared util (`shared/utils/email.ts`) to encrypt the email (currently simple character reversal)
 
 3. **Obfuscated display**: Vue application fetches the encrypted endpoint and displays it using CSS `direction: rtl` to reverse character order in the DOM
 

@@ -2,7 +2,11 @@
 import { useImageData } from '~/composables/useImageData'
 
 const { data: articles } = await useAsyncData('articles', () => {
-  return queryCollection('content').order('date', 'DESC').all()
+  // Listing fields only (also what the ItemList JSON-LD reads): no article body.
+  return queryCollection('content')
+    .select('path', 'title', 'description', 'date', 'image')
+    .order('date', 'DESC')
+    .all()
 })
 
 // SSG-safe fallback for computed values

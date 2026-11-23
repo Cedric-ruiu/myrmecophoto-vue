@@ -2,6 +2,7 @@
 const { data: emailEncrypted } = useNuxtData('emailEncrypted')
 
 const currentYear = new Date().getFullYear()
+const authorUrl = SCHEMA_CONSTANTS.AUTHOR.url
 
 const navigationLinks = [
   { to: '/taxons/', label: 'Photos spécimens' },
@@ -84,5 +85,12 @@ const socialLinks = [
         </div>
       </div>
     </div>
+
+    <p class="mt-12 mb-0 pt-6 border-white/10 border-t text-[13px] text-ink-4 leading-relaxed measure-wide">
+      Myrmecophoto est le projet personnel de
+      <a :href="authorUrl" target="_blank" rel="author noopener" data-umami-event="author-site" data-umami-event-placement="footer" class="text-ink-2 hover:text-link-hover">Cédric Ruiu</a>,
+      passionné d'entomologie et développeur web freelance près de Vannes
+      (<a :href="authorUrl" target="_blank" rel="noopener" data-umami-event="author-site" data-umami-event-placement="footer" class="text-ink-2 hover:text-link-hover">cedric-ruiu.fr</a>).
+    </p>
   </footer>
 </template>

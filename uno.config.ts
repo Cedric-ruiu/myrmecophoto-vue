@@ -6,6 +6,7 @@ import {
 } from 'unocss'
 
 import presetIcons from '@unocss/preset-icons'
+import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 import presetWind4 from '@unocss/preset-wind4'
 
 export default defineConfig({
@@ -22,6 +23,17 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       provider: 'bunny', // default provider
+      // The default 2 s failure timeout is shorter than a typical Bunny Fonts
+      // response (~2.5 s): the fetch then fails silently and the build ships
+      // without any web font.
+      timeouts: { warning: 5000, failure: 30000 },
+      // Self-hosted: font files are downloaded at build time into public/fonts
+      // (gitignored) and served from the site's origin, so no third-party
+      // connection is needed at runtime (CSP font-src 'self').
+      processors: createLocalFontProcessor({
+        fontAssetsDir: 'public/fonts',
+        fontServeBaseUrl: '/fonts',
+      }),
       fonts: {
         // Open Sans:ital,wght@0,400;0,700;1,400 + Quicksand:wght@400;500;700
         //

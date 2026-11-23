@@ -5,10 +5,10 @@ defineProps({
 </script>
 
 <template>
-  <li class="relative [ u-headerNavItem ]">
+  <li class="relative [ u-header-nav-item ]">
     <NuxtLink
       :to="link"
-      class="block py-3 sm:py-1 text-ink-4 [ u-headerNavItem__link ]"
+      class="block py-3 sm:py-1 text-ink-4 [ u-header-nav-item__link ]"
     >
       <slot />
     </NuxtLink>
@@ -16,7 +16,7 @@ defineProps({
 </template>
 
 <style lang="scss">
-.u-headerNavItem {
+.u-header-nav-item {
   transition: color $anime-duration ease-in-out;
 
   &__link {

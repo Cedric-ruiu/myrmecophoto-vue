@@ -6,6 +6,9 @@
 //
 // See: node_modules/@nuxtjs/sitemap/dist/runtime/server/sitemap/urlset/normalise.js (preNormalizeEntry)
 
+// Nitro v3 (Nuxt 5): becomes `definePlugin` from 'nitro'.
+import { defineNitroPlugin } from 'nitropack/runtime'
+
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('sitemap:output', (ctx: { sitemap: string }) => {
     ctx.sitemap = ctx.sitemap.replace(

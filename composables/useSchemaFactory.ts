@@ -19,7 +19,6 @@ export interface SchemaFactoryOptions {
       width?: number
       height?: number
     }
-    tags?: string[]
     location?: string
   }
 
@@ -40,7 +39,7 @@ export interface SchemaFactoryOptions {
         file_name: string
         width?: number
         height?: number
-        date?: string
+        date?: string | null
         description?: string | null
       }>
     }>
@@ -59,8 +58,8 @@ export interface SchemaFactoryOptions {
       date: { published: string }
     }>
     subfamilies?: Array<{
-      name: string
-      description?: string
+      name: string | null
+      description?: string | null
       genus?: Array<{
         specie?: Array<{
           _count?: { specimen: number }
@@ -74,6 +73,8 @@ export interface SchemaFactoryOptions {
     contactPoint?: boolean
   }
 }
+
+type TaxonSpecimen = NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number]
 
 export const useSchemaFactory = () => {
 
@@ -106,7 +107,8 @@ export const useSchemaFactory = () => {
         ],
         worksFor: {
           '@type': 'Organization',
-          name: 'Freelance'
+          name: 'Cédric Ruiu, développeur web freelance',
+          url: 'https://cedric-ruiu.fr'
         },
         creator: {
           '@type': 'CreativeWork',
@@ -183,7 +185,7 @@ export const useSchemaFactory = () => {
       mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
       articleSection: 'Myrmécologie',
       about: SCHEMA_CONSTANTS.KEYWORDS.myrmecology,
-      keywords: article.tags || SCHEMA_CONSTANTS.KEYWORDS.myrmecology,
+      keywords: SCHEMA_CONSTANTS.KEYWORDS.myrmecology,
       inLanguage: 'fr-FR',
       isAccessibleForFree: true,
       locationCreated: article.location ? {
@@ -194,8 +196,8 @@ export const useSchemaFactory = () => {
   }
 
   const createTaxonImageObjectSchema = (
-    picture: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number]['taxonomy_picture'][number],
-    specimen: NonNullable<NonNullable<SchemaFactoryOptions['taxon']>['specimens']>[number],
+    picture: NonNullable<TaxonSpecimen['taxonomy_picture']>[number],
+    specimen: TaxonSpecimen,
     taxon: NonNullable<SchemaFactoryOptions['taxon']>,
     isPrimary: boolean
   ) => {

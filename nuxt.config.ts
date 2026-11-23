@@ -78,7 +78,9 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ['photoswipe', 'image-size', '@nuxt/content'],
+      // @vue/devtools-core and photoswipe/lightbox (dynamic import): discovered at
+      // runtime otherwise, which reloads the dev server on the first page view.
+      include: ['photoswipe', 'photoswipe/lightbox', 'image-size', '@nuxt/content', '@vue/devtools-core'],
       exclude: ['@nuxtjs/seo'],
     },
     css: {
@@ -97,14 +99,16 @@ export default defineNuxtConfig({
 
   ssr: true,
 
+  prerender: {
+    routes: [
+      '/api/getEncryptedEmailContact',
+      '/api/__sitemap__/urls',
+    ],
+  },
+
   nitro: {
     prerender: {
-      routes: [
-        '/api/getTaxa',
-        '/api/getSpecies',
-        '/api/getEncryptedEmailContact',
-        '/api/__sitemap__/urls',
-      ],
+      // Builder-specific: not part of the top-level `prerender` option.
       concurrency: 2,
     },
     esbuild: {
@@ -139,10 +143,19 @@ export default defineNuxtConfig({
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
   },
 
+  // Opt into Nuxt 5 defaults ahead of the upgrade. Among them, payloadExtraction
+  // defaults to 'client': the initial render reads the payload inlined in the HTML,
+  // client-side navigation still loads the extracted _payload.json files.
+  future: {
+    compatibilityVersion: 5,
+  },
+
   experimental: {
-    payloadExtraction: true,
-    sharedPrerenderData: true,
+    // sharedPrerenderData already defaults to true.
     extractAsyncDataHandlers: true,
+    // Server-rendered 404.html (served by Netlify for unknown paths) instead of an
+    // empty SPA shell.
+    prerenderErrorPages: true,
     typescriptPlugin: true,
   },
 
@@ -165,18 +178,31 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     buildCache: true,
     defaults: {
-      component: 'NuxtSeo',
+      // colorMode, theme and siteLogo: prop defaults of OgImage/NuxtSeo.satori.vue
+      // (nuxt-og-image v7 only accepts image options here).
       width: 1200,
       height: 630,
-      colorMode: 'dark',
-      theme: '#e72c27',
-      siteLogo: '/myrmecophoto-logo.png',
       emojis: false,
     },
     security: {
       renderTimeout: 30000,
       imageFetchTimeout: 5000,
     },
+    // sharp is only needed for JPEG output and is not installed. With zeroRuntime,
+    // nuxt-og-image skips its own "sharp missing" detection and keeps the sharp
+    // binding, so the dev server crashes on `import "sharp"`.
+    compatibility: {
+      dev: { sharp: false },
+      prerender: { sharp: false },
+      runtime: { sharp: false },
+    },
+  },
+
+  $development: {
+    // Once its font list settles after the first render, nuxt-og-image rebuilds
+    // Nitro and the request in flight never resolves. Opt in with
+    // OG_IMAGE_DEV=true to preview OG images in dev.
+    ogImage: { enabled: process.env.OG_IMAGE_DEV === 'true' },
   },
 
   seo: {
@@ -184,19 +210,23 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
 
+  // Bundled by @nuxtjs/seo v6 and enabled by default: not wanted on this static site.
+  aiReady: false,
+  skewProtection: false,
+
   schemaOrg: {
     identity: {
       type: 'Person',
       name: 'Cédric Ruiu',
-      url: 'https://myrmecophoto.fr',
+      url: 'https://cedric-ruiu.fr',
       image: '/img/cedric-ruiu-avatar.webp',
       jobTitle: [
-        'Développeur Web',
-        'Photographe Macro',
-        'Myrmécologiste Amateur',
+        'Développeur web freelance',
+        'Photographe macro',
+        'Myrmécologiste amateur',
       ],
       description:
-        'Créateur de Myrmecophoto, développeur web et photographe spécialisé en macrophotographie scientifique des fourmis.',
+        'Passionné d\'entomologie, créateur de Myrmecophoto et développeur web freelance près de Vannes.',
       knowsAbout: [
         'Myrmécologie',
         'Macrophotographie',

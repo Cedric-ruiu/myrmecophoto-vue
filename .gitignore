@@ -2,6 +2,8 @@ node_modules
 prisma/ERD.md
 prisma/generated
 composables/image-manifest.json
+composables/image-manifest-taxons.json
+public/fonts
 *.log*
 .nuxt
 .nitro
