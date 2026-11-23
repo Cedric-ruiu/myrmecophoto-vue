@@ -22,6 +22,10 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       provider: 'bunny', // default provider
+      // The default 2 s failure timeout is shorter than a typical Bunny Fonts
+      // response (~2.5 s): the fetch then fails silently and the build ships
+      // without any web font.
+      timeouts: { warning: 5000, failure: 30000 },
       fonts: {
         // Open Sans:ital,wght@0,400;0,700;1,400 + Quicksand:wght@400;500;700
         //
