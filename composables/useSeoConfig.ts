@@ -78,6 +78,7 @@ interface SeoConfigOptions {
    * - 'taxon': Enhanced Taxon + ScholarlyArticle + ImageGallery + Dataset
    * - 'taxon-list': Collection + Organization for taxonomic database
    * - 'about': AboutPage + Person + ContactPage
+   * - 'error': generic WebPage (error page, whatever its URL)
    *
    * @example 'homepage', 'article', 'taxon', 'taxon-list', 'about' (or leave undefined for auto-detection)
    */

@@ -34,6 +34,7 @@ useSeoConfig({
   title: `Erreur ${errorCode.value} | Myrmecophoto`,
   description: errorMessage.value,
   robotsRule: 'noindex, nofollow',
+  pageType: 'error',
 })
 </script>
 
