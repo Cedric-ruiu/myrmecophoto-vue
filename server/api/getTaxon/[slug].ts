@@ -1,4 +1,4 @@
-import { createError, defineEventHandler, getRouterParam } from 'nuxt/server'
+import { createError, defineHandler, getRouterParam } from 'nuxt/server'
 import type { Prisma } from '../../../prisma/generated/client/client'
 import db from '../../db'
 
@@ -45,7 +45,7 @@ export type TaxonDetail = Prisma.specieGetPayload<typeof taxonSelect> & {
   sameGenus: { name: string }[]
 }
 
-export default defineEventHandler(async (event): Promise<TaxonDetail> => {
+export default defineHandler(async (event): Promise<TaxonDetail> => {
   // Slug shaped as `genus-species` ("sp." is written "sp" in URLs).
   const [genusPart, speciesPart] = (getRouterParam(event, 'slug') || '').split('-', 2)
   const routeGenus = genusPart?.trim().toLowerCase()

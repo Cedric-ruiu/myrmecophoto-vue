@@ -1,4 +1,4 @@
-import { defineEventHandler } from 'nuxt/server'
+import { defineHandler } from 'nuxt/server'
 import type { Prisma } from '../../prisma/generated/client/client'
 import db from '../db'
 
@@ -43,7 +43,7 @@ const taxaSelect = {
 
 export type TaxaWithRelations = Prisma.subfamilyGetPayload<typeof taxaSelect>
 
-export default defineEventHandler(async () => {
+export default defineHandler(async () => {
   return await db.subfamily.findMany({
     select: taxaSelect.select,
     orderBy: { name: 'asc' },

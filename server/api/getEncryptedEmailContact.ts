@@ -1,6 +1,6 @@
-import { defineEventHandler, useRuntimeConfig } from 'nuxt/server'
+import { defineHandler, useRuntimeConfig } from 'nuxt/server'
 import { encryptEmail } from '#shared/utils/email'
 
-export default defineEventHandler(() => {
+export default defineHandler(() => {
   return { data: encryptEmail(useRuntimeConfig().emailContact) }
 })
