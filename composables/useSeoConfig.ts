@@ -218,9 +218,10 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ogLocale: 'fr_FR',
     ogSiteName: siteName,
     ogUrl: canonicalUrl,
-    ogImage: ogImageUrl
-      ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
-      : `${siteUrl}/_og/d${route.path}.png`,
+    // Without ogImageUrl, nuxt-og-image provides og:image (and its dimensions).
+    ...(ogImageUrl && {
+      ogImage: ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`,
+    }),
 
     themeColor: '#e72c27',
     colorScheme: 'light dark' as const,
