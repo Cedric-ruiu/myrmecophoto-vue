@@ -9,6 +9,14 @@
 export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content', '@nuxt/eslint'],
 
+  content: {
+    build: {
+      // No code blocks in the articles: skip Shiki, which Vite otherwise discovers
+      // at runtime in development and reloads the page for.
+      markdown: { highlight: false },
+    },
+  },
+
   linkChecker: {
     // Ignore link validation rules that conflict with French content
     skipInspections: [
