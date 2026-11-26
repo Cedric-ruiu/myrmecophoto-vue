@@ -107,6 +107,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    // Nitro v3 (Nuxt 5) ignores `esbuild` and `externals` (NUXT_B9001) and the site
+    // generates the same output without them: drop both when upgrading.
     prerender: {
       // Builder-specific: not part of the top-level `prerender` option.
       concurrency: 2,
