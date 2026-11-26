@@ -6,14 +6,20 @@
 //
 // See: node_modules/@nuxtjs/sitemap/dist/runtime/server/sitemap/urlset/normalise.js (preNormalizeEntry)
 
-// Nitro v3 (Nuxt 5): becomes `definePlugin` from 'nitro'.
-import { defineNitroPlugin } from 'nitropack/runtime'
+// Plain function rather than `defineNitroPlugin` ('nitropack/runtime', Nitro v2) or
+// `definePlugin` ('nitro', Nitro v3): both are identity helpers, and either import
+// would tie this file to one Nitro major.
+interface SitemapNitroApp {
+  hooks: {
+    hook: (name: 'sitemap:output', handler: (ctx: { sitemap: string }) => void) => void
+  }
+}
 
-export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook('sitemap:output', (ctx: { sitemap: string }) => {
+export default (nitroApp: SitemapNitroApp) => {
+  nitroApp.hooks.hook('sitemap:output', (ctx) => {
     ctx.sitemap = ctx.sitemap.replace(
       /(<image:loc>[^<]+?)\/<\/image:loc>/g,
       '$1</image:loc>'
     )
   })
-})
+}
