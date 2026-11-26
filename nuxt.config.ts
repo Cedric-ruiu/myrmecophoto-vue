@@ -212,13 +212,6 @@ export default defineNuxtConfig({
     },
   },
 
-  $development: {
-    // Once its font list settles after the first render, nuxt-og-image rebuilds
-    // Nitro and the request in flight never resolves. Opt in with
-    // OG_IMAGE_DEV=true to preview OG images in dev.
-    ogImage: { enabled: process.env.OG_IMAGE_DEV === 'true' },
-  },
-
   seo: {
     automaticDefaults: true,
     redirectToCanonicalSiteUrl: true,
