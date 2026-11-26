@@ -214,6 +214,9 @@ export default defineNuxtConfig({
   seo: {
     automaticDefaults: true,
     redirectToCanonicalSiteUrl: true,
+    // X builds its cards from Open Graph: no twitter:* tags, from nuxt-seo-utils
+    // or nuxt-og-image (unhead flags them as deprecated).
+    automaticTwitterTags: false,
   },
 
   // Bundled by @nuxtjs/seo v6 and enabled by default: not wanted on this static site.
