@@ -12361,7 +12361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:~1.2.18, rolldown@npm:~1.2.19":
+"rolldown@npm:1.2.19, rolldown@npm:~1.2.18, rolldown@npm:~1.2.19":
   version: 1.2.19
   resolution: "rolldown@npm:1.2.19"
   dependencies:
@@ -12566,12 +12566,14 @@ __metadata:
     postcss-scss: "npm:4.0.9"
     prisma: "npm:7.10.1"
     prisma-erd-generator: "npm:3.2.1"
+    rolldown: "npm:1.2.19"
     sass: "npm:1.108.2"
     satori: "npm:0.47.1"
     stylelint: "npm:18.1.0"
     tailwind-sorter: "npm:1.0.3"
     typescript: "npm:6.0.3"
     unocss: "npm:66.13.0"
+    vite: "npm:8.3.8"
     vue: "npm:3.5.46"
     vue-router: "npm:5.5.1"
     vue-tsc: "npm:3.3.14"
@@ -14581,7 +14583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^8.0.0, vite@npm:^8.3.8":
+"vite@npm:8.3.8, vite@npm:^8.0.0, vite@npm:^8.3.8":
   version: 8.3.8
   resolution: "vite@npm:8.3.8"
   dependencies:
