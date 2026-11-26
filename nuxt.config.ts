@@ -157,6 +157,10 @@ export default defineNuxtConfig({
     // empty SPA shell.
     prerenderErrorPages: true,
     typescriptPlugin: true,
+    // Build client and server one after the other: UnoCSS global mode shares its
+    // state across Vite environments, so concurrent builds leak server-only classes
+    // (OG image templates) into the client CSS. See unocss/unocss#5483.
+    parallelBuild: false,
   },
 
   devtools: { enabled: true },
