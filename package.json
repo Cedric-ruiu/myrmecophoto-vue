@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "node scripts/generate-image-manifest.mjs && nuxt dev --host 0.0.0.0",
+    "dev": "node scripts/generate-image-manifest.mjs && nuxt dev",
+    "dev:lan": "node scripts/generate-image-manifest.mjs && nuxt dev --host 0.0.0.0",
     "manifest": "node scripts/generate-image-manifest.mjs",
     "serveSSG": "npx serve ./dist",
     "serve:netlify": "node scripts/serve-netlify.mjs",

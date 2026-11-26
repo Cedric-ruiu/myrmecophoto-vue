@@ -15,6 +15,8 @@ yarn
 
 # Start the development server on http://localhost:3000
 yarn dev
+# Same, reachable from the local network (e.g. to test on a phone)
+yarn dev:lan
 
 # Test SSG and serve at http://localhost:3000
 yarn serve-generate
