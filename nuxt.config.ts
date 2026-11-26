@@ -147,7 +147,9 @@ export default defineNuxtConfig({
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/__sitemap__/'],
+        // /api/ stays crawlable (@nuxtjs/robots warns otherwise): its prerendered
+        // JSON is kept out of the index by an X-Robots-Tag header (netlify.toml).
+        disallow: ['/__sitemap__/'],
       },
     ],
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
