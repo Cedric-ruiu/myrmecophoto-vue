@@ -7,14 +7,14 @@ import type { SchemaFactoryOptions } from './useSchemaFactory'
 interface SeoConfigOptions {
   /**
    * Page title for SEO
-   * Used for <title>, Open Graph and Twitter Cards
+   * Used for <title> and Open Graph
    * @example "About - Who am I?"
    */
   title: string
 
   /**
    * Page description for SEO
-   * Used for meta description, Open Graph and Twitter Cards
+   * Used for meta description and Open Graph
    * @example "Discover Cédric Ruiu, web developer and photographer passionate about myrmecology."
    */
   description: string
@@ -59,12 +59,6 @@ interface SeoConfigOptions {
   ogImageUrl?: string
 
   /**
-   * Specific Twitter image URL
-   * If not provided, uses ogImageUrl or automatic generation
-   */
-  twitterImage?: string
-
-  /**
    * Page type for automatic Schema.org generation (auto-detected from route)
    * When provided, explicitly sets the schema type. If not provided, auto-detects from route path.
    *
@@ -84,6 +78,7 @@ interface SeoConfigOptions {
    * - 'taxon': Enhanced Taxon + ScholarlyArticle + ImageGallery + Dataset
    * - 'taxon-list': Collection + Organization for taxonomic database
    * - 'about': AboutPage + Person + ContactPage
+   * - 'error': generic WebPage (error page, whatever its URL)
    *
    * @example 'homepage', 'article', 'taxon', 'taxon-list', 'about' (or leave undefined for auto-detection)
    */
@@ -113,7 +108,6 @@ interface SeoConfigOptions {
  * Automatically generates all necessary SEO metadata:
  * - Automatic canonical URL
  * - Complete Open Graph metadata
- * - Optimized Twitter Cards
  * - Myrmecology keywords
  * - Uniform OG style (#e72c27, dark mode)
  * - Author information (Cédric Ruiu)
@@ -147,7 +141,6 @@ export function useSeoConfig(options: SeoConfigOptions) {
     customMeta = {},
     titleTemplate,
     ogImageUrl,
-    twitterImage,
     pageType,
     schemaData = {},
   } = options
@@ -226,18 +219,10 @@ export function useSeoConfig(options: SeoConfigOptions) {
     ogLocale: 'fr_FR',
     ogSiteName: siteName,
     ogUrl: canonicalUrl,
-    ogImage: ogImageUrl
-      ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
-      : `${siteUrl}/_og/d${route.path}.png`,
-
-    twitterCard: 'summary_large_image' as const,
-    twitterTitle: title,
-    twitterDescription: description,
-    twitterImage: twitterImage
-      ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage}`)
-      : ogImageUrl
-        ? (ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`)
-        : `${siteUrl}/_og/d${route.path}.png`,
+    // Without ogImageUrl, nuxt-og-image provides og:image (and its dimensions).
+    ...(ogImageUrl && {
+      ogImage: ogImageUrl.startsWith('http') ? ogImageUrl : `${siteUrl}${ogImageUrl}`,
+    }),
 
     themeColor: '#e72c27',
     colorScheme: 'light dark' as const,

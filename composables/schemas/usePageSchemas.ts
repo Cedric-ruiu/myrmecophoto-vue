@@ -11,6 +11,7 @@ export type PageType =
   | 'taxon-list'
   | 'about'
   | 'contact'
+  | 'error'
 
 export interface PageSchemaOptions extends SchemaFactoryOptions {
   pageType?: PageType
@@ -288,6 +289,10 @@ export const usePageSchemas = () => {
 
       case 'about':
         applyAboutSchemas()
+        break
+
+      case 'error':
+        applyFallbackSchema(options)
         break
 
       default:

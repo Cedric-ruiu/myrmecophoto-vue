@@ -9,6 +9,14 @@
 export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', '@unocss/nuxt', '@nuxt/content', '@nuxt/eslint'],
 
+  content: {
+    build: {
+      // No code blocks in the articles: skip Shiki, which Vite otherwise discovers
+      // at runtime in development and reloads the page for.
+      markdown: { highlight: false },
+    },
+  },
+
   linkChecker: {
     // Ignore link validation rules that conflict with French content
     skipInspections: [
@@ -56,14 +64,14 @@ export default defineNuxtConfig({
           // Cross-Origin-Embedder-Policy: require-corp (see netlify.toml): the remote
           // host answers with `Access-Control-Allow-Origin: *`, so a CORS-mode request
           // satisfies COEP while a plain no-cors one would be blocked.
-          // Numeric tagPriority outranks every other head tag so the tag is rendered
-          // last, right before </head>.
+          // 'low' renders the tag after the app's own scripts (unhead groups head
+          // tags by type, so it still comes before the meta tags).
           defer: true,
           src: 'https://stats.cedric-ruiu.fr/m.js',
           'data-website-id': 'efd1bb96-5ca9-4636-9b01-7c6396fe9b7b',
           'data-domains': 'myrmecophoto.fr',
           crossorigin: 'anonymous',
-          tagPriority: 200,
+          tagPriority: 'low',
         },
       ],
     },
@@ -107,6 +115,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    // Nitro v3 (Nuxt 5) ignores `esbuild` and `externals` (NUXT_B9001) and the site
+    // generates the same output without them: drop both when upgrading.
     prerender: {
       // Builder-specific: not part of the top-level `prerender` option.
       concurrency: 2,
@@ -137,7 +147,9 @@ export default defineNuxtConfig({
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/__sitemap__/'],
+        // /api/ stays crawlable (@nuxtjs/robots warns otherwise): its prerendered
+        // JSON is kept out of the index by an X-Robots-Tag header (netlify.toml).
+        disallow: ['/__sitemap__/'],
       },
     ],
     sitemap: ['https://myrmecophoto.fr/sitemap.xml'],
@@ -157,6 +169,10 @@ export default defineNuxtConfig({
     // empty SPA shell.
     prerenderErrorPages: true,
     typescriptPlugin: true,
+    // Build client and server one after the other: UnoCSS global mode shares its
+    // state across Vite environments, so concurrent builds leak server-only classes
+    // (OG image templates) into the client CSS. See unocss/unocss#5483.
+    parallelBuild: false,
   },
 
   devtools: { enabled: true },
@@ -198,16 +214,12 @@ export default defineNuxtConfig({
     },
   },
 
-  $development: {
-    // Once its font list settles after the first render, nuxt-og-image rebuilds
-    // Nitro and the request in flight never resolves. Opt in with
-    // OG_IMAGE_DEV=true to preview OG images in dev.
-    ogImage: { enabled: process.env.OG_IMAGE_DEV === 'true' },
-  },
-
   seo: {
     automaticDefaults: true,
     redirectToCanonicalSiteUrl: true,
+    // X builds its cards from Open Graph: no twitter:* tags, from nuxt-seo-utils
+    // or nuxt-og-image (unhead flags them as deprecated).
+    automaticTwitterTags: false,
   },
 
   // Bundled by @nuxtjs/seo v6 and enabled by default: not wanted on this static site.

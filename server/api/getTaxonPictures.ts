@@ -1,4 +1,4 @@
-import { defineEventHandler, getQuery } from 'nuxt/server'
+import { defineHandler, getQuery } from 'nuxt/server'
 import db from '../db'
 
 const stripExtension = (fileName: string) => fileName.replace(/\.(jpg|jpeg|png|avif)$/i, '')
@@ -15,7 +15,7 @@ export interface TaxonPictureInfo {
 
 // Specimen photos looked up by file base (`?files=a,b`), returned in request order.
 // Used by the homepage hero, which only needs a handful of plates.
-export default defineEventHandler(async (event): Promise<TaxonPictureInfo[]> => {
+export default defineHandler(async (event): Promise<TaxonPictureInfo[]> => {
   const files = String(getQuery(event).files || '')
     .split(',')
     .map(f => f.trim())
