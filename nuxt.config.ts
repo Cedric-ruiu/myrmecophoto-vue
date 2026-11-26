@@ -64,14 +64,14 @@ export default defineNuxtConfig({
           // Cross-Origin-Embedder-Policy: require-corp (see netlify.toml): the remote
           // host answers with `Access-Control-Allow-Origin: *`, so a CORS-mode request
           // satisfies COEP while a plain no-cors one would be blocked.
-          // Numeric tagPriority outranks every other head tag so the tag is rendered
-          // last, right before </head>.
+          // 'low' renders the tag after the app's own scripts (unhead groups head
+          // tags by type, so it still comes before the meta tags).
           defer: true,
           src: 'https://stats.cedric-ruiu.fr/m.js',
           'data-website-id': 'efd1bb96-5ca9-4636-9b01-7c6396fe9b7b',
           'data-domains': 'myrmecophoto.fr',
           crossorigin: 'anonymous',
-          tagPriority: 200,
+          tagPriority: 'low',
         },
       ],
     },
